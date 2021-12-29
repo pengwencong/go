@@ -8,4 +8,5 @@ import (
 func Init(engine *gin.Engine) {
 
 	engine.GET("/video", controller.VideoStream)
+	engine.GET("/redis", controller.RedisOperate)
 }
