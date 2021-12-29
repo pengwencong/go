@@ -10,6 +10,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 )
 
 func main() {
@@ -27,8 +28,9 @@ func main() {
 
 	go hs.ListenAndServe() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
-	restart(hs)
 	fmt.Println("pid:", os.Getpid())
+	
+	restart(hs)
 }
 
 func restart(hs *http.Server){
