@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"go/router"
@@ -27,6 +28,7 @@ func main() {
 	go hs.ListenAndServe() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
 	restart(hs)
+	fmt.Println("pid:", os.Getpid())
 }
 
 func restart(hs *http.Server){
