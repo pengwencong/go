@@ -7,7 +7,10 @@ import (
 )
 
 func VideoStream(c *gin.Context){
-	c.HTML(200,"video.html",gin.H{})
+	c.JSON(200,gin.H{
+		"message":"success",
+	})
+	//c.HTML(200,"video.html",gin.H{})
 }
 
 func RedisOperate(c *gin.Context){
