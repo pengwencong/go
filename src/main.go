@@ -20,9 +20,10 @@ func main() {
 	router.Init(engine)
 
 	hs := &http.Server{
-		Addr:"8080",
+		Addr:":8080",
 		Handler:engine,
 	}
+
 	go hs.ListenAndServe() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
 	restart(hs)
