@@ -140,7 +140,7 @@
                 "username":"admin"
             }]
         };
-        var pc = new RTCPeerConnection(iceServer);
+        pc = new RTCPeerConnection(iceServer);
 
         pc.onicecandidate = onIceCandidate
         pc.onaddstream = onRemoteStreamAdded
