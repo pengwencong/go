@@ -61,7 +61,7 @@
     window.onload = function () {
         // if (queryParams && queryParams['key']) {    // 加载空白脚本中预置的queryParams参数
         //     document.getElementById('key').value = queryParams['key']
-        initPeer()
+        connect()
         // }
         myVideo = document.getElementById('myVideo')
         yourVideo = document.getElementById('yourVideo')
@@ -72,7 +72,7 @@
     function connect() {
         var errorCB, scHandlers, handleMsg
         // 获取连接密钥
-        key = document.getElementById('key').value
+        key = "peng"
         // 处理通过信令通道收到的所有消息
         handleMsg = function (msg) {
             var msgE = document.getElementById('inmessages')
@@ -99,7 +99,6 @@
             'onConnected': function () {
                 // setStatus('Connected')
                 // 已成功连接，开始建立对等连接
-                console.log("initpeer")
                 initPeer()
             },
             'onMessage': handleMsg
@@ -118,16 +117,18 @@
     // 通过信道发送消息
     function send(msg) {
         var handler = function (res) {
-            document.getElementById('response').innerHTML = res
+            //document.getElementById('response').innerHTML = res
+            console.log("hand")
             return
         }
-        msg = msg || document.getElementById('message').value   // 没有消息则获取信道消息
+        //msg = msg //|| document.getElementById('message').value   // 没有消息则获取信道消息
         // 发布到屏幕上
-        msgE = document.getElementById('outmessages')
-        var msgString = JSON.stringify(msg).replace(/\\r\\n/g, '\n')
-        msgE.value = msgString + '\n' + msgE.value
+        // msgE = document.getElementById('outmessages')
+        // var msgString = JSON.stringify(msg).replace(/\\r\\n/g, '\n')
+        // msgE.value = msgString + '\n' + msgE.value
         // 通过信令通道发送出去
         signalingChannel.send(msg, handler)
+        console.log("send")
     }
 
 
@@ -181,7 +182,7 @@
         console.log("addstream")
         // setStatus('Ready for call')
         // if (queryParams && queryParams['call'] && !weWaited) {
-        //     call()
+            call()
         // }
     }
 
@@ -199,6 +200,8 @@
     function gotDescription(localDesc) {
         pc.setLocalDescription(localDesc)
         send(localDesc)
+        console.log("gotDescription")
+        console.log(localDesc)
     }
 </script>
 </body>
