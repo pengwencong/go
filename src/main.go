@@ -22,5 +22,5 @@ func main() {
 	//禁用控制台颜色
 	router.Init(engine)
 
-	engine.Run(":80") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	engine.RunTLS(":80", "./runtime/tls/server.pem", "./runtime/tls/server.key") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
