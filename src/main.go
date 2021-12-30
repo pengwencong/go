@@ -1,17 +1,12 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"github.com/unrolled/secure"
 	"go/router"
 	"go/server"
-	"net/http"
-	"os"
-	"os/signal"
-	"syscall"
 )
 
 func main() {
