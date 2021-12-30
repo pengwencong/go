@@ -38,18 +38,6 @@ func main() {
 	//engine.RunTLS(":80", )
 
 	fmt.Println("listen err:", err)
-
-	go restart(hs)
-}
-
-func restart(hs *http.Server){
-	sigs := make(chan os.Signal, 1)
-	signal.Notify(sigs, syscall.SIGHUP, syscall.SIGTERM, syscall.SIGINT)
-
-	select {
-	case <- sigs:
-		hs.Shutdown(context.TODO())
-	}
 }
 
 func TlsHandler() gin.HandlerFunc {
