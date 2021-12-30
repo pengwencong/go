@@ -215,7 +215,7 @@
     // 一旦获取到了会话描述，就将其作为本地描述，然后将其发送至另一端的浏览器
     function gotDescription(localDesc) {
         pc.setLocalDescription(localDesc)
-        send(localDesc)
+        // send(localDesc)
         console.log("gotDescription")
         console.log(localDesc)
     }
