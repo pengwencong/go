@@ -146,7 +146,7 @@
         pc.onicecandidate = onIceCandidate
         pc.onaddstream = onRemoteStreamAdded
         pc.onremovestream = onRemoteStreamRemoved
-        pc.setRemoteDescription(new RTCSessionDescription(msg))
+        pc.setRemoteDescription(new RTCSessionDescription("peng"))
         answer()
         console.log("initpeer")
     }
