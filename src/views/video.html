@@ -42,11 +42,12 @@
         console.log('cound not get user media')
     }
     function gotUserMedia(stream) {
+        console.log("getmedia")
         myVideoStream = stream
         haveLocalMedia = true
         // 向我显示我的本地视频
         myVideo.srcObject = myVideoStream
-        // myVideo.play()
+        myVideo.play()
         // 等待pc创建完毕
         attachMediaIfReady()
     }
