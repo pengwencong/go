@@ -146,8 +146,20 @@
         pc.onicecandidate = onIceCandidate
         pc.onaddstream = onRemoteStreamAdded
         pc.onremovestream = onRemoteStreamRemoved
-        pc.setRemoteDescription(new RTCSessionDescription("peng"))
+        var mg = {
+            "sdp":"peng",
+            "type":"offer"
+        }
+        pc.setRemoteDescription(new RTCSessionDescription(mg))
         answer()
+        setTimeout(function () {
+            var mg = {
+                "sdp":"peng",
+                "type":"answer"
+            }
+            pc.setRemoteDescription(new RTCSessionDescription(mg))
+        },500)
+
         console.log("initpeer")
     }
 
