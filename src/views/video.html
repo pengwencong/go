@@ -166,13 +166,17 @@
     // 如果当前浏览器有另一个候选项，将其发送给对等端
     function onIceCandidate(e) {
         console.log("onice")
-        if (e.candidate) {
-            send({
-                type: 'candidate',
-                mlineindex: e.candidate.sdpMLineIndex,
-                candidate: e.candidate.candidate
-            })
-        }
+        // if (e.candidate) {
+        //     send({
+        //         type: 'candidate',
+        //         mlineindex: e.candidate.sdpMLineIndex,
+        //         candidate: e.candidate.candidate
+        //     })
+        // }
+        pc.addIceCandidate(new RTCIceCandidate({
+            sdpMLineIndex: 2,
+            candidate: "peng"
+        }))
     }
 
     // 如果我们浏览器检测到另一端加入了媒体流，则将其显示在屏幕上
