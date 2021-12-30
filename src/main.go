@@ -29,13 +29,7 @@ func main() {
 	//禁用控制台颜色
 	router.Init(engine)
 
-	hs := &http.Server{
-		Addr:":80",
-		Handler: engine,
-	}
-
-	err = hs.ListenAndServeTLS("./runtime/tls/server.pem", "./runtime/tls/server.key")
-	//engine.RunTLS(":80", )
+	err = engine.RunTLS(":80", "./runtime/tls/server.pem", "./runtime/tls/server.key")
 
 	fmt.Println("listen err:", err)
 }
