@@ -1,11 +1,16 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"go/router"
 	"go/server"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
 )
 
 func main() {
@@ -22,5 +27,23 @@ func main() {
 	//禁用控制台颜色
 	router.Init(engine)
 
-	engine.RunTLS(":80", "./runtime/tls/server.pem", "./runtime/tls/server.key") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	hs := &http.Server{
+		Addr:":80",
+		Handler: engine,
+	}
+
+	go hs.ListenAndServeTLS("./runtime/tls/server.pem", "./runtime/tls/server.key")
+	//engine.RunTLS(":80", )
+
+	restart(hs)
+}
+
+func restart(hs *http.Server){
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGHUP, syscall.SIGTERM, syscall.SIGINT)
+
+	select {
+	case <- sigs:
+		hs.Shutdown(context.TODO())
+	}
 }
