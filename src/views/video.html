@@ -58,7 +58,7 @@
     window.onload = function () {
         // if (queryParams && queryParams['key']) {    // 加载空白脚本中预置的queryParams参数
         //     document.getElementById('key').value = queryParams['key']
-            connect()
+        initPeer()
         // }
         myVideo = document.getElementById('myVideo')
         yourVideo = document.getElementById('yourVideo')
@@ -142,6 +142,7 @@
         pc.onicecandidate = onIceCandidate
         pc.onaddstream = onRemoteStreamAdded
         pc.onremovestream = onRemoteStreamRemoved
+        console.log("initpeer")
     }
 
     // 如果当前浏览器有另一个候选项，将其发送给对等端
@@ -173,9 +174,10 @@
     // 将本地流添加至对等连接
     function attachMedia() {
         pc.addStream(myVideoStream)
+        console.log("addstream")
         // setStatus('Ready for call')
         // if (queryParams && queryParams['call'] && !weWaited) {
-            call()
+        //     call()
         // }
     }
 
