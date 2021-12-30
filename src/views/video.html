@@ -33,10 +33,10 @@
 
     // 获取本地媒体
     function getMedia() {
-        (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia)({
-            audio: true,
-            video: true
-        }, gotUserMedia, didntGetUserMedia)
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+        var constr = {audio: false, video: true};
+        navigator.getUserMedia(constr, gotUserMedia, didntGetUserMedia);
     }
     function didntGetUserMedia() {
         console.log('cound not get user media')
@@ -46,6 +46,7 @@
         haveLocalMedia = true
         // 向我显示我的本地视频
         myVideo.srcObject = myVideoStream
+        // myVideo.play()
         // 等待pc创建完毕
         attachMediaIfReady()
     }
