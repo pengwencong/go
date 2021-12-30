@@ -25,8 +25,6 @@ func main() {
 	//禁用控制台颜色
 	router.Init(engine)
 
-	go engine.Run(":8080")
-
 	err = engine.RunTLS(":443", "./runtime/tls/server.pem", "./runtime/tls/server.key")
 
 	fmt.Println("listen err:", err)
