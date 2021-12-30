@@ -3,37 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <title>video</title>
+    <style>
+        #yourVideo{
+            position: absolute;
+            right: 0px;
+            top: 20px;
+        }
+    </style>
 </head>
 <body>
 <div>peng</div>
-<video id="video">a</video>
+<video id="myVideo">a</video>
+<video id="yourVideo">a</video>
+
 <script>
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-
-    // 只获取video:
-    var constraints = {audio: false, video: true};
-    var video = document.querySelector("#video");
-
-    function successCallback(stream) {
-        // Note: make the returned stream available to console for inspection
-        window.stream = stream;
-
-        if (window.URL) {
-            // Chrome浏览器
-            video.srcObject = stream;
-        } else {
-            // Firefox和Opera: 可以直接把视频源设置为stream
-            video.src = stream;
+    var signalingChannel, key, id,
+        haveLocalMedia = false,
+        weWaited = false,
+        myVideoStream, myVideo,
+        yourVideoStream, yourVideo,
+        doNothing = function () { },
+        pc,
+        constraints = {
+            mandatory: {
+                OfferToReceiveAudio: true,
+                OfferToReceiveVideo: true
+            }
         }
-        // 播放
-        video.play();
+
+    // 获取本地媒体
+    function getMedia() {
+        (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia)({
+            audio: true,
+            video: true
+        }, gotUserMedia, didntGetUserMedia)
+    }
+    function didntGetUserMedia() {
+        console.log('cound not get user media')
+    }
+    function gotUserMedia(stream) {
+        myVideoStream = stream
+        haveLocalMedia = true
+        // 向我显示我的本地视频
+        myVideo.srcObject = myVideoStream
+        // 等待pc创建完毕
+        attachMediaIfReady()
     }
 
-    function errorCallback(error){
-        console.log("navigator.getUserMedia error: ", error);
+    function attachMediaIfReady() {
+        if (pc && haveLocalMedia) attachMedia()
     }
 
-    navigator.getUserMedia(constraints, successCallback, errorCallback);
+    // 自动开始获取本地媒体
+    window.onload = function () {
+        // if (queryParams && queryParams['key']) {    // 加载空白脚本中预置的queryParams参数
+        //     document.getElementById('key').value = queryParams['key']
+            connect()
+        // }
+        myVideo = document.getElementById('myVideo')
+        yourVideo = document.getElementById('yourVideo')
+        getMedia()
+    }
+
+    // 连接服务器并建立信令通道
+    function connect() {
+        var errorCB, scHandlers, handleMsg
+        // 获取连接密钥
+        key = document.getElementById('key').value
+        // 处理通过信令通道收到的所有消息
+        handleMsg = function (msg) {
+            var msgE = document.getElementById('inmessages')
+            var msgString = JSON.stringify(msg).replace(/\\r\\n/g, '\n')
+            msgE.value = msgString + '\n' + msgE.value    // 将最新的消息放置在最上方
+            console.log('msgString:', msgString)
+            if (msg.type === 'offer') {
+                pc.setRemoteDescription(new RTCSessionDescription(msg))
+                answer()
+            } else if (msg.type === 'answer') {
+                pc.setRemoteDescription(new RTCSessionDescription(msg))
+            } else if (msg.type === 'candidate') {
+                pc.addIceCandidate(new RTCIceCandidate({
+                    sdpMLineIndex: msg.mlineindex,
+                    candidate: msg.candidate
+                }))
+            }
+        }
+        scHandlers = {
+            'onWaiting': function () {
+                // setStatus('Waiting')
+                weWaited = true
+            },
+            'onConnected': function () {
+                // setStatus('Connected')
+                // 已成功连接，开始建立对等连接
+                console.log("initpeer")
+                initPeer()
+            },
+            'onMessage': handleMsg
+        }
+        // 创建信令通道
+        signalingChannel = createSignalingChannel(key, scHandlers)
+        errorCB = function (msg) {
+            document.getElementById('response').innerHTML = msg
+        }
+
+        // 进行连接
+        signalingChannel.connect(errorCB)
+        console.log("channel")
+    }
+
+    // 通过信道发送消息
+    function send(msg) {
+        var handler = function (res) {
+            document.getElementById('response').innerHTML = res
+            return
+        }
+        msg = msg || document.getElementById('message').value   // 没有消息则获取信道消息
+        // 发布到屏幕上
+        msgE = document.getElementById('outmessages')
+        var msgString = JSON.stringify(msg).replace(/\\r\\n/g, '\n')
+        msgE.value = msgString + '\n' + msgE.value
+        // 通过信令通道发送出去
+        signalingChannel.send(msg, handler)
+    }
+
+
+
+    function initPeer(){
+        var iceServer = {
+            "iceServers": [{
+                "url": "turn:fw.hiwonder.com:3478",
+                "credential":"123456",
+                "username":"admin"
+            }]
+        };
+        var pc = new RTCPeerConnection(iceServer);
+
+        pc.onicecandidate = onIceCandidate
+        pc.onaddstream = onRemoteStreamAdded
+        pc.onremovestream = onRemoteStreamRemoved
+    }
+
+    // 如果当前浏览器有另一个候选项，将其发送给对等端
+    function onIceCandidate(e) {
+        if (e.candidate) {
+            send({
+                type: 'candidate',
+                mlineindex: e.candidate.sdpMLineIndex,
+                candidate: e.candidate.candidate
+            })
+        }
+    }
+
+    // 如果我们浏览器检测到另一端加入了媒体流，则将其显示在屏幕上
+    function onRemoteStreamAdded(e) {
+        yourVideoStream = e.stream
+        console.log('yourVideo: ', yourVideo)
+        yourVideo.srcObject = yourVideoStream
+        // setStatus('On call')
+    }
+
+    // 远端移除流，这里不做操作
+    function onRemoteStreamRemoved(e) {
+
+    }
+
+
+
+    // 将本地流添加至对等连接
+    function attachMedia() {
+        pc.addStream(myVideoStream)
+        // setStatus('Ready for call')
+        // if (queryParams && queryParams['call'] && !weWaited) {
+            call()
+        // }
+    }
+
+    // 生成一个offer
+    function call() {
+        pc.createOffer(gotDescription, doNothing, constraints)
+    }
+
+    // 应答会话描述，生成answer
+    function answer() {
+        pc.createAnswer(gotDescription, doNothing, constraints)
+    }
+
+    // 一旦获取到了会话描述，就将其作为本地描述，然后将其发送至另一端的浏览器
+    function gotDescription(localDesc) {
+        pc.setLocalDescription(localDesc)
+        send(localDesc)
+    }
 </script>
 </body>
 </html>
