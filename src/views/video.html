@@ -196,19 +196,6 @@
         pc.onicecandidate = onIceCandidate
         pc.onaddstream = onRemoteStreamAdded
         pc.onremovestream = onRemoteStreamRemoved
-        var mg = {
-            "sdp":"peng",
-            "type":"offer"
-        }
-        pc.setRemoteDescription(new RTCSessionDescription(mg))
-        answer()
-        setTimeout(function () {
-            var mg = {
-                "sdp":"peng",
-                "type":"answer"
-            }
-            pc.setRemoteDescription(new RTCSessionDescription(mg))
-        },500)
 
         console.log("initpeer")
     }
@@ -223,10 +210,13 @@
         //         candidate: e.candidate.candidate
         //     })
         // }
-        pc.addIceCandidate(new RTCIceCandidate({
-            sdpMLineIndex: 2,
-            candidate: "peng"
-        }))
+        var msg ={"from":"1","time":"11:39","type":1,'to':'2','content':{
+                        type: 'candidate',
+                        mlineindex: e.candidate.sdpMLineIndex,
+                        candidate: e.candidate.candidate
+                    }}
+        ws.send(JSON.stringify(msg));
+        ws.send()
     }
 
     // 如果我们浏览器检测到另一端加入了媒体流，则将其显示在屏幕上
