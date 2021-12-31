@@ -28,14 +28,14 @@
                 OfferToReceiveVideo: true
             }
         }
-    var mime = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-    var mediaSource = new MediaSource()
-    mediaSource.addEventListener('sourceopen', sourceOpen);
-    function sourceOpen () {
-
-        // 新建一个 sourceBuffer
-        sourceBuffer = mediaSource.addSourceBuffer(mime);
-    }
+    // var mime = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+    // var mediaSource = new MediaSource()
+    // mediaSource.addEventListener('sourceopen', sourceOpen);
+    // function sourceOpen () {
+    //
+    //     // 新建一个 sourceBuffer
+    //     sourceBuffer = mediaSource.addSourceBuffer(mime);
+    // }
 
     id = {{.id}}
     function handleMsg(recontent){
@@ -103,30 +103,30 @@
         }
 
         // 打开一个 web socket
-        ws1 = new WebSocket("wss://fw.hiwonder.com/ws");
-
-        ws1.onopen = function()
-        {
-
-            // Web Socket 已连接上，使用 send() 方法发送数据
-            console.log(id)
-            ws1.binaryType = "arraybuffer";
-            console.log("open");
-        };
-
-        ws1.onmessage = function (evt)
-        {
-            console.log("recive1 msg")
-            console.log(evt.data)
-            sourceBuffer.appendBuffer(evt.data)
-            myVideo.play()
-        };
-
-        ws1.onclose = function()
-        {
-            // 关闭 websocket
-            alert("连接已关闭...");
-        };
+        // ws1 = new WebSocket("wss://fw.hiwonder.com/ws");
+        //
+        // ws1.onopen = function()
+        // {
+        //
+        //     // Web Socket 已连接上，使用 send() 方法发送数据
+        //     console.log(id)
+        //     ws1.binaryType = "arraybuffer";
+        //     console.log("open");
+        // };
+        //
+        // ws1.onmessage = function (evt)
+        // {
+        //     console.log("recive1 msg")
+        //     console.log(evt.data)
+        //     sourceBuffer.appendBuffer(evt.data)
+        //     myVideo.play()
+        // };
+        //
+        // ws1.onclose = function()
+        // {
+        //     // 关闭 websocket
+        //     alert("连接已关闭...");
+        // };
     }
 
     // 获取本地媒体
@@ -159,7 +159,7 @@
         myVideo = document.getElementById('myVideo')
         yourVideo = document.getElementById('yourVideo')
 
-        myVideo.src = URL.createObjectURL(mediaSource)
+        // myVideo.src = URL.createObjectURL(mediaSource)
         getMedia()
     }
 
@@ -250,9 +250,9 @@
     function onRemoteStreamAdded(e) {
         yourVideoStream = e.stream
 
-        setTimeout(function () {
-            re(yourVideoStream)
-        },500)
+        // setTimeout(function () {
+        //     re(yourVideoStream)
+        // },500)
 
         console.log('yourVideo: ', yourVideo)
         yourVideo.srcObject = yourVideoStream
