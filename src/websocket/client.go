@@ -113,7 +113,7 @@ func (c *Client) Write() {
 				return
 			}
 			fmt.Println("send msg")
-			fmt.Println(c.ID, ":", string(message))
+			
 			c.Socket.WriteMessage(websocket.TextMessage, message)
 		}
 	}

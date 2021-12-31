@@ -181,8 +181,7 @@ func (manager *ClientManager) Start() {
 				fmt.Println("man unmarshal error")
 				continue
 			}
-			fmt.Println("man:",msgFrom)
-
+			fmt.Println("man")
 			msgTo := message.MessageTo{
 				From:msgFrom.From,
 				Time : msgFrom.Time,
