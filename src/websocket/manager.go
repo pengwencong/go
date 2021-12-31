@@ -47,13 +47,13 @@ func Connect(c *gin.Context){
 
 		}
 	}
-	_, message, err := conn.ReadMessage()
+	_, messag, err := conn.ReadMessage()
 	if err != nil {
 		conn.Close()
 		return
 	}
 
-	if _, ok := Manager.Clients[string(message)]; ok {
+	if _, ok := Manager.Clients[string(messag)]; ok {
 		return
 	}
 	//group := &Group{
@@ -65,7 +65,7 @@ func Connect(c *gin.Context){
 
 	// websocket connect
 	client := &Client{
-		ID: string(message),
+		ID: string(messag),
 		Socket: conn,
 		Send: make(chan []byte, 20),
 		HeartTime: 0,
