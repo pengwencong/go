@@ -28,11 +28,7 @@
                 OfferToReceiveVideo: true
             }
         }
-    var mediaSource = new MediaSource()
-    myVideo.src = URL.createObjectURL(mediaSource)
-    var mime = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
 
-    var sourceBuffer = mediaSource.addSourceBuffer(mime);
     id = {{.id}}
     function handleMsg(recontent){
         if (recontent.type == "offer") {
@@ -143,7 +139,9 @@
         // 等待pc创建完毕
         attachMedia()
     }
-
+    var mediaSource = new MediaSource()
+    var mime = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+    var sourceBuffer = mediaSource.addSourceBuffer(mime);
     // 自动开始获取本地媒体
     window.onload = function () {
         initWebsocket()
@@ -153,6 +151,8 @@
 
         myVideo = document.getElementById('myVideo')
         yourVideo = document.getElementById('yourVideo')
+
+        myVideo.src = URL.createObjectURL(mediaSource)
         getMedia()
     }
 
