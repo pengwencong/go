@@ -65,7 +65,7 @@ func Connect(c *gin.Context){
 	client := &Client{
 		ID: string(message),
 		Socket: conn,
-		Send: make(chan []byte),
+		Send: make(chan []byte, 20),
 		HeartTime: 0,
 		DataBuff : []byte{},
 	}
