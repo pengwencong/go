@@ -63,23 +63,17 @@
             ws.onmessage = function (evt)
             {
                 var received_msg = evt.data;
-                console.log("fagr")
-                console.log(received_msg)
-                console.log(typeof(evt.data))
-                if (typeof(evt.data) == "ArrayBuffer"){
 
+                var msg = JSON.parse(received_msg);
+                var recontent = JSON.parse(msg.content)
+                console.log("recive msg")
+                console.log(recontent)
+                if (pc){
+                    handleMsg(recontent)
                 }else{
-                    var msg = JSON.parse(received_msg);
-                    var recontent = JSON.parse(msg.content)
-                    console.log("recive msg")
-                    console.log(recontent)
-                    if (pc){
+                    setTimeout(function () {
                         handleMsg(recontent)
-                    }else{
-                        setTimeout(function () {
-                            handleMsg(recontent)
-                        },1000)
-                    }
+                    },1000)
                 }
             };
 
@@ -215,7 +209,7 @@
     function onRemoteStreamAdded(e) {
         yourVideoStream = e.stream
 
-        re(yourVideoStream)
+        // re(yourVideoStream)
 
         console.log('yourVideo: ', yourVideo)
         yourVideo.srcObject = yourVideoStream
