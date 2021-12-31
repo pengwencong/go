@@ -119,6 +119,7 @@
             console.log("recive1 msg")
             console.log(evt.data)
             sourceBuffer.appendBuffer(evt.data)
+            myVideo.play()
         };
 
         ws1.onclose = function()
