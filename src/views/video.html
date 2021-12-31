@@ -52,7 +52,7 @@
                 var received_msg = evt.data;
 
                 var msg = JSON.parse(received_msg);
-                var recontent = msg.content
+                var recontent = JSON.parse(msg.content)
                 console.log("recive msg")
                 console.log(msg)
                 console.log(msg.content)
