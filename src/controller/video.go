@@ -8,13 +8,11 @@ import (
 
 func VideoStream(c *gin.Context){
 	id := c.Query("id")
-	pid := c.Query("pid")
 	//c.JSON(200,gin.H{
 	//	"message":"success",
 	//})
 	c.HTML(200,"video.html",gin.H{
 		"id":id,
-		"pid":pid,
 	})
 }
 
