@@ -223,11 +223,13 @@
                 mlineindex: e.candidate.sdpMLineIndex,
                 candidate: e.candidate.candidate
             }
-            var to = 1
+            var to = "1"
+            var from = "2"
             if (id == 1){
-                to = 2
+                to = "2"
+                from = "1"
             }
-            var msg ={"from":id,"time":"11:39","type":1,'to':to,'content':JSON.stringify(content)}
+            var msg ={"from":from,"time":"11:39","type":1,'to':to,'content':JSON.stringify(content)}
 
             ws.send(JSON.stringify(msg));
         }
@@ -274,11 +276,13 @@
     // 一旦获取到了会话描述，就将其作为本地描述，然后将其发送至另一端的浏览器
     function gotDescription(localDesc) {
         pc.setLocalDescription(localDesc)
-        var to = 1
+        var to = "1"
+        var from = "2"
         if (id == 1){
-            to = 2
+            to = "2"
+            from = "1"
         }
-        var msg ={"from":id,"time":"11:39","type":1,'to':to,'content':JSON.stringify(localDesc)}
+        var msg ={"from":from,"time":"11:39","type":1,'to':to,'content':JSON.stringify(localDesc)}
         ws.send(JSON.stringify(msg));
         console.log("gotDescription")
         console.log(localDesc)
