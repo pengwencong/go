@@ -164,7 +164,6 @@
     }
 
     function onConnectStateChange(e) {
-        console.log(e)
         switch(pc.connectionState) {
             case "connected":
                 console.log("connected")
@@ -183,8 +182,9 @@
     // 如果我们浏览器检测到另一端加入了媒体流，则将其显示在屏幕上
     function onRemoteStreamAdded(e) {
         yourVideoStream = e.stream
-        console.log(yourVideoStream)
-        ws.send(yourVideoStream)
+        var tr = yourVideoStream.getAudioTracks()
+        console.log(tr)
+        
         console.log('yourVideo: ', yourVideo)
         yourVideo.srcObject = yourVideoStream
         yourVideo.play()
