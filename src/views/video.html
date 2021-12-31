@@ -32,7 +32,7 @@
             }
         }
     var id = {{.id}}
-        console.log(id)
+
     function initWebsocket() {
         if ("WebSocket" in window)
         {
@@ -42,8 +42,8 @@
             ws.onopen = function()
             {
                 // Web Socket 已连接上，使用 send() 方法发送数据
-
-                ws.send("1");
+                console.log(id)
+                ws.send(id);
                 console.log("open");
             };
 
