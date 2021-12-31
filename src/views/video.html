@@ -137,7 +137,7 @@
         pc.onicecandidate = onIceCandidate
         pc.onaddstream = onRemoteStreamAdded
         pc.onremovestream = onRemoteStreamRemoved
-
+        pc.onconnectionstatechange = onConnectStateChange
         console.log("initpeer")
         attachMedia()
     }
@@ -163,6 +163,23 @@
 
     }
 
+    function onConnectStateChange(e) {
+        console.log(e)
+        switch(pc.connectionState) {
+            case "connected":
+                console.log("connected")
+                break;
+            case "disconnected":
+                console.log("dconnected")
+            case "failed":
+                console.log("fail")
+                break;
+            case "closed":
+                console.log("closed")
+                break;
+        }
+    }
+
     // 如果我们浏览器检测到另一端加入了媒体流，则将其显示在屏幕上
     function onRemoteStreamAdded(e) {
         yourVideoStream = e.stream
@@ -174,7 +191,6 @@
     // 远端移除流，这里不做操作
     function onRemoteStreamRemoved(e) {
         console.log("remove")
-        pc.Close()
     }
 
     // 将本地流添加至对等连接
