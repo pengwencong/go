@@ -105,7 +105,10 @@
     // 自动开始获取本地媒体
     window.onload = function () {
         initWebsocket()
-        initPeer()
+        setTimeout(function () {
+            initPeer()
+        },500)
+
         myVideo = document.getElementById('myVideo')
         yourVideo = document.getElementById('yourVideo')
         getMedia()
@@ -132,7 +135,6 @@
     // 如果当前浏览器有另一个候选项，将其发送给对等端
     function onIceCandidate(e) {
         if (e.candidate) {
-            console.log(e.candidate)
             var content = {
                 type: 'candidate',
                 mlineindex: e.candidate.sdpMLineIndex,
