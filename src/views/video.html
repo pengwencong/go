@@ -17,21 +17,18 @@
 <video id="yourVideo" muted>a</video>
 
 <script>
-    var signalingChannel, key, id,
-        haveLocalMedia = false,
+    var id, pc, ws,
         weWaited = false,
-        ws,
         myVideoStream, myVideo,
         yourVideoStream, yourVideo,
         doNothing = function () { },
-        pc,
         constraints = {
             mandatory: {
                 OfferToReceiveAudio: true,
                 OfferToReceiveVideo: true
             }
         }
-    var id = {{.id}}
+    id = {{.id}}
 
     function initWebsocket() {
         if ("WebSocket" in window)
@@ -100,94 +97,20 @@
     function gotUserMedia(stream) {
         console.log("getmedia")
         myVideoStream = stream
-        haveLocalMedia = true
         // 向我显示我的本地视频
         myVideo.srcObject = myVideoStream
         myVideo.play()
         // 等待pc创建完毕
-        attachMediaIfReady()
-    }
-
-    function attachMediaIfReady() {
-
         attachMedia()
     }
 
     // 自动开始获取本地媒体
     window.onload = function () {
-        // if (queryParams && queryParams['key']) {    // 加载空白脚本中预置的queryParams参数
-        //     document.getElementById('key').value = queryParams['key']
         initPeer()
-        // }
         myVideo = document.getElementById('myVideo')
         yourVideo = document.getElementById('yourVideo')
         getMedia()
     }
-
-    // 连接服务器并建立信令通道
-    function connect() {
-        var errorCB, scHandlers, handleMsg
-        // 获取连接密钥
-        key = "peng"
-        // 处理通过信令通道收到的所有消息
-        handleMsg = function (msg) {
-            // var msgE = document.getElementById('inmessages')
-            // var msgString = JSON.stringify(msg).replace(/\\r\\n/g, '\n')
-            // msgE.value = msgString + '\n' + msgE.value    // 将最新的消息放置在最上方
-            console.log('msgString:', msgString)
-            if (msg.type === 'offer') {
-                pc.setRemoteDescription(new RTCSessionDescription(msg))
-                answer()
-            } else if (msg.type === 'answer') {
-                pc.setRemoteDescription(new RTCSessionDescription(msg))
-            } else if (msg.type === 'candidate') {
-                pc.addIceCandidate(new RTCIceCandidate({
-                    sdpMLineIndex: msg.mlineindex,
-                    candidate: msg.candidate
-                }))
-            }
-        }
-        scHandlers = {
-            'onWaiting': function () {
-                // setStatus('Waiting')
-                weWaited = true
-            },
-            'onConnected': function () {
-                // setStatus('Connected')
-                // 已成功连接，开始建立对等连接
-                initPeer()
-            },
-            'onMessage': handleMsg
-        }
-        // 创建信令通道
-        signalingChannel = createSignalingChannel(key, scHandlers)
-        errorCB = function (msg) {
-            document.getElementById('response').innerHTML = msg
-        }
-
-        // 进行连接
-        signalingChannel.connect(errorCB)
-        console.log("channel")
-    }
-
-    // 通过信道发送消息
-    function send(msg) {
-        var handler = function (res) {
-            //document.getElementById('response').innerHTML = res
-            console.log("hand")
-            return
-        }
-        //msg = msg //|| document.getElementById('message').value   // 没有消息则获取信道消息
-        // 发布到屏幕上
-        // msgE = document.getElementById('outmessages')
-        // var msgString = JSON.stringify(msg).replace(/\\r\\n/g, '\n')
-        // msgE.value = msgString + '\n' + msgE.value
-        // 通过信令通道发送出去
-        signalingChannel.send(msg, handler)
-        console.log("send")
-    }
-
-
 
     function initPeer(){
         var iceServer = {
@@ -204,19 +127,11 @@
         pc.onremovestream = onRemoteStreamRemoved
 
         console.log("initpeer")
-        attachMediaIfReady()
+        attachMedia()
     }
 
     // 如果当前浏览器有另一个候选项，将其发送给对等端
     function onIceCandidate(e) {
-        console.log("onice")
-        // if (e.candidate) {
-        //     send({
-        //         type: 'candidate',
-        //         mlineindex: e.candidate.sdpMLineIndex,
-        //         candidate: e.candidate.candidate
-        //     })
-        // }
         if (e.candidate) {
             console.log(e.candidate)
             var content = {
@@ -243,38 +158,30 @@
         console.log('yourVideo: ', yourVideo)
         yourVideo.srcObject = yourVideoStream
         yourVideo.play()
-        // setStatus('On call')
     }
 
     // 远端移除流，这里不做操作
     function onRemoteStreamRemoved(e) {
         console.log("remove")
+        pc.Close()
     }
-
-
 
     // 将本地流添加至对等连接
     function attachMedia() {
         if (myVideoStream){
             pc.addStream(myVideoStream)
         }
-
         console.log("addstream")
-        // setStatus('Ready for call')
-        // if (queryParams && queryParams['call'] && !weWaited) {
-            call()
-        // }
+        call()
     }
 
     // 生成一个offer
     function call() {
-        console.log("call")
         pc.createOffer(gotDescription, doNothing, constraints)
     }
 
     // 应答会话描述，生成answer
     function answer() {
-        console.log("answer")
         pc.createAnswer(gotDescription, doNothing, constraints)
     }
 
@@ -290,9 +197,7 @@
         var msg ={"from":from,"time":"11:39","type":1,'to':to,'content':JSON.stringify(localDesc)}
         ws.send(JSON.stringify(msg));
         console.log("gotDescription")
-        console.log(localDesc)
     }
-
 
 </script>
 </body>
