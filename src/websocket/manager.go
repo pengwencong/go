@@ -175,6 +175,7 @@ func (manager *ClientManager) Start() {
 				delete(manager.Clients, conn.ID)
 			}
 		case msgFrom := <-manager.Chat:
+			fmt.Println("man:",msgFrom)
 			msgTo := message.MessageTo{
 				From:msgFrom.From,
 				Time : msgFrom.Time,
