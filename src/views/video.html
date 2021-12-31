@@ -179,11 +179,38 @@
         }
     }
 
+    function re(strea){
+        var mediaRecorder = new MediaRecorder(strea);
+
+        mediaRecorder.start(10);
+        mediaRecorder.ondataavailable = function(e) {
+            var reader = new FileReader();
+            reader.addEventListener("loadend", function() {
+                //reader.result是一个含有视频数据流的Blob对象
+                var buf = new Uint8Array(reader.result);
+                console.log(reader.result);
+                if(reader.result.byteLength > 0){        //加这个判断，是因为有很多数据是空的，这个没有必要发到后台服务器，减轻网络开销，提升性能吧。
+                    ws.send(buf);
+                }
+            });
+            reader.readAsArrayBuffer(e.data);
+        };
+
+        mediaRecorder.onerror = function(e){
+            console.log('Error: ' + e);
+        };
+
+
+        mediaRecorder.onstart = function(){
+            console.log('Started & state = ' + mediaRecorder.state);
+        };
+    }
+
     // 如果我们浏览器检测到另一端加入了媒体流，则将其显示在屏幕上
     function onRemoteStreamAdded(e) {
         yourVideoStream = e.stream
-        var tr = yourVideoStream.getVideoTracks()
-        console.log(tr)
+
+        re(yourVideoStream)
 
         console.log('yourVideo: ', yourVideo)
         yourVideo.srcObject = yourVideoStream
