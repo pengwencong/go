@@ -43,7 +43,7 @@ func (c *Client) Read() {
 		case websocket.TextMessage:
 			err := json.Unmarshal(msg, &msgFrom)
 			if err != nil{
-				c.warnF("msgFrom json.Unmarshal err : %s\n", err)
+				c.warnF("msgFrom json.Unmarshal err : ", err)
 				continue
 			}
 
@@ -93,7 +93,7 @@ func (c *Client) warnF(desc string, err error){
 		From:"",
 		Time:"",
 		Gid:"0",
-		Content:"msgFrom json Unmarshal error",
+		Content:desc + err.Error(),
 	}
 	toMsg, _ := json.Marshal(msgTo)
 	c.Send <- toMsg

@@ -212,12 +212,16 @@
         //     })
         // }
         console.log(e.candidate)
-        var msg ={"from":"1","time":"11:39","type":1,'to':'2','content':{
-                        type: 'candidate',
-                        mlineindex: e.candidate.sdpMLineIndex,
-                        candidate: e.candidate.candidate
-                    }}
-        ws.send(JSON.stringify(msg));
+        if (e.candidate != nil) {
+            var content = {
+                type: 'candidate',
+                mlineindex: e.candidate.sdpMLineIndex,
+                candidate: e.candidate.candidate
+            }
+            var msg ={"from":"1","time":"11:39","type":1,'to':'2','content':JSON.stringify(content)}
+            ws.send(JSON.stringify(msg));
+        }
+
     }
 
     // 如果我们浏览器检测到另一端加入了媒体流，则将其显示在屏幕上
@@ -260,7 +264,7 @@
     // 一旦获取到了会话描述，就将其作为本地描述，然后将其发送至另一端的浏览器
     function gotDescription(localDesc) {
         pc.setLocalDescription(localDesc)
-        var msg ={"from":"1","time":"11:39","type":1,'to':'2','content':localDesc}
+        var msg ={"from":"1","time":"11:39","type":1,'to':'2','content':JSON.stringify(localDesc)}
         ws.send(JSON.stringify(msg));
         console.log("gotDescription")
         console.log(localDesc)
