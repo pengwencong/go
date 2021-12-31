@@ -17,7 +17,7 @@
 <video id="yourVideo" muted>a</video>
 
 <script>
-    var id, pc, ws,
+    var id, ws, pid,
         weWaited = false,
         myVideoStream, myVideo,
         yourVideoStream, yourVideo,
@@ -28,18 +28,20 @@
                 OfferToReceiveVideo: true
             }
         }
-    id = {{.id}}
+    var pca = array()
+    id = {{.id}},pid = {{.pid}}
+
     function handleMsg(recontent){
         if (recontent.type == "offer") {
             console.log("rece offer")
-            pc.setRemoteDescription(new RTCSessionDescription(recontent))
+            pca[pid].setRemoteDescription(new RTCSessionDescription(recontent))
             answer()
         } else if (recontent.type === "answer") {
             console.log("rece answer")
-            pc.setRemoteDescription(new RTCSessionDescription(recontent))
+            pca[pid].setRemoteDescription(new RTCSessionDescription(recontent))
         } else if (recontent.type === "candidate") {
             console.log("rece candidate")
-            pc.addIceCandidate(new RTCIceCandidate({
+            pca[pid].addIceCandidate(new RTCIceCandidate({
                 sdpMLineIndex: recontent.mlineindex,
                 candidate: recontent.candidate
             }))
@@ -68,12 +70,12 @@
                 var recontent = JSON.parse(msg.content)
                 console.log("recive msg")
                 console.log(recontent)
-                if (pc){
+                if (pca[pid]){
                     handleMsg(recontent)
                 }else{
                     setTimeout(function () {
                         handleMsg(recontent)
-                    },500)
+                    },1000)
                 }
 
             };
@@ -132,12 +134,24 @@
                 "username":"admin"
             }]
         };
-        pc = new RTCPeerConnection(iceServer);
+        var pc = new RTCPeerConnection(iceServer);
 
         pc.onicecandidate = onIceCandidate
         pc.onaddstream = onRemoteStreamAdded
         pc.onremovestream = onRemoteStreamRemoved
         pc.onconnectionstatechange = onConnectStateChange
+
+
+        var pc1 = new RTCPeerConnection(iceServer);
+
+        pc1.onicecandidate = onIceCandidate
+        pc1.onaddstream = onRemoteStreamAdded
+        pc1.onremovestream = onRemoteStreamRemoved
+        pc1.onconnectionstatechange = onConnectStateChange
+
+        pca.push(pc)
+        pca.push(pc1)
+
         console.log("initpeer")
         attachMedia()
     }
@@ -164,8 +178,8 @@
     }
 
     function onConnectStateChange(e) {
-        console.log(e)
-        switch(pc.connectionState) {
+        console.log("statechange")
+        switch(pca[pid].connectionState) {
             case "connected":
                 console.log("connected")
                 break;
@@ -196,7 +210,7 @@
     // 将本地流添加至对等连接
     function attachMedia() {
         if (myVideoStream){
-            pc.addStream(myVideoStream)
+            pca[pid].addStream(myVideoStream)
         }
         console.log("addstream")
         call()
@@ -204,17 +218,17 @@
 
     // 生成一个offer
     function call() {
-        pc.createOffer(gotDescription, doNothing, constraints)
+        pca[pid].createOffer(gotDescription, doNothing, constraints)
     }
 
     // 应答会话描述，生成answer
     function answer() {
-        pc.createAnswer(gotDescription, doNothing, constraints)
+        pca[pid].createAnswer(gotDescription, doNothing, constraints)
     }
 
     // 一旦获取到了会话描述，就将其作为本地描述，然后将其发送至另一端的浏览器
     function gotDescription(localDesc) {
-        pc.setLocalDescription(localDesc)
+        pca[pid].setLocalDescription(localDesc)
         var to = "1"
         var from = "2"
         if (id == 1){
