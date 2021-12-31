@@ -82,8 +82,6 @@
         }
     }
 
-    initWebsocket()
-
     // 获取本地媒体
     function getMedia() {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -106,6 +104,7 @@
 
     // 自动开始获取本地媒体
     window.onload = function () {
+        initWebsocket()
         initPeer()
         myVideo = document.getElementById('myVideo')
         yourVideo = document.getElementById('yourVideo')
