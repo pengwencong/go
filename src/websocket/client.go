@@ -57,8 +57,6 @@ func (c *Client) Read() {
 			case message.ClientVideo:
 				video = true
 			case message.ClientMessage:
-				fmt.Println("recive msg")
-				fmt.Println(c.ID, ":", string(msg))
 				Manager.Chat <- &msgFrom
 			case message.GroupsMessage:
 				Manager.Chat <- &msgFrom

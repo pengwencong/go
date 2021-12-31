@@ -197,8 +197,10 @@ func (manager *ClientManager) Start() {
 					//err := rabbitmq.RedisSetProducter(messageSlice, message.Chant_Data)
 					//if err != nil {
 					//}
-
+					fmt.Println("man", ":", msgFrom.Content)
 					WaitMsg[msgFrom.To] = append(WaitMsg[msgFrom.To],msgFrom.Content)
+					fmt.Println("man", ":", WaitMsg[msgFrom.To])
+					fmt.Println("man", ":", len(WaitMsg[msgFrom.To]))
 				}
 			}
 			//if msgFrom.Type == message.GroupsMessage {
