@@ -54,9 +54,7 @@
                 var msg = JSON.parse(received_msg);
                 var recontent = JSON.parse(msg.content)
                 console.log("recive msg")
-                console.log(msg)
-                console.log(msg.content)
-                console.log(recontent.type)
+                console.log(recontent)
                 if (recontent.type == "offer") {
                     console.log("rece offer")
                     pc.setRemoteDescription(new RTCSessionDescription(msg.content))
@@ -225,7 +223,12 @@
                 mlineindex: e.candidate.sdpMLineIndex,
                 candidate: e.candidate.candidate
             }
-            var msg ={"from":"1","time":"11:39","type":1,'to':'2','content':JSON.stringify(content)}
+            var to = 1
+            if (id == 1){
+                to = 2
+            }
+            var msg ={"from":id,"time":"11:39","type":1,'to':to,'content':JSON.stringify(content)}
+
             ws.send(JSON.stringify(msg));
         }
 
@@ -271,7 +274,11 @@
     // 一旦获取到了会话描述，就将其作为本地描述，然后将其发送至另一端的浏览器
     function gotDescription(localDesc) {
         pc.setLocalDescription(localDesc)
-        var msg ={"from":"1","time":"11:39","type":1,'to':'2','content':JSON.stringify(localDesc)}
+        var to = 1
+        if (id == 1){
+            to = 2
+        }
+        var msg ={"from":id,"time":"11:39","type":1,'to':to,'content':JSON.stringify(localDesc)}
         ws.send(JSON.stringify(msg));
         console.log("gotDescription")
         console.log(localDesc)
