@@ -28,6 +28,11 @@
                 OfferToReceiveVideo: true
             }
         }
+    var mediaSource = new MediaSource()
+    myVideo.src = URL.createObjectURL(mediaSource)
+    var mime = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+
+    var sourceBuffer = mediaSource.addSourceBuffer(mime);
     id = {{.id}}
     function handleMsg(recontent){
         if (recontent.type == "offer") {
@@ -82,6 +87,9 @@
                 // 关闭 websocket
                 alert("连接已关闭...");
             };
+
+
+
         }
 
         else
@@ -106,6 +114,7 @@
         {
             console.log("recive1 msg")
             console.log(evt.data)
+            sourceBuffer.appendBuffer(evt.data)
         };
 
         ws1.onclose = function()
@@ -220,7 +229,8 @@
         };
 
         mediaRecorder.onerror = function(e){
-            console.log('Error: ' + e);
+            console.log('Error: ');
+            console.log(e);
         };
 
 
