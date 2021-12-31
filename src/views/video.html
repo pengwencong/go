@@ -282,6 +282,8 @@
             to = "2"
             from = "1"
         }
+        var msg1 ={"from":from,"time":"11:39","type":1,'to':to,'content':"fe"}
+        ws.send(JSON.stringify(msg1));
         var msg ={"from":from,"time":"11:39","type":1,'to':to,'content':JSON.stringify(localDesc)}
         ws.send(JSON.stringify(msg));
         console.log("gotDescription")
