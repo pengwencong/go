@@ -146,7 +146,7 @@ func (manager *ClientManager) Start() {
 		select {
 		case conn := <-manager.Register:
 			manager.Clients[conn.ID] = conn
-			fmt.Println(manager)
+			fmt.Println(*manager)
 		case conn := <-manager.Unregister:
 			if _, ok := manager.Clients[conn.ID]; ok {
 				close(conn.Send)
