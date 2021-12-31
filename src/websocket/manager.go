@@ -102,6 +102,7 @@ func Connect(c *gin.Context){
 			client.Send <- toMsg
 		}
 	}
+	delete(WaitMsg,client.ID)
 }
 
 
