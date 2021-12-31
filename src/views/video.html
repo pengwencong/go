@@ -54,12 +54,16 @@
                 var msg = JSON.parse(received_msg);
                 console.log("recive msg")
                 console.log(msg)
+                console.log(msg.content)
                 if (msg.content.type === 'offer') {
+                    console.log("rece offer")
                     pc.setRemoteDescription(new RTCSessionDescription(msg.content))
                     answer()
                 } else if (msg.content.type === 'answer') {
+                    console.log("rece answer")
                     pc.setRemoteDescription(new RTCSessionDescription(msg.content))
                 } else if (msg.content.type === 'candidate') {
+                    console.log("rece candidate")
                     pc.addIceCandidate(new RTCIceCandidate({
                         sdpMLineIndex: msg.content.mlineindex,
                         candidate: msg.content.candidate
