@@ -17,7 +17,7 @@
 <video id="yourVideo" muted>a</video>
 
 <script>
-    var id, pc, ws,
+    var id, pc, ws, ws1,
         weWaited = false,
         myVideoStream, myVideo,
         yourVideoStream, yourVideo,
@@ -89,6 +89,30 @@
             // 浏览器不支持 WebSocket
             alert("您的浏览器不支持 WebSocket!");
         }
+
+        // 打开一个 web socket
+        ws1 = new WebSocket("wss://fw.hiwonder.com/ws");
+
+        ws1.onopen = function()
+        {
+
+            // Web Socket 已连接上，使用 send() 方法发送数据
+            console.log(id)
+            ws1.binaryType = "arraybuffer";
+            console.log("open");
+        };
+
+        ws1.onmessage = function (evt)
+        {
+            console.log("recive1 msg")
+            console.log(evt.data)
+        };
+
+        ws1.onclose = function()
+        {
+            // 关闭 websocket
+            alert("连接已关闭...");
+        };
     }
 
     // 获取本地媒体
@@ -189,7 +213,7 @@
                 var buf = new Uint8Array(reader.result);
                 console.log(reader.result);
                 if(reader.result.byteLength > 0){        //加这个判断，是因为有很多数据是空的，这个没有必要发到后台服务器，减轻网络开销，提升性能吧。
-                    ws.send(buf);
+                    ws1.send(buf);
                 }
             });
             reader.readAsArrayBuffer(e.data);
@@ -209,7 +233,7 @@
     function onRemoteStreamAdded(e) {
         yourVideoStream = e.stream
 
-        // re(yourVideoStream)
+        re(yourVideoStream)
 
         console.log('yourVideo: ', yourVideo)
         yourVideo.srcObject = yourVideoStream
