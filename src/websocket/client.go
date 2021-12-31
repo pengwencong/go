@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/gorilla/websocket"
 	"go/message"
+	"fmt"
 )
 
 // Client is a websocket client

@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"time"
+	"fmt"
 )
 
 // ClientManager is a websocket manager
