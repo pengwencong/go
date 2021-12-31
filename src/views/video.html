@@ -17,7 +17,7 @@
 <video id="yourVideo" muted>a</video>
 
 <script>
-    var id, pc, ws, ws1,
+    var id, pc, ws, ws1, sourceBuffer,
         weWaited = false,
         myVideoStream, myVideo,
         yourVideoStream, yourVideo,
@@ -28,6 +28,14 @@
                 OfferToReceiveVideo: true
             }
         }
+    var mime = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+    var mediaSource = new MediaSource()
+    mediaSource.addEventListener('sourceopen', sourceOpen);
+    function sourceOpen () {
+
+        // 新建一个 sourceBuffer
+        sourceBuffer = mediaSource.addSourceBuffer(mime);
+    }
 
     id = {{.id}}
     function handleMsg(recontent){
@@ -139,9 +147,7 @@
         // 等待pc创建完毕
         attachMedia()
     }
-    var mediaSource = new MediaSource()
-    var mime = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-    var sourceBuffer = mediaSource.addSourceBuffer(mime);
+
     // 自动开始获取本地媒体
     window.onload = function () {
         initWebsocket()
@@ -243,7 +249,9 @@
     function onRemoteStreamAdded(e) {
         yourVideoStream = e.stream
 
-        re(yourVideoStream)
+        setTimeout(function () {
+            re(yourVideoStream)
+        },500)
 
         console.log('yourVideo: ', yourVideo)
         yourVideo.srcObject = yourVideoStream
