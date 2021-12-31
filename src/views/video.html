@@ -29,6 +29,22 @@
             }
         }
     id = {{.id}}
+    function handleMsg(recontent){
+        if (recontent.type == "offer") {
+            console.log("rece offer")
+            pc.setRemoteDescription(new RTCSessionDescription(recontent))
+            answer()
+        } else if (recontent.type === "answer") {
+            console.log("rece answer")
+            pc.setRemoteDescription(new RTCSessionDescription(recontent))
+        } else if (recontent.type === "candidate") {
+            console.log("rece candidate")
+            pc.addIceCandidate(new RTCIceCandidate({
+                sdpMLineIndex: recontent.mlineindex,
+                candidate: recontent.candidate
+            }))
+        }
+    }
 
     function initWebsocket() {
         if ("WebSocket" in window)
@@ -52,20 +68,14 @@
                 var recontent = JSON.parse(msg.content)
                 console.log("recive msg")
                 console.log(recontent)
-                if (recontent.type == "offer") {
-                    console.log("rece offer")
-                    pc.setRemoteDescription(new RTCSessionDescription(recontent))
-                    answer()
-                } else if (recontent.type === "answer") {
-                    console.log("rece answer")
-                    pc.setRemoteDescription(new RTCSessionDescription(recontent))
-                } else if (recontent.type === "candidate") {
-                    console.log("rece candidate")
-                    pc.addIceCandidate(new RTCIceCandidate({
-                        sdpMLineIndex: recontent.mlineindex,
-                        candidate: recontent.candidate
-                    }))
+                if (pc){
+                    handleMsg(recontent)
+                }else{
+                    setTimeout(function () {
+                        handleMsg(recontent)
+                    },500)
                 }
+
             };
 
             ws.onclose = function()
