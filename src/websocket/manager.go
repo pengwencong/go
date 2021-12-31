@@ -146,7 +146,6 @@ func (manager *ClientManager) Start() {
 		select {
 		case conn := <-manager.Register:
 			manager.Clients[conn.ID] = conn
-			fmt.Println(*manager)
 		case conn := <-manager.Unregister:
 			if _, ok := manager.Clients[conn.ID]; ok {
 				close(conn.Send)
@@ -176,6 +175,9 @@ func (manager *ClientManager) Start() {
 					//err := rabbitmq.RedisSetProducter(messageSlice, message.Chant_Data)
 					//if err != nil {
 					//}
+					toMsg, _ := json.Marshal(msgTo)
+
+					client.Send <- toMsg
 				}
 			}
 			//if msgFrom.Type == message.GroupsMessage {

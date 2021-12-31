@@ -57,6 +57,7 @@ func (c *Client) Read() {
 			case message.ClientVideo:
 				video = true
 			case message.ClientMessage:
+				fmt.Println("recive msg")
 				fmt.Println(c.ID, ":", string(msg))
 				Manager.Chat <- &msgFrom
 			case message.GroupsMessage:
@@ -113,6 +114,7 @@ func (c *Client) Write() {
 				c.Socket.WriteMessage(websocket.CloseMessage, []byte{})
 				return
 			}
+			fmt.Println("send msg")
 			fmt.Println(c.ID, ":", string(message))
 			c.Socket.WriteMessage(websocket.TextMessage, message)
 		}
