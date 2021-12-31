@@ -111,6 +111,7 @@ func (c *Client) Write() {
 				c.Socket.WriteMessage(websocket.CloseMessage, []byte{})
 				return
 			}
+			fmt.Println(c.ID, ":", message)
 			c.Socket.WriteMessage(websocket.TextMessage, message)
 		}
 	}
