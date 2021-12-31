@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"time"
+	"fmt"
 )
 
 // ClientManager is a websocket manager
@@ -83,11 +84,11 @@ func Connect(c *gin.Context){
 	manager.Register <- client
 
 
-	if val, ok := manager.WaitMsg[client.ID]; ok {
+	if val, ok := WaitMsg[client.ID]; ok {
 		fmt.Println(client.ID, val)
-		for id, v := range val {
+		for _, v := range val {
 			from := "1"
-			if id == "1" {
+			if client.ID == "1" {
 				from = "2"
 			}
 			msgTo := message.MessageTo{
