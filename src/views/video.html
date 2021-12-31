@@ -51,6 +51,7 @@
                 var received_msg = evt.data;
 
                 var msg = JSON.parse(received_msg);
+                console.log("recive msg")
                 console.log(msg)
                 if (msg.content.type === 'offer') {
                     pc.setRemoteDescription(new RTCSessionDescription(msg.content))
@@ -216,7 +217,6 @@
                         candidate: e.candidate.candidate
                     }}
         ws.send(JSON.stringify(msg));
-        ws.send()
     }
 
     // 如果我们浏览器检测到另一端加入了媒体流，则将其显示在屏幕上
