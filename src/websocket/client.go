@@ -2,9 +2,9 @@ package websocket
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gorilla/websocket"
 	"go/message"
-	"fmt"
 )
 
 // Client is a websocket client
@@ -21,7 +21,7 @@ func (c *Client) Read() {
 		Manager.Unregister <- c
 	}()
 
-	msgFrom := message.MessageFrom{}
+	//msgFrom := message.MessageFrom{}
 	file := false
 	video := false
 
@@ -42,25 +42,25 @@ func (c *Client) Read() {
 
 		switch messageType {
 		case websocket.TextMessage:
-			err := json.Unmarshal(msg, &msgFrom)
-			if err != nil{
-				c.warnF("msgFrom json.Unmarshal err : ", err)
-				continue
-			}
-
-			switch msgFrom.Type {
-			case message.PongMessage:
-				c.HeartTime -= 1
-				continue
-			case message.ClientFile:
-				file = true
-			case message.ClientVideo:
-				video = true
-			case message.ClientMessage:
-				Manager.Chat <- &msgFrom
-			case message.GroupsMessage:
-				Manager.Chat <- &msgFrom
-			}
+			//err := json.Unmarshal(msg, &msgFrom)
+			//if err != nil{
+			//	c.warnF("msgFrom json.Unmarshal err : ", err)
+			//	continue
+			//}
+			Manager.Chat <- msg
+			//switch msgFrom.Type {
+			//case message.PongMessage:
+			//	c.HeartTime -= 1
+			//	continue
+			//case message.ClientFile:
+			//	file = true
+			//case message.ClientVideo:
+			//	video = true
+			//case message.ClientMessage:
+			//	Manager.Chat <- msg
+			//case message.GroupsMessage:
+			//	Manager.Chat <- msg
+			//}
 		case websocket.BinaryMessage:
 			//if file {
 			//	err = help.SaveFileFromBinary(c.ID, msgFrom.Content, msg)

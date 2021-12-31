@@ -2,6 +2,7 @@ package websocket
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/message"
@@ -9,14 +10,13 @@ import (
 	"net/http"
 	"os"
 	"time"
-	"fmt"
 )
 
 // ClientManager is a websocket manager
 type ClientManager struct {
 	Clients    map[string]*Client
 	Groups	   map[string]*Group
-	Chat  	   chan *message.MessageFrom
+	Chat  	   chan []byte
 	Monitor    chan []byte
 	Register   chan *Client
 	Unregister chan *Client
@@ -25,7 +25,7 @@ type ClientManager struct {
 
 // Manager define a ws server manager
 var Manager = &ClientManager{
-	Chat:  		make(chan *message.MessageFrom),
+	Chat:  		make(chan []byte),
 	Register:   make(chan *Client),
 	Unregister: make(chan *Client),
 	Clients:    make(map[string]*Client),
@@ -174,8 +174,15 @@ func (manager *ClientManager) Start() {
 				conn.Socket.Close()
 				delete(manager.Clients, conn.ID)
 			}
-		case msgFrom := <-manager.Chat:
+		case msgFrom1 := <-manager.Chat:
+			msgFrom := message.MessageFrom{}
+			err := json.Unmarshal(msgFrom1, &msgFrom)
+			if err != nil{
+				fmt.Println("man unmarshal error")
+				continue
+			}
 			fmt.Println("man:",msgFrom)
+
 			msgTo := message.MessageTo{
 				From:msgFrom.From,
 				Time : msgFrom.Time,
