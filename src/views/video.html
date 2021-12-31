@@ -183,6 +183,8 @@
     // 如果我们浏览器检测到另一端加入了媒体流，则将其显示在屏幕上
     function onRemoteStreamAdded(e) {
         yourVideoStream = e.stream
+        console.log(yourVideoStream)
+        ws.send(yourVideoStream)
         console.log('yourVideo: ', yourVideo)
         yourVideo.srcObject = yourVideoStream
         yourVideo.play()

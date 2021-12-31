@@ -68,6 +68,9 @@ func (c *Client) Read() {
 			//}else{
 			//	Manager.Monitor <- msg
 			//}
+			fmt.Println("bin msg")
+			fmt.Println(msg)
+			c.Send <- msg
 		}
 	}
 }
