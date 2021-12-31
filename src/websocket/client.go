@@ -69,7 +69,7 @@ func (c *Client) Read() {
 			//	Manager.Monitor <- msg
 			//}
 			fmt.Println("bin msg")
-			c.Send <- msg
+			c.Socket.WriteMessage(websocket.BinaryMessage, msg)
 		}
 	}
 }
