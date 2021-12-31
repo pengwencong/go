@@ -32,6 +32,8 @@ var Manager = &ClientManager{
 	Monitor:    make(chan []byte),
 }
 
+var WaitMsg = make(map[string][]string)
+
 func Connect(c *gin.Context){
 	conn := CreateConnect(c)
 	if conn == nil {
@@ -79,6 +81,26 @@ func Connect(c *gin.Context){
 	manager := GetManager()
 	//manager.Groups["g1"] = group
 	manager.Register <- client
+
+
+	if val, ok := manager.WaitMsg[client.ID]; ok {
+		fmt.Println(client.ID, val)
+		for id, v := range val {
+			from := "1"
+			if id == "1" {
+				from = "2"
+			}
+			msgTo := message.MessageTo{
+				From:from,
+				Time : "11:20",
+				Gid:"0",
+				Content:v,
+			}
+			toMsg, _ := json.Marshal(msgTo)
+
+			client.Send <- toMsg
+		}
+	}
 }
 
 
@@ -164,7 +186,7 @@ func (manager *ClientManager) Start() {
 					toMsg, _ := json.Marshal(msgTo)
 
 					client.Send <- toMsg
-				}else{
+				} else {
 					//redisSetMessage := message.RedisSetMessage{
 					//	Key:message.Chant_Data,
 					//	Message:msgFrom,
@@ -174,9 +196,8 @@ func (manager *ClientManager) Start() {
 					//err := rabbitmq.RedisSetProducter(messageSlice, message.Chant_Data)
 					//if err != nil {
 					//}
-					toMsg, _ := json.Marshal(msgTo)
 
-					client.Send <- toMsg
+					WaitMsg[msgFrom.To] = append(WaitMsg[msgFrom.To],msgFrom.Content)
 				}
 			}
 			//if msgFrom.Type == message.GroupsMessage {
