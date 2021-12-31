@@ -63,19 +63,22 @@
             ws.onmessage = function (evt)
             {
                 var received_msg = evt.data;
-
-                var msg = JSON.parse(received_msg);
-                var recontent = JSON.parse(msg.content)
-                console.log("recive msg")
-                console.log(recontent)
-                if (pc){
-                    handleMsg(recontent)
+                console.log(typeof(evt.data))
+                if (typeof(evt.data) == "ArrayBuffer"){
+                    
                 }else{
-                    setTimeout(function () {
+                    var msg = JSON.parse(received_msg);
+                    var recontent = JSON.parse(msg.content)
+                    console.log("recive msg")
+                    console.log(recontent)
+                    if (pc){
                         handleMsg(recontent)
-                    },1000)
+                    }else{
+                        setTimeout(function () {
+                            handleMsg(recontent)
+                        },1000)
+                    }
                 }
-
             };
 
             ws.onclose = function()
