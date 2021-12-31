@@ -255,7 +255,10 @@
 
     // 将本地流添加至对等连接
     function attachMedia() {
-        pc.addStream(myVideoStream)
+        if (myVideoStream){
+            pc.addStream(myVideoStream)
+        }
+
         console.log("addstream")
         // setStatus('Ready for call')
         // if (queryParams && queryParams['call'] && !weWaited) {
