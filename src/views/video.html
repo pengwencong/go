@@ -57,11 +57,11 @@
                 console.log(recontent)
                 if (recontent.type == "offer") {
                     console.log("rece offer")
-                    pc.setRemoteDescription(new RTCSessionDescription(msg.content))
+                    pc.setRemoteDescription(new RTCSessionDescription(recontent))
                     answer()
                 } else if (recontent.type === "answer") {
                     console.log("rece answer")
-                    pc.setRemoteDescription(new RTCSessionDescription(msg.content))
+                    pc.setRemoteDescription(new RTCSessionDescription(recontent))
                 } else if (recontent.type === "candidate") {
                     console.log("rece candidate")
                     pc.addIceCandidate(new RTCIceCandidate({
@@ -282,8 +282,6 @@
             to = "2"
             from = "1"
         }
-        var msg1 ={"from":from,"time":"11:39","type":1,'to':to,'content':"fe"}
-        ws.send(JSON.stringify(msg1));
         var msg ={"from":from,"time":"11:39","type":1,'to':to,'content':JSON.stringify(localDesc)}
         ws.send(JSON.stringify(msg));
         console.log("gotDescription")
