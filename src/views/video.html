@@ -31,7 +31,8 @@
                 OfferToReceiveVideo: true
             }
         }
-
+    var id = {{.id}}
+        console.log(id)
     function initWebsocket() {
         if ("WebSocket" in window)
         {
@@ -211,8 +212,8 @@
         //         candidate: e.candidate.candidate
         //     })
         // }
-        console.log(e.candidate)
         if (e.candidate) {
+            console.log(e.candidate)
             var content = {
                 type: 'candidate',
                 mlineindex: e.candidate.sdpMLineIndex,
