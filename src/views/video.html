@@ -63,9 +63,10 @@
             ws.onmessage = function (evt)
             {
                 var received_msg = evt.data;
+                console.log("fagr")
                 console.log(typeof(evt.data))
                 if (typeof(evt.data) == "ArrayBuffer"){
-                    
+
                 }else{
                     var msg = JSON.parse(received_msg);
                     var recontent = JSON.parse(msg.content)
