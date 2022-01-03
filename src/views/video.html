@@ -111,7 +111,6 @@
         {
 
             var buf = new Uint8Array(evt.data);
-            console.log(buf)
             recordedChunks.push(buf);
         };
 
@@ -291,6 +290,7 @@
 
     var mVideo = document.getElementById('mVideo')
     function ss(){
+        console.log(recordedChunks)
         var blob = new Blob(recordedChunks, {
             type: "video/webm"
         });
