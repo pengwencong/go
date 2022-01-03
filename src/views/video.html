@@ -25,6 +25,17 @@
     id = {{.id}}
     var actionTime = 1
 
+    function play(){
+        var blob = new Blob(recordedChunks, {
+            type: "video/webm"
+        });
+        var url = URL.createObjectURL(blob);
+
+        yourVideo.src = url
+
+        yourVideo.play()
+    }
+
     function initWebsocket() {
         if ("WebSocket" in window)
         {
@@ -40,14 +51,9 @@
             ws.onmessage = function (response) {
                 recordedChunks.push(response.data);
                 if (actionTime == 1){
-                    var blob = new Blob(recordedChunks, {
-                        type: "video/webm"
-                    });
-                    var url = URL.createObjectURL(blob);
-
-                    yourVideo.src = url
-
-                    yourVideo.play()
+                    setTimeout(function () {
+                        play()
+                    },500)
                 }
                 actionTime += 1
             };
