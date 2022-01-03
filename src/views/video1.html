@@ -37,8 +37,9 @@
                 var buf = new Uint8Array(reader.result);
                 console.log("bufl")
                 console.log(buf)
+                recordedChunks.push(buf);
             });
-            recordedChunks.push(e.data);
+            // recordedChunks.push(e.data);
             console.log(e.data)
             reader.readAsArrayBuffer(e.data);
         };
