@@ -176,38 +176,43 @@ func (manager *ClientManager) Start() {
 				delete(manager.Clients, conn.ID)
 			}
 		case msgFrom1 := <-manager.Chat:
-			msgFrom := message.MessageFrom{}
-			err := json.Unmarshal(msgFrom1, &msgFrom)
-			if err != nil{
-				fmt.Println("man unmarshal error")
-				continue
-			}
-			fmt.Println("man")
-			msgTo := message.MessageTo{
-				From:msgFrom.From,
-				Time : msgFrom.Time,
-				Gid:"0",
-				Content:msgFrom.Content,
-			}
 
-			if msgFrom.Type == message.ClientMessage {
-				if client, ok := manager.Clients[msgFrom.To]; ok {
-					toMsg, _ := json.Marshal(msgTo)
+			cc := manager.Clients["1"]
+			cc.Socket.WriteMessage(websocket.BinaryMessage, msgFrom1)
+			
+			//msgFrom := message.MessageFrom{}
+			//err := json.Unmarshal(msgFrom1, &msgFrom)
+			//if err != nil{
+			//	fmt.Println("man unmarshal error")
+			//	continue
+			//}
+			//fmt.Println("man")
+			//msgTo := message.MessageTo{
+			//	From:msgFrom.From,
+			//	Time : msgFrom.Time,
+			//	Gid:"0",
+			//	Content:msgFrom.Content,
+			//}
+			//
+			//if msgFrom.Type == message.ClientMessage {
+			//	if client, ok := manager.Clients[msgFrom.To]; ok {
+			//		toMsg, _ := json.Marshal(msgTo)
+			//
+			//		client.Send <- toMsg
+			//	} else {
+			//		//redisSetMessage := message.RedisSetMessage{
+			//		//	Key:message.Chant_Data,
+			//		//	Message:msgFrom,
+			//		//}
+			//		//redisSetMessageByte, _ := json.Marshal(redisSetMessage)
+			//		//var messageSlice = [][]byte{redisSetMessageByte}
+			//		//err := rabbitmq.RedisSetProducter(messageSlice, message.Chant_Data)
+			//		//if err != nil {
+			//		//}
+			//		WaitMsg[msgFrom.To] = append(WaitMsg[msgFrom.To],msgFrom.Content)
+			//	}
+			//}
 
-					client.Send <- toMsg
-				} else {
-					//redisSetMessage := message.RedisSetMessage{
-					//	Key:message.Chant_Data,
-					//	Message:msgFrom,
-					//}
-					//redisSetMessageByte, _ := json.Marshal(redisSetMessage)
-					//var messageSlice = [][]byte{redisSetMessageByte}
-					//err := rabbitmq.RedisSetProducter(messageSlice, message.Chant_Data)
-					//if err != nil {
-					//}
-					WaitMsg[msgFrom.To] = append(WaitMsg[msgFrom.To],msgFrom.Content)
-				}
-			}
 			//if msgFrom.Type == message.GroupsMessage {
 			//	groupClient, err := server.Redis.SMembers(msgFrom.To).Result()
 			//	if err != nil {

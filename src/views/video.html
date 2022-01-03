@@ -15,7 +15,7 @@
 <button onclick="ss()">peng</button>
 <video src="" id="myVideo" muted></video>
 <video src="" id="mVideo" muted>
-    <source src="" type="video/webm;codecs=vp8">
+
 </video>
 <video id="yourVideo" muted></video>
 
@@ -55,38 +55,38 @@
         if ("WebSocket" in window)
         {
             // 打开一个 web socket
-            ws = new WebSocket("wss://fw.hiwonder.com/ws");
-
-            ws.onopen = function()
-            {
-                // Web Socket 已连接上，使用 send() 方法发送数据
-                console.log(id)
-                ws.send(id);
-                console.log("open");
-            };
-
-            ws.onmessage = function (evt)
-            {
-                var received_msg = evt.data;
-
-                var msg = JSON.parse(received_msg);
-                var recontent = JSON.parse(msg.content)
-                console.log("recive msg")
-                console.log(recontent)
-                if (pc){
-                    handleMsg(recontent)
-                }else{
-                    setTimeout(function () {
-                        handleMsg(recontent)
-                    },1000)
-                }
-            };
-
-            ws.onclose = function()
-            {
-                // 关闭 websocket
-                alert("连接已关闭...");
-            };
+            // ws = new WebSocket("wss://fw.hiwonder.com/ws");
+            //
+            // ws.onopen = function()
+            // {
+            //     // Web Socket 已连接上，使用 send() 方法发送数据
+            //     console.log(id)
+            //     ws.send(id);
+            //     console.log("open");
+            // };
+            //
+            // ws.onmessage = function (evt)
+            // {
+            //     var received_msg = evt.data;
+            //
+            //     var msg = JSON.parse(received_msg);
+            //     var recontent = JSON.parse(msg.content)
+            //     console.log("recive msg")
+            //     console.log(recontent)
+            //     if (pc){
+            //         handleMsg(recontent)
+            //     }else{
+            //         setTimeout(function () {
+            //             handleMsg(recontent)
+            //         },1000)
+            //     }
+            // };
+            //
+            // ws.onclose = function()
+            // {
+            //     // 关闭 websocket
+            //     alert("连接已关闭...");
+            // };
 
 
 
@@ -139,16 +139,19 @@
         // 向我显示我的本地视频
         myVideo.srcObject = myVideoStream
         myVideo.play()
+        setTimeout(function () {
+            re(stream)
+        },200)
         // 等待pc创建完毕
-        attachMedia()
+        // attachMedia()
     }
 
     // 自动开始获取本地媒体
     window.onload = function () {
         initWebsocket()
-        setTimeout(function () {
-            initPeer()
-        },500)
+        // setTimeout(function () {
+        //     initPeer()
+        // },500)
 
         myVideo = document.getElementById('myVideo')
         yourVideo = document.getElementById('yourVideo')
@@ -224,7 +227,7 @@
                        //加这个判断，是因为有很多数据是空的，这个没有必要发到后台服务器，减轻网络开销，提升性能吧。
                 ws1.send(buf);
             });
-
+            console.log(e.data)
             reader.readAsArrayBuffer(e.data);
         };
 
@@ -243,9 +246,9 @@
     function onRemoteStreamAdded(e) {
         yourVideoStream = e.stream
 
-        setTimeout(function () {
-            re(e.stream)
-        },200)
+        // setTimeout(function () {
+        //     re(e.stream)
+        // },200)
 
         console.log('yourVideo: ', yourVideo)
         yourVideo.srcObject = yourVideoStream
@@ -291,17 +294,15 @@
     }
 
     var mVideo = document.getElementById('mVideo')
-    var sources = mVideo.getElementsByTagName('source');
 
     function ss(){
 
         var blob = new Blob(recordedChunks, {
-            type: "video/webm;codecs=vp8"
+            type: "video/webm"
         });
         console.log(blob)
         var url = URL.createObjectURL(blob);
         mVideo.srcObject = url
-        sources[0].srcObject =url
         mVideo.play()
     }
 </script>

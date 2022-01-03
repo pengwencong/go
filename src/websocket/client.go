@@ -68,8 +68,8 @@ func (c *Client) Read() {
 			//}else{
 			//	Manager.Monitor <- msg
 			//}
-			fmt.Println("bin msg")
-			c.Socket.WriteMessage(websocket.BinaryMessage, msg)
+			Manager.Chat <- msg
+			
 		}
 	}
 }
