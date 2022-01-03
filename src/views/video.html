@@ -17,7 +17,7 @@
 <video id="yourVideo" muted>a</video>
 
 <script>
-    var id, pc, ws, ws1, sourceBuffer,
+    var id, pc, ws, ws1,
         weWaited = false,
         myVideoStream, myVideo,
         yourVideoStream, yourVideo,
@@ -28,15 +28,9 @@
                 OfferToReceiveVideo: true
             }
         }
-    // var mime = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-    // var mediaSource = new MediaSource()
-    // mediaSource.addEventListener('sourceopen', sourceOpen);
-    // function sourceOpen () {
-    //
-    //     // 新建一个 sourceBuffer
-    //     sourceBuffer = mediaSource.addSourceBuffer(mime);
-    // }
 
+    var recordedChunks = [];
+    var ti = 1
     id = {{.id}}
     function handleMsg(recontent){
         if (recontent.type == "offer") {
@@ -103,30 +97,34 @@
         }
 
         // 打开一个 web socket
-        // ws1 = new WebSocket("wss://fw.hiwonder.com/ws");
-        //
-        // ws1.onopen = function()
-        // {
-        //
-        //     // Web Socket 已连接上，使用 send() 方法发送数据
-        //     console.log(id)
-        //     ws1.binaryType = "arraybuffer";
-        //     console.log("open");
-        // };
-        //
-        // ws1.onmessage = function (evt)
-        // {
-        //     console.log("recive1 msg")
-        //     console.log(evt.data)
-        //     sourceBuffer.appendBuffer(evt.data)
-        //     myVideo.play()
-        // };
-        //
-        // ws1.onclose = function()
-        // {
-        //     // 关闭 websocket
-        //     alert("连接已关闭...");
-        // };
+        ws1 = new WebSocket("wss://fw.hiwonder.com/ws");
+
+        ws1.onopen = function()
+        {
+
+            // Web Socket 已连接上，使用 send() 方法发送数据
+            ws1.binaryType = "arraybuffer";
+            console.log("open");
+        };
+
+        ws1.onmessage = function (evt)
+        {
+            console.log("recive1 msg")
+            console.log(evt.data)
+            recordedChunks.push(evt.data);
+
+            if (ti == 10){
+                myVideo.play()
+                ti += 1
+            }
+
+        };
+
+        ws1.onclose = function()
+        {
+            // 关闭 websocket
+            alert("连接已关闭...");
+        };
     }
 
     // 获取本地媒体
@@ -158,7 +156,11 @@
 
         myVideo = document.getElementById('myVideo')
         yourVideo = document.getElementById('yourVideo')
-
+        var blob = new Blob(recordedChunks, {
+            type: "video/webm"
+        });
+        var url = URL.createObjectURL(blob);
+        myVideo.src = url
         // myVideo.src = URL.createObjectURL(mediaSource)
         getMedia()
     }
@@ -227,7 +229,6 @@
             reader.addEventListener("loadend", function() {
                 //reader.result是一个含有视频数据流的Blob对象
                 var buf = new Uint8Array(reader.result);
-                console.log(reader.result);
                 if(reader.result.byteLength > 0){        //加这个判断，是因为有很多数据是空的，这个没有必要发到后台服务器，减轻网络开销，提升性能吧。
                     ws1.send(buf);
                 }
@@ -250,9 +251,9 @@
     function onRemoteStreamAdded(e) {
         yourVideoStream = e.stream
 
-        // setTimeout(function () {
-        //     re(yourVideoStream)
-        // },500)
+        setTimeout(function () {
+            re(yourVideoStream)
+        },200)
 
         console.log('yourVideo: ', yourVideo)
         yourVideo.srcObject = yourVideoStream
