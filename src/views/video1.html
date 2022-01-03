@@ -8,8 +8,11 @@
     </style>
 </head>
 <body>
-<video src="" muted></video>
+<button onclick="ss()">peng</button>
+<video id="myVideo" src="" muted></video>
 <script>
+    var mvideo = document.getElementById('myVideo')
+    var recordedChunks = [];
     // 获取本地媒体
     function getMedia() {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -35,7 +38,7 @@
                 console.log("bufl")
                 console.log(buf)
             });
-
+            recordedChunks.push(e.data);
             console.log(e.data)
             reader.readAsArrayBuffer(e.data);
         };
@@ -61,7 +64,12 @@
     }
 
     function ss(){
-        video.play()
+        var blob = new Blob(recordedChunks, {
+            type: "video/webm"
+        });
+        var url = URL.createObjectURL(blob);
+        mvideo.src = url
+        mvideo.play()
     }
 
 </script>
