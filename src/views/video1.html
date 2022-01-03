@@ -27,15 +27,12 @@
 
     function re(strea){
         var mediaRecorder = new MediaRecorder(strea);
-        console.log("a")
         mediaRecorder.start(10);
         mediaRecorder.ondataavailable = function(e) {
-            console.log("vail")
             var reader = new FileReader();
             reader.addEventListener("loadend", function() {
                 //reader.result是一个含有视频数据流的Blob对象
                 var buf = new Uint8Array(reader.result);
-                console.log("bufl")
                 console.log(buf)
                 recordedChunks.push(buf);
             });

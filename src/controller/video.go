@@ -16,6 +16,11 @@ func VideoStream(c *gin.Context){
 	})
 }
 
+func VideoStream1(c *gin.Context){
+
+	c.HTML(200,"video1.html",gin.H{})
+}
+
 func RedisOperate(c *gin.Context){
 	result, err := server.Redis.Set("peng","wenport",0).Result()
 	if err != nil {

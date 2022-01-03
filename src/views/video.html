@@ -13,9 +13,9 @@
 </head>
 <body>
 <button onclick="ss()">peng</button>
-<video src="" id="myVideo" muted>a</video>
+<video src="" id="myVideo" muted></video>
 <video src="" id="mVideo" muted></video>
-<video id="yourVideo" muted>a</video>
+<video id="yourVideo" muted></video>
 
 <script>
     var id, pc, ws, ws1,
@@ -109,6 +109,7 @@
 
         ws1.onmessage = function (evt)
         {
+            console.log(evt.data)
             recordedChunks.push(evt.data);
         };
 
