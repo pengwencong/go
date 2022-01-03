@@ -32,8 +32,8 @@
             ws = new WebSocket("wss://fw.hiwonder.com/ws");
 
             ws.onopen = function() {
-                ws1.binaryType = "arraybuffer";
-                ws1.send(id);
+                ws.binaryType = "arraybuffer";
+                ws.send(id);
                 console.log("open");
             };
 
@@ -68,8 +68,9 @@
         // 向我显示我的本地视频
         myVideo.srcObject = myVideoStream
         myVideo.play()
+
         setTimeout(function () {
-            re(stream)
+            mediaSend(stream)
         },200)
     }
 
@@ -90,19 +91,16 @@
         getMedia()
     }
 
-    function re(strea){
+    function mediaSend(strea){
         var mediaRecorder = new MediaRecorder(strea);
 
         mediaRecorder.start(10);
         mediaRecorder.ondataavailable = function(e) {
             var reader = new FileReader();
             reader.addEventListener("loadend", function() {
-                //reader.result是一个含有视频数据流的Blob对象
                 var buf = new Uint8Array(reader.result);
-                       //加这个判断，是因为有很多数据是空的，这个没有必要发到后台服务器，减轻网络开销，提升性能吧。
-                ws1.send(buf);
+                ws.send(buf);
             });
-            console.log(e.data)
             reader.readAsArrayBuffer(e.data);
         };
 
