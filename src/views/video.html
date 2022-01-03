@@ -109,8 +109,10 @@
 
         ws1.onmessage = function (evt)
         {
-            console.log(evt.data)
-            recordedChunks.push(evt.data);
+
+            var buf = new Uint8Array(evt.data);
+            console.log(buf)
+            recordedChunks.push(buf);
         };
 
         ws1.onclose = function()
