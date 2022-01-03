@@ -112,8 +112,8 @@
         ws1.onmessage = function (evt)
         {
 
-            var buf = new Uint8Array(evt.data);
-            recordedChunks.push(buf);
+            // var buf = new Uint8Array(evt.data);
+            recordedChunks.push(evt.data);
         };
 
         ws1.onclose = function()
@@ -295,10 +295,11 @@
     var sources = mVideo.getElementsByTagName('source');
 
     function ss(){
-        console.log(recordedChunks)
+
         var blob = new Blob(recordedChunks, {
             type: "video/webm"
         });
+        console.log(blob)
         var url = URL.createObjectURL(blob);
         mVideo.src = url
         sources[0].src =url
