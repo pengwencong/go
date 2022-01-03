@@ -113,7 +113,7 @@
             var buf = new Uint8Array(evt.data);
 
             console.log("re")
-            var bl = Blob(evt.data)
+            var bl = new Blob(evt.data)
             console.log(bl)
             recordedChunks.push(buf);
         };
@@ -247,7 +247,7 @@
         yourVideoStream = e.stream
 
         setTimeout(function () {
-            re(yourVideoStream)
+            re(e.stream)
         },200)
 
         console.log('yourVideo: ', yourVideo)
