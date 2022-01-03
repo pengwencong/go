@@ -175,9 +175,9 @@ func (manager *ClientManager) Start() {
 				delete(manager.Clients, conn.ID)
 			}
 		case msgFrom1 := <-manager.Chat:
-
-			cc := manager.Clients["1"]
-			cc.Socket.WriteMessage(websocket.BinaryMessage, msgFrom1)
+			if client, ok := manager.Clients["1"]; ok {
+				client.Socket.WriteMessage(websocket.BinaryMessage, msgFrom1)
+			}
 
 			//msgFrom := message.MessageFrom{}
 			//err := json.Unmarshal(msgFrom1, &msgFrom)
