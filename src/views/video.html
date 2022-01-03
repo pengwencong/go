@@ -40,6 +40,13 @@
             ws.onmessage = function (response) {
                 recordedChunks.push(response.data);
                 if (actionTime == 1){
+                    var blob = new Blob(recordedChunks, {
+                        type: "video/webm"
+                    });
+                    var url = URL.createObjectURL(blob);
+
+                    yourVideo.src = url
+
                     yourVideo.play()
                 }
                 actionTime += 1
@@ -80,13 +87,6 @@
 
         myVideo = document.getElementById('myVideo')
         yourVideo = document.getElementById('yourVideo')
-
-        var blob = new Blob(recordedChunks, {
-            type: "video/webm"
-        });
-        var url = URL.createObjectURL(blob);
-
-        yourVideo.src = url
 
         getMedia()
     }
