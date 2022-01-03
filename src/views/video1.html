@@ -25,7 +25,7 @@
     function re(strea){
         var mediaRecorder = new MediaRecorder(strea);
         console.log("a")
-        mediaRecorder.start();
+        mediaRecorder.start(10);
         mediaRecorder.ondataavailable = function(e) {
             console.log("vail")
             var reader = new FileReader();
