@@ -54,39 +54,39 @@
     function initWebsocket() {
         if ("WebSocket" in window)
         {
-            // 打开一个 web socket
-            // ws = new WebSocket("wss://fw.hiwonder.com/ws");
-            //
-            // ws.onopen = function()
-            // {
-            //     // Web Socket 已连接上，使用 send() 方法发送数据
-            //     console.log(id)
-            //     ws.send(id);
-            //     console.log("open");
-            // };
-            //
-            // ws.onmessage = function (evt)
-            // {
-            //     var received_msg = evt.data;
-            //
-            //     var msg = JSON.parse(received_msg);
-            //     var recontent = JSON.parse(msg.content)
-            //     console.log("recive msg")
-            //     console.log(recontent)
-            //     if (pc){
-            //         handleMsg(recontent)
-            //     }else{
-            //         setTimeout(function () {
-            //             handleMsg(recontent)
-            //         },1000)
-            //     }
-            // };
-            //
-            // ws.onclose = function()
-            // {
-            //     // 关闭 websocket
-            //     alert("连接已关闭...");
-            // };
+            打开一个 web socket
+            ws = new WebSocket("wss://fw.hiwonder.com/ws");
+
+            ws.onopen = function()
+            {
+                // Web Socket 已连接上，使用 send() 方法发送数据
+                console.log(id)
+                ws.send(id);
+                console.log("open");
+            };
+
+            ws.onmessage = function (evt)
+            {
+                var received_msg = evt.data;
+
+                var msg = JSON.parse(received_msg);
+                var recontent = JSON.parse(msg.content)
+                console.log("recive msg")
+                console.log(recontent)
+                if (pc){
+                    handleMsg(recontent)
+                }else{
+                    setTimeout(function () {
+                        handleMsg(recontent)
+                    },1000)
+                }
+            };
+
+            ws.onclose = function()
+            {
+                // 关闭 websocket
+                alert("连接已关闭...");
+            };
 
 
 
