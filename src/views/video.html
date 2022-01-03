@@ -109,13 +109,16 @@
 
         ws1.onmessage = function (evt)
         {
-            console.log("recive1 msg")
-            console.log(evt.data)
             recordedChunks.push(evt.data);
-
+            ti += 1
             if (ti == 10){
+
+                var blob = new Blob(recordedChunks, {
+                    type: "video/webm"
+                });
+                var url = URL.createObjectURL(blob);
+                myVideo.src = url
                 myVideo.play()
-                ti += 1
             }
 
         };
@@ -156,11 +159,7 @@
 
         myVideo = document.getElementById('myVideo')
         yourVideo = document.getElementById('yourVideo')
-        var blob = new Blob(recordedChunks, {
-            type: "video/webm"
-        });
-        var url = URL.createObjectURL(blob);
-        myVideo.src = url
+
         // myVideo.src = URL.createObjectURL(mediaSource)
         getMedia()
     }
