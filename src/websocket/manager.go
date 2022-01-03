@@ -52,7 +52,7 @@ func Connect(c *gin.Context){
 		conn.Close()
 		return
 	}
-
+	fmt.Println("conccc,:", string(messag))
 	if _, ok := Manager.Clients[string(messag)]; ok {
 		return
 	}
@@ -179,7 +179,7 @@ func (manager *ClientManager) Start() {
 
 			cc := manager.Clients["1"]
 			cc.Socket.WriteMessage(websocket.BinaryMessage, msgFrom1)
-			
+
 			//msgFrom := message.MessageFrom{}
 			//err := json.Unmarshal(msgFrom1, &msgFrom)
 			//if err != nil{
