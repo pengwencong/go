@@ -52,7 +52,6 @@ func Connect(c *gin.Context){
 		conn.Close()
 		return
 	}
-	fmt.Println("conccc,:", string(messag))
 	if _, ok := Manager.Clients[string(messag)]; ok {
 		return
 	}
