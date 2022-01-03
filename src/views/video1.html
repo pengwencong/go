@@ -24,9 +24,10 @@
 
     function re(strea){
         var mediaRecorder = new MediaRecorder(strea);
-
+        console.log("a")
         mediaRecorder.start();
         mediaRecorder.ondataavailable = function(e) {
+            console.log("vail")
             var reader = new FileReader();
             reader.addEventListener("loadend", function() {
                 //reader.result是一个含有视频数据流的Blob对象
@@ -34,7 +35,7 @@
                 console.log("bufl")
                 console.log(buf)
             });
-            console.log("vail")
+
             console.log(e.data)
             reader.readAsArrayBuffer(e.data);
         };
