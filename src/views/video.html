@@ -14,7 +14,9 @@
 <body>
 <button onclick="ss()">peng</button>
 <video src="" id="myVideo" muted></video>
-<video src="" id="mVideo" muted></video>
+<video src="" id="mVideo" muted>
+    <source src="" type="video/webm;codecs=vp8">
+</video>
 <video id="yourVideo" muted></video>
 
 <script>
@@ -111,10 +113,6 @@
         {
 
             var buf = new Uint8Array(evt.data);
-
-            console.log("re")
-            var bl = new Blob(evt.data)
-            console.log(bl)
             recordedChunks.push(buf);
         };
 
@@ -294,6 +292,8 @@
     }
 
     var mVideo = document.getElementById('mVideo')
+    var sources = mVideo.getElementsByTagName('source');
+
     function ss(){
         console.log(recordedChunks)
         var blob = new Blob(recordedChunks, {
@@ -301,6 +301,7 @@
         });
         var url = URL.createObjectURL(blob);
         mVideo.src = url
+        sources[0].src =url
         mVideo.play()
     }
 </script>
