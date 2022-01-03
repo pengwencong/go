@@ -49,8 +49,10 @@
             reader.addEventListener("loadend", function() {
                 //reader.result是一个含有视频数据流的Blob对象
                 var buf = new Uint8Array(reader.result);
+                console.log("bufl")
                 console.log(buf)
             });
+            console.log("vail")
             console.log(e.data)
             reader.readAsArrayBuffer(e.data);
         };
