@@ -12,8 +12,9 @@
     </style>
 </head>
 <body>
-<div>peng</div>
+<button onclick="ss()">peng</button>
 <video src="" id="myVideo" muted>a</video>
+<video src="" id="mVideo" muted></video>
 <video id="yourVideo" muted>a</video>
 
 <script>
@@ -30,7 +31,6 @@
         }
 
     var recordedChunks = [];
-    var ti = 1
     id = {{.id}}
     function handleMsg(recontent){
         if (recontent.type == "offer") {
@@ -110,17 +110,6 @@
         ws1.onmessage = function (evt)
         {
             recordedChunks.push(evt.data);
-            ti += 1
-            if (ti == 10){
-
-                var blob = new Blob(recordedChunks, {
-                    type: "video/webm"
-                });
-                var url = URL.createObjectURL(blob);
-                myVideo.src = url
-                myVideo.play()
-            }
-
         };
 
         ws1.onclose = function()
@@ -297,6 +286,15 @@
         console.log("gotDescription")
     }
 
+    var mVideo = document.getElementById('mVideo')
+    function ss(){
+        var blob = new Blob(recordedChunks, {
+            type: "video/webm"
+        });
+        var url = URL.createObjectURL(blob);
+        mVideo.src = url
+        mVideo.play()
+    }
 </script>
 </body>
 </html>

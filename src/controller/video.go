@@ -11,7 +11,7 @@ func VideoStream(c *gin.Context){
 	//c.JSON(200,gin.H{
 	//	"message":"success",
 	//})
-	c.HTML(200,"video1.html",gin.H{
+	c.HTML(200,"video.html",gin.H{
 		"id":id,
 	})
 }
