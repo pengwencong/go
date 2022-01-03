@@ -300,8 +300,8 @@
         });
         console.log(blob)
         var url = URL.createObjectURL(blob);
-        mVideo.src = url
-        sources[0].src =url
+        mVideo.srcObject = url
+        sources[0].srcObject =url
         mVideo.play()
     }
 </script>
