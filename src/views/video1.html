@@ -8,26 +8,8 @@
     </style>
 </head>
 <body>
-<button onclick="ss()">peng</button>
-<video src="" autoplay muted crossOrigin="anonymous"></video>
+<video src="" muted></video>
 <script>
-
-    var sourceBuffer
-    var video = document.querySelector('video');
-    var assetURL = 'http://192.168.11.7:8080/1.mp4';
-    // Need to be specific for Blink regarding codecs
-    // ./mp4info frag_bunny.mp4 | grep Codec
-    var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
-
-    if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
-        var mediaSource = new MediaSource();
-        //console.log(mediaSource.readyState); // closed
-        video.src = URL.createObjectURL(mediaSource);
-        mediaSource.addEventListener('sourceopen', sourceOpen);
-    } else {
-        console.error('Unsupported MIME type or codec: ', mimeCodec);
-    }
-
     // 获取本地媒体
     function getMedia() {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -59,7 +41,6 @@
 
         mediaRecorder.onerror = function(e){
             console.log('Error: ');
-            console.log(e);
         };
 
 
@@ -75,39 +56,13 @@
 
     // 自动开始获取本地媒体
     window.onload = function () {
-        setTimeout(function () {
-            getMedia()
-        },200)
+        getMedia()
     }
 
     function ss(){
         video.play()
     }
-    function sourceOpen () {
-        console.log("open"); // open
-        var mediaSource = this;
 
-        sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
-        // fetchAB(assetURL, function (buf) {
-        //
-        //     sourceBuffer.addEventListener('updateend', function () {
-        //         mediaSource.endOfStream();
-        //     });
-        //     sourceBuffer.appendBuffer(buf);
-        // });
-        // sourceBuffer.appendBuffer(buf);
-    };
-
-    function fetchAB (url, cb) {
-        console.log(url);
-        var xhr = new XMLHttpRequest;
-        xhr.open('get', url);
-        xhr.responseType = 'arraybuffer';
-        xhr.onload = function () {
-            cb(xhr.response);
-        };
-        xhr.send();
-    };
 </script>
 </body>
 </html>
