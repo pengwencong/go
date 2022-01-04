@@ -33,6 +33,7 @@ func (room *Room) DataRecive() {
 		case websocket.TextMessage:
 			Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
+			fmt.Println("bin")
 			for _, client := range room.Clients {
 				client.Send <- msg
 			}

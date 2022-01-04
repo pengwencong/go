@@ -1,14 +1,9 @@
 package live
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"go/help"
-	"go/message"
 	"net/http"
-	"reflect"
 )
 
 // ClientManager is a websocket manager
@@ -33,20 +28,8 @@ func (dispatch *Dispatch) Start() {
 	for {
 		select {
 		case data := <-dispatch.Chat:
-			var interfaceItem interface{}
 
-			err := json.Unmarshal(data, interfaceItem)
-			if err != nil {
-				help.Log.Infof("dispatch chat Unmarshalerr:", err.Error())
-			}
-			fmt.Println("type")
-			fmt.Println(reflect.TypeOf(interfaceItem).Kind())
-			switch interfaceItem.(type) {
-			case message.MessageAnswer:
-				answer, _ := interfaceItem.(message.MessageAnswer)
-				LiveManager.Clients[answer.ID].Send <- data
-			}
-
+			LiveManager.Clients[1].Send <- data
 
 		//msgFrom := message.MessageFrom{}
 		//err := json.Unmarshal(msgFrom1, &msgFrom)
