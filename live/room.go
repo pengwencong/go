@@ -55,6 +55,7 @@ func CreateRoom(ID int, conn *websocket.Conn) *Room{
 		ID: ID,
 		Conn: conn,
 		Send: make(chan []byte),
+		Clients:   make(map[int]*Client),
 	}
 }
 

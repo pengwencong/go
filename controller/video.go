@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go/help"
 	"go/live"
@@ -15,6 +16,7 @@ func UserRoom(c *gin.Context){
 	live.LiveManager.Clients[userID] = client
 
 	room := live.LiveManager.Rooms[roomID]
+	fmt.Println(room)
 	room.Clients[userID] = client
 
 	c.HTML(200,"userroom.html",gin.H{
