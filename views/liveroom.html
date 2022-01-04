@@ -37,7 +37,9 @@
             };
 
             ws.onmessage = function (response) {
-
+                console.log(response)
+                var str = ab2str(response)
+                console.log(str)
             };
 
             ws.onclose = function() {
@@ -46,6 +48,10 @@
         } else {
             alert("您的浏览器不支持 WebSocket!");
         }
+    }
+
+    function ab2str(buf) {
+        return String.fromCharCode.apply(null, new Uint16Array(buf));
     }
 
     // 获取本地媒体
