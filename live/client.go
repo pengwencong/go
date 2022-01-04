@@ -94,7 +94,7 @@ func (c *Client) DataSend() {
 				c.Conn.WriteMessage(websocket.CloseMessage, []byte{})
 				return
 			}
-			c.Conn.WriteMessage(websocket.TextMessage, message)
+			c.Conn.WriteMessage(websocket.BinaryMessage, message)
 		}
 	}
 }
