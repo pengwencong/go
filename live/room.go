@@ -23,11 +23,12 @@ func (room *Room) DataRecive() {
 
 	for {
 		msgType, msg, err := room.Conn.ReadMessage()
+		fmt.Println("room read")
 		if err != nil {
 			//Manager.Unregister <- c
 			break
 		}
-		fmt.Println("re")
+
 		switch msgType {
 		case websocket.TextMessage:
 			fmt.Println("txtme")
@@ -48,6 +49,7 @@ func (room *Room) DataSend() {
 	for {
 		select {
 		case message, ok := <-room.Send:
+			fmt.Println("room send")
 			if !ok {
 				room.Conn.WriteMessage(websocket.CloseMessage, []byte{})
 				return

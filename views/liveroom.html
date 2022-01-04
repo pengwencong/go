@@ -40,7 +40,11 @@
                 console.log(response)
                 if (response.type == "message"){
                     var data = JSON.stringify(response.data)
+                    console.log(data)
+                    console.log(id)
+                    console.log(id == data.subscribe)
                     if (data.subscribe == id){
+                        console.log("fasd")
                         var res ={"status":200,"id":parseInt(data.id)}
                         ws.send(res)
                         startSend = 1
