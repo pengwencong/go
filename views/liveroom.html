@@ -88,10 +88,10 @@
             reader.addEventListener("loadend", function() {
                 var buf = new Uint8Array(reader.result);
                 // sendChunks.push(buf)
-                if (startSend == 1){
+                // if (startSend == 1){
                     ws.send(buf);
                     // sendChunks = []
-                }
+                // }
             });
 
             reader.readAsArrayBuffer(e.data);
