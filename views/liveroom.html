@@ -64,7 +64,7 @@
     function getMedia() {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-        var constr = {audio: true, video: true};
+        var constr = {audio: false, video: true};
         navigator.getUserMedia(constr, gotUserMedia, didntGetUserMedia);
     }
     function didntGetUserMedia() {
@@ -89,10 +89,10 @@
             var reader = new FileReader();
             reader.addEventListener("loadend", function() {
                 var buf = new Uint8Array(reader.result);
-                sendChunks.push(buf)
-                if (sendChunks.length >= 10 && startSend == 1){
+                // sendChunks.push(buf)
+                if (startSend == 1){
                     ws.send(buf);
-                    sendChunks = []
+                    // sendChunks = []
                 }
             });
             reader.readAsArrayBuffer(e.data);
