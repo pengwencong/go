@@ -19,7 +19,7 @@ func (room *Room) DataRecive() {
 	defer func() {
 		room.Conn.Close()
 	}()
-
+	t := 1
 	for {
 		msgType, msg, err := room.Conn.ReadMessage()
 		if err != nil {
@@ -31,7 +31,10 @@ func (room *Room) DataRecive() {
 		case websocket.TextMessage:
 			Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
-			room.Send <- msg
+			if t > 20 {
+				room.Send <- msg
+			}
+			t++
 			if client , ok := LiveManager.Clients[1]; ok {
 				client.Send <- msg
 			}else{
