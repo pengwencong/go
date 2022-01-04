@@ -1,8 +1,11 @@
 package live
 
 import (
+	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
+	"go/help"
+	"go/message"
 	"net/http"
 )
 
@@ -21,89 +24,99 @@ var Dispatcher = &Dispatch{
 }
 
 
-//func (dispatch *Dispatch) Start() {
-//	//ticker := time.NewTicker(time.Second * 30)
-//	//go heart(ticker, Manager)
-//
-//	for {
-//		select {
-//		case data := <-dispatch.Chat:
-//			if client, ok := LiveManager.Clients[1]; ok {
-//				client.Conn.WriteMessage(websocket.BinaryMessage, data)
-//			}
-//
-//		//msgFrom := message.MessageFrom{}
-//		//err := json.Unmarshal(msgFrom1, &msgFrom)
-//		//if err != nil{
-//		//	fmt.Println("man unmarshal error")
-//		//	continue
-//		//}
-//		//fmt.Println("man")
-//		//msgTo := message.MessageTo{
-//		//	From:msgFrom.From,
-//		//	Time : msgFrom.Time,
-//		//	Gid:"0",
-//		//	Content:msgFrom.Content,
-//		//}
-//		//
-//		//if msgFrom.Type == message.ClientMessage {
-//		//	if client, ok := manager.Clients[msgFrom.To]; ok {
-//		//		toMsg, _ := json.Marshal(msgTo)
-//		//
-//		//		client.Send <- toMsg
-//		//	} else {
-//		//		//redisSetMessage := message.RedisSetMessage{
-//		//		//	Key:message.Chant_Data,
-//		//		//	Message:msgFrom,
-//		//		//}
-//		//		//redisSetMessageByte, _ := json.Marshal(redisSetMessage)
-//		//		//var messageSlice = [][]byte{redisSetMessageByte}
-//		//		//err := rabbitmq.RedisSetProducter(messageSlice, message.Chant_Data)
-//		//		//if err != nil {
-//		//		//}
-//		//		WaitMsg[msgFrom.To] = append(WaitMsg[msgFrom.To],msgFrom.Content)
-//		//	}
-//		//}
-//
-//		//if msgFrom.Type == message.GroupsMessage {
-//		//	groupClient, err := server.Redis.SMembers(msgFrom.To).Result()
-//		//	if err != nil {
-//		//		return
-//		//	}
-//		//
-//		//	msgTo.Gid = msgFrom.To
-//		//	msgToByte, _ := json.Marshal(msgTo)
-//		//
-//		//	if group, ok := manager.Groups[msgFrom.To]; ok {
-//		//		var messageSlice = [][]byte{}
-//		//		for _, clientId := range groupClient {
-//		//			if clientId == msgFrom.From {
-//		//				continue
-//		//			}
-//		//			if client, ok := group.Clients[clientId]; ok {
-//		//				client.Send <- msgToByte
-//		//			}else{
-//		//				msgFrom.To = clientId
-//		//				redisSetMessage := message.RedisSetMessage{
-//		//					Key:message.Chant_Data,
-//		//					Message:msgFrom,
-//		//				}
-//		//				redisSetMessageByte, _ := json.Marshal(redisSetMessage)
-//		//				messageSlice = append(messageSlice, redisSetMessageByte)
-//		//			}
-//		//		}
-//		//		err := rabbitmq.RedisSetProducter(messageSlice, message.Chant_Data)
-//		//		if err != nil {
-//		//		}
-//		//	}else{
-//		//		return
-//		//	}
-//		//}
-//		case data := <-dispatch.Mideastream:
-//
-//		}
-//	}
-//}
+func (dispatch *Dispatch) Start() {
+	//ticker := time.NewTicker(time.Second * 30)
+	//go heart(ticker, Manager)
+
+	for {
+		select {
+		case data := <-dispatch.Chat:
+			var interfaceItem interface{}
+
+			err := json.Unmarshal(data, interfaceItem)
+			if err != nil {
+				help.Log.Infof("dispatch chat Unmarshalerr:", err.Error())
+			}
+
+			switch interfaceItem.(type) {
+			case message.MessageAnswer:
+				answer, _ := interfaceItem.(message.MessageAnswer)
+				LiveManager.Clients[answer.ID].Send <- data
+			}
+
+
+		//msgFrom := message.MessageFrom{}
+		//err := json.Unmarshal(msgFrom1, &msgFrom)
+		//if err != nil{
+		//	fmt.Println("man unmarshal error")
+		//	continue
+		//}
+		//fmt.Println("man")
+		//msgTo := message.MessageTo{
+		//	From:msgFrom.From,
+		//	Time : msgFrom.Time,
+		//	Gid:"0",
+		//	Content:msgFrom.Content,
+		//}
+		//
+		//if msgFrom.Type == message.ClientMessage {
+		//	if client, ok := manager.Clients[msgFrom.To]; ok {
+		//		toMsg, _ := json.Marshal(msgTo)
+		//
+		//		client.Send <- toMsg
+		//	} else {
+		//		//redisSetMessage := message.RedisSetMessage{
+		//		//	Key:message.Chant_Data,
+		//		//	Message:msgFrom,
+		//		//}
+		//		//redisSetMessageByte, _ := json.Marshal(redisSetMessage)
+		//		//var messageSlice = [][]byte{redisSetMessageByte}
+		//		//err := rabbitmq.RedisSetProducter(messageSlice, message.Chant_Data)
+		//		//if err != nil {
+		//		//}
+		//		WaitMsg[msgFrom.To] = append(WaitMsg[msgFrom.To],msgFrom.Content)
+		//	}
+		//}
+
+		//if msgFrom.Type == message.GroupsMessage {
+		//	groupClient, err := server.Redis.SMembers(msgFrom.To).Result()
+		//	if err != nil {
+		//		return
+		//	}
+		//
+		//	msgTo.Gid = msgFrom.To
+		//	msgToByte, _ := json.Marshal(msgTo)
+		//
+		//	if group, ok := manager.Groups[msgFrom.To]; ok {
+		//		var messageSlice = [][]byte{}
+		//		for _, clientId := range groupClient {
+		//			if clientId == msgFrom.From {
+		//				continue
+		//			}
+		//			if client, ok := group.Clients[clientId]; ok {
+		//				client.Send <- msgToByte
+		//			}else{
+		//				msgFrom.To = clientId
+		//				redisSetMessage := message.RedisSetMessage{
+		//					Key:message.Chant_Data,
+		//					Message:msgFrom,
+		//				}
+		//				redisSetMessageByte, _ := json.Marshal(redisSetMessage)
+		//				messageSlice = append(messageSlice, redisSetMessageByte)
+		//			}
+		//		}
+		//		err := rabbitmq.RedisSetProducter(messageSlice, message.Chant_Data)
+		//		if err != nil {
+		//		}
+		//	}else{
+		//		return
+		//	}
+		//}
+		//case data := <-dispatch.Mideastream:
+
+		}
+	}
+}
 
 
 type liveManager struct {

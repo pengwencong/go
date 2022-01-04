@@ -21,14 +21,18 @@ func (room *Room) DataRecive() {
 	}()
 
 	for {
-		_, msg, err := room.Conn.ReadMessage()
+		msgType, msg, err := room.Conn.ReadMessage()
 		if err != nil {
 			//Manager.Unregister <- c
 			break
 		}
-
-		for _, client := range room.Clients {
-			client.Send <- msg
+		switch msgType {
+		case websocket.TextMessage:
+			Dispatcher.Chat <- msg
+		case websocket.BinaryMessage:
+			for _, client := range room.Clients {
+				client.Send <- msg
+			}
 		}
 	}
 }

@@ -1,9 +1,11 @@
 package live
 
 import (
+	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
+	"go/message"
 	"strconv"
 )
 
@@ -49,7 +51,20 @@ func ConnectToRoom(c *gin.Context){
 		return
 	}
 
-	LiveManager.Rooms[1].Send <- []byte("1")
+	offer := message.MessageOffer{
+		ID: 1,
+		Subscribe: 1,
+	}
+	offerByte := []byte{}
+
+	err = json.Unmarshal(offerByte, offer)
+	if err != nil {
+		help.Log.Infof("room init ReadMessage err:", err.Error())
+		conn.Close()
+		return
+	}
+
+	LiveManager.Rooms[1].Send <- offerByte
 
 	go client.DataRecive()
 	go client.DataSend()
