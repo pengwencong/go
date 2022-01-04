@@ -51,7 +51,7 @@ func (room *Room) DataSend() {
 				room.Conn.WriteMessage(websocket.CloseMessage, []byte{})
 				return
 			}
-			room.Conn.WriteMessage(websocket.TextMessage, message)
+			room.Conn.WriteMessage(websocket.BinaryMessage, message)
 		}
 	}
 }
