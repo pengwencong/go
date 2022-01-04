@@ -41,20 +41,15 @@
 
             ws.onmessage = function (response) {
                 console.log(response)
-                if (response.type == "message"){
-                    var data = JSON.parse(response.data)
-                    if (data.status == 200 && data.id == userID){
-                        console.log("success")
-                    }
-                }else{
-                    recordedChunks.push(response.data);
-                    if (actionTime == 1){
-                        setTimeout(function () {
-                            play()
-                        },500)
-                    }
-                    actionTime += 1
+
+                recordedChunks.push(response.data);
+                if (actionTime == 1){
+                    setTimeout(function () {
+                        play()
+                    },500)
                 }
+                actionTime += 1
+
             };
 
             ws.onclose = function() {

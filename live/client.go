@@ -2,7 +2,6 @@ package live
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
@@ -91,7 +90,6 @@ func (c *Client) DataSend() {
 	for {
 		select {
 		case message, ok := <-c.Send:
-			fmt.Println("client send")
 			if !ok {
 				c.Conn.WriteMessage(websocket.CloseMessage, []byte{})
 				return
