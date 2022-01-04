@@ -40,15 +40,15 @@
             };
 
             ws.onmessage = function (response) {
-                console.log(response)
+                console.log(response.data)
 
                 recordedChunks.push(response.data);
-                if (actionTime == 1){
+                // if (actionTime == 1){
                     setTimeout(function () {
                         play()
                     },500)
-                }
-                actionTime += 1
+                // }
+                // actionTime += 1
 
             };
 
