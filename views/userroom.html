@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>video</title>
+    <style>
+        #yourVideo{
+            position: absolute;
+            right: 0px;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+<video src="" id="liveVideo" muted></video>
+
+<script>
+    var ws, liveVideo,
+        recordedChunks = [],
+        actionTime = 1
+
+    var userID = {{.userID}}
+    var roomID = {{.roomID}}
+
+    window.onload = function () {
+        initWebsocket()
+
+        liveVideo = document.getElementById('liveVideo')
+    }
+
+    function initWebsocket() {
+        if ("WebSocket" in window)
+        {
+            ws = new WebSocket("wss://fw.hiwonder.com/connectToRoom");
+
+            ws.onopen = function() {
+                ws.binaryType = "arraybuffer";
+                ws.send(userID);
+                console.log("open");
+            };
+
+            ws.onmessage = function (response) {
+                recordedChunks.push(response.data);
+                if (actionTime == 1){
+                    setTimeout(function () {
+                        play()
+                    },500)
+                }
+                actionTime += 1
+            };
+
+            ws.onclose = function() {
+                alert("连接已关闭...");
+            };
+        } else {
+            alert("您的浏览器不支持 WebSocket!");
+        }
+    }
+
+    function play(){
+        var blob = new Blob(recordedChunks, {
+            type: "video/webm"
+        });
+        var url = URL.createObjectURL(blob);
+
+        liveVideo.src = url
+        liveVideo.play()
+    }
+
+</script>
+</body>
+</html>
