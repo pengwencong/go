@@ -15,17 +15,16 @@
 <video src="" id="liveVideo" muted></video>
 
 <script>
-    var ws, liveVideo,
-        recordedChunks = [],
-        actionTime = 1
-
+    var ws, liveVideo
+    var actionTime = 1
+    var recordedChunks = []
     var userID = {{.userID}}
     var roomID = {{.roomID}}
 
+    var liveVideo = document.getElementById('liveVideo')
+
     window.onload = function () {
         initWebsocket()
-
-        liveVideo = document.getElementById('liveVideo')
     }
 
     function initWebsocket() {
