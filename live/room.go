@@ -1,6 +1,7 @@
 package live
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
@@ -26,8 +27,10 @@ func (room *Room) DataRecive() {
 			//Manager.Unregister <- c
 			break
 		}
+		fmt.Println("re")
 		switch msgType {
 		case websocket.TextMessage:
+			fmt.Println("txtme")
 			Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
 			for _, client := range room.Clients {
