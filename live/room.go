@@ -35,7 +35,7 @@ func (room *Room) DataRecive() {
 			if client , ok := LiveManager.Clients[1]; ok {
 				client.Send <- msg
 			}else{
-				
+
 			}
 
 			//for _, client := range room.Clients {
