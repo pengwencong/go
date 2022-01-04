@@ -32,7 +32,12 @@ func (room *Room) DataRecive() {
 			Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
 			room.Send <- msg
-			LiveManager.Clients[1].Send <- msg
+			if client , ok := LiveManager.Clients[1]; ok {
+				client.Send <- msg
+			}else{
+				
+			}
+
 			//for _, client := range room.Clients {
 			//	client.Send <- msg
 			//}
