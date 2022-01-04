@@ -9,16 +9,11 @@
 </head>
 <body>
 <video id="myVideo" muted></video>
-<video src="" id="liveVideo" muted></video>
 <script>
     var id, ws, myVideoStream, myVideo,
         startSend = 0,
         sendChunks = []
-    var recordedChunks = []
     id = {{.roomID}}
-    var actionTime = 1
-
-    var liveVideo = document.getElementById('liveVideo')
 
     window.onload = function () {
         initWebsocket()
@@ -48,13 +43,6 @@
                 //     ws.send(res)
                 //     startSend = 1
                 // }
-                recordedChunks.push(response.data);
-                if (actionTime == 1){
-                    setTimeout(function () {
-                        play()
-                    },500)
-                }
-                actionTime += 1
             };
 
             ws.onclose = function() {
@@ -63,16 +51,6 @@
         } else {
             alert("您的浏览器不支持 WebSocket!");
         }
-    }
-
-    function play(){
-        var blob = new Blob(recordedChunks, {
-            type: "video/webm"
-        });
-        var url = URL.createObjectURL(blob);
-
-        liveVideo.src = url
-        liveVideo.play()
     }
 
     // 获取本地媒体
