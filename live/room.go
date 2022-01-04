@@ -31,7 +31,6 @@ func (room *Room) DataRecive() {
 
 		switch msgType {
 		case websocket.TextMessage:
-			fmt.Println("txtme")
 			Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
 			for _, client := range room.Clients {

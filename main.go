@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/pprof"
+	"github.com/gin-gonic/gin"
 	"go/help"
+	"go/live"
 	"go/router"
 	"go/server"
 )
@@ -17,6 +18,8 @@ func main() {
 		help.Log.Info("init redis err:", err.Error())
 		return
 	}
+
+	go live.Dispatcher.Start()
 
 	engine := gin.Default()
 	engine.LoadHTMLGlob("views/*")
