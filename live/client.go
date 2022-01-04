@@ -55,9 +55,7 @@ func ConnectToRoom(c *gin.Context){
 		ID: 1,
 		Subscribe: 1,
 	}
-	offerByte := []byte{}
-
-	err = json.Unmarshal(offerByte, offer)
+	offerByte, err := json.Marshal(offer)
 	if err != nil {
 		help.Log.Infof("room init ReadMessage err:", err.Error())
 		conn.Close()
