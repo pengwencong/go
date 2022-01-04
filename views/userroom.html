@@ -42,7 +42,9 @@
             ws.onmessage = function (response) {
                 recordedChunks.push(response.data);
                 if (actionTime == 1){
-                    play()
+                    setTimeout(function () {
+                        play()
+                    },500)
                 }
                 actionTime += 1
 

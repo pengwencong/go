@@ -38,14 +38,12 @@
 
             ws.onmessage = function (response) {
                 console.log(response)
-                if (response.type == "message"){
-                    var data = JSON.parse(response.data)
-                    if (data.subscribe == id){
-                        var res ={"status":200,"id":parseInt(data.id)}
-                        ws.send(res)
-                        startSend = 1
-                    }
-                }
+                // var data = JSON.parse(response.data)
+                // if (data.subscribe == id){
+                //     var res ={"status":200,"id":parseInt(data.id)}
+                //     ws.send(res)
+                //     startSend = 1
+                // }
             };
 
             ws.onclose = function() {
