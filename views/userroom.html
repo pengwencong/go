@@ -42,7 +42,7 @@
             ws.onmessage = function (response) {
                 console.log(response)
                 if (response.type == "message"){
-                    var data = JSON.stringify(response.data)
+                    var data = JSON.parse(response.data)
                     if (data.status == 200 && data.id == userID){
                         console.log("success")
                     }

@@ -39,7 +39,7 @@
             ws.onmessage = function (response) {
                 console.log(response)
                 if (response.type == "message"){
-                    var data = JSON.stringify(response.data)
+                    var data = JSON.parse(response.data)
                     console.log(data)
                     console.log(id)
                     console.log(id == data.subscribe)
