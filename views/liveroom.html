@@ -39,7 +39,7 @@
             ws.onmessage = function (response) {
                 console.log(response)
                 if (response.type == "message"){
-                    var data = json.stringify(response.data)
+                    var data = JSON.stringify(response.data)
                     if (data.subscribe == id){
                         var res ={"status":200,"id":parseInt(data.id)}
                         ws.send(res)
