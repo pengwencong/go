@@ -10,7 +10,6 @@ import (
 
 type Student struct {
 	ID     int
-	TeacherID []int
 	headerData [][]byte
 	Send chan message.MessageSend
 	Conn *websocket.Conn
@@ -40,9 +39,9 @@ func (student *Student) DataRecive() {
 			if len(student.headerData) < 2{
 				student.setHeaderData(msg)
 			}else{
-				//for _, client := range student.Clients {
-					MonitorManager.Teachers[1].Send <- sendData
-				//}
+				for _, teacher := range MonitorManager.Teachers {
+					teacher.Send <- sendData
+				}
 			}
 			//time++
 			//if time < 10 {
