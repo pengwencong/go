@@ -40,6 +40,7 @@
             };
 
             ws.onmessage = function (response) {
+                console.log(response)
                 var type = typeof(response.data)
                 if (type == "string"){
                     // var data = JSON.parse(response.data)

@@ -1,10 +1,12 @@
 package live
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
 	"go/message"
+	"os"
 	"strconv"
 )
 
@@ -16,6 +18,9 @@ type Room struct {
 	headerData [][]byte
 }
 
+var fileData [][]byte
+
+var time = 1
 
 func (room *Room) DataRecive() {
 	sendData := message.MessageSend{
@@ -40,6 +45,24 @@ func (room *Room) DataRecive() {
 				for _, client := range room.Clients {
 					client.Send <- sendData
 				}
+			}
+			time++
+			if time < 10 {
+				fileData = append(fileData, msg)
+			}
+			if time == 10 {
+				ff, err := os.Create("./resource/video/room1media.mp4")
+				if err != nil {
+					fmt.Println("create file err:", err.Error())
+				}
+
+				for _, val := range fileData {
+					_, err := ff.Write(val)
+					if err != nil {
+						fmt.Println("file write err: ", err.Error())
+					}
+				}
+				ff.Close()
 			}
 		}
 	}
