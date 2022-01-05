@@ -46,10 +46,13 @@
                 ws.binaryType = "arraybuffer";
                 ws.send(id);
                 console.log("open");
+                if (ws.readyState == ws.CONNECTING){
+                    getMedia()
+                }else{
+                    alert("连接已关闭...");
+                }
             };
-            ws.CONNECTING = function() {
-                getMedia()
-            }
+
             ws.onmessage = function (response) {
                 console.log(response.data)
                 var data = response.data
