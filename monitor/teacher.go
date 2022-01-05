@@ -82,6 +82,7 @@ func unregisterTeacher(teacher *Teacher) (err error) {
 }
 
 func (teacher *Teacher) sendHeaderData(headerdata [][]byte){
+	fmt.Println(len(headerdata))
 	for _, val := range headerdata {
 		headerData := message.MessageSend{
 			message.BinMessage,
