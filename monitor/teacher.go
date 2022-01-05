@@ -45,7 +45,7 @@ func MonitorStudent(c *gin.Context){
 		conn.Close()
 		return
 	}
-	fmt.Println(MonitorManager.offer)
+	fmt.Println(offer)
 	fmt.Println(MonitorManager.Students)
 	if _, ok := MonitorManager.Students[offer.Subscribe]; ok {
 		teacher := CreateTeacher(offer.ID, conn)
