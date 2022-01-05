@@ -1,21 +1,23 @@
 package live
 
 import (
+	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
+	"go/message"
 	"net/http"
 )
 
 // ClientManager is a websocket manager
 type Dispatch struct {
-	Chat  	   chan []byte
+	Chat  	   chan message.MessageDispatch
 	Mideastream    chan []byte
 	Action chan []byte
 }
 
 
 var Dispatcher = &Dispatch{
-	Chat:  		make(chan []byte),
+	Chat:  		make(chan message.MessageDispatch),
 	Mideastream:    make(chan []byte),
 	Action: make(chan []byte),
 }
@@ -27,9 +29,17 @@ func (dispatch *Dispatch) Start() {
 
 	for {
 		select {
-		case data := <-dispatch.Chat:
+		case msgDispatch := <-dispatch.Chat:
+			switch msgDispatch.Type {
+			case message.OfferMessage:
+				offer := message.MessageOffer{}
+				json.Unmarshal(msgDispatch.MsgSend.Data, &offer)
+				room, _ := LiveManager.Rooms[offer.Subscribe]
+				client, _ := LiveManager.Clients[offer.ID]
 
-			LiveManager.Clients[1].Send <- data
+				client.sendHeaderData(room.headerData)
+				room.dataDeal(msgDispatch.MsgSend)
+			}
 
 		//msgFrom := message.MessageFrom{}
 		//err := json.Unmarshal(msgFrom1, &msgFrom)

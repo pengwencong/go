@@ -12,9 +12,9 @@
 <video src="" id="liveVideo" muted></video>
 <script>
     var id, ws, myVideoStream, myVideo,
-        startSend = 0,
-        sendChunks = [],
-        mideaHeader = []
+        userNum = 0,
+        sendHeader = 0,
+        sendChunks = []
     id = {{.roomID}}
     var liveVideo = document.getElementById('liveVideo')
     var actionTime = 1
@@ -23,8 +23,6 @@
         initWebsocket()
 
         myVideo = document.getElementById('myVideo')
-
-        getMedia()
     }
 
     function play(){
@@ -49,22 +47,26 @@
                 ws.send(id);
                 console.log("open");
             };
-
+            ws.CONNECTING = function() {
+                getMedia()
+            }
             ws.onmessage = function (response) {
                 console.log(response.data)
+                var data = response.data
+                console.log(typeof(data))
                 // var data = JSON.parse(response.data)
                 // if (data.subscribe == id){
                 //     var res ={"status":200,"id":parseInt(data.id)}
                 //     ws.send(res)
-                //     startSend = 1
+                //     userNum++
                 // }
-                recordedChunks.push(response.data);
-                if (actionTime == 1){
-                    setTimeout(function () {
-                        play()
-                    },500)
-                }
-                actionTime += 1
+                // recordedChunks.push(data);
+                // if (actionTime == 1){
+                //     setTimeout(function () {
+                //         play()
+                //     },500)
+                // }
+                // actionTime += 1
             };
 
             ws.onclose = function() {
@@ -91,9 +93,7 @@
         myVideo.srcObject = myVideoStream
         myVideo.play()
 
-        setTimeout(function () {
-            mediaSend(stream)
-        },200)
+        mediaSend(stream)
     }
 
     function mediaSend(strea){
@@ -105,14 +105,13 @@
             reader.addEventListener("loadend", function() {
                 var buf = new Uint8Array(reader.result);
                 // sendChunks.push(buf)
-                if (mideaHeader.length >= 2){
-                    // ws.send(buf)
+                if (sendHeader >= 2 && userNum > 0){
+                    ws.send(buf)
                 }else{
-                    mideaHeader.push(buf)
+                    sendHeader++
                     ws.send(buf)
                 }
             });
-
             reader.readAsArrayBuffer(e.data);
         };
 

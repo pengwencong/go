@@ -1,7 +1,9 @@
 package message
 
 const (
-	PongMessage = 0
+	StringMessage = 1
+	BinMessage = 2
+	OfferMessage = 3
 )
 
 type RedisSetMessage struct {
@@ -19,4 +21,14 @@ type MessageOffer struct {
 type MessageAnswer struct {
 	ID int `json:"id"`
 	Status   int `json:"status"`
+}
+
+type MessageDispatch struct {
+	Type int `json:"type"`
+	MsgSend MessageSend `json:"msgsend"`
+}
+
+type MessageSend struct {
+	MsgType int `json:"msgtype"`
+	Data []byte `json:"data"`
 }

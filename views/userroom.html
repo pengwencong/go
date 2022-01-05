@@ -34,7 +34,8 @@
 
             ws.onopen = function() {
                 ws.binaryType = "arraybuffer";
-                ws.send(userID);
+                var offer = {"id":userID,"subscribe":roomID}
+                ws.send(JSON.stringify(offer));
                 console.log("open");
             };
 

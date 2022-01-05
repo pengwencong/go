@@ -1,69 +1,87 @@
 package live
 
 import (
+	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
-	"strconv"
+	"go/message"
 )
 
 // Client is a websocket client
 type Client struct {
 	ID     int
 	Conn *websocket.Conn
-	Send   chan []byte
+	Send   chan message.MessageSend
 }
 
 func CreateClient(ID int, conn *websocket.Conn) *Client{
 	return &Client{
 		ID: ID,
 		Conn: conn,
-		Send: make(chan []byte),
+		Send: make(chan message.MessageSend),
 	}
 }
 
 func ConnectToRoom(c *gin.Context){
 	conn, err := createConnect(c)
 	if err != nil {
-		help.Log.Infof("room init createConnect err:", err.Error())
+		help.Log.Infof("client connect to room createconnect err:", err.Error())
 		return
 	}
 
 	_, msg, err := conn.ReadMessage()
 	if err != nil {
-		help.Log.Infof("room init ReadMessage err:", err.Error())
+		help.Log.Infof("client connect to room readmsg err:", err.Error())
 		conn.Close()
 		return
 	}
 
-	clientId, err := strconv.Atoi( string(msg) )
+	offer := message.MessageOffer{}
+	err = json.Unmarshal(msg, &offer)
 	if err != nil {
-		help.Log.Infof("room init Atoi err:", err.Error())
+		help.Log.Infof("client connect to room unmarshal err:", err.Error())
+		conn.Close()
 		return
 	}
-	client, ok := LiveManager.Clients[clientId]
+
+	client, ok := LiveManager.Clients[offer.ID]
 	if ok {
 		client.Conn = conn
 	} else {
-		help.Log.Infof("room init get room Instance err:", err.Error())
+		help.Log.Infof("client connect to room get client err:", err.Error())
 		return
 	}
 
-	//offer := message.MessageOffer{
-	//	ID: 1,
-	//	Subscribe: 1,
-	//}
-	//offerByte, err := json.Marshal(offer)
-	//if err != nil {
-	//	help.Log.Infof("room init ReadMessage err:", err.Error())
-	//	conn.Close()
-	//	return
-	//}
+	_, ok = LiveManager.Rooms[offer.Subscribe]
+	if ok {
+		msgSend := message.MessageSend{
+			message.StringMessage,
+			msg,
+		}
 
-	//LiveManager.Rooms[1].Send <- offerByte
+		msgDispatch := message.MessageDispatch{
+			message.OfferMessage,
+			msgSend,
+		}
+		Dispatcher.Chat <- msgDispatch
+	} else {
+		help.Log.Infof("client connect to room get room err:", err.Error())
+		return
+	}
 
 	go client.DataRecive()
 	go client.DataSend()
+}
+
+func (c *Client) sendHeaderData(headerdata [][]byte){
+	for _, val := range headerdata {
+		headerData := message.MessageSend{
+			message.BinMessage,
+			val,
+		}
+		c.Send <- headerData
+	}
 }
 
 func (c *Client) DataRecive() {
@@ -87,12 +105,17 @@ func (c *Client) DataSend() {
 
 	for {
 		select {
-		case message, ok := <-c.Send:
+		case msg, ok := <-c.Send:
 			if !ok {
 				c.Conn.WriteMessage(websocket.CloseMessage, []byte{})
 				return
 			}
-			c.Conn.WriteMessage(websocket.BinaryMessage, message)
+			switch msg.MsgType {
+			case message.StringMessage:
+				c.Conn.WriteMessage(websocket.TextMessage, msg.Data)
+			case message.BinMessage:
+				c.Conn.WriteMessage(websocket.BinaryMessage, msg.Data)
+			}
 		}
 	}
 }

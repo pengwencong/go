@@ -4,13 +4,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
+	"go/message"
 	"strconv"
-	"time"
 )
 
 type Room struct {
 	ID     int
-	Send chan []byte
+	Send chan message.MessageSend
 	Conn *websocket.Conn
 	Clients   map[int]*Client
 	headerData [][]byte
@@ -21,6 +21,10 @@ func (room *Room) DataRecive() {
 	defer func() {
 		room.Conn.Close()
 	}()
+	sendData := message.MessageSend{
+		message.BinMessage,
+		[]byte{},
+	}
 	for {
 		msgType, msg, err := room.Conn.ReadMessage()
 		if err != nil {
@@ -32,22 +36,24 @@ func (room *Room) DataRecive() {
 		case websocket.TextMessage:
 			//Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
-			room.headerData = append(room.headerData, msg)
-			if len(room.headerData) == 2{
-				time.Sleep(time.Second * 2)
-				for _, val := range room.headerData {
-					room.Send <- val
+			sendData.Data = msg
+			if len(room.headerData) < 2{
+				room.setHeaderData(msg)
+			}else{
+				for _, client := range room.Clients {
+					client.Send <- sendData
 				}
 			}
-			//if t != 2 {
-			//	room.Send <- msg
-			//}
-			//t++
-			//for _, client := range room.Clients {
-			//	client.Send <- msg
-			//}
 		}
 	}
+}
+
+func (room *Room) setHeaderData(data []byte) {
+	room.headerData = append(room.headerData, data)
+}
+
+func (room *Room) dataDeal(data message.MessageSend){
+	room.Send <- data
 }
 
 func (room *Room) DataSend() {
@@ -57,12 +63,17 @@ func (room *Room) DataSend() {
 
 	for {
 		select {
-		case message, ok := <-room.Send:
+		case msg, ok := <-room.Send:
 			if !ok {
 				room.Conn.WriteMessage(websocket.CloseMessage, []byte{})
 				return
 			}
-			room.Conn.WriteMessage(websocket.BinaryMessage, message)
+			switch msg.MsgType {
+			case message.StringMessage:
+				room.Conn.WriteMessage(websocket.TextMessage, msg.Data)
+			case message.BinMessage:
+				room.Conn.WriteMessage(websocket.BinaryMessage, msg.Data)
+			}
 		}
 	}
 }
@@ -71,7 +82,7 @@ func CreateRoom(ID int, conn *websocket.Conn) *Room{
 	return &Room{
 		ID: ID,
 		Conn: conn,
-		Send: make(chan []byte),
+		Send: make(chan message.MessageSend),
 		Clients:   make(map[int]*Client),
 	}
 }

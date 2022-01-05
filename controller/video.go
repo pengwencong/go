@@ -14,8 +14,11 @@ func UserRoom(c *gin.Context){
 	client := live.CreateClient(userID, nil)
 	live.LiveManager.Clients[userID] = client
 
-	room := live.LiveManager.Rooms[roomID]
-	room.Clients[userID] = client
+	if room, ok := live.LiveManager.Rooms[roomID]; ok {
+		room.Clients[userID] = client
+	} else {
+
+	}
 
 	c.HTML(200,"userroom.html",gin.H{
 		"roomID": roomID,
