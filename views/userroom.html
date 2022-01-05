@@ -40,15 +40,23 @@
             };
 
             ws.onmessage = function (response) {
-                console.log(response.data)
-                recordedChunks.push(response.data);
-                if (actionTime == 1){
-                    setTimeout(function () {
-                        play()
-                    },500)
+                console.log(typeof(response.data))
+                if (typeof(response.data) == "string"){
+                    // var data = JSON.parse(response.data)
+                    // if (data.subscribe == id){
+                    //     var res ={"status":200,"id":parseInt(data.id)}
+                    //     ws.send(res)
+                    //     userNum++
+                    // }
+                }else{
+                    recordedChunks.push(response.data);
+                    if (actionTime == 1){
+                        setTimeout(function () {
+                            play()
+                        },500)
+                    }
+                    actionTime += 1
                 }
-                actionTime += 1
-
             };
 
             ws.onclose = function() {

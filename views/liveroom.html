@@ -52,8 +52,7 @@
 
             ws.onmessage = function (response) {
                 console.log(response.data)
-                var data = response.data
-                if (typeof(data) == "string"){
+                if (typeof(response.data) == "string"){
                     // var data = JSON.parse(response.data)
                     // if (data.subscribe == id){
                     //     var res ={"status":200,"id":parseInt(data.id)}
@@ -61,7 +60,7 @@
                     //     userNum++
                     // }
                 }else{
-                    recordedChunks.push(data);
+                    recordedChunks.push(response.data);
                     if (actionTime == 1){
                         setTimeout(function () {
                             play()
