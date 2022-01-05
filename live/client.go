@@ -2,6 +2,7 @@ package live
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
@@ -15,7 +16,7 @@ type Client struct {
 	Send   chan message.MessageSend
 }
 
-func CreateClient(ID int, conn *websocket.Conn) *Client{
+func CreateClient(ID int, conn *websocket.Conn) *Client {
 	return &Client{
 		ID: ID,
 		Conn: conn,
@@ -29,6 +30,8 @@ func ConnectToRoom(c *gin.Context){
 		help.Log.Infof("client connect to room createconnect err:", err.Error())
 		return
 	}
+
+	conn.SetCloseHandler(closeHandle)
 
 	_, msg, err := conn.ReadMessage()
 	if err != nil {
@@ -45,33 +48,41 @@ func ConnectToRoom(c *gin.Context){
 		return
 	}
 
-	client, ok := LiveManager.Clients[offer.ID]
-	if ok {
-		client.Conn = conn
-	} else {
-		help.Log.Infof("client connect to room get client err:", err.Error())
-		return
-	}
+	if room, ok := LiveManager.Rooms[offer.Subscribe]; ok {
+		client := CreateClient(offer.ID, conn)
+		LiveManager.Clients[offer.ID] = client
+		room.Clients[offer.ID] = client
+		ClientRoomMap.Map[offer.ID] = offer.Subscribe
 
-	_, ok = LiveManager.Rooms[offer.Subscribe]
-	if ok {
+		go client.DataRecive()
+		go client.DataSend()
+
 		msgSend := message.MessageSend{
 			message.StringMessage,
 			msg,
 		}
-
 		msgDispatch := message.MessageDispatch{
 			message.OfferMessage,
 			msgSend,
 		}
 		Dispatcher.Chat <- msgDispatch
+
 	} else {
 		help.Log.Infof("client connect to room get room err:", err.Error())
+		conn.Close()
 		return
 	}
 
-	go client.DataRecive()
-	go client.DataSend()
+
+}
+
+func unregisterClient(client *Client){
+	client.Conn.Close()
+	close(client.Send)
+	delete(LiveManager.Clients, client.ID)
+	if roomID, ok := ClientRoomMap.Map[client.ID]; ok {
+		delete(LiveManager.Rooms[roomID].Clients, client.ID)
+	}
 }
 
 func (c *Client) sendHeaderData(headerdata [][]byte){
@@ -84,16 +95,29 @@ func (c *Client) sendHeaderData(headerdata [][]byte){
 	}
 }
 
+func closeHandle(code int, text string) error {
+	fmt.Println("close")
+	fmt.Println(code)
+	fmt.Println(text)
+
+	return nil
+}
+
 func (c *Client) DataRecive() {
 	defer func() {
 		//Manager.Unregister <- c
 	}()
 
 	for {
-		_, _, err := c.Conn.ReadMessage()
+		msgType, msg, err := c.Conn.ReadMessage()
 		if err != nil {
 			//Manager.Unregister <- c
 			break
+		}
+		fmt.Println(msg)
+		fmt.Println(msgType)
+		switch msgType {
+
 		}
 	}
 }

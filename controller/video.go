@@ -11,13 +11,7 @@ func UserRoom(c *gin.Context){
 	roomID, _ := strconv.Atoi( c.Query("roomID") )
 	userID := 1
 
-	client := live.CreateClient(userID, nil)
-	live.LiveManager.Clients[userID] = client
-
-	if room, ok := live.LiveManager.Rooms[roomID]; ok {
-		room.Clients[userID] = client
-	} else {
-
+	if _, ok := live.LiveManager.Rooms[roomID]; !ok {
 	}
 
 	c.HTML(200,"userroom.html",gin.H{

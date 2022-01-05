@@ -127,6 +127,14 @@ var LiveManager = &liveManager{
 	Clients: make(map[int]*Client, 100),
 }
 
+type clientRoomMap struct {
+	Map map[int]int
+}
+
+var ClientRoomMap = &clientRoomMap{
+	Map : make(map[int]int, 100),
+}
+
 func createConnect(c *gin.Context) (*websocket.Conn, error) {
 	conn, err := (&websocket.Upgrader{
 		CheckOrigin: func(r *http.Request) bool { return true },

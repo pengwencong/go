@@ -40,15 +40,14 @@
             };
 
             ws.onmessage = function (response) {
-                console.log(typeof(response.data))
-                if (typeof(response.data) == "string"){
+                var type = typeof(response.data)
+                if (type == "string"){
                     // var data = JSON.parse(response.data)
                     // if (data.subscribe == id){
                     //     var res ={"status":200,"id":parseInt(data.id)}
                     //     ws.send(res)
-                    //     userNum++
                     // }
-                }else{
+                }else if (type == "object"){
                     recordedChunks.push(response.data);
                     if (actionTime == 1){
                         setTimeout(function () {
