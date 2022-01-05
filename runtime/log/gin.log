@@ -1,0 +1,2 @@
+2022-01-04T17:44:10.855+0800	INFO	go1/main.go:32	dispatch chat Unmarshalerr:%!(EXTRA string=json: Unmarshal(nil))
+2022-01-04T17:50:30.064+0800	INFO	go1/main.go:34	dispatch chat Unmarshalerr:%!(EXTRA string=json: cannot unmarshal object into Go value of type message.MessageInterface)
