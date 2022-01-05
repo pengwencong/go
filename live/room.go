@@ -37,7 +37,7 @@ func (room *Room) DataRecive() {
 			fmt.Println("a", tt)
 			//Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
-			fmt.Println(string(msg))
+			fmt.Println(msg)
 			//if t != 2 {
 			//	room.Send <- msg
 			//}
