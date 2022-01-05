@@ -13,7 +13,8 @@
 <script>
     var id, ws, myVideoStream, myVideo,
         startSend = 0,
-        sendChunks = []
+        sendChunks = [],
+        mideaHeader = []
     id = {{.roomID}}
     var liveVideo = document.getElementById('liveVideo')
     var actionTime = 1
@@ -57,7 +58,6 @@
                 //     ws.send(res)
                 //     startSend = 1
                 // }
-                console.log(response.data)
                 recordedChunks.push(response.data);
                 if (actionTime == 1){
                     setTimeout(function () {
@@ -105,10 +105,15 @@
             reader.addEventListener("loadend", function() {
                 var buf = new Uint8Array(reader.result);
                 // sendChunks.push(buf)
-                // if (startSend == 1){
-                    ws.send(buf);
-                    // sendChunks = []
-                // }
+                if (mideaHeader.length >= 2){
+                    // ws.send(buf)
+                }else{
+                    mideaHeader.push(buf)
+                    if (mideaHeader.length == 2){
+                        var header = {"type":"header","data":mideaHeader}
+                        ws.send(header)
+                    }
+                }
             });
 
             reader.readAsArrayBuffer(e.data);
