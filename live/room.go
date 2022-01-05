@@ -1,10 +1,12 @@
 package live
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
+	"go/message"
 	"strconv"
 )
 
@@ -30,7 +32,9 @@ func (room *Room) DataRecive() {
 
 		switch msgType {
 		case websocket.TextMessage:
-			fmt.Println("a", string(msg))
+			tt := message.Test{}
+			json.Unmarshal(msg, &tt)
+			fmt.Println("a", tt)
 			//Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
 			fmt.Println(string(msg))
