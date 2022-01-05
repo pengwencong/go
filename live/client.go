@@ -52,7 +52,7 @@ func ConnectToRoom(c *gin.Context){
 		LiveManager.Clients[offer.ID] = client
 		room.Clients[offer.ID] = client
 		ClientRoomMap.Map[offer.ID] = offer.Subscribe
-
+		fmt.Println(ClientRoomMap.Map)
 		conn.SetCloseHandler(client.closeHandle)
 
 		go client.DataRecive()
