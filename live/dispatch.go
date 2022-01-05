@@ -38,7 +38,7 @@ func (dispatch *Dispatch) Start() {
 
 				room, _ := LiveManager.Rooms[offer.Subscribe]
 				client, _ := LiveManager.Clients[offer.ID]
-				fmt.Printf("%+v\n", room)
+				fmt.Printf("%+v\n", room.Clients[offer.ID])
 				fmt.Printf("%+v\n", client)
 				client.sendHeaderData(room.headerData)
 				room.dataDeal(msgDispatch.MsgSend)
