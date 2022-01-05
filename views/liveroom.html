@@ -47,7 +47,7 @@
                 ws.send(id);
                 console.log("open");
                 var getMideo = setInterval(function () {
-                    console(ws.readyState)
+                    console.log(ws.readyState)
                     if (ws.readyState == ws.CONNECTING){
                         clearInterval(getMideo)
                         getMedia()
