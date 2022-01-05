@@ -18,9 +18,6 @@ type Room struct {
 
 
 func (room *Room) DataRecive() {
-	defer func() {
-		room.Conn.Close()
-	}()
 	sendData := message.MessageSend{
 		message.BinMessage,
 		[]byte{},
@@ -57,10 +54,6 @@ func (room *Room) dataDeal(data message.MessageSend){
 }
 
 func (room *Room) DataSend() {
-	defer func() {
-		room.Conn.Close()
-	}()
-
 	for {
 		select {
 		case msg, ok := <-room.Send:

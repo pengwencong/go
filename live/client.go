@@ -105,14 +105,10 @@ func (c *Client) closeHandle(code int, text string) error {
 }
 
 func (c *Client) DataRecive() {
-	defer func() {
-		unregisterClient(c)
-	}()
-
 	for {
 		msgType, msg, err := c.Conn.ReadMessage()
 		if err != nil {
-			unregisterClient(c)
+			//unregisterClient(c)
 			break
 		}
 		fmt.Println(msg)
@@ -124,15 +120,11 @@ func (c *Client) DataRecive() {
 }
 
 func (c *Client) DataSend() {
-	defer func() {
-		unregisterClient(c)
-	}()
-
 	for {
 		select {
 		case msg, ok := <-c.Send:
 			if !ok {
-				unregisterClient(c)
+				//unregisterClient(c)
 				return
 			}
 			switch msg.MsgType {
