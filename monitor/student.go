@@ -1,6 +1,7 @@
 package monitor
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
@@ -38,8 +39,10 @@ func (student *Student) DataRecive() {
 			sendData.Data = msg
 			if len(student.headerData) < 2{
 				student.setHeaderData(msg)
+				fmt.Println(len(student.headerData))
 			}else{
 				for _, teacher := range MonitorManager.Teachers {
+					fmt.Println(teacher.ID)
 					teacher.Send <- sendData
 				}
 			}
