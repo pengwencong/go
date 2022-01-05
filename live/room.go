@@ -69,16 +69,8 @@ func (room *Room) DataRecive() {
 }
 
 func closeRoom(room *Room) (err error) {
-
-	roomID := strconv.Itoa(room.ID)
-	closeMessage := message.MessageSend{
-		message.CloseMessage,
-		[]byte(roomID),
-	}
 	for _, client := range room.Clients {
-		fmt.Println("afeaf")
-		client.Send <- closeMessage
-		//client.Conn.Close()
+		client.Conn.Close()
 	}
 
 	close(room.Send)

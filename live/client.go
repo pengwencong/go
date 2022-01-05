@@ -131,9 +131,6 @@ func (c *Client) DataSend() {
 				c.Conn.WriteMessage(websocket.TextMessage, msg.Data)
 			case message.BinMessage:
 				c.Conn.WriteMessage(websocket.BinaryMessage, msg.Data)
-			case message.CloseMessage:
-				fmt.Println("afeaf")
-				c.Conn.WriteMessage(websocket.CloseMessage, msg.Data)
 			}
 		}
 	}
