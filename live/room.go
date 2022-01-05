@@ -1,13 +1,11 @@
 package live
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
-	"go/message"
 	"strconv"
+	"time"
 )
 
 type Room struct {
@@ -32,14 +30,15 @@ func (room *Room) DataRecive() {
 
 		switch msgType {
 		case websocket.TextMessage:
-			tt := message.Test{}
-			json.Unmarshal(msg, &tt)
-			fmt.Println("a", tt)
 			//Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
-			fmt.Printf("%T\n", msg)
 			room.headerData = append(room.headerData, msg)
-			fmt.Println(len(room.headerData))
+			if len(room.headerData) == 2{
+				time.Sleep(time.Second * 2)
+				for _, val := range room.headerData {
+					room.Send <- val
+				}
+			}
 			//if t != 2 {
 			//	room.Send <- msg
 			//}

@@ -15,11 +15,6 @@ type MessageOffer struct {
 	Subscribe    int `json:"subscribe"`
 }
 
-type Test struct {
-	Type string `json:"type"`
-	Data []byte `json:"data"`
-}
-
 // Message is an object for websocket message which is mapped to json type
 type MessageAnswer struct {
 	ID int `json:"id"`
