@@ -110,10 +110,7 @@
                 }else{
                     mideaHeader.push(buf)
                     if (mideaHeader.length == 2){
-                        var header = {"type":"header","data":mideaHeader}
-                        ws.send(JSON.stringify(header))
-                        var header1 = {"type":"header","data":buf}
-                        ws.send(JSON.stringify(header1))
+                        ws.send(mideaHeader)
                     }
                 }
             });
