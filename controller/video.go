@@ -47,8 +47,10 @@ func Teacher(c *gin.Context) {
 	if err != nil {
 		help.Log.Info("create teacher Atoi err:", err.Error())
 	}
+	studentID := 1
 
 	c.HTML(200,"teacher.html",gin.H{
-		"studentID": teacherID,
+		"teacherID": teacherID,
+		"studentID": studentID,
 	})
 }
