@@ -108,11 +108,8 @@
                 var buf = new Uint8Array(reader.result);
                 // sendChunks.push(buf)
                 if (sendHeader >= 2 && userNum > 0){
-                    console.log("a")
-                    console.log(buf)
                     ws.send(buf)
-                }else{
-                    console.log(buf)
+                }else if (sendHeader < 2) {
                     sendHeader++
                     ws.send(buf)
                 }
