@@ -107,6 +107,7 @@
                 var buf = new Uint8Array(reader.result);
                 // sendChunks.push(buf)
                 if (sendHeader >= 2 && userNum > 0){
+                    console.log("s")
                     ws.send(buf)
                 }else if (sendHeader < 2) {
                     sendHeader++

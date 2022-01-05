@@ -71,7 +71,6 @@
         var blob = new Blob(recordedChunks, {
             type: "video/webm"
         });
-        console.log(blob)
         var url = URL.createObjectURL(blob);
 
         liveVideo.src = url

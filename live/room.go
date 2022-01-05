@@ -1,6 +1,7 @@
 package live
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
@@ -40,6 +41,7 @@ func (room *Room) DataRecive() {
 			if len(room.headerData) < 2{
 				room.setHeaderData(msg)
 			}else{
+				fmt.Println("bin")
 				for _, client := range room.Clients {
 					client.Send <- sendData
 				}
@@ -72,6 +74,7 @@ func (room *Room) DataSend() {
 			case message.StringMessage:
 				room.Conn.WriteMessage(websocket.TextMessage, msg.Data)
 			case message.BinMessage:
+				fmt.Println("binaa")
 				room.Conn.WriteMessage(websocket.BinaryMessage, msg.Data)
 			}
 		}
