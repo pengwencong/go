@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>video</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<video id="myVideo" muted></video>
+<script>
+    var id, ws, myVideoStream, myVideo,
+        sendHeader = 0,
+        sendChunks = []
+    id = {{.roomID}}
+    window.onload = function () {
+        initWebsocket()
+
+        myVideo = document.getElementById('myVideo')
+    }
+
+    function initWebsocket() {
+        if ("WebSocket" in window)
+        {
+            //打开一个 web socket
+            ws = new WebSocket("wss://fw.hiwonder.com/studentConnect");
+
+            ws.onopen = function() {
+                ws.binaryType = "arraybuffer";
+                ws.send(id);
+                console.log("open");
+                getMedia()
+
+            };
+
+            ws.onmessage = function (response) {
+                var type = typeof(response.data)
+                if (typeof(response.data) == "string"){
+                    // var data = JSON.parse(response.data)
+                    // if (data.subscribe == id){
+                    //     var res ={"status":200,"id":parseInt(data.id)}
+                    //     ws.send(res)
+                    //
+                    // }
+                }
+            };
+
+            ws.onclose = function() {
+                alert("连接已关闭...");
+            };
+        } else {
+            alert("您的浏览器不支持 WebSocket!");
+        }
+    }
+
+    // 获取本地媒体
+    function getMedia() {
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+        var constr = {audio: false, video: true};
+        navigator.getUserMedia(constr, gotUserMedia, didntGetUserMedia);
+    }
+    function didntGetUserMedia() {
+        console.log('cound not get user media')
+    }
+    function gotUserMedia(stream) {
+        myVideoStream = stream
+        // 向我显示我的本地视频
+        myVideo.srcObject = myVideoStream
+        myVideo.play()
+
+        mediaSend(stream)
+    }
+
+    function mediaSend(strea){
+        var mediaRecorder = new MediaRecorder(strea);
+
+        mediaRecorder.start(10);
+        mediaRecorder.ondataavailable = function(e) {
+            var reader = new FileReader();
+            reader.addEventListener("loadend", function() {
+                var buf = new Uint8Array(reader.result);
+                // sendChunks.push(buf)
+                if (sendHeader >= 2){
+                    ws.send(buf)
+                }else if (sendHeader < 2) {
+                    sendHeader++
+                    ws.send(buf)
+                }
+            });
+            reader.readAsArrayBuffer(e.data);
+        };
+
+        mediaRecorder.onerror = function(e){
+            console.log('Error: ');
+            console.log(e);
+        };
+
+
+        mediaRecorder.onstart = function(){
+            console.log('Started & state = ' + mediaRecorder.state);
+        };
+    }
+
+</script>
+</body>
+</html>

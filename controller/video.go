@@ -26,9 +26,29 @@ func CreateRoom(c *gin.Context) {
 		help.Log.Info("create room Atoi err:", err.Error())
 	}
 
-
-
 	c.HTML(200,"liveroom.html",gin.H{
 		"roomID": roomID,
+	})
+}
+
+func Student(c *gin.Context) {
+	studentID, err := strconv.Atoi( c.Query("studentID") )
+	if err != nil {
+		help.Log.Info("create student Atoi err:", err.Error())
+	}
+
+	c.HTML(200,"student.html",gin.H{
+		"studentID": studentID,
+	})
+}
+
+func Teacher(c *gin.Context) {
+	teacherID, err := strconv.Atoi( c.Query("teacherID") )
+	if err != nil {
+		help.Log.Info("create teacher Atoi err:", err.Error())
+	}
+
+	c.HTML(200,"teacher.html",gin.H{
+		"studentID": teacherID,
 	})
 }
