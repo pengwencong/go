@@ -2,6 +2,7 @@ package live
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
@@ -31,8 +32,6 @@ func ConnectToRoom(c *gin.Context){
 		return
 	}
 
-	conn.SetCloseHandler(closeHandle)
-
 	_, msg, err := conn.ReadMessage()
 	if err != nil {
 		help.Log.Infof("client connect to room readmsg err:", err.Error())
@@ -54,6 +53,8 @@ func ConnectToRoom(c *gin.Context){
 		room.Clients[offer.ID] = client
 		ClientRoomMap.Map[offer.ID] = offer.Subscribe
 
+		conn.SetCloseHandler(client.closeHandle)
+
 		go client.DataRecive()
 		go client.DataSend()
 
@@ -72,17 +73,21 @@ func ConnectToRoom(c *gin.Context){
 		conn.Close()
 		return
 	}
-
-
 }
 
-func unregisterClient(client *Client){
-	client.Conn.Close()
+func unregisterClient(client *Client) (err error) {
 	close(client.Send)
 	delete(LiveManager.Clients, client.ID)
+	delete(ClientRoomMap.Map, client.ID)
 	if roomID, ok := ClientRoomMap.Map[client.ID]; ok {
 		delete(LiveManager.Rooms[roomID].Clients, client.ID)
+	}else{
+		err = errors.New("unregister client ")
+		help.Log.Infof("unregister client %d error", client.ID)
 	}
+	fmt.Println(LiveManager)
+	fmt.Println(ClientRoomMap)
+	return nil
 }
 
 func (c *Client) sendHeaderData(headerdata [][]byte){
@@ -95,23 +100,19 @@ func (c *Client) sendHeaderData(headerdata [][]byte){
 	}
 }
 
-func closeHandle(code int, text string) error {
-	fmt.Println("close")
-	fmt.Println(code)
-	fmt.Println(text)
-
-	return nil
+func (c *Client) closeHandle(code int, text string) error {
+	return unregisterClient(c)
 }
 
 func (c *Client) DataRecive() {
 	defer func() {
-		//Manager.Unregister <- c
+		unregisterClient(c)
 	}()
 
 	for {
 		msgType, msg, err := c.Conn.ReadMessage()
 		if err != nil {
-			//Manager.Unregister <- c
+			unregisterClient(c)
 			break
 		}
 		fmt.Println(msg)
@@ -124,14 +125,14 @@ func (c *Client) DataRecive() {
 
 func (c *Client) DataSend() {
 	defer func() {
-		c.Conn.Close()
+		unregisterClient(c)
 	}()
 
 	for {
 		select {
 		case msg, ok := <-c.Send:
 			if !ok {
-				c.Conn.WriteMessage(websocket.CloseMessage, []byte{})
+				unregisterClient(c)
 				return
 			}
 			switch msg.MsgType {
