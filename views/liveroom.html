@@ -47,26 +47,28 @@
                 ws.send(id);
                 console.log("open");
                 getMedia()
-                
+
             };
 
             ws.onmessage = function (response) {
                 console.log(response.data)
                 var data = response.data
-                console.log(typeof(data))
-                // var data = JSON.parse(response.data)
-                // if (data.subscribe == id){
-                //     var res ={"status":200,"id":parseInt(data.id)}
-                //     ws.send(res)
-                //     userNum++
-                // }
-                // recordedChunks.push(data);
-                // if (actionTime == 1){
-                //     setTimeout(function () {
-                //         play()
-                //     },500)
-                // }
-                // actionTime += 1
+                if (typeof(data) == "string"){
+                    // var data = JSON.parse(response.data)
+                    // if (data.subscribe == id){
+                    //     var res ={"status":200,"id":parseInt(data.id)}
+                    //     ws.send(res)
+                    //     userNum++
+                    // }
+                }else{
+                    recordedChunks.push(data);
+                    if (actionTime == 1){
+                        setTimeout(function () {
+                            play()
+                        },500)
+                    }
+                    actionTime += 1
+                }
             };
 
             ws.onclose = function() {
@@ -106,8 +108,11 @@
                 var buf = new Uint8Array(reader.result);
                 // sendChunks.push(buf)
                 if (sendHeader >= 2 && userNum > 0){
+                    console.log("a")
+                    console.log(buf)
                     ws.send(buf)
                 }else{
+                    console.log(buf)
                     sendHeader++
                     ws.send(buf)
                 }
