@@ -1,12 +1,10 @@
 package monitor
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
 	"go/message"
-	"os"
 	"strconv"
 )
 
@@ -18,9 +16,9 @@ type Student struct {
 	Conn *websocket.Conn
 }
 
-var fileData [][]byte
+//var fileData [][]byte
 
-var time = 1
+//var time = 1
 
 func (student *Student) DataRecive() {
 	sendData := message.MessageSend{
@@ -43,27 +41,27 @@ func (student *Student) DataRecive() {
 				student.setHeaderData(msg)
 			}else{
 				//for _, client := range student.Clients {
-				//	client.Send <- sendData
+					MonitorManager.Teachers[1].Send <- sendData
 				//}
 			}
-			time++
-			if time < 10 {
-				fileData = append(fileData, msg)
-			}
-			if time == 10 {
-				ff, err := os.Create("./resource/video/room1media.mp4")
-				if err != nil {
-					fmt.Println("create file err:", err.Error())
-				}
-
-				for _, val := range fileData {
-					_, err := ff.Write(val)
-					if err != nil {
-						fmt.Println("file write err: ", err.Error())
-					}
-				}
-				ff.Close()
-			}
+			//time++
+			//if time < 10 {
+			//	fileData = append(fileData, msg)
+			//}
+			//if time == 10 {
+			//	ff, err := os.Create("./resource/video/room1media.mp4")
+			//	if err != nil {
+			//		fmt.Println("create file err:", err.Error())
+			//	}
+			//
+			//	for _, val := range fileData {
+			//		_, err := ff.Write(val)
+			//		if err != nil {
+			//			fmt.Println("file write err: ", err.Error())
+			//		}
+			//	}
+			//	ff.Close()
+			//}
 		}
 	}
 }

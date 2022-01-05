@@ -36,9 +36,9 @@ func (dispatch *Dispatch) Start() {
 				json.Unmarshal(msgDispatch.MsgSend.Data, &offer)
 
 				student, _ := MonitorManager.Students[offer.Subscribe]
-				client, _ := MonitorManager.Teachers[offer.ID]
+				teacher, _ := MonitorManager.Teachers[offer.ID]
 
-				client.sendHeaderData(student.headerData)
+				teacher.sendHeaderData(student.headerData)
 				student.dataDeal(msgDispatch.MsgSend)
 			}
 
