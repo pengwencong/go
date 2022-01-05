@@ -24,7 +24,7 @@
         if ("WebSocket" in window)
         {
             //打开一个 web socket
-            ws = new WebSocket("wss://fw.hiwonder.com/studentConnect");
+            ws = new WebSocket("wss://fw.hiwonder.com/monitor/studentConnect");
 
             ws.onopen = function() {
                 ws.binaryType = "arraybuffer";
