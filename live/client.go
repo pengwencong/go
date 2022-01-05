@@ -81,12 +81,12 @@ func unregisterClient(client *Client) (err error) {
 	delete(ClientRoomMap.Map, client.ID)
 	if roomID, ok := ClientRoomMap.Map[client.ID]; ok {
 		delete(LiveManager.Rooms[roomID].Clients, client.ID)
+		fmt.Println(LiveManager.Rooms[roomID].Clients)
 	}else{
 		err = errors.New("unregister client ")
 		help.Log.Infof("unregister client %d error", client.ID)
 	}
-	fmt.Println(LiveManager)
-	fmt.Println(ClientRoomMap)
+
 	return nil
 }
 
