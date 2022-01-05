@@ -2,6 +2,7 @@ package monitor
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/message"
@@ -30,6 +31,7 @@ func (dispatch *Dispatch) Start() {
 	for {
 		select {
 		case msgDispatch := <-dispatch.Chat:
+			fmt.Println(msgDispatch)
 			switch msgDispatch.Type {
 			case message.OfferMessage:
 				offer := message.MessageOffer{}
