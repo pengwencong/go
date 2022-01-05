@@ -77,7 +77,7 @@ func closeRoom(room *Room) (err error) {
 	}
 	for _, client := range room.Clients {
 		client.Send <- closeMessage
-		client.Conn.Close()
+		//client.Conn.Close()
 	}
 
 	close(room.Send)
