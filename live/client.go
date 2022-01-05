@@ -2,7 +2,6 @@ package live
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
@@ -81,7 +80,6 @@ func (c *Client) sendHeaderData(headerdata [][]byte){
 			message.BinMessage,
 			val,
 		}
-		fmt.Println("header len: ", len(val))
 		c.Send <- headerData
 	}
 }

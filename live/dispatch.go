@@ -34,9 +34,11 @@ func (dispatch *Dispatch) Start() {
 			case message.OfferMessage:
 				offer := message.MessageOffer{}
 				json.Unmarshal(msgDispatch.MsgSend.Data, &offer)
+
 				room, _ := LiveManager.Rooms[offer.Subscribe]
 				client, _ := LiveManager.Clients[offer.ID]
-
+				room.Clients[offer.ID] = client
+				
 				client.sendHeaderData(room.headerData)
 				room.dataDeal(msgDispatch.MsgSend)
 			}
