@@ -15,7 +15,7 @@ type Room struct {
 	Send chan []byte
 	Conn *websocket.Conn
 	Clients   map[int]*Client
-	headerData []byte
+	headerData [][]byte
 }
 
 
@@ -38,6 +38,8 @@ func (room *Room) DataRecive() {
 			//Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
 			fmt.Printf("%T\n", msg)
+			room.headerData = append(room.headerData, msg)
+			fmt.Println(len(room.headerData))
 			//if t != 2 {
 			//	room.Send <- msg
 			//}
