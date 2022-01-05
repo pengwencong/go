@@ -8,6 +8,7 @@ import (
 	"go/live"
 	"go/router"
 	"go/server"
+	"go/monitor"
 )
 
 func main() {
@@ -20,6 +21,7 @@ func main() {
 	}
 
 	go live.Dispatcher.Start()
+	go monitor.Dispatcher.Start()
 
 	engine := gin.Default()
 	engine.LoadHTMLGlob("views/*")
