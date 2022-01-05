@@ -18,7 +18,7 @@ func CreateClient(ID int, conn *websocket.Conn) *Client{
 	return &Client{
 		ID: ID,
 		Conn: conn,
-		Send: make(chan []byte, 3),
+		Send: make(chan []byte),
 	}
 }
 

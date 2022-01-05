@@ -12,6 +12,7 @@ type Room struct {
 	Send chan []byte
 	Conn *websocket.Conn
 	Clients   map[int]*Client
+	headerData []byte
 }
 
 
@@ -19,6 +20,7 @@ func (room *Room) DataRecive() {
 	defer func() {
 		room.Conn.Close()
 	}()
+	t := 1
 	for {
 		msgType, msg, err := room.Conn.ReadMessage()
 		if err != nil {
@@ -30,9 +32,13 @@ func (room *Room) DataRecive() {
 		case websocket.TextMessage:
 			Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
-			for _, client := range room.Clients {
-				client.Send <- msg
+			if t != 3 {
+				room.Send <- msg
 			}
+			t++
+			//for _, client := range room.Clients {
+			//	client.Send <- msg
+			//}
 		}
 	}
 }

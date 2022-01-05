@@ -9,18 +9,32 @@
 </head>
 <body>
 <video id="myVideo" muted></video>
+<video src="" id="liveVideo" muted></video>
 <script>
     var id, ws, myVideoStream, myVideo,
         startSend = 0,
         sendChunks = []
     id = {{.roomID}}
-
+    var liveVideo = document.getElementById('liveVideo')
+    var actionTime = 1
+    var recordedChunks = []
     window.onload = function () {
         initWebsocket()
 
         myVideo = document.getElementById('myVideo')
 
         getMedia()
+    }
+
+    function play(){
+        var blob = new Blob(recordedChunks, {
+            type: "video/webm"
+        });
+        console.log(blob)
+        var url = URL.createObjectURL(blob);
+
+        liveVideo.src = url
+        liveVideo.play()
     }
 
     function initWebsocket() {
@@ -43,6 +57,14 @@
                 //     ws.send(res)
                 //     startSend = 1
                 // }
+                console.log(response.data)
+                recordedChunks.push(response.data);
+                if (actionTime == 1){
+                    setTimeout(function () {
+                        play()
+                    },500)
+                }
+                actionTime += 1
             };
 
             ws.onclose = function() {
