@@ -32,7 +32,7 @@ func (room *Room) DataRecive() {
 		case websocket.TextMessage:
 			Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
-			if t != 3 {
+			if t != 2 {
 				room.Send <- msg
 			}
 			t++
