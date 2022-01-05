@@ -26,8 +26,7 @@ func CreateRoom(c *gin.Context) {
 		help.Log.Info("create room Atoi err:", err.Error())
 	}
 
-	room := live.CreateRoom(roomID, nil)
-	live.LiveManager.Rooms[roomID] = room
+
 
 	c.HTML(200,"liveroom.html",gin.H{
 		"roomID": roomID,

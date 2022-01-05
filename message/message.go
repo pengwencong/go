@@ -4,6 +4,7 @@ const (
 	StringMessage = 1
 	BinMessage = 2
 	OfferMessage = 3
+	CloseMessage = 4
 )
 
 type RedisSetMessage struct {

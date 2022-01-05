@@ -45,6 +45,30 @@ func (room *Room) DataRecive() {
 	}
 }
 
+func closeRoom(room *Room) (err error) {
+
+	roomID := strconv.Itoa(room.ID)
+	closeMessage := message.MessageSend{
+		message.CloseMessage,
+		[]byte(roomID),
+	}
+	for _, client := range room.Clients {
+		client.Send <- closeMessage
+		client.Conn.Close()
+	}
+
+	close(room.Send)
+	delete(LiveManager.Rooms, room.ID)
+
+	help.Log.Infof("close room %d error", room.ID)
+
+	return nil
+}
+
+func (room *Room) closeHandle(code int, text string) error {
+	return closeRoom(room)
+}
+
 func (room *Room) setHeaderData(data []byte) {
 	room.headerData = append(room.headerData, data)
 }
@@ -97,15 +121,14 @@ func Init(c *gin.Context) {
 	roomID, err := strconv.Atoi( string(msg) )
 	if err != nil {
 		help.Log.Infof("room init Atoi err:", err.Error())
+		conn.Close()
 		return
 	}
-	room, ok := LiveManager.Rooms[roomID]
-	if ok {
-		room.Conn = conn
-	} else {
-		help.Log.Infof("room init get room Instance err:", err.Error())
-		return
-	}
+
+	room := CreateRoom(roomID, conn)
+	LiveManager.Rooms[roomID] = room
+
+	room.Conn.SetCloseHandler(room.closeHandle)
 
 	go room.DataRecive()
 	go room.DataSend()
