@@ -52,7 +52,7 @@ func ConnectToRoom(c *gin.Context){
 		LiveManager.Clients[offer.ID] = client
 		room.Clients[offer.ID] = client
 		ClientRoomMap.Map[offer.ID] = offer.Subscribe
-		fmt.Println(ClientRoomMap.Map)
+
 		conn.SetCloseHandler(client.closeHandle)
 
 		go client.DataRecive()
@@ -78,11 +78,9 @@ func ConnectToRoom(c *gin.Context){
 func unregisterClient(client *Client) (err error) {
 	close(client.Send)
 	delete(LiveManager.Clients, client.ID)
-	delete(ClientRoomMap.Map, client.ID)
-	fmt.Println(ClientRoomMap.Map)
 	if roomID, ok := ClientRoomMap.Map[client.ID]; ok {
 		delete(LiveManager.Rooms[roomID].Clients, client.ID)
-		fmt.Println(LiveManager.Rooms[roomID].Clients)
+		delete(ClientRoomMap.Map, client.ID)
 	}else{
 		err = errors.New("unregister client ")
 		help.Log.Infof("unregister client %d error", client.ID)
