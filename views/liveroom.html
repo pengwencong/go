@@ -46,13 +46,8 @@
                 ws.binaryType = "arraybuffer";
                 ws.send(id);
                 console.log("open");
-                var getMideo = setInterval(function () {
-                    console.log(ws.readyState)
-                    if (ws.readyState == ws.CONNECTING){
-                        clearInterval(getMideo)
-                        getMedia()
-                    }
-                },200)
+                getMedia()
+                
             };
 
             ws.onmessage = function (response) {
