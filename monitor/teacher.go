@@ -20,7 +20,7 @@ func CreateTeacher(ID int, conn *websocket.Conn) *Teacher {
 	return &Teacher{
 		ID: ID,
 		Conn: conn,
-		Send: make(chan message.MessageSend),
+		Send: make(chan message.MessageSend, 10),
 	}
 }
 
@@ -120,7 +120,8 @@ func (teacher *Teacher) DataSend() {
 			}
 			switch msg.MsgType {
 			case message.StringMessage:
-				teacher.Conn.WriteMessage(websocket.TextMessage, msg.Data)
+				bb, _ := json.Marshal(msg)
+				teacher.Conn.WriteMessage(websocket.TextMessage, bb)
 			case message.BinMessage:
 				teacher.Conn.WriteMessage(websocket.BinaryMessage, msg.Data)
 			}

@@ -21,7 +21,7 @@ type Student struct {
 
 func (student *Student) DataRecive() {
 	sendData := message.MessageSend{
-		message.BinMessage,
+		message.StringMessage,
 		[]byte{},
 	}
 	for {
