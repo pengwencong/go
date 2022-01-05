@@ -9,20 +9,20 @@ import (
 
 func Init(engine *gin.Engine) {
 
-	engine.Group("/live")
+	live := engine.Group("/live")
 	{
-		engine.GET("/userroom", controller.UserRoom)
-		engine.GET("/connectToRoom", live.ConnectToRoom)
-		engine.GET("/createRoom", controller.CreateRoom)
-		engine.GET("/roomInit", live.Init)
+		live.GET("/userroom", controller.UserRoom)
+		live.GET("/connectToRoom", live.ConnectToRoom)
+		live.GET("/createRoom", controller.CreateRoom)
+		live.GET("/roomInit", live.Init)
 	}
 
-	engine.Group("/monitor")
+	monitor := engine.Group("/monitor")
 	{
-		engine.GET("/teacher", controller.Teacher)
-		engine.GET("/monitorStudent", monitor.MonitorStudent)
-		engine.GET("/student", controller.Student)
-		engine.GET("/studentConnect", monitor.StudentConnect)
+		monitor.GET("/teacher", controller.Teacher)
+		monitor.GET("/monitorStudent", monitor.MonitorStudent)
+		monitor.GET("/student", controller.Student)
+		monitor.GET("/studentConnect", monitor.StudentConnect)
 	}
 
 	engine.Static("/resource/video","./resource/video")
