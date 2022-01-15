@@ -35,7 +35,7 @@ func (student *Student) DataRecive() {
 		}
 
 		RateManager.StudentDownDataLen[student.ID] += len(msg)
-
+		fmt.Println(RateManager.StudentDownDataLen[student.ID])
 		switch msgType {
 		case websocket.TextMessage:
 			//Dispatcher.Chat <- msgDispatch

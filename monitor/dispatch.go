@@ -149,7 +149,6 @@ func heart(){
 		select {
 		case <-ticker.C:
 			i++
-			fmt.Println("i:",i)
 			for _, student := range MonitorManager.Students {
 				student.calculateRate(i)
 				student.Conn.WriteMessage(websocket.TextMessage, []byte("heart"))
