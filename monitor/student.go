@@ -8,6 +8,7 @@ import (
 	"go/help"
 	"go/message"
 	"strconv"
+	"time"
 )
 
 type Student struct {
@@ -153,26 +154,35 @@ func (student *Student) adjustMediaFramer(i int) {
 		[]byte{},
 	}
 
-	switch student.framerType {
-	case Framer30:
-		if 4 < diff && diff < 10 {
-			framerMsg.FramerType = W110H150f20
-			framerMsgByte, _ := json.Marshal(framerMsg)
-			msg.Data = framerMsgByte
+	time.Sleep(time.Second * 4)
 
-			student.Send <- msg
-		}
-	case Framer20:
-		if 14 < diff && diff < 20 {
-			framerMsg.FramerType = W110H150f10
-			framerMsgByte, _ := json.Marshal(framerMsg)
-			msg.Data = framerMsgByte
+	framerMsg.FramerType = W110H150f20
+	framerMsgByte, _ := json.Marshal(framerMsg)
+	msg.Data = framerMsgByte
 
-			student.Send <- msg
-		}
-	case Framer10:
+	student.Send <- msg
 
-	}
+	fmt.Println("ssfa")
+	//switch student.framerType {
+	//case Framer30:
+	//	if 4 < diff && diff < 10 {
+	//		framerMsg.FramerType = W110H150f20
+	//		framerMsgByte, _ := json.Marshal(framerMsg)
+	//		msg.Data = framerMsgByte
+	//
+	//		student.Send <- msg
+	//	}
+	//case Framer20:
+	//	if 14 < diff && diff < 20 {
+	//		framerMsg.FramerType = W110H150f10
+	//		framerMsgByte, _ := json.Marshal(framerMsg)
+	//		msg.Data = framerMsgByte
+	//
+	//		student.Send <- msg
+	//	}
+	//case Framer10:
+	//
+	//}
 }
 
 func StudentConnect(c *gin.Context) {
