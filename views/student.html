@@ -13,7 +13,7 @@
     var id, ws, myVideoStream, myVideo,
         sendHeader = 0,
         sendChunks = [],
-        defaultFrame = 30,
+        defaultFrame = 20,
 
         frame30 = 30, //30帧
         frame20 = 20, //20帧
@@ -52,8 +52,8 @@
 
                     switch (data.msgType) {
                         case frameMessage:
-                            var framerType = data.framerType
-                            getMedia(framerType)
+                            var frameType = data.framerType
+                            getMedia(frameType)
 
                             var adjustMsgResponse = {"msgType":frameType,"status":200}
                             ws.send(JSON.stringify(adjustMsgResponse))
