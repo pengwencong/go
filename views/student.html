@@ -13,8 +13,7 @@
     var id, ws, myVideoStream, myVideo,
         sendHeader = 0,
         sendChunks = [],
-        frame = 6,
-        i = 1
+        frame = 6
 
     id = {{.studentID}}
 
@@ -86,12 +85,10 @@
         // 向我显示我的本地视频
         myVideo.srcObject = myVideoStream
         myVideo.play()
-        i++
-        if (i == 3){
-            console.log( stream.getVideoTracks()[0].getSettings().height )
-            console.log( stream.getVideoTracks()[0].getSettings().width )
-            console.log( stream.getVideoTracks()[0].getSettings().frameRate )
-        }
+        console.log("fa")
+        console.log( stream.getVideoTracks()[0].getSettings().height )
+        console.log( stream.getVideoTracks()[0].getSettings().width )
+        console.log( stream.getVideoTracks()[0].getSettings().frameRate )
 
         mediaSend(stream)
     }
