@@ -122,11 +122,11 @@ func CreateStudent(ID int, conn *websocket.Conn) *Student{
 
 func (student *Student) calculateRate(i int) {
 	if i % 2 == 0 {
-		RateManager.TeacherDownDataLen[student.ID] = 0
-		RateManager.TeacherUpDataLen[student.ID] = 0
+		RateManager.StudentDownDataLen[student.ID] = 0
+		RateManager.StudentUpDataLen[student.ID] = 0
 	} else {
-		student.downRate = RateManager.TeacherDownDataLen[student.ID] / 3
-		student.upRate = RateManager.TeacherUpDataLen[student.ID] / 3
+		student.downRate = RateManager.StudentDownDataLen[student.ID] / 3
+		student.upRate = RateManager.StudentUpDataLen[student.ID] / 3
 		fmt.Println(student.downRate)
 		fmt.Println(student.upRate)
 	}
