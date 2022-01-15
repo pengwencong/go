@@ -65,14 +65,19 @@
             audio: false,
             video: {
                 width:{
+                    idal:480,
                     min:320,
                     max:1280
                 },
                 height:{
+                    idal:640,
                     min:240,
                     max:720
                 },
-                frameRate:10
+                frameRate:{
+                    idal:60,
+                    min:10
+                }
             }
         };
         navigator.getUserMedia(constr, gotUserMedia, didntGetUserMedia);
