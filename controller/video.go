@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func UserRoom(c *gin.Context){
+func UserRoom(c *gin.Context) {
 	roomID, _ := strconv.Atoi( c.Query("roomID") )
 	userID := 1
 

@@ -89,8 +89,12 @@ func (room *Room) setHeaderData(data []byte) {
 	room.headerData = append(room.headerData, data)
 }
 
-func (room *Room) dataDeal(data message.MessageSend){
-	room.Send <- data
+func (room *Room) dataDeal(data []byte){
+	messageSend := message.MessageSend{
+		message.StringMessage,
+		data,
+	}
+	room.Send <- messageSend
 }
 
 func (room *Room) DataSend() {

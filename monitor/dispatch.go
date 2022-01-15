@@ -6,26 +6,26 @@ import (
 	"github.com/gorilla/websocket"
 	"go/message"
 	"net/http"
+	"time"
 )
 
 // ClientManager is a websocket manager
 type Dispatch struct {
 	Chat  	   chan message.MessageDispatch
 	Mideastream    chan []byte
-	Action chan []byte
+	NetRateMonitor chan *Student
 }
 
 
 var Dispatcher = &Dispatch{
 	Chat:  		make(chan message.MessageDispatch),
 	Mideastream:    make(chan []byte),
-	Action: make(chan []byte),
+	NetRateMonitor: make(chan *Student, 50),
 }
 
 
 func (dispatch *Dispatch) Start() {
-	//ticker := time.NewTicker(time.Second * 30)
-	//go heart(ticker, Manager)
+	go heart()
 
 	for {
 		select {
@@ -33,13 +33,13 @@ func (dispatch *Dispatch) Start() {
 			switch msgDispatch.Type {
 			case message.OfferMessage:
 				offer := message.MessageOffer{}
-				json.Unmarshal(msgDispatch.MsgSend.Data, &offer)
+				json.Unmarshal(msgDispatch.MsgData, &offer)
 
 				student, _ := MonitorManager.Students[offer.Subscribe]
 				teacher, _ := MonitorManager.Teachers[offer.ID]
 
 				teacher.sendHeaderData(student.headerData)
-				student.dataDeal(msgDispatch.MsgSend)
+				student.dataDeal(msgDispatch.MsgData)
 			}
 
 		//msgFrom := message.MessageFrom{}
@@ -110,6 +110,7 @@ func (dispatch *Dispatch) Start() {
 		//	}
 		//}
 		//case data := <-dispatch.Mideastream:
+		//case data := <-dispatch.NetRateMonitor:
 
 		}
 	}
@@ -122,7 +123,7 @@ type monitorManager struct {
 }
 
 // Manager define a ws server manager
-var MonitorManager = &monitorManager{
+var MonitorManager = &monitorManager {
 	Students: make(map[int]*Student, 5),
 	Teachers: make(map[int]*Teacher, 100),
 }
@@ -140,19 +141,34 @@ func createConnect(c *gin.Context) (*websocket.Conn, error) {
 	return conn, nil
 }
 
+func heart(){
+	ticker := time.NewTicker(time.Second * 3)
+	i := 0
+	for{
+		select {
+		case <-ticker.C:
+			for _, student := range MonitorManager.Students {
+				student.calculateRate(i)
+				student.Conn.WriteMessage(websocket.TextMessage, []byte("heart"))
+			}
+			for _, teacher := range MonitorManager.Teachers {
+				teacher.calculateRate(i)
+				teacher.Conn.WriteMessage(websocket.TextMessage, []byte("heart"))
+			}
+		}
+	}
+}
 
-//func heart(ticker *time.Ticker, manager *ClientManager){
-//	for{
-//		select {
-//		case <-ticker.C:
-//			for _, client := range manager.Clients{
-//				if(client.HeartTime >= 2){
-//					continue
-//				}
-//				//client.Socket.WriteJSON(message.MessageTo{From: "0", Time:"0", Gid:"0", Content: "ping"})
-//				//client.HeartTime += 1
-//			}
-//		}
-//	}
-//}
+type rateManager struct {
+	TeacherDownDataLen map[int]int
+	TeacherUpDataLen map[int]int
+	StudentDownDataLen map[int]int
+	StudentUpDataLen map[int]int
+}
 
+var RateManager = &rateManager{
+	TeacherDownDataLen : make(map[int]int, 5),
+	TeacherUpDataLen : make(map[int]int, 5),
+	StudentDownDataLen : make(map[int]int, 50),
+	StudentUpDataLen : make(map[int]int, 50),
+}

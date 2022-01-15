@@ -12,8 +12,11 @@
 <script>
     var id, ws, myVideoStream, myVideo,
         sendHeader = 0,
-        sendChunks = []
+        sendChunks = [],
+        frame = 6
+
     id = {{.studentID}}
+
     window.onload = function () {
         initWebsocket()
 
@@ -29,9 +32,9 @@
             ws.onopen = function() {
                 ws.binaryType = "arraybuffer";
                 ws.send(id);
+
                 console.log("open");
                 getMedia()
-
             };
 
             ws.onmessage = function (response) {
@@ -58,7 +61,23 @@
     function getMedia() {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-        var constr = {audio: false, video: true};
+        var constr = {
+            audio: false,
+            video: {
+                width:{
+                    min:320,
+                    max:1280
+                },
+                height:{
+                    min:240,
+                    max:720
+                },
+                frameRate:{
+                    ideal:60,
+                    min:10
+                }
+            }
+        };
         navigator.getUserMedia(constr, gotUserMedia, didntGetUserMedia);
     }
     function didntGetUserMedia() {

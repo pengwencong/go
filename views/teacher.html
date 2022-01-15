@@ -33,24 +33,31 @@
     function initWebsocket() {
         if ("WebSocket" in window)
         {
-            ws = new WebSocket("wss://fw.hiwonder.com/monitor/monitorStudent");
+            ws = new WebSocket("ws://192.168.11.7:8080/monitor/monitorStudent");
 
             ws.onopen = function() {
                 ws.binaryType = "arraybuffer";
                 var offer = {"id":userID,"subscribe":roomID}
                 ws.send(JSON.stringify(offer));
-                console.log("open");
+                // var time = Date.parse( new Date() ).toString()
+                // console.log( time.substr(0,10) )
             };
 
             ws.onmessage = function (response) {
-                console.log(response.data)
                 var type = typeof(response.data)
                 if (type == "string"){
-                    var data = JSON.parse(response.data)
-                    // if (data.subscribe == roomID){
-                    //     var res ={"status":200,"id":parseInt(data.id)}
-                    //     ws.send(res)
-                    // }
+                    if (response.data == "heart"){
+                        var time = Date.parse( new Date() ).toString()
+                        var heartData = {"type":5, "data":time.substr(0,10)}
+                        ws.send(JSON.stringify(heartData))
+                    }else{
+                        var data = JSON.parse(response.data)
+                        // if (data.subscribe == roomID){
+                        //     var res ={"status":200,"id":parseInt(data.id)}
+                        //     ws.send(res)
+                        // }
+                    }
+
                 }else if (type == "object"){
                     recordedChunks.push(response.data);
                     if (actionTime == 1){

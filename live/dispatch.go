@@ -33,13 +33,13 @@ func (dispatch *Dispatch) Start() {
 			switch msgDispatch.Type {
 			case message.OfferMessage:
 				offer := message.MessageOffer{}
-				json.Unmarshal(msgDispatch.MsgSend.Data, &offer)
+				json.Unmarshal(msgDispatch.MsgData, &offer)
 
 				room, _ := LiveManager.Rooms[offer.Subscribe]
 				client, _ := LiveManager.Clients[offer.ID]
 
 				client.sendHeaderData(room.headerData)
-				room.dataDeal(msgDispatch.MsgSend)
+				room.dataDeal(msgDispatch.MsgData)
 			}
 
 		//msgFrom := message.MessageFrom{}

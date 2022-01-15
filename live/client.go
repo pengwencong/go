@@ -58,13 +58,10 @@ func ConnectToRoom(c *gin.Context){
 		go client.DataRecive()
 		go client.DataSend()
 
-		msgSend := message.MessageSend{
-			message.StringMessage,
-			msg,
-		}
+
 		msgDispatch := message.MessageDispatch{
 			message.OfferMessage,
-			msgSend,
+			msg,
 		}
 		Dispatcher.Chat <- msgDispatch
 

@@ -12,15 +12,17 @@ import (
 // Client is a websocket client
 type Teacher struct {
 	ID     int
-	Conn *websocket.Conn
+	downRate int
+	upRate int
 	Send   chan message.MessageSend
+	Conn *websocket.Conn
 }
 
 func CreateTeacher(ID int, conn *websocket.Conn) *Teacher {
 	return &Teacher{
 		ID: ID,
-		Conn: conn,
 		Send: make(chan message.MessageSend, 10),
+		Conn: conn,
 	}
 }
 
@@ -55,18 +57,14 @@ func MonitorStudent(c *gin.Context){
 		go teacher.DataRecive()
 		go teacher.DataSend()
 
-		msgSend := message.MessageSend{
-			message.StringMessage,
-			msg,
-		}
 		msgDispatch := message.MessageDispatch{
 			message.OfferMessage,
-			msgSend,
+			msg,
 		}
 		Dispatcher.Chat <- msgDispatch
 
 	} else {
-		help.Log.Infof("teacher connect to room get room err:", err.Error())
+		help.Log.Info("teacher connect to room get room err")
 		conn.Close()
 		return
 	}
@@ -95,17 +93,37 @@ func (teacher *Teacher) closeHandle(code int, text string) error {
 	return unregisterTeacher(teacher)
 }
 
+func (teacher *Teacher) calculateRate(i int) {
+	if i % 2 == 0 {
+		RateManager.TeacherDownDataLen[teacher.ID] = 0
+		RateManager.TeacherUpDataLen[teacher.ID] = 0
+	}else{
+		teacher.downRate = RateManager.TeacherDownDataLen[teacher.ID] / 3
+		teacher.upRate = RateManager.TeacherUpDataLen[teacher.ID] / 3
+	}
+}
+
 func (teacher *Teacher) DataRecive() {
 	for {
 		msgType, msg, err := teacher.Conn.ReadMessage()
 		if err != nil {
-			//unregisterTeacher(c)
 			break
 		}
-		fmt.Println(msg)
-		fmt.Println(msgType)
-		switch msgType {
 
+		if _, ok := RateManager.TeacherDownDataLen[teacher.ID]; ok {
+			RateManager.TeacherDownDataLen[teacher.ID] += len(msg)
+		}else{
+			RateManager.TeacherDownDataLen[teacher.ID] = 0
+		}
+
+		switch msgType {
+		case websocket.TextMessage:
+			reciveData := message.MessageRecive{}
+			err := json.Unmarshal(msg, &reciveData)
+			if err != nil {
+
+			}
+			fmt.Printf("%+v\n", reciveData)
 		}
 	}
 }
@@ -113,15 +131,17 @@ func (teacher *Teacher) DataRecive() {
 func (teacher *Teacher) DataSend() {
 	for {
 		select {
-		case msg, ok := <-teacher.Send:
-			if !ok {
-				//unregisterTeacher(c)
-				return
+		case msg := <-teacher.Send:
+
+			if _, ok := RateManager.TeacherUpDataLen[teacher.ID]; ok {
+				RateManager.TeacherUpDataLen[teacher.ID] += len(msg.Data)
+			}else{
+				RateManager.TeacherUpDataLen[teacher.ID] = 0
 			}
+
 			switch msg.MsgType {
 			case message.StringMessage:
-				bb, _ := json.Marshal(msg)
-				teacher.Conn.WriteMessage(websocket.TextMessage, bb)
+				teacher.Conn.WriteMessage(websocket.TextMessage, msg.Data)
 			case message.BinMessage:
 				teacher.Conn.WriteMessage(websocket.BinaryMessage, msg.Data)
 			}

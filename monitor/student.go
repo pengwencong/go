@@ -1,6 +1,7 @@
 package monitor
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
@@ -10,6 +11,8 @@ import (
 
 type Student struct {
 	ID     int
+	downRate int
+	upRate int
 	headerData [][]byte
 	Send chan message.MessageSend
 	Conn *websocket.Conn
@@ -21,7 +24,7 @@ type Student struct {
 
 func (student *Student) DataRecive() {
 	sendData := message.MessageSend{
-		message.StringMessage,
+		message.BinMessage,
 		[]byte{},
 	}
 	for {
@@ -31,14 +34,16 @@ func (student *Student) DataRecive() {
 			break
 		}
 
+		RateManager.StudentDownDataLen[student.ID] += len(msg)
+
 		switch msgType {
 		case websocket.TextMessage:
-			//Dispatcher.Chat <- msg
+			//Dispatcher.Chat <- msgDispatch
 		case websocket.BinaryMessage:
 			sendData.Data = msg
-			if len(student.headerData) < 2{
+			if len(student.headerData) < 2 {
 				student.setHeaderData(msg)
-			}else{
+			} else {
 				for _, teacher := range MonitorManager.Teachers {
 					teacher.Send <- sendData
 				}
@@ -82,18 +87,21 @@ func (student *Student) setHeaderData(data []byte) {
 	student.headerData = append(student.headerData, data)
 }
 
-func (student *Student) dataDeal(data message.MessageSend){
-	student.Send <- data
+func (student *Student) dataDeal(data []byte){
+	messageSend := message.MessageSend{
+		message.StringMessage,
+		data,
+	}
+	student.Send <- messageSend
 }
 
 func (student *Student) DataSend() {
 	for {
 		select {
-		case msg, ok := <-student.Send:
-			if !ok {
-				student.Conn.WriteMessage(websocket.CloseMessage, []byte{})
-				return
-			}
+		case msg := <-student.Send:
+			
+			RateManager.StudentUpDataLen[student.ID] += len(msg.Data)
+
 			switch msg.MsgType {
 			case message.StringMessage:
 				student.Conn.WriteMessage(websocket.TextMessage, msg.Data)
@@ -109,6 +117,18 @@ func CreateStudent(ID int, conn *websocket.Conn) *Student{
 		ID: ID,
 		Conn: conn,
 		Send: make(chan message.MessageSend),
+	}
+}
+
+func (student *Student) calculateRate(i int) {
+	if i % 2 == 0 {
+		RateManager.TeacherDownDataLen[student.ID] = 0
+		RateManager.TeacherUpDataLen[student.ID] = 0
+	} else {
+		student.downRate = RateManager.TeacherDownDataLen[student.ID] / 3
+		student.upRate = RateManager.TeacherUpDataLen[student.ID] / 3
+		fmt.Println(student.downRate)
+		fmt.Println(student.upRate)
 	}
 }
 
