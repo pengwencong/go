@@ -9,6 +9,10 @@ import (
 	"time"
 )
 
+const(
+	W195H150f60 = 40
+)
+
 // ClientManager is a websocket manager
 type Dispatch struct {
 	Chat  	   chan message.MessageDispatch

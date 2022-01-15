@@ -98,8 +98,8 @@ func (teacher *Teacher) calculateRate(i int) {
 		RateManager.TeacherDownDataLen[teacher.ID] = 0
 		RateManager.TeacherUpDataLen[teacher.ID] = 0
 	}else{
-		teacher.downRate = RateManager.TeacherDownDataLen[teacher.ID] / 3
-		teacher.upRate = RateManager.TeacherUpDataLen[teacher.ID] / 3
+		teacher.downRate = RateManager.TeacherDownDataLen[teacher.ID] / 3 * 1024
+		teacher.upRate = RateManager.TeacherUpDataLen[teacher.ID] / 3 * 1024
 	}
 }
 
