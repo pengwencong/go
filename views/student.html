@@ -14,11 +14,13 @@
         sendHeader = 0,
         sendChunks = [],
         defaultFrame = 30,
-        frameType = 6, //调整帧消息
+
         frame30 = 30, //30帧
         frame20 = 20, //20帧
         frame10 = 10 //10帧
 
+    var heartMessage = 5,
+        frameMessage = 6, //调整帧消息
 
     id = {{.studentID}}
 
@@ -47,13 +49,18 @@
                 var type = typeof(response.data)
                 if (type == "string"){
                     var data = JSON.parse(response.data)
-                    if (data.msgType == frameType){
-                        var framerType = data.framerType
-                        getMedia(framerType)
 
-                        var adjustMsgResponse = {"msgType":frameType,"status":200}
-                        ws.send(JSON.stringify(adjustMsgResponse))
+                    switch (data.msgType) {
+                        case frameMessage:
+                            var framerType = data.framerType
+                            getMedia(framerType)
+
+                            var adjustMsgResponse = {"msgType":frameType,"status":200}
+                            ws.send(JSON.stringify(adjustMsgResponse))
+                        case heartMessage:
+                            console.log("heart")
                     }
+
                 } else if (type == "object") {
 
                 }

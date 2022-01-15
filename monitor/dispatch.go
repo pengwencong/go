@@ -9,19 +9,8 @@ import (
 	"time"
 )
 
-/*
 
-*/
 type FramerType int
-const(
-
-	W110H150f60 = 40
-	W110H150f40 = 38
-	W110H150f30 = 30
-	W110H150f20 = 20
-	W110H150f10 = 10
-)
-
 const(
 	Framer10 FramerType = iota
 	Framer20
@@ -30,6 +19,15 @@ const(
 	Framer50
 	Framer60
 )
+
+const(
+	W110H150f60 = 40
+	W110H150f40 = 38
+	W110H150f30 = 30
+	W110H150f20 = 20
+	W110H150f10 = 10
+)
+
 // ClientManager is a websocket manager
 type Dispatch struct {
 	Chat  	   chan message.MessageDispatch
@@ -165,13 +163,23 @@ func createConnect(c *gin.Context) (*websocket.Conn, error) {
 func heart(){
 	ticker := time.NewTicker(time.Second * 3)
 	i := 0
+
+	heartMsg := message.MessageHeart{
+		message.HeartBeatMessage,
+	}
+	heartMsgByte, _ := json.Marshal(heartMsg)
+	msg := message.MessageSend{
+		message.StringMessage,
+		heartMsgByte,
+	}
+
 	for{
 		select {
 		case <-ticker.C:
 			i++
 			for _, student := range MonitorManager.Students {
 				student.adjustMediaFramer(i)
-				student.Conn.WriteMessage(websocket.TextMessage, []byte("heart"))
+				student.Send <- msg
 			}
 			for _, teacher := range MonitorManager.Teachers {
 				teacher.calculateRate(i)

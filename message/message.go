@@ -9,7 +9,7 @@ const (
 	AdjustFramer = 6
 )
 
-type HeartMessage struct {
+type MessageHeart struct {
 	Type int `json:"type"`
 }
 
