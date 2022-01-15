@@ -2,7 +2,6 @@ package monitor
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/message"
@@ -10,9 +9,13 @@ import (
 	"time"
 )
 
+/*
+
+*/
 const(
 	W195H150f60 = 35
 	W195H150f30 = 45
+	W195H150f10 = 50
 )
 
 // ClientManager is a websocket manager
@@ -154,9 +157,9 @@ func heart(){
 		select {
 		case <-ticker.C:
 			i++
-			fmt.Println("i:",i)
 			for _, student := range MonitorManager.Students {
-				student.calculateRate(i)
+				rate := student.calculateRate(i)
+				adjustMediaSize(rate)
 				student.Conn.WriteMessage(websocket.TextMessage, []byte("heart"))
 			}
 			for _, teacher := range MonitorManager.Teachers {
@@ -165,6 +168,10 @@ func heart(){
 			}
 		}
 	}
+}
+
+func adjustMediaSize(rate int){
+
 }
 
 type rateManager struct {

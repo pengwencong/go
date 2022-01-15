@@ -27,7 +27,6 @@ func (student *Student) DataRecive() {
 		message.BinMessage,
 		[]byte{},
 	}
-	i := 0
 	for {
 		msgType, msg, err := student.Conn.ReadMessage()
 		if err != nil {
@@ -36,8 +35,7 @@ func (student *Student) DataRecive() {
 		}
 
 		RateManager.StudentDownDataLen[student.ID] += len(msg)
-		i++
-		fmt.Println(i)
+
 		switch msgType {
 		case websocket.TextMessage:
 			//Dispatcher.Chat <- msgDispatch
@@ -122,7 +120,7 @@ func CreateStudent(ID int, conn *websocket.Conn) *Student{
 	}
 }
 
-func (student *Student) calculateRate(i int) {
+func (student *Student) calculateRate(i int)  int {
 	if i % 2 == 0 {
 		RateManager.StudentDownDataLen[student.ID] = 0
 		RateManager.StudentUpDataLen[student.ID] = 0
@@ -130,7 +128,10 @@ func (student *Student) calculateRate(i int) {
 		student.downRate = RateManager.StudentDownDataLen[student.ID] / ( 3 * 1024 )
 		student.upRate = RateManager.StudentUpDataLen[student.ID] / ( 3 * 1024 )
 		fmt.Println(student.downRate)
+		fmt.Println(RateManager.StudentDownDataLen[student.ID])
 	}
+
+	return student.downRate
 }
 
 func StudentConnect(c *gin.Context) {

@@ -93,7 +93,7 @@ func (teacher *Teacher) closeHandle(code int, text string) error {
 	return unregisterTeacher(teacher)
 }
 
-func (teacher *Teacher) calculateRate(i int) {
+func (teacher *Teacher) calculateRate(i int) int {
 	if i % 2 == 0 {
 		RateManager.TeacherDownDataLen[teacher.ID] = 0
 		RateManager.TeacherUpDataLen[teacher.ID] = 0
@@ -101,6 +101,8 @@ func (teacher *Teacher) calculateRate(i int) {
 		teacher.downRate = RateManager.TeacherDownDataLen[teacher.ID] / ( 3 * 1024 )
 		teacher.upRate = RateManager.TeacherUpDataLen[teacher.ID] / ( 3 * 1024 )
 	}
+
+	return teacher.downRate
 }
 
 func (teacher *Teacher) DataRecive() {
