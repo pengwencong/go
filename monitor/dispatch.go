@@ -148,6 +148,7 @@ func heart(){
 	for{
 		select {
 		case <-ticker.C:
+			i++
 			fmt.Println("i:",i)
 			for _, student := range MonitorManager.Students {
 				student.calculateRate(i)
