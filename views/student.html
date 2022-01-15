@@ -88,9 +88,9 @@
         myVideo.play()
         i++
         if (i == 3){
-            stream.getVideoTracks()[0].getSettings().height
-            stream.getVideoTracks()[0].getSettings().width
-            stream.getVideoTracks()[0].getSettings().frameRate
+            console.log( stream.getVideoTracks()[0].getSettings().height )
+            console.log( stream.getVideoTracks()[0].getSettings().width )
+            console.log( stream.getVideoTracks()[0].getSettings().frameRate )
         }
 
         mediaSend(stream)
