@@ -27,6 +27,7 @@ func (student *Student) DataRecive() {
 		message.BinMessage,
 		[]byte{},
 	}
+	i := 0
 	for {
 		msgType, msg, err := student.Conn.ReadMessage()
 		if err != nil {
@@ -35,7 +36,8 @@ func (student *Student) DataRecive() {
 		}
 
 		RateManager.StudentDownDataLen[student.ID] += len(msg)
-		fmt.Println(RateManager.StudentDownDataLen[student.ID])
+		i++
+		fmt.Println(i)
 		switch msgType {
 		case websocket.TextMessage:
 			//Dispatcher.Chat <- msgDispatch
