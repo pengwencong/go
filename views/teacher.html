@@ -33,7 +33,7 @@
     function initWebsocket() {
         if ("WebSocket" in window)
         {
-            ws = new WebSocket("ws://192.168.11.7:8080/monitor/monitorStudent");
+            ws = new WebSocket("wss://fw.hiwonder.com/monitor/monitorStudent");
 
             ws.onopen = function() {
                 ws.binaryType = "arraybuffer";

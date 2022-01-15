@@ -99,7 +99,7 @@ func (student *Student) DataSend() {
 	for {
 		select {
 		case msg := <-student.Send:
-			
+
 			RateManager.StudentUpDataLen[student.ID] += len(msg.Data)
 
 			switch msg.MsgType {

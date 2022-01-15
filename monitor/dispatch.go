@@ -2,6 +2,7 @@ package monitor
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/message"
@@ -147,6 +148,7 @@ func heart(){
 	for{
 		select {
 		case <-ticker.C:
+			fmt.Println("i:",i)
 			for _, student := range MonitorManager.Students {
 				student.calculateRate(i)
 				student.Conn.WriteMessage(websocket.TextMessage, []byte("heart"))
