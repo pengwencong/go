@@ -13,7 +13,8 @@
     var id, ws, myVideoStream, myVideo,
         sendHeader = 0,
         sendChunks = [],
-        frame = 6
+        frame = 6,
+        i = 1
 
     id = {{.studentID}}
 
@@ -72,7 +73,7 @@
                     min:240,
                     max:720
                 },
-                frameRate:30
+                frameRate:60
             }
         };
         navigator.getUserMedia(constr, gotUserMedia, didntGetUserMedia);
@@ -85,6 +86,12 @@
         // 向我显示我的本地视频
         myVideo.srcObject = myVideoStream
         myVideo.play()
+        i++
+        if (i == 3){
+            stream.getVideoTracks()[0].getSettings().height
+            stream.getVideoTracks()[0].getSettings().width
+            stream.getVideoTracks()[0].getSettings().frameRate
+        }
 
         mediaSend(stream)
     }
