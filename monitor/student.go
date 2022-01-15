@@ -125,8 +125,8 @@ func (student *Student) calculateRate(i int) {
 		RateManager.StudentDownDataLen[student.ID] = 0
 		RateManager.StudentUpDataLen[student.ID] = 0
 	} else {
-		student.downRate = RateManager.StudentDownDataLen[student.ID] / 3 * 1024
-		student.upRate = RateManager.StudentUpDataLen[student.ID] / 3 * 1024
+		student.downRate = RateManager.StudentDownDataLen[student.ID] / ( 3 * 1024 )
+		student.upRate = RateManager.StudentUpDataLen[student.ID] / ( 3 * 1024 )
 		fmt.Println(student.downRate)
 	}
 }
