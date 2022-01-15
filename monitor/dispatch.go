@@ -13,9 +13,11 @@ import (
 
 */
 const(
-	W195H150f60 = 35
-	W195H150f30 = 45
-	W195H150f10 = 50
+	W110H150f60 = 30
+	W110H150f40 = 38
+	W110H150f30 = 30
+	W110H150f20 = 20
+	W110H150f10 = 10
 )
 
 // ClientManager is a websocket manager
