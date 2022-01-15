@@ -12,14 +12,24 @@ import (
 /*
 
 */
+type FramerType int
 const(
-	W110H150f60 = 30
+
+	W110H150f60 = 40
 	W110H150f40 = 38
 	W110H150f30 = 30
 	W110H150f20 = 20
 	W110H150f10 = 10
 )
 
+const(
+	Framer10 FramerType = iota
+	Framer20
+	Framer30
+	Framer40
+	Framer50
+	Framer60
+)
 // ClientManager is a websocket manager
 type Dispatch struct {
 	Chat  	   chan message.MessageDispatch
@@ -160,8 +170,7 @@ func heart(){
 		case <-ticker.C:
 			i++
 			for _, student := range MonitorManager.Students {
-				rate := student.calculateRate(i)
-				adjustMediaSize(rate)
+				student.adjustMediaFramer(i)
 				student.Conn.WriteMessage(websocket.TextMessage, []byte("heart"))
 			}
 			for _, teacher := range MonitorManager.Teachers {
@@ -172,9 +181,7 @@ func heart(){
 	}
 }
 
-func adjustMediaSize(rate int){
 
-}
 
 type rateManager struct {
 	TeacherDownDataLen map[int]int

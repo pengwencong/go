@@ -13,7 +13,12 @@
     var id, ws, myVideoStream, myVideo,
         sendHeader = 0,
         sendChunks = [],
-        frame = 6
+        defaultFrame = 30,
+        frameType = 6, //调整帧消息
+        frame30 = 30, //30帧
+        frame20 = 20, //20帧
+        frame10 = 10 //10帧
+
 
     id = {{.studentID}}
 
@@ -32,20 +37,25 @@
             ws.onopen = function() {
                 ws.binaryType = "arraybuffer";
                 ws.send(id);
-
                 console.log("open");
-                getMedia()
+
+                getMedia(defaultFrame)
             };
 
             ws.onmessage = function (response) {
+                console.log(response)
                 var type = typeof(response.data)
-                if (typeof(response.data) == "string"){
-                    // var data = JSON.parse(response.data)
-                    // if (data.subscribe == id){
-                    //     var res ={"status":200,"id":parseInt(data.id)}
-                    //     ws.send(res)
-                    //
-                    // }
+                if (type == "string"){
+                    var data = JSON.parse(response.data)
+                    if (data.msgType == frameType){
+                        var framerType = data.framerType
+                        getMedia(framerType)
+
+                        var adjustMsgResponse = {"msgType":frameType,"status":200}
+                        ws.send(JSON.stringify(adjustMsgResponse))
+                    }
+                } else if (type == "object") {
+
                 }
             };
 
@@ -58,7 +68,7 @@
     }
 
     // 获取本地媒体
-    function getMedia() {
+    function getMedia(frame) {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
         var constr = {
@@ -66,7 +76,7 @@
             video: {
                 width:110,
                 height:150,
-                frameRate:60
+                frameRate:frame
             }
         };
         navigator.getUserMedia(constr, gotUserMedia, didntGetUserMedia);

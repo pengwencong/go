@@ -6,6 +6,7 @@ const (
 	OfferMessage = 3
 	CloseMessage = 4
 	HeartBeatMessage = 5
+	AdjustFramer = 6
 )
 
 type HeartMessage struct {
@@ -35,4 +36,9 @@ type MessageDispatch struct {
 type MessageSend struct {
 	MsgType int `json:"msgType"`
 	Data []byte `json:"data"`
+}
+
+type MessageAdjust struct {
+	MsgType int `json:"msgType"`
+	FramerType int  `json:"framerType"`
 }

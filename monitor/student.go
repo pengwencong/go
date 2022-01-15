@@ -1,6 +1,7 @@
 package monitor
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
@@ -11,6 +12,7 @@ import (
 
 type Student struct {
 	ID     int
+	framerType FramerType
 	downRate int
 	upRate int
 	headerData [][]byte
@@ -115,6 +117,7 @@ func (student *Student) DataSend() {
 func CreateStudent(ID int, conn *websocket.Conn) *Student{
 	return &Student{
 		ID: ID,
+		framerType: Framer30,
 		Conn: conn,
 		Send: make(chan message.MessageSend),
 	}
@@ -132,6 +135,44 @@ func (student *Student) calculateRate(i int)  int {
 	}
 
 	return student.downRate
+}
+
+func (student *Student) adjustMediaFramer(i int) {
+	rate := student.calculateRate(i)
+	diff := W110H150f30 - rate
+	if diff <= 0 {
+		return
+	}
+
+	framerMsg := message.MessageAdjust{
+		message.AdjustFramer,
+		int(Framer30),
+	}
+	msg := message.MessageSend{
+		message.StringMessage,
+		[]byte{},
+	}
+
+	switch student.framerType {
+	case Framer30:
+		if 4 < diff && diff < 10 {
+			framerMsg.FramerType = W110H150f20
+			framerMsgByte, _ := json.Marshal(framerMsg)
+			msg.Data = framerMsgByte
+
+			student.Send <- msg
+		}
+	case Framer20:
+		if 14 < diff && diff < 20 {
+			framerMsg.FramerType = W110H150f10
+			framerMsgByte, _ := json.Marshal(framerMsg)
+			msg.Data = framerMsgByte
+
+			student.Send <- msg
+		}
+	case Framer10:
+
+	}
 }
 
 func StudentConnect(c *gin.Context) {
