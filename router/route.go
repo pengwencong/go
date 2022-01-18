@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"go/chat"
 	"go/controller"
 	"go/live"
 	"go/monitor"
@@ -25,5 +26,14 @@ func Init(engine *gin.Engine) {
 		monitorGroup.GET("/studentConnect", monitor.StudentConnect)
 	}
 
+	chatGroup := engine.Group("/chat")
+	{
+		chatGroup.GET("/login", controller.Login)
+		chatGroup.GET("/connect", chat.Connect)
+	}
+
 	engine.Static("/resource/video","./resource/video")
+	engine.Static("/resource/css","./resource/css")
+	engine.Static("/resource/js","./resource/js")
+	engine.GET("/monitorGc", controller.MonitorGC)
 }

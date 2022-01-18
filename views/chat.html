@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chat</title>
+    <link rel="stylesheet" type="text/css" href="../resource/css/chat.css?t=202201181422">
+    <style>
+        body{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="chatContainer">
+    <div class="chatHeader">
+        <div class="name">{{.name}}</div>
+    </div>
+    <div class="chatInterface">
+        <div class="chatList">
+            <div class="chatItem">
+                <img class="Avatar" src="">
+                <div class="info">
+                    <div class="name"></div>
+                    <div class="msg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="chatBox">
+            <div class="header">
+                <div class="chatName">{{.chatName}}</div>
+            </div>
+            <div id="chatInfo" class="info">
+
+            </div>
+            <div class="operation">
+                <textarea class="messageInput" id="textareaId" name="message" ></textarea>
+                <button class="send" onclick="messageSend()">fa</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    var ws, remoteId, dom,
+        userMessage = 1, groupMessage = 2,
+        textMessage = 3, binaryMessage = 4, fileMessage = 5,
+        toID
+
+    var selfMsgDomHeader = "<div class='selfMsg'>"
+    var Tail = "</div>"
+    var otherMsgDomHeader = "<div class='otherMsg'>"
+
+
+
+    var userID = {{.ID}}
+
+    window.onload = function () {
+        dom = document.getElementById('textareaId')
+        // initWebsocket()
+    }
+
+    function messageSend(){
+        var sendMessage = {"from":userID,"to":toID,"type":userMessage, "dataType":textMessage, "data":dom.value}
+        ws.send(JSON.stringify(sendMessage))
+    }
+
+    function initWebsocket() {
+        if ("WebSocket" in window)
+        {
+            ws = new WebSocket("wss://fw.hiwonder.com/chat/connect");
+
+            ws.onopen = function() {
+                ws.binaryType = "arraybuffer";
+                ws.send(userID);
+            };
+
+            ws.onmessage = function (response) {
+                var type = typeof(response.data)
+                if (type == "string"){
+                    if (response.data == "heart"){
+                        var time = Date.parse( new Date() ).toString()
+                        var heartData = {"type":5, "data":time.substr(0,10)}
+                        ws.send(JSON.stringify(heartData))
+                    }else{
+                        var data = JSON.parse(response.data)
+                        switch (data.dataType) {
+                            case textMessage:
+                                var newDom = otherMsgDomHeader + data.data + Tail
+                                $("#chatInfo").append(newDom)
+                        }
+                        
+                    }
+
+                }else if (type == "object"){
+                    recordedChunks.push(response.data);
+                    if (actionTime == 1){
+                        setTimeout(function () {
+                            play()
+                        },500)
+                    }
+                    actionTime += 1
+                }
+            };
+
+            ws.onclose = function() {
+                alert("连接已关闭...");
+            };
+        } else {
+            alert("您的浏览器不支持 WebSocket!");
+        }
+    }
+
+</script>
+</body>
+</html>

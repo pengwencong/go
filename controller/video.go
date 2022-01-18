@@ -1,10 +1,14 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go/help"
 	"go/live"
+	"runtime"
+	"runtime/debug"
 	"strconv"
+	"time"
 )
 
 func UserRoom(c *gin.Context) {
@@ -53,4 +57,37 @@ func Teacher(c *gin.Context) {
 		"teacherID": teacherID,
 		"studentID": studentID,
 	})
+}
+
+
+
+func MonitorGC(c *gin.Context) {
+
+
+	i := 1
+	tick := time.Tick(1 * time.Second)
+
+	for {
+		select {
+		case <- tick:
+			var memStats = &runtime.MemStats{}
+			runtime.ReadMemStats(memStats)
+
+			fmt.Printf("BEFORE GC: %+v\n", memStats)
+
+			var GCstats = &debug.GCStats{}
+			debug.ReadGCStats(GCstats)
+
+			fmt.Printf("%+v\n", GCstats)
+			i++
+			if i < 4 {
+				var test = make([]byte, 1024*1024 * 2)
+				if len(test) == 20 {}
+			} else {
+				var test = make([]byte, 1024*1024)
+				if len(test) == 20 {}
+			}
+
+		}
+	}
 }
