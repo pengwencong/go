@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
-	"go/message"
 	"strconv"
 )
 
@@ -69,14 +68,14 @@ func (c *Client) DataRecive() {
 	//	[]byte{},
 	//}
 	for {
-		msgType, _, err := c.conn.ReadMessage()
+		msgType, msg, err := c.conn.ReadMessage()
 		if err != nil {
 			break
 		}
 
 		switch msgType {
 		case websocket.TextMessage:
-			//Dispatcher.Chat <- msgDispatch
+			Dispatcher.Chat <- msg
 		case websocket.BinaryMessage:
 
 		}
@@ -90,9 +89,9 @@ func (c *Client) DataSend() {
 		case msg := <-c.Send:
 
 			switch msg.MsgType {
-			case message.StringMessage:
+			case StringMessage:
 				c.conn.WriteMessage(websocket.TextMessage, msg.Data)
-			case message.BinMessage:
+			case BinMessage:
 				c.conn.WriteMessage(websocket.BinaryMessage, msg.Data)
 			}
 

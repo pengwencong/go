@@ -7,7 +7,7 @@ import (
 )
 
 func Login(c *gin.Context) {
-	ID, err := strconv.Atoi( c.Query("ID") )
+	ID, err := strconv.Atoi( c.Query("id") )
 	if err != nil {
 		help.Log.Info("create teacher Atoi err:", err.Error())
 	}

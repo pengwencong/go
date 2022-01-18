@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
+	"go/chat"
 	"go/help"
 	"go/live"
 	"go/monitor"
@@ -22,6 +23,9 @@ func main() {
 
 	go live.Dispatcher.Start()
 	go monitor.Dispatcher.Start()
+	go chat.Dispatcher.Start()
+
+	server.GCTicker()
 
 	engine := gin.Default()
 	engine.LoadHTMLGlob("views/*")

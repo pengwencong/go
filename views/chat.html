@@ -47,7 +47,7 @@
     var ws, remoteId, dom,
         userMessage = 1, groupMessage = 2,
         textMessage = 3, binaryMessage = 4, fileMessage = 5,
-        toID
+        toID = 2
 
     var selfMsgDomHeader = "<div class='selfMsg'>"
     var Tail = "</div>"
@@ -56,13 +56,14 @@
 
 
     var userID = {{.ID}}
-
+        console.log(userID)
     window.onload = function () {
         dom = document.getElementById('textareaId')
-        // initWebsocket()
+        initWebsocket()
     }
 
     function messageSend(){
+        console.log(userID)
         var sendMessage = {"from":userID,"to":toID,"type":userMessage, "dataType":textMessage, "data":dom.value}
         ws.send(JSON.stringify(sendMessage))
     }
@@ -70,7 +71,7 @@
     function initWebsocket() {
         if ("WebSocket" in window)
         {
-            ws = new WebSocket("wss://fw.hiwonder.com/chat/connect");
+            ws = new WebSocket("ws://192.168.11.7:8080/chat/connect");
 
             ws.onopen = function() {
                 ws.binaryType = "arraybuffer";
@@ -91,7 +92,7 @@
                                 var newDom = otherMsgDomHeader + data.data + Tail
                                 $("#chatInfo").append(newDom)
                         }
-                        
+
                     }
 
                 }else if (type == "object"){
