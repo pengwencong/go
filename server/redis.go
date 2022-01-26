@@ -19,3 +19,9 @@ func InitRedis() error {
 	_, err := Redis.Ping().Result()
 	return err
 }
+
+func Set(key string, value string, ) error {
+
+
+	return nil
+}

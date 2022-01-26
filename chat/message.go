@@ -1,10 +1,10 @@
 package chat
 
 const (
-	USER = iota
-	GROUP
-	StringMessage
-	BinMessage
+	USER =  1
+	GROUP =  2
+	StringMessage =  3
+	BinMessage =  4
 )
 
 type MessageChat struct {

@@ -1,14 +1,15 @@
 package server
 
 import (
-	"fmt"
 	"runtime"
 	"runtime/debug"
 	"time"
 )
 
+var LastGCTime time.Time
+
 const (
-	ALLMEN = 1024 * 1024 * 1024 * 6
+	MENLIMIT = 1024 * 1024 * 1024 * 6
 )
 
 type finalizer struct {
@@ -21,22 +22,25 @@ type finalizerRef struct {
 }
 
 func finalizerHandle(f *finalizerRef) {
-
-	//select {
-	//case <- f.parent.ch:
-	//
-	//}
-
 	var memStats = &runtime.MemStats{}
 	runtime.ReadMemStats(memStats)
 
-	fmt.Printf("GC: %+v\n", memStats)
+	now := time.Now()
+	gcSubTime := now.Sub(LastGCTime)
+	LastGCTime = now
 
-	if (memStats.Alloc * 200) > ALLMEN {
-		multi := ALLMEN / memStats.Alloc
-		debug.SetGCPercent( int(multi) )
-	} else {
-		debug.SetGCPercent(200)
+	if gcSubTime.Minutes() < 1.97 {
+		perSecondsMem := 1024 * 1024//memStats.NextGC / ( uint64( gcSubTime.Seconds()/2 ) )
+		twoMinuteMem := perSecondsMem * 120
+
+		var gcPercentge uint64
+		if twoMinuteMem > MENLIMIT {
+			gcPercentge = MENLIMIT / memStats.NextGC
+		} else {
+			gcPercentge = uint64( twoMinuteMem ) / memStats.NextGC
+		}
+
+		debug.SetGCPercent( int(gcPercentge) * 100 )
 	}
 
 	runtime.SetFinalizer(f, finalizerHandle)

@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"go/help"
 	"go/live"
-	"runtime"
 	"runtime/debug"
 	"strconv"
 	"time"
@@ -62,32 +61,15 @@ func Teacher(c *gin.Context) {
 
 
 func MonitorGC(c *gin.Context) {
-
-
-	i := 1
-	tick := time.Tick(1 * time.Second)
+	tick := time.Tick(3 * time.Minute)
 
 	for {
 		select {
 		case <- tick:
-			var memStats = &runtime.MemStats{}
-			runtime.ReadMemStats(memStats)
+			var gcStatus = &debug.GCStats{}
+			debug.ReadGCStats(gcStatus)
 
-			fmt.Printf("BEFORE GC: %+v\n", memStats)
-
-			var GCstats = &debug.GCStats{}
-			debug.ReadGCStats(GCstats)
-
-			fmt.Printf("%+v\n", GCstats)
-			i++
-			if i < 4 {
-				var test = make([]byte, 1024*1024 * 2)
-				if len(test) == 20 {}
-			} else {
-				var test = make([]byte, 1024*1024)
-				if len(test) == 20 {}
-			}
-
+			fmt.Println(gcStatus)
 		}
 	}
 }
