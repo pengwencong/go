@@ -29,9 +29,9 @@ func getLogWriter() zapcore.WriteSyncer {
 	path := "./runtime/log/gin.log"
 	lumberJackLogger := &lumberjack.Logger{
 		Filename:   path,
-		MaxSize:    10,
-		MaxBackups: 30,
-		MaxAge:     30,
+		MaxSize:    10,//MB
+		MaxBackups: 30,//保留旧文件最大个数
+		MaxAge:     30,//保留旧文件最大天数
 		Compress:   false,
 	}
 
