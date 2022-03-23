@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"go/help"
-	"go/server"
 	"strconv"
 )
 
@@ -39,7 +38,7 @@ func Connect(c *gin.Context) {
 	client := CreateClient(clientID, conn)
 
 	ChatManager.Clients[clientID] = client
-	server.Redis.Set(string(clientID), "a", 0)
+	//server.Redis.Set(string(clientID), "a", 0)
 
 	go client.DataRecive()
 	go client.DataSend()

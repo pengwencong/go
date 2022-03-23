@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>video</title>
+    <style>
+        #liveVideo{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 0px);
+            width:50%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<video src="" id="liveVideo" muted></video>
+
+<script>
+    var ws, liveVideo
+    var actionTime = 1
+    var recordedChunks = []
+    var userID = {{.userID}}
+    var roomID = {{.roomID}}
+
+    var liveVideo = document.getElementById('liveVideo')
+
+    window.onload = function () {
+        initWebsocket()
+    }
+
+    function initWebsocket() {
+        if ("WebSocket" in window)
+        {
+            ws = new WebSocket("wss://fw.hiwonder.com/connectToRoom");
+
+            ws.onopen = function() {
+                ws.binaryType = "arraybuffer";
+                var offer = {"id":userID,"subscribe":roomID}
+                ws.send(JSON.stringify(offer));
+                console.log("open");
+            };
+
+            ws.onmessage = function (response) {
+                var type = typeof(response.data)
+                if (type == "string"){
+                    var data = JSON.parse(response.data)
+                    // if (data.subscribe == roomID){
+                    //     var res ={"status":200,"id":parseInt(data.id)}
+                    //     ws.send(res)
+                    // }
+                }else if (type == "object"){
+                    recordedChunks.push(response.data);
+                    if (actionTime == 1){
+                        setTimeout(function () {
+                            play()
+                        },500)
+                    }
+                    actionTime += 1
+                }
+            };
+
+            ws.onclose = function() {
+                alert("连接已关闭...");
+            };
+        } else {
+            alert("您的浏览器不支持 WebSocket!");
+        }
+    }
+
+    function play(){
+        var blob = new Blob(recordedChunks, {
+            type: "video/webm"
+        });
+        var url = URL.createObjectURL(blob);
+
+        liveVideo.src = url
+        liveVideo.play()
+    }
+
+</script>
+</body>
+</html>

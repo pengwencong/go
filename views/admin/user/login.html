@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<style>
+    body{
+
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: url("../../../public/static/admin/img/loginbackground.jpeg") no-repeat;
+        background-size: cover;
+    }
+
+    input{
+        background:none;
+        outline:none;
+        border:none;
+    }
+
+    input::-webkit-input-placeholder{
+        text-align: center;
+    }
+    input:-moz-placeholder{
+        text-align: center;
+    }
+    input::-moz-placeholder{
+        text-align: center;
+    }
+    input:-ms-input-placeholder{
+        text-align: center;
+    }
+    .loginContainer{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        height: 122px;
+    }
+
+    .mobilePhione {
+        width: 370px;
+        height: 50px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0px);
+        margin-bottom:30px;
+        box-shadow: 16px 11px 14px #919d91;
+    }
+
+    .mobilePhione > input {
+        width:100%;
+        height: 100%;
+        position: relative;
+        border-radius: 30px;
+        background-color: #fff;
+        color: black;
+        text-align: left;
+        font-size: 15px;
+        padding-left:15px;
+    }
+
+    .password  {
+        width: 370px;
+        height: 50px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0px);
+        box-shadow: 16px 11px 14px #919d91;
+    }
+
+    .password > input {
+        width:100%;
+        height: 100%;
+        position: relative;
+        border-radius: 30px;
+        background-color: #fff;
+        color: black;
+        text-align: left;
+        font-size: 15px;
+        padding-left:15px;
+    }
+    .phione-fade-enter {
+        opacity: 0;
+        width : 230px;
+        height: 30px;
+    }
+
+    .phione-fade-enter-from,.phione-fade-leave-to {
+        opacity: 1 ;
+        width: 130px;
+        height: 27px;
+    }
+    .phione-fade-enter-active, .phione-fade-leave-active {
+        transition: all 2s ease;
+    }
+
+    .password-fade-enter {
+        opacity: 0;
+        width : 130px;
+        height: 27px;
+    }
+
+    .password-fade-enter-from,.password-fade-leave-to {
+        opacity: 1 ;
+        width: 370px;
+        height: 50px;
+    }
+    .password-fade-enter-active, .password-fade-leave-active {
+        transition: all 2s ease;
+    }
+
+</style>
+<body >
+<div class="container" id="login">
+
+        <div class="loginContainer" >
+            <transition name="phione-fade">
+            <div class="mobilePhione" v-show = "phoineShow">
+                <input ref='phoine' type="text" name="mobilePhione" placeholder="请输入手机号" v-model="mobilePhione">
+            </div>
+            </transition>
+            <transition name="password-fade">
+            <div class="password" v-show = "passwordShow">
+                <input v-on:keyup.enter="login" type="text" name="password" placeholder="请输入密码" v-model="password" >
+            </div>
+            </transition>
+        </div>
+
+</div>
+
+<script src="../../../public/static/common/js/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/qs/6.5.1/qs.min.js"></script>
+<script>
+    var obj = {
+        mobilePhione: '',
+        password: '',
+        phoineShow: false,
+        passwordShow : false,
+        up : 1,
+    }
+
+    new Vue({
+        el: '#login',
+        data: obj,
+        updated: function () {
+            if (this.up == 1){
+                this.$refs.phoine.focus()
+            }
+            this.up++
+        },
+        mounted() {
+            this.phoineShow = !this.phoineShow
+            this.passwordShow = !this.passwordShow
+        },
+        methods: {
+            login : function (data) {
+                if (this.mobilePhione === ""){
+                    alert("请输入手机号")
+                    return
+                }
+
+                if (this.password === ""){
+                    alert("请输入密码")
+                    return
+                }
+
+                var data = {
+                    "phione" : this.mobilePhione,
+                    "password" : this.password,
+                }
+
+                axios.post("/admin/login", Qs.stringify(data))
+                    .then(function (res) {
+                        let data = res.data
+                        if (data.status == 200){
+                            localStorage.setItem('token',data.token)
+                        } else {
+                            alert(data.message)
+                        }
+                    })
+                    .catch(function (res) {
+                        console.log(res)
+                    })
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+mysql:
+  user : root
+  password : peng%wenconf
+  host : 120.77.17.51
+  port : 3306
+  name : illnessplaza
+cache:
+  enable: false
+  list: [redis,mongoDB]
+email:
+  serverhost: smtp.mxhichina.com
+  serverport: 465
+  fromemail: register01@hiwonder.com
+  frompasswd: Hiwonder6688
+redis:
+  host: 120.77.17.51
+  port: 6379
+  password: "peng%wenconf"
+  db: 0
+
+es:
+  host: 106.55.178.129
+  port: 9200
+  user : elastic
+  password: "pes%wen&conf"
+
+

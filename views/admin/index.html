@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<style>
+    body{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pdding: 0;
+        margin: 0;
+    }
+
+    textarea {
+        outline: 0;
+    }
+
+    input{
+        background:none;
+        outline:none;
+        border:none;
+    }
+
+    input::-webkit-input-placeholder{
+        text-align: center;
+    }
+    input:-moz-placeholder{
+        text-align: center;
+    }
+    input::-moz-placeholder{
+        text-align: center;
+    }
+    input:-ms-input-placeholder{
+        text-align: center;
+    }
+    .login{
+        width:100%;
+        height: 100%;
+        background: url("../../public/static/admin/img/loginbackground.jpeg") no-repeat;
+        background-size: cover;
+        overflow: hidden;
+        position: fixed;
+    }
+    .login-leave-to{
+        opacity: 0.3;
+    }
+    .login-leave-active {
+        transition: all 1s ease;
+    }
+    .loginContainer{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: fit-content;
+        height: 122px;
+    }
+
+    .mobilePhione {
+        width: 370px;
+        height: 50px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0px);
+        margin-bottom:30px;
+        box-shadow: 16px 11px 14px #919d91;
+    }
+
+    .mobilePhione > input {
+        width:100%;
+        height: 100%;
+        position: relative;
+        border-radius: 30px;
+        background-color: #fff;
+        color: black;
+        text-align: left;
+        font-size: 15px;
+        padding-left:15px;
+    }
+
+    .password  {
+        width: 370px;
+        height: 50px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0px);
+        box-shadow: 16px 11px 14px #919d91;
+    }
+
+    .password > input {
+        width:100%;
+        height: 100%;
+        position: relative;
+        border-radius: 30px;
+        background-color: #fff;
+        color: black;
+        text-align: left;
+        font-size: 15px;
+        padding-left:15px;
+    }
+    .phione-fade-enter,.phione-fade-leave-to {
+        opacity: 0;
+        width : 90px;
+        height: 20px;
+    }
+
+    .phione-fade-leave{
+        opacity: 1;
+    }
+    .phione-fade-enter-active{
+        transition: all 2s ease;
+    }
+    .phione-fade-leave-active {
+        transition: all 1s ease;
+    }
+    .password-fade-enter,.password-fade-leave-to {
+        opacity: 0;
+        width : 0px;
+        height: 0px;
+    }
+
+    .password-fade-enter-active, .password-fade-leave-active {
+        transition: all 2s ease;
+    }
+    .password-fade-leave-active {
+        transition: all 1s ease;
+    }
+    .workbench{
+        width:100%;
+        height: 100%;
+        background: url("../../public/static/admin/img/loginbackground.jpeg") no-repeat;
+        background-size: cover;
+        overflow: hidden;
+        position: fixed;
+    }
+    .workbenchC-enter {
+        opacity: 0.3;
+    }
+    .workbenchC-leave-to {
+        opacity: 0.3;
+    }
+    .workbenchC-leave-active {
+        transition: all 1s ease !important;
+    }
+    .workbenchC-enter-active {
+        transition: all 2s ease;
+    }
+    .workbenchContainer{
+        cursor: pointer;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .workbenchContainer .line {
+        display: flex;
+        width: 500px;
+        height: 150px;
+        justify-content: space-between;
+    }
+    .workbenchContainer .line div {
+        width: 230px;
+        height: 26px;
+        border-radius: 20px;
+        text-align: center;
+        padding-top: 45px;
+        padding-bottom: 45px;
+        transition: all .6s ease;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .workbenchContainer .line div:hover {
+        box-shadow: 8px 15px 21px rgb(0 0 0 / 14%);
+        transform: translate3d(0, -4px, 0);
+    }
+    .workbenchContainer .bbs{
+        background: url("../../public/static/admin/img/bbs.jpeg") no-repeat;
+        background-size: cover;
+        color: #ffffff;
+
+    }
+    .workbenchContainer .live{
+        background: url("../../public/static/admin/img/live.jpeg") no-repeat;
+        background-size: cover;
+        color: #ffffff;
+
+    }
+    .workbenchContainer .write{
+        background: url("../../public/static/admin/img/write.jpeg") no-repeat;
+        background-size: cover;
+        color: #ffffff;
+
+    }
+    .workbenchContainer .creation{
+        background: url("../../public/static/admin/img/creation.jpeg") no-repeat;
+        background-size: cover;
+        color: #ffffff;
+
+    }
+    .workbench-enter {
+        opacity: 0;
+        width: 130px !important;
+        height: 0px !important;
+
+    }
+    .workbench-leave {
+
+    }
+    .workbench-leave-to {
+        opacity: 0;
+        width: 130px !important;
+        height: 0px !important;
+    }
+     .workbench-enter-active {
+        transition: all 2s ease !important;
+    }
+    .workbench-leave-active {
+        transition: all 1s ease !important;
+    }
+    .creationContainer{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: fixed;
+        background-color: #f6f6f6;
+    }
+    .creationContainer>div{
+        float: left;
+        height: 100%;
+    }
+    .creationContainer .left {
+        width: 25%;
+    }
+    .creationContainer .right {
+        width: 25%;
+    }
+    .creationContainer .medium {
+        width: 50%;
+    }
+    .medium .showDetail{
+        width: 100%;
+        height: 250px;
+        border-bottom: 1px solid skyblue;
+        background: url("../../public/static/admin/img/workbk.png") no-repeat;
+        background-size: cover;
+        opacity: 0;
+    }
+    .deveguide{
+        width: 100%;
+        height: 150px;
+        position: relative;
+        display: flex;
+        justify-content: space-around;
+        opacity: 0;
+    }
+    .deveguide .card {
+        width: 228px;
+        height: 100%;
+        border-radius: 10px;
+        background-color: #fff;
+        cursor: pointer;
+        transition: all .6s ease;
+    }
+    .deveguide .card:hover {
+        box-shadow: 8px 15px 21px rgb(0 0 0 / 14%);
+        transform: translate3d(0, -4px, 0);
+    }
+
+    .creative{
+        width: 96.5%;
+        height: 400px;
+        position: relative;
+        padding: 10px;
+        overflow: hidden;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        opacity: 0;
+    }
+    .creative .info {
+        margin-right: 10px;
+        flex: 0 0 100% !important;
+        background-color: #fff;
+        border-radius: 10px;
+        text-align: left;
+        cursor: pointer;
+        transition: all 1s ease;
+        opacity: .8;
+        height: 100%;
+        box-shadow: 2px 4px 1px 1px rgba(0, 0, 0, .12);
+    }
+
+    .creative .info .head{
+        font-size: 18px;
+        padding: 10px 10px;
+        margin-bottom: 16px;
+    }
+    .creative .info .desc{
+        font-size: 16px;
+        padding: 10px 10px;
+    }
+    .work {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        margin-top: 6px;
+
+    }
+    .work .area{
+        background: url("../../public/static/admin/img/workbk.png") no-repeat;
+        background-size: cover;
+        font-size: 19px;
+        border: none;
+        outline: 0;
+    }
+    .work>div{
+        float: left;
+    }
+    .textInfo{
+        margin: 11px;
+        width: 96%;
+        height: 100%;
+        background: url("../../public/static/admin/img/workbk.png") no-repeat;
+        background-size: cover;
+        cursor: pointer;
+    }
+    /* platform */
+
+    .platFormContainer{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: #f0f2f5;
+    }
+
+    /* platform */
+    /* addInfo */
+    .addInfoContainer{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 728px;
+        height: 550px;
+        border-radius:5px;
+    }
+
+    .addInfoContainer .tagList{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .addInfoContainer .tagList input[type=radio]{
+        position: absolute;
+        opacity: 0;
+    }
+
+    .addInfoContainer .tagList>label{
+        width: 100px;
+        height: 21px;
+        background-color: #e6ebf3;
+        text-align: center;
+        padding: 10px;
+        cursor: pointer;
+        color: #00a4ff;
+
+    }
+    .addInfoContainer .tagList>label:hover{
+        background-color: #fff;
+    }
+
+    .addInfoContainer .operation {
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    .operation div{
+        width: 400px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+    /* addInfo */
+
+    /* addBook */
+
+    .bookContainer {
+        height: 342px;
+        position: relative;
+        left: 50%;
+        top: 27%;
+        transform: translate(-50%, -50%);
+    }
+    .bookContainer .book {
+        margin-bottom: 100px;
+        height: 45px;
+        border-radius: 7px;
+        box-shadow: 5px 6px 9px 1px rgba(0, 0, 0, .12);
+    }
+    .bookContainer .bookDesc {
+        box-shadow: 5px 6px 9px 1px rgba(0, 0, 0, .12);
+        height: 190px;
+    }
+    .bookContainer textarea {
+        height: 100%;
+        width: 100%;
+        resize: none;
+        border: none;
+        font-size: 18px;
+        color: #666666;
+    }
+    .bookContainer input {
+        width: 100%;
+        font-size: 18px;
+        padding-left: 10px;
+        padding-top: 13px;
+    }
+    /* addBook */
+
+</style>
+<body >
+<div id="box">
+
+    <router-view>
+    </router-view>
+</div>
+<template id="login">
+    <transition name="login">
+        <div class="login" v-show="loginBkShow" key="login">
+            <div class="loginContainer" key="loginc">
+                <transition name="phione-fade">
+                    <div class="mobilePhione" v-show = "loginShow">
+                        <input ref='phoine' type="text" placeholder="请输入手机号" v-model="mobilePhione">
+                    </div>
+                </transition>
+                <transition name="password-fade">
+                    <div class="password" v-show = "loginShow">
+                        <input @keyup.enter="login" type="text" placeholder="请输入密码" v-model="password">
+                    </div>
+                </transition>
+            </div>
+        </div>
+    </transition>
+</template>
+<template id="workbench">
+    <transition name="workbenchC">
+        <div class="workbench" v-show="workbenchShow">
+        <div class="workbenchContainer" >
+            <div class="line">
+                <transition name="workbench">
+                    <div class="write" v-show = "writeShow" @click="action($event)" id="1">写</div>
+                </transition>
+                <transition name="workbench">
+                    <div class="creation" v-show = "creationShow" @click="action($event)" id="2">思</div>
+                </transition>
+            </div>
+            <div class="line">
+                <transition name="workbench">
+                    <div class="bbs" v-show = "bbsShow" @click="action($event)" id="4">论</div>
+                </transition>
+                <transition name="workbench">
+                    <div class="live" v-show = "liveShow" @click="action($event)" id="3">直</div>
+                </transition>
+            </div>
+        </div>
+    </div>
+    </transition>
+</template>
+<template id="creation">
+    <div class="creationContainer">
+        <div class="left" >
+            <div class="deveguide">
+                <div class="card">
+                    <div class="head">啊ewtgwqg</div>
+                    <div class="desc">啊wrqghehqg</div>
+                </div>
+                <div class="card">
+                    <div class="head">啊ewtgwqg</div>
+                    <div class="desc">啊wrqghehqg</div>
+                </div>
+            </div>
+            <div class="creative">
+                <div class="info">
+                    <div class="head">啊fasdf</div>
+                    <div class="desc">de的</div>
+                </div>
+                <div class="info">
+                    <div class="head">啊fasdf</div>
+                    <div class="desc">de的</div>
+                </div>
+            </div>
+            <div class="textInfo"  v-show="textInfoShow">
+                <div class="volume">
+                    <input>
+                </div>
+                <div class="chapter">
+                    <input>
+                </div>
+            </div>
+        </div>
+        <div class="medium">
+            <div class="showDetail">
+            </div>
+            <div class="work" >
+                <div class="target">
+                    <div>target:</div>
+                    <textarea @keyup.enter="storeTarget" class="area" v-model="targetContent"></textarea>
+                </div>
+                <div class="scene">
+                    <div>scene:</div>
+                    <textarea @keyup.enter="storeScene" class="area" v-model="sceneContent"></textarea>
+                </div>
+                <div @click="up">up</div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="deveguide">
+                <div class="card">
+                    <div class="head">啊ewtgwqg</div>
+                    <div class="desc">啊wrqghehqg</div>
+                </div>
+                <div class="card">
+                    <div class="head">啊ewtgwqg</div>
+                    <div class="desc">啊wrqghehqg</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</template>
+<template id="writeCreationPlatform">
+    <div class="platFormContainer">
+        <add-info></add-info>
+    </div>
+</template>
+<template id="addInfo">
+    <div class="addInfoContainer">
+        <div class="tagList">
+            <label class="addBook"><input type="radio" value="add-book" id="add-book" v-model="view">A</label>
+            <label class="addVolume"><input type="radio" value="add-volume" id="add-volume" v-model="view">B</label>
+            <label class="addChapter"><input type="radio" value="add-volume" id="add-volume" v-model="view">C</label>
+            <label class="addAfflatus"><input type="radio" value="add-volume" id="add-volume" v-model="view">D</label>
+            <label class="addCreation"><input type="radio" value="add-volume" id="add-volume" v-model="view">E</label>
+        </div>
+        <div class="operation">
+            <component v-bind:is="view"></component>
+        </div>
+    </div>
+</template>
+<template id="addBook">
+    <div class="bookContainer">
+        <div class="book">
+            <input v-model="bookName" type="text" class="bookName" placeholder="请输入">
+        </div>
+        <div class="bookDesc">
+            <textarea @keyup.enter="addBook" v-model="bookDesc" type="text"></textarea>
+        </div>
+    </div>
+</template>
+<template id="addVolume">
+    <div class="volumeContainer">
+        <div class="book">
+            <input v-model="bookName" type="text" class="bookName" placeholder="请输入">
+        </div>
+        <div class="volume">
+            <input @keyup.enter="addVolume" v-model="volume" type="text" placeholder="请输入">
+        </div>
+    </div>
+</template>
+<script src="../../public/static/common/js/vue.js"></script>
+<script src="../../public/static/common/js/router.js"></script>
+<script src="../../public/static/common/js/axios.min.js"></script>
+<script src="../../public/static/common/js/qs.min.js"></script>
+
+<script>
+    var obj = {
+        loginShow: false
+    }
+
+    var token = localStorage.getItem("token")
+    var creation = {
+        data: function () {
+            return {
+                textInfoShow : false,
+                targetContent: '',
+                sceneContent: ''
+            }
+        },
+        mounted() {
+
+        },
+        methods: {
+            hide : function () {
+                this.textInfoShow = !this.textInfoShow
+            },
+            storeScene: function(){
+                let scene = localStorage.getItem("scene")
+                console.log(scene)
+                console.log(this.sceneContent)
+
+                let data = this.targetContent
+                if (scene != null) {
+                    data = scene + data
+                }
+                localStorage.setItem("scene", data)
+                this.sceneContent = ''
+            },
+            storeTarget:function(){
+                let target = localStorage.getItem("target")
+                console.log(target)
+                console.log(this.targetContent)
+
+                let data = this.targetContent
+                if (target != null) {
+                    data = target + data
+                }
+                localStorage.setItem("target", data)
+                this.targetContent = ''
+            },
+            up: function () {
+                let data = {
+                    target: this.targetContent,
+                    scene: this.sceneContent
+                }
+                axios.post("/admin/create", Qs.stringify(data))
+                    .then(function (res) {
+                        let data = res.data
+                        console.log(data)
+                        if (data.status == 200){
+                        } else {
+                            alert(data.message)
+                        }
+                    })
+                    .catch(function (res) {
+                        console.log(res)
+                    })
+            }
+        },
+        template:'#creation'
+    };
+
+    var addBook = {
+        data: function () {
+            return {
+                bookName: '',
+                bookDesc: ''
+            }
+        },
+        mounted() {
+        },
+        methods: {
+            addBook: function () {
+
+            }
+        },
+        template:'#addBook'
+    };
+    var addVolume = {
+        data: function () {
+            return {
+                bookName: '',
+                volume: ''
+            }
+        },
+        mounted() {
+        },
+        methods: {
+            addVolume: function () {
+
+            }
+        },
+        template:'#addVolume'
+    };
+
+    var addInfo = {
+        data: function () {
+            return {
+                containerShow: false,
+                bookShow: true,
+                volumeShow: false,
+                view: "add-book"
+            }
+        },
+        components: {
+            "add-book": addBook,
+            "add-volume": addVolume
+        },
+        mounted() {
+            this.containerShow = !this.containerShow
+        },
+        methods: {
+            action : function (data) {
+
+            }
+        },
+        template:'#addInfo'
+    };
+
+
+    var platform = {
+        data: function () {
+            return {
+            }
+        },
+        mounted() {
+        },
+        components: {
+            "add-info": addInfo
+        },
+        methods: {
+            action : function (data) {
+
+            }
+        },
+        template:'#writeCreationPlatform'
+    }
+
+
+    var workbench ={
+        data: function () {
+            return {
+                bbsShow: false,
+                liveShow: false,
+                writeShow: false,
+                creationShow: false,
+                workbenchShow : false,
+            }
+        },
+        mounted() {
+            this.workbenchShow = !this.workbenchShow
+            this.bbsShow = !this.bbsShow
+            this.liveShow = !this.liveShow
+            this.writeShow = !this.writeShow
+            this.creationShow = !this.creationShow
+        },
+        methods: {
+            action : function (data) {
+                let index = parseInt(data.currentTarget.id)
+                var time = 200
+                var that = this
+                for (let i = 1; i <= 4; i++){
+                    switch (index) {
+                        case 1:
+                            setTimeout(function () {
+                                that.writeShow = !that.writeShow
+                            }, time)
+
+                            break
+                        case 2:
+                            setTimeout(function () {
+                                that.creationShow = !that.creationShow
+                            }, time)
+
+                            break
+                        case 3:
+                            setTimeout(function () {
+                                that.liveShow = !that.liveShow
+                            }, time)
+
+                            break
+                        case 4:
+                            setTimeout(function () {
+                                that.bbsShow = !that.bbsShow
+                            }, time)
+                            break
+                    }
+                    time += 250
+                    index += 1
+                    if (index > 4){
+                        index -= 4
+                    }
+
+                }
+                setTimeout(function () {
+                    that.workbenchShow = !that.workbenchShow
+                    setTimeout(function () {
+                        router.push({path:"creation"})
+                    },600)
+                },time)
+            }
+        },
+        template:'#workbench'
+    };
+
+    var login = {
+        data: function () {
+            return {
+                mobilePhione: '',
+                password: '',
+                loginShow: false,
+                loginBkShow: true,
+                up : 1,
+            }
+        },
+        updated: function () {
+            if (this.up == 1){
+                this.$refs.phoine.focus()
+            }
+            this.up++
+        },
+        mounted() {
+            this.loginShow = !this.loginShow
+        },
+        methods: {
+            login : function () {
+                var that = this
+                if (this.mobilePhione === ""){
+                    alert("请输入手机号")
+                    return
+                }
+
+                if (this.password === ""){
+                    alert("请输入密码")
+                    return
+                }
+
+                var data = {
+                    "phione" : this.mobilePhione,
+                    "password" : this.password,
+                }
+
+                axios.post("/admin/login", Qs.stringify(data))
+                    .then(function (res) {
+                        let data = res.data
+                        console.log(data)
+                        if (data.status == 200){
+                            localStorage.setItem('token',data.token)
+                            that.loginShow = !that.loginShow
+                            that.loginBkShow = !that.loginBkShow
+                            setTimeout(function () {
+                                router.push({path:"workbench"})
+                            },600)
+                        } else {
+                            alert(data.message)
+                        }
+                    })
+                    .catch(function (res) {
+                        console.log(res)
+                    })
+            }
+        },
+        template: "#login"
+    }
+
+    const routes=[
+        {path:'/login', component:login},
+        {path:'/workbench', component:workbench},
+        {path:'/creation', component:creation},
+        {path:'/platform', component:platform}
+    ];
+    const router=new VueRouter({
+        routes
+    });
+    new Vue({
+        el:'#box',
+        data: obj,
+        router,
+        components: {
+            'login': login,
+            'workbench': workbench,
+            'creation': creation,
+            'platform': platform
+        },
+        updated: function () {
+        },
+        mounted() {
+            if (token != null) {
+                this.isLogin()
+            } else {
+                router.push({path:"login"})
+            }
+        },
+        methods: {
+            isLogin: function () {
+                let data = {
+                    "token" : token,
+                }
+                axios.post("/admin/isLogin", Qs.stringify(data))
+                    .then(function (res) {
+                        let data = res.data
+                        if (data.status == 200){
+                            // router.push({path:"workbench"})
+                            router.push({path:"platform"})
+                        } else {
+                            localStorage.removeItem('token')
+                            router.push({path:"login"})
+                        }
+                    })
+                    .catch(function (res) {
+                        console.log(res)
+                    })
+            }
+        }
+    });
+</script>
+</body>
+</html>

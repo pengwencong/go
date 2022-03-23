@@ -2,13 +2,29 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	adcontroller "go/admin/controller"
+	"go/admin/middleware"
 	"go/chat"
 	"go/controller"
+	"go/elastic"
 	"go/live"
 	"go/monitor"
 )
 
 func Init(engine *gin.Engine) {
+
+	adminGroup := engine.Group("/admin")
+	{
+		adminGroup.POST("/login", adcontroller.Login)
+		adminGroup.POST("/isLogin", adcontroller.IsLogin)
+		adminGroup.POST("/creation", middleware.Login, adcontroller.Creation)
+	}
+
+	elasticGroup := engine.Group("/elastic")
+	{
+		elasticGroup.GET("/create", elastic.CreateIndex)
+		elasticGroup.GET("/test", elastic.TestSearch)
+	}
 
 	liveGroup := engine.Group("/live")
 	{
@@ -33,7 +49,10 @@ func Init(engine *gin.Engine) {
 	}
 
 	engine.Static("/resource/video","./resource/video")
-	engine.Static("/resource/css","./resource/css")
+	engine.Static("/public/static","./public/static")
+	engine.StaticFile("/admin","./views/admin/index.html")
+	engine.StaticFile("/shopify","./views/shopify.html")
 	engine.Static("/resource/js","./resource/js")
 	engine.GET("/monitorGc", controller.MonitorGC)
+	engine.GET("/test", controller.TestSlice)
 }

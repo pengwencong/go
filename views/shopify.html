@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .container{
+        padding: 4.05% 6%;
+        width: 1170px;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0px);
+        background-color: #fff;
+    }
+    body{
+        background-color: #f6f6f6;
+    }
+</style>
+<body>
+<div class="container">
+    <style><!--
+        /*
+        shopify适配 start
+        */
+        .templateProduct .tab-content table td{
+
+            padding: 7px 5px;
+        }
+        .templateProduct .tab-content{
+            padding-top: 2%;
+        }
+        .page-product.layout-extended .product-simple-tab .nav:before{
+            top:39px;
+        }
+        .tab-content .tab-pane ul{
+            padding: 0 0 43px 0px;
+        }
+        /*
+        shopify适配 end
+        */
+        body{
+            font-family: "Open Sans", sans-serif !important;
+        }
+        /*防止详情下面多了空白*/
+        #tabs-1{
+            display:none;
+        }
+        .imageItem>.border{
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ffb43f !important;
+        }
+        .pcmar0{
+            margin-bottom: 0px !important;
+        }
+        .dotLine{
+            width: 100%;
+            height: 5px;
+            background-image: linear-gradient(to right, #ccc 0%, #ccc 50%, #0000 50%);
+            background-size: 11px 5px;
+            margin-bottom: 43px;
+            background-repeat: repeat-x;
+        }
+        .dot{
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 180, 63, 100);
+            border-radius: 50%;
+            margin-right: 13px;
+        }
+        .border{
+            border-radius: 5px;
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #ffb43f !important;
+        }
+        .dot{
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 180, 63, 100);
+            border-radius: 50%;
+            margin-right: 13px;
+        }
+        .mainImg{
+            width:100%;
+            height: auto;
+            margin-bottom: 43px;
+        }
+        .head{
+            line-height: 30px;
+            font-family: "Open Sans", sans-serif;
+            font-weight: bold;
+            font-size: 30px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .desc{
+            font-weight: 400;
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+            color: #101010;
+            line-height: 2;
+        }
+
+        .descItem{
+            padding-bottom: 43px;
+        }
+        .feature{
+            font-size: 30px;
+            font-weight: bold;
+
+            font-family: "Open Sans", sans-serif;
+            margin-bottom: 24px;
+        }
+
+        .ulFeature{
+            font-size: 18px;
+            font-family: "Open Sans", sans-serif;
+            color: #101010;
+            list-style:none !important;
+            line-height: 21px;
+
+        }
+
+
+        .descItem>.head{
+            line-height: 30px;
+            font-family: "Open Sans", sans-serif;
+            font-weight: bold;
+            font-size: 30px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .descItem>.desc{
+            font-weight: 400;
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+            color:rgba(16, 16, 16, 100);
+            line-height: 2;
+
+        }
+        .item>img{
+            margin-right:48px;
+        }
+        .descContainer>.head{
+            line-height: 30px;
+            font-family: "Open Sans", sans-serif;
+            font-weight: bold;
+            font-size: 30px;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        .descContainer>.desc{
+            line-height: 2;
+            color:rgba(16, 16, 16, 100);
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+
+        .iframeContainer{
+
+            line-height: 20px;
+
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 100);
+            margin-bottom:30px;
+        }
+        .iframeContainer>.iframe{
+            width: 670px;
+            height: 394px;
+            margin-top:17px;
+            border: none;
+        }
+        .iframeContainer>.video_href{
+            color: #fff;
+            display: block;
+            width: 15%;
+            background: #f99000;
+            font-size: 18px;
+            line-height: 44px;
+            text-align: center;
+            border-radius: 22px;
+            font-family: sans-serif;
+            font-weight: 900;
+            margin: 30px auto;
+            box-shadow: 0 0 6px #f08000;
+        }
+        .imageContainer{
+            padding-bottom: 43px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .imageContainer>.imageItem{
+            width: 49%;
+        }
+        .imageItem>img{
+            margin-bottom: 24px;
+            width:100%;
+            border: 1px solid #e6e6e6;
+            border-radius: 5px;
+        }
+
+        .imageItem.fourimg{
+
+        }
+
+        .imageItem.fourimg>.fourimgline:nth-child(odd){
+            width: 46%;
+            height: auto;
+            float: left;
+        }
+        .imageItem.fourimg>.fourimgline:nth-child(even){
+            width: 46%;
+            height: auto;
+            float: right;
+        }
+        .imageItem.fourimg>.fourimgline>img{
+            width: 100%;
+            border: 1px solid #e6e6e6;
+            border-radius: 5px;
+        }
+
+        .imageItem.fourimg>.fourimgline>.head{
+            font-size: 16px;
+        }
+        .fourimgline>.head{
+            margin-bottom: 0px;
+        }
+        .twolevelleft{
+            width: 63%;
+        }
+        .twolevelleft img{
+            width:100%;
+            margin-bottom:24px;
+        }
+        .twolevelright{
+            width: 35%;
+        }
+        .twolevelright>.twolevel{
+            height: 50%;
+        }
+        .twolevelright>.twolevel{
+            margin-bottom: 16px;
+        }
+        .twolevelright>.twolevel:first-child{
+            margin-bottom: 16px;
+        }
+        .twolevelright>.twolevel>img{
+            width:100%;
+            margin-bottom:24px;
+        }
+
+        .leftimgline{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .leftimgline>img{
+            width:48%;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid rgba(230, 230, 230, 100);
+        }
+        .leftimgline>div{
+            width:48%;
+        }
+        .leftimgline>div>.head{
+            text-align: left;
+            margin-bottom: 30px;
+            margin-top: 129px;
+        }
+        .descItem>img{
+            width:100%;
+        }
+        .leftimgcontainer{
+            margin-bottom: 43px;
+        }
+        .imgdesct{
+            margin-bottom: 15px;
+        }
+        .imghead{
+            margin-bottom: 25px !important;
+        }
+        .imageDescContainer{
+            width: 96%;
+            display: block;
+            margin: 0 auto;
+
+        }
+        .imageDescContainer>.head{
+            text-align: center;
+            margin-bottom:8px;
+            font-size: 23px;
+        }
+        .imageDescContainer>.desc{
+            font-size: 18px;
+            line-height:2;
+            text-align: left ;
+        }
+        .mo{
+            display:none;
+        }
+        .pc{
+            display:block;
+        }
+        .pcflex{
+            display: flex;
+        }
+        .wrod_br2{
+            display:none;
+        }
+        .imageIte{
+            width: 32%;
+            height: auto;
+        }
+        .imageIt{
+            width: 24%;
+            height: auto;
+        }
+
+        .imageContainer>desch{
+            width: 24%;
+            text-align:center;
+        }
+        .imageIte>img{
+            margin-bottom: 10px;
+            width:100%;
+            border-radius: 5px;
+            border: 1px solid rgba(230, 230, 230, 100);
+        }
+
+        .imageIt>img{
+            margin-bottom: 10px;
+            width:100%;
+            border-radius: 5px;
+            border: 1px solid rgba(230, 230, 230, 100);
+        }
+        .packageList td{
+            border: 1px solid rgba(187, 187, 187, 100);
+            line-height: 20px;
+            text-align: center !important;
+            width: 302px;
+            height: 48px;
+            padding-top: 7px !important;
+            color:rgba(16, 16, 16, 100);
+            font-size: 18px;
+            font-weight: 400;
+        }
+        .packageList{
+            position: relative;
+            display: block;
+            width: fit-content;
+            border-spacing: 7px !important;
+            border-collapse:separate !important;
+            margin:0 auto;
+            margin-bottom: 43px !important;
+        }
+        .packageList .small{
+            width: 71px;
+            text-align: center !important;
+        }
+        .packageList .long{
+            width: 300px;
+            text-align: left !important;
+        }
+        .packageList .ll{
+            width: 361px;
+            text-align: left !important;
+        }
+        .packageList tr:first-child td{
+            border-top:1px solid rgba(187, 187, 187, 100) !important;
+        }
+        .packageList tr:last-child td {
+            border-bottom: 1px solid rgba(187, 187, 187, 100) !important;
+        }
+        .ulDesc{
+            list-style: none !important;
+            width: fit-content;
+            margin: 0 auto;
+            font-size: 18px;
+            font-family: "Open Sans", sans-serif;
+            color: #101010;
+
+
+            line-height: 2;
+        }
+        .mof17{
+            font-size: 20px;
+        }
+        @media screen and (max-width: 700px) {
+
+            .imageItem.fourimg>.fourimgline>img{
+                margin-bottom: 10px;
+            }
+            .imageIt{
+                margin-bottom: 30px;
+            }
+            .twolevelright>.twolevel:first-child{
+                margin-bottom: 30px;
+            }
+            .momar10{
+                margin-bottom: 10px !important;
+            }
+            .imghead{
+                margin-bottom: 10px !important;
+            }
+            .imageItem.fourimg>.fourimgline:nth-child(odd){
+                width: 100%;
+                margin-bottom: 30px;
+            }
+            .imageItem.fourimg>.fourimgline:nth-child(even){
+                width: 100%;
+                margin-bottom: 30px;
+            }
+            .twolevelleft{
+                width: 100%;
+                margin-bottom: 30px;
+            }
+            .twolevelright{
+                width: 100%;
+                margin-bottom: 30px;
+            }
+            .twolevelright>.twolevel>img{
+                margin-bottom: 10px;
+            }
+            .twolevelleft img{
+                margin-bottom: 10px;
+            }
+            .dotLine{
+                margin-bottom: 30px;
+            }
+            .imageItem>.border{
+                margin-bottom:10px;
+            }
+            .imageIte>img{
+                margin-bottom: 10px;
+            }
+            .headMo{
+                font-size:20px;
+                line-height: 22px;
+                margin-bottom: 8px;
+                font-weight:bold;
+            }
+            .packageList{
+                width:100%;
+            }
+            .packageList td{
+                font-size:16px;
+            }
+            .descContainer>.head{
+                text-align:center;
+            }
+            .desch{
+                margin-bottom:30px;
+                margin-top: 17px;
+            }
+            .imageIte{
+                width:100%;
+                margin-bottom: 30px;
+            }
+            .item>img{
+                margin: 0 auto;
+                display: block;
+                margin-bottom: 17px;
+            }
+            .iframeContainer{
+                margin-bottom: 30px;
+            }
+            .iframeContainer>.iframe{
+                height:auto;
+                margin-bottom: 1px;
+                margin-top: 8px;
+            }
+            .descItem>.head{
+                font-size:20px;
+                line-height: 22px;
+                margin-bottom: 8px;
+            }
+            .descItem>.desc{
+                font-size:16px;
+                line-height: inherit;
+            }
+            .item{
+                display: block;
+                padding-bottom:30px;
+            }
+
+            .descContainer>.head{
+                font-size:20px;
+                line-height: 22px;
+                margin-bottom: 8px;
+            }
+            .descContainer>.desc{
+                font-size:16px;
+                line-height: inherit;
+            }
+
+
+            .descItem{
+                padding-bottom: 30px;
+            }
+
+            .product-simple-tab .nav li a{
+                line-height: 24px;
+            }
+            .page-product.layout-extended .product-simple-tab .nav li{
+                padding: 3px;
+                margin-right: 4px;
+            }
+            .product-simple-tab .nav li a{
+                font-size: 15px;
+            }
+            .page-product.layout-extended .product-simple-tab .nav li:before{
+                display:none !important;
+            }
+            .mainImg{
+                margin-bottom:30px;
+            }
+
+            .tab-content .tab-pane ul{
+                padding: 0 0 30px 0px;
+            }
+            .head{
+                font-size:20px;
+                margin-bottom:8px;
+            }
+            .ulDesc{
+                width:100%;
+                font-size: 16px;
+                line-height: inherit;
+            }
+            .feature{
+                margin-bottom:17px;
+                font-size: 20px;
+            }
+            .ulFeature{
+                font-size: 16px;
+                line-height: inherit;
+            }
+            .imageContainer{
+                display:block;
+                padding-bottom: 0px;
+            }
+            .imageContainer>.imageItem{
+                width:100%;
+            }
+            .imageItem{
+                margin-bottom:30px;
+            }
+            .desc{
+                font-size:16px;
+                line-height: inherit;
+            }
+            .imageItem>img{
+                margin-bottom:0px;
+            }
+            .imageDescContainer{
+                width: 100%;
+                display: block;
+                margin: 0 auto;
+
+            }
+            .imageDescContainer>.head{
+                font-size: 17px;
+                line-height: 22px;
+                margin-bottom: 8px;
+                text-align: center ;
+            }
+            .imageDescContainer>.desc {
+                font-size: 16px;
+                line-height: inherit;
+            }
+            .mo{
+                display:block;
+            }
+            .pc{
+                display:none;
+            }
+            .imageIt{
+                width:100%;
+
+            }
+            .imageIt>img{
+                margin-bottom: 10px;
+                border-radius: 5px;
+                border: 1px solid #e6e6e6;
+            }
+            .momargin0{
+                margin-bottom:0px !important;
+            }
+            .imageItem.fourimg{
+                margin-bottom: 0px;
+            }
+            .mof17{
+                font-size: 17px;
+            }
+            .pcflex{
+                display: none;
+            }
+        }
+        --></style>
+    <div class="iframeContainer"><iframe class="iframe" src="https://www.youtube.com/embed/sDDF6Tyi4U0" allowfullscreen=""></iframe></div>
+    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/1_f8317327-6d2e-48fa-90bc-b5eb9406dbcf.jpg?v=1646358055" class="mainImg pc">
+    <img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/1_92919baa-e051-4089-a69c-4c1c38a81299.jpg?v=1646472245" class="mainImg mo">
+    <div class="descItem">
+        <div class="head">Product Description</div>
+        <div class="desc pc">JetMax is the best AI robotic arm powered by NVIDIA Jetson Nano. It is equipped with HD wide-angle camera and high-quality smart bus servo, adopts ROS robot system and supports Python programming. Through deep learning and AI vision, this robotic arm can perform multiple tasks, such as color tracking, waste sorting, gesture
+            recognition, face tracking, mask identification. Via Android/iOS mobile APP, PC computer, mouse and wireless handle, you can control it at your fingertip.<br>
+            With JetMax, not only can you master the robot vision, image processing, robot kinematics, etc., but also can swiftly complete various AI creativity projects. Ample tutorials and source codes are provided aiming at helping you make the AI ideas into reality.</div>
+        <div class="desc mo"><span style="margin-bottom: 10px;display: block;">
+            JetMax is the best AI robotic arm powered by NVIDIA Jetson Nano. It is equipped with HD wide-angle camera and high-quality smart bus servo, adopts ROS robot system and supports Python programming.<br>
+            </span><span style="margin-bottom: 10px;display: block;">Through deep learning and AI vision, it can perform multiple tasks, such as color tracking, waste sorting, gesture recognition, face tracking, mask identification. Via Android/iOS mobile APP, PC computer, mouse and wireless handle, you can control it at your fingertip.<br>
+           </span><span >With JetMax, not only can you master the robot vision, image processing, robot kinematics, etc., but also can swiftly complete various AI creativity projects.</div>
+        </span>
+    </div>
+    <img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/2_f6a71ffe-e1bd-49d6-bbca-101c75e9ab18.jpg?v=1646472153" class="mainImg pc">
+    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/2_e270d670-7a20-4088-8e6f-27c4a1831f8b.jpg?v=1646358562" class="mainImg mo">
+
+    <div class="dotLine pc"></div>
+    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
+    <div class="descItem">
+        <div class="head pc">Driven by AI&nbsp;&nbsp;&nbsp;Powered by NVIDIA Jetson Nano</div>
+        <div class="head mo">Driven by AI<br>Powered by NVIDIA Jetson Nano</div>
+        <div class="desc momar10 pc">The open-source JetMax robot arm is powered by Jetson Nano, which supports deep learning, computer vision, graphics and more. Jetson Nano has the performance and capabilities you need to run modern AI workloads, giving you a fast and easy way to add advanced AI to your JetMax robot arm.</div>
+        <div class="desc momar10 mo">Support deep learning, computer vision, graphics and more. Jetson Nano has the performance and capabilities you need to run modern AI workloads, giving you a fast and easy way to add advanced AI to your JetMax robot arm.</div>
+        <img class="momar10 pc" style="width:100%;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/3_301fb70e-d8f4-4d79-a715-e91512ea193b.jpg?v=1646359254">
+        <img class="momar10 mo" style="width:100%;" src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/3_4c814552-600d-40f8-b04d-8fe0d4e3ad27.jpg?v=1646472282">
+        <div class="desc pc">Jetson Nano can connect to a variety of advanced networks, such as TensorFlow, PyTorch, Caffe/Caffe2, Keras, MXNet, etc., which can meet the computing power required by most AI projects. Powered by Jetson Nano, the robotic arm JetMax can perform powerful functions such as image recognition, object detection and positioning,
+            posture recognition, intelligent analysis, etc. </div>
+        <div class="desc mo">Jetson Nano can connect to a variety of advanced networks, such as TensorFlow, PyTorch, Caffe/Caffe2, Keras, MXNet, etc., which can meet the computing power required by most AI projects.
+        </div>
+    </div>
+    <div class="dotLine pc"></div>
+    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
+    <div class="head imghead">First Person Vision</div>
+    <div class="leftimgcontainer pc">
+        <div class="leftimgline">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_08ad7b28-0c5c-40ba-8b68-1094af0ac33b.jpg?v=1646359285">
+            <div>
+                <div class="head">Adjustable Angle</div>
+                <div class="desc">The end camera of the JetMax can be mounted vertically and horizontally, giving JetMax a top view and a flat view for different task needs.</div>
+            </div>
+        </div>
+        <div class="leftimgline">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/6_db1480aa-f2fa-4629-8205-90394d21d2d2.jpg?v=1646360035">
+            <div>
+                <div class="head">HD Image, Real Time Remote Control</div>
+                <div class="desc">Enable to interact with the perceived environment efficiently and empower you to skillfully make your AI creativity into reality.</div>
+            </div>
+        </div>
+        <div class="leftimgline">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/5_ae1f2f10-95b5-4d8f-96d6-d099ba699eb2.jpg?v=1646359982">
+            <div>
+                <div class="head">Various Changeable End-of-arm Tools</div>
+                <div class="desc">The end of JetMax can be fitted with air pump suction nozzles, gripper, electromagnetic suction cup, pen holder, pen, etc., to adapt to more AI scenarios.</div>
+            </div>
+        </div>
+    </div>
+    <div class="imageContainer mo">
+        <div class="imageIte">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_08ad7b28-0c5c-40ba-8b68-1094af0ac33b.jpg?v=1646359285">
+            <div class="imageDescContainer">
+                <div class="head">Adjustable Angle</div>
+                <div class="desc">The end camera of the JetMax can be mounted vertically and horizontally, giving JetMax a top view and a flat view for different task needs.</div>
+            </div>
+        </div>
+        <div class="imageIte ">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/6_db1480aa-f2fa-4629-8205-90394d21d2d2.jpg?v=1646360035">
+            <div class="imageDescContainer">
+                <div class="head">HD Image, Real Time Remote Control</div>
+                <div calss="desc">Enable to interact with the perceived environment efficiently and empower you to skillfully make your AI creativity into reality.</div>
+            </div>
+        </div>
+        <div class="imageIte ">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/5_ae1f2f10-95b5-4d8f-96d6-d099ba699eb2.jpg?v=1646359982">
+            <div class="imageDescContainer">
+                <div class="head">Various Changeable End-of-arm Tools</div>
+                <div calss="desc">The end of JetMax can be fitted with air pump suction nozzles, gripper, electromagnetic suction cup, pen holder, pen, etc., to adapt to more AI scenarios.</div>
+            </div>
+        </div>
+    </div>
+    <div class="dotLine pc"></div>
+    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
+    <div class="descItem">
+        <div class="head pc">AI Vision Recognition&nbsp;&nbsp;&nbsp;Object Tracking </div>
+        <div class="head mo">AI Vision Recognition<br>Object Tracking </div>
+        <div class="desc imgdesct">Taking OpenCV as image processing library, JetMax can exploit FPV to recognize and locate the blocks of different colors to realize various AI projects.</div>
+        <div style="padding-bottom: 0px;" class="imageContainer">
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/7_0cad71e7-36f4-45b2-8edf-c76fcd78ff40.jpg?v=1646360928">
+                <div class="imageDescContainer">
+                    <div class="head" style="margin-bottom: 0px;">Color Sorting</div>
+                </div>
+            </div>
+            <div class="imageIte ">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/9_6a2fe26c-05c4-483a-b738-25cfda1cd38c.jpg?v=1646361362">
+                <div class="imageDescContainer">
+                    <div class="head" style="margin-bottom: 0px;">Intelligent Stacking</div>
+                </div>
+            </div>
+            <div class="imageIte momargin0">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/8_9c150045-89ca-4fa7-b736-21d09747b4cf.jpg?v=1646360955">
+                <div class="imageDescContainer">
+                    <div class="head" style="margin-bottom: 0px;">Object Tracking</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dotLine pc"></div>
+    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
+    <div class="descItem">
+        <div class="head">Deep Learning, Model Training</div>
+        <div class="desc imgdesct">Waste cards, alphabet cards and number cards are provided in the kit. JetMax can swiftly recognize different kinds of cards to implement complex AI projects, like waste sorting, auto sequencing, word spelling, numeric calculation, etc.</div>
+        <img class="imgdesct pc" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/10_7894a770-f155-40ae-afc2-0f8c618642d0.jpg?v=1646361703">
+        <img class="imgdesct mo" src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/4_1470bc70-d40e-4541-97b4-5ab61e542a45.jpg?v=1646472348">
+        <div style="padding-bottom: 0px;" class="imageContainer">
+            <div class="imageIt">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/11_8cb30f50-e4c6-4393-a617-7a84db89d821.jpg?v=1646361793">
+                <div class="imageDescContainer">
+                    <div class="head pcmar0 mof17" >Waste Sorting</div>
+                </div>
+            </div>
+            <div class="imageIt ">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/12_49ba77ee-40f1-445f-ba3e-fa256cc4d568.jpg?v=1646361950">
+                <div class="imageDescContainer">
+                    <div class="head pcmar0 mof17" >Auto Sequencing</div>
+                </div>
+            </div>
+            <div class="imageIt">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/13_096e1d09-cedd-41e3-9e71-87edf4fc5979.jpg?v=1646362034">
+                <div class="imageDescContainer">
+                    <div class="head pcmar0 mof17" >Word Spelling</div>
+                </div>
+            </div>
+            <div class="imageIt momargin0">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/14_bd4700b0-5f97-4f46-a547-5fd48213849f.jpg?v=1646362905">
+                <div class="imageDescContainer">
+                    <div class="head pcmar0 momarin0 mof17" >Numeric Calculation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dotLine pc"></div>
+    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
+    <div class="descItem">
+        <div class="head imghead pc">Human Feature Recognition,  AI Interaction</div>
+        <div class="head imghead mo">Human Feature Recognition<br>AI Interaction</div>
+        <div style="padding-bottom: 0px;" class="imageContainer">
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/15_01dc3881-a6e5-4a34-a434-aff0b4b9f2cd.jpg?v=1646363344">
+                <div class="imageDescContainer">
+                    <div class="head pcmar0">Gesture Recognition</div>
+                </div>
+            </div>
+            <div class="imageIte ">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/17_60c28b94-3584-42a5-bfda-c825dbc55e7e.jpg?v=1646363483">
+                <div class="imageDescContainer">
+                    <div class="head pcmar0">Facial Emotion Recognition</div>
+                </div>
+            </div>
+            <div class="imageIte momargin0">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/16_5f6a7cab-9155-487d-91d5-fffbd9d987e9.jpg?v=1646363445">
+                <div class="imageDescContainer">
+                    <div class="head pcmar0">Gesture Picking</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dotLine pc"></div>
+    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
+    <div class="descItem">
+        <div class="head pc">Inverse Kinematics Algorithm&nbsp;&nbsp;&nbsp;Support Path Planning</div>
+        <div class="head mo" style="font-size:18px;">Inverse Kinematics Algorithm<br>Support Path Planning</div>
+        <div class="desc imgdesct pc">With built-in kinematics algorithm, JetMax can calculate the theoretical moving angle of each joint through the input of target coordinates. Then combined with the serial bus servo control protocol, it can precisely control the
+            servos.<br>Attributed to inverse kinematics algorithm, not only can accurately achieve target transferring and tracking, but also carry out path planning for the robotic arm, and complete advanced tasks such as writing numbers, drawing stick figures.</div>
+        <div class="desc imgdesct mo">With built-in kinematics algorithm, JetMax can calculate the theoretical moving angle of each joint through the input of target coordinates. Then combined with the serial bus servo control protocol, it can precisely control the servos.<br>It can accurately achieve target transferring and tracking, carry out path planning, and complete advanced tasks such as writing numbers, drawing stick figures.</div>
+        <div style="padding-bottom: 0px;" class="imageContainer">
+            <div class="imageItem">
+                <img class="momar10" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/18_178fc01c-5951-44c5-91a7-02b885324e0e.jpg?v=1646363496">
+                <div class="imageDescContainer">
+                    <div class="head" style="margin-bottom: 0px;">Drawing Stick Figures</div>
+                </div>
+            </div>
+            <div class="imageItem momargin0">
+                <img class="momar10" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/19_4f735551-3e4f-476c-9d2d-d8efdf7aed51.jpg?v=1646363651">
+                <div class="imageDescContainer">
+                    <div class="head" style="margin-bottom: 0px;">Writing Numbers</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dotLine pc"></div>
+    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
+    <div class="descItem">
+        <div class="head">Support Various Module Expansions</div>
+        <div class="desc imgdesct">JetMax reserves a lot of sensor ports. With different sensors connected, more AI applications can be realized easily through program coding. Use your imagination, your creativity is irreplaceable!</div>
+        <div style="padding-bottom: 0px;" class="imageContainer">
+            <div class="twolevelleft">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/20_bbd38dc8-3702-4c65-bee6-4a2f1a353f87.jpg?v=1646363672">
+                <div class="imageDescContainer">
+                    <div class="head" style="margin-bottom: 0px;">Mask Identification</div>
+                </div>
+            </div>
+            <div class="twolevelright momargin0">
+                <div class="twolevel">
+                    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/21_35c01ede-a4fd-4a09-91ff-7de295c2484f.jpg?v=1646363811">
+                    <div class="imageDescContainer">
+                        <div class="head" style="margin-bottom: 0px;">Fan Module</div>
+                    </div>
+                </div>
+                <div class="twolevel momargin0">
+                    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/22_1c905157-3de6-4c9c-852a-2d50be40bd37.jpg?v=1646363827">
+                    <div class="imageDescContainer">
+                        <div class="head" style="margin-bottom: 0px;">Face Tracking</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="dotLine pc"></div>
+    <div class="dotLine mo" style="margin-bottom: 23px;"></div>
+    <div class="head">ROS Robot Operating System</div>
+    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/23_c9a3a867-77b4-4c5e-ad78-584a501d0700.jpg?v=1646363876" class="mainImg pc">
+    <img style="margin-bottom: 17px;" src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/5_c5cdc072-cf7d-4ad5-99af-887a71af2da0.jpg?v=1646472408" class="mainImg mo">
+    <div class="dotLine pc"></div>
+    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
+    <div class="head imghead">Four Control Methods</div>
+
+    <div class="pcflex imageContainer">
+        <div class="imageItem fourimg">
+            <div class="fourimgline">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/25_b6a1055c-36e5-4da6-ab49-24bfad3cd1b9.jpg?v=1646364252">
+                <div class="head">PC software control</div>
+            </div>
+            <div class="fourimgline">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/24_f2acd2d9-a0de-443b-a752-9e0c46a067b4.jpg?v=1646364195">
+                <div class="head">iOS/ Android app control</div>
+            </div>
+            <div class="fourimgline">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/26_75f3d230-5ad4-43ac-84d2-7a3f01e9f130.jpg?v=1646364630">
+                <div class="head">Wireless handle control</div>
+            </div>
+            <div class="fourimgline">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/27_018ce11e-aeb5-473b-ad4e-8045bdf63ebb.jpg?v=1646364834">
+                <div class="head">Mouse cont</div>
+            </div>
+        </div>
+        <div class="imageItem">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/28_ec0d8f97-d632-4d85-94be-52fdbaac696d.jpg?v=1646364961">
+        </div>
+    </div>
+    <div class="mo imageContainer" style="margin-bottom:30px;">
+        <div class="imageItem">
+            <img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/6_dfb2439f-d0d4-45f6-90bf-a740223cb830.jpg?v=1646473866">
+        </div>
+        <div class="imageItem ">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/19_4f735551-3e4f-476c-9d2d-d8efdf7aed51.jpg?v=1646363651">
+        </div>
+    </div>
+    <div class="dotLine"></div>
+    <div class="imageContainer">
+        <div class="imageItem">
+            <img style="margin-bottom:0px;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/29_1f2f228f-8cc9-44a6-a355-75f0c4c549d9.jpg?v=1646365743">
+        </div>
+        <div class="imageItem">
+            <img style="margin-bottom:0px;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/30.jpg?v=1646365844">
+        </div>
+    </div>
+
+    <div class="descItem">
+        <div class="head">Smart Serial Bus Servo</div>
+        <div class="desc imgdesct">Fitted with three precision smart bus servos, JetMax is capable of high accuracy and heavy payload. Using trajectory planning algorithm, JetMax can maneuver accurately according to your programmed path.</div>
+        <img class="pc" style="border-radius: 5px;width:100%;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/31.jpg?v=1646366421">
+        <img class="mo" style="border-radius: 5px;width:100%;" src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/7_12421b57-2dad-4dda-a405-3de053c41162.jpg?v=1646472460">
+    </div>
+    <div class="dotLine pc"></div>
+    <div class="dotLine mo" style="margin-bottom: 20px;"></div>
+    <div class="head imghead">Product Parameter</div>
+    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/32_7bd37d6c-3dba-457f-b773-c9d1b20a2d4e.jpg?v=1646366442" class="mainImg pc">
+    <img style="margin-bottom: 24px;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/9dddb64871cfc7d36229ae9963e89046.jpg?v=1646368234" class="mainImg mo">
+
+    <div class="head pc" style="margin-bottom: 16px;">Starter & Standard & Advanced Kit</div>
+    <div class="head mo" style="margin-bottom: 16px;font-size: 18px;">Starter & Standard & Advanced Kit</div>
+    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/33.jpg?v=1646366503" class="mainImg pc">
+    <img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/8_c58fd5d0-cc90-4a7f-bc49-3bcb1cab4307.jpg?v=1646472507" class="mainImg mo">
+
+
+
+    <h5><strong><b>Specifications</b></strong></h5>
+    <table>
+        <tbody>
+        <tr>
+            <td style="width: 209px;"><strong>Item</strong></td>
+            <td style="width: 521px;"><strong>Specification</strong></td>
+        </tr>
+        <tr>
+            <td style="width: 337px;"><span>Axis</span></td>
+            <td style="width: 181px;">4+1</td>
+        </tr>
+        <tr>
+            <td rowspan="2" style="width: 337px;"><span>Dimension</span></td>
+            <td rowspan="2" style="width: 181px;"><span>450*1 60*260mm</span></td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td rowspan="2" style="width: 337px;"><span>Weight(Only JetMax)</span></td>
+            <td rowspan="2" style="width: 181px;"><span>1.6kg</span></td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td rowspan="2" style="width: 337px;"><span>Payload</span></td>
+            <td rowspan="2" style="width: 181px;"><span>Max.450g</span></td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td rowspan="2" style="width: 337px;"><span>Ambient Temperature</span></td>
+            <td rowspan="2" style="width: 181px;">0°C~ 45 °C</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td style="width: 337px;">Material</td>
+            <td style="width: 181px;">Aluminum, Fiberglass</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Reach</td>
+            <td>R104~ R289 x 240°</td>
+        </tr>
+        <tr>
+            <td>Repeatabillty</td>
+            <td>+1mm</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Joint Speed</td>
+            <td>Max.0.20sec/60°</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>End Effector</td>
+            <td>Suction Cup, Small Gripper, Big Gripper</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Power Supply</td>
+            <td>12V 5A DC Adapter</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Connectivity</td>
+            <td>USB/Wi-Fi/Ethernet</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Controller</td>
+            <td>Jetson Nano B01</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Storage</td>
+            <td>32G Class 10 TF</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Programming Tools</td>
+            <td>Python/C/C++/JavaScript</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Control Methods</td>
+            <td>JetMax Panel/App/Wireless Handle</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Packing List</td>
+            <td>1* JetMax (installed camera)<br>1* 12V 5A power adapter<br>1* Map<br>6* Blocks<br>1* Waste card pack<br>1* Number and alphabet card pack<br>1* Small gripper with servo (Standard and Developer kit only)<br>1* Big gripper gripper with servo (Standard and Developer kit only)<br>1* Pen and holder (Standard and Developer kit only)<br>1* PS2 handle (Standard and Developer kit only)<br>1* Fan module (Developer kit only)<br>1* Touch sensor (Developer kit only)<br>1* Glowy ultrasonic sensor (Developer kit only)<br>1* MP3 module (Developer kit only)<br>1* Digital tube (Developer kit only)<br>1* Dot matrix display (Developer kit only)<br>1* sensor bracket and wire pack (Developer kit only)</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+</body>
+</html>

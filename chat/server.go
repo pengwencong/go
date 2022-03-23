@@ -8,12 +8,10 @@ import (
 	"github.com/gorilla/websocket"
 	"go/help"
 	chatpb "go/proto/chat"
-	"go/server"
 	"google.golang.org/grpc"
 	"net"
 	"net/http"
 	"time"
-	"unsafe"
 )
 
 const (
@@ -56,12 +54,13 @@ func (dispatch *Dispatch) Start() {
 				}
 
 				client.Send <- messageSend
-			} else if url, err := server.Redis.Get(string(messageChat.To)).Result(); err != nil {
-				err := ChatServer.Send(url)
-				if err != nil {
-
-				}
 			}
+			//else if url, err := server.Redis.Get(string(messageChat.To)).Result(); err != nil {
+			//	err := ChatServer.Send(url)
+			//	if err != nil {
+			//
+			//	}
+			//}
 
 		}
 	}
@@ -104,7 +103,6 @@ func (chatServer chatServer) Server() {
 	}
 
 	var opts []grpc.ServerOption
-
 	opts = append(opts,
 		grpc.UnaryInterceptor(streamMonitor),
 		)
@@ -147,8 +145,7 @@ func (chatServer chatServer) Send(url string) error {
 		return err
 	}
 	defer conn.Close()
-	fmt.Println("afsd")
-	fmt.Println(unsafe.Sizeof(conn))
+
 	chatClient := chatpb.NewChatClient(conn)
 
 	ctx := context.Background()

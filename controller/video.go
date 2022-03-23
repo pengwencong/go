@@ -58,8 +58,6 @@ func Teacher(c *gin.Context) {
 	})
 }
 
-
-
 func MonitorGC(c *gin.Context) {
 	tick := time.Tick(3 * time.Minute)
 
@@ -73,3 +71,8 @@ func MonitorGC(c *gin.Context) {
 		}
 	}
 }
+
+func TestSlice(c *gin.Context) {
+
+}
+

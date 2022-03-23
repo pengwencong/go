@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>video</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<video id="myVideo" muted></video>
+<script>
+    var id, ws, myVideoStream, myVideo,
+        sendHeader = 0,
+        sendChunks = [],
+        defaultFrame = 20,
+        frame30 = 30, //30帧
+        frame20 = 20, //20帧
+        frame10 = 10 //10帧
+
+    var heartMessage = 5,
+        frameMessage = 6, //调整帧消息
+
+    id = {{.studentID}}
+
+    window.onload = function () {
+        initWebsocket()
+
+        myVideo = document.getElementById('myVideo')
+    }
+
+    function initWebsocket() {
+        if ("WebSocket" in window)
+        {
+            //打开一个 web socket
+            ws = new WebSocket("wss://fw.hiwonder.com/monitor/studentConnect");
+
+            ws.onopen = function() {
+                ws.binaryType = "arraybuffer";
+                ws.send(id);
+                console.log("open");
+
+                getMedia(defaultFrame)
+            };
+
+            ws.onmessage = function (response) {
+                console.log(response)
+                var type = typeof(response.data)
+                if (type == "string"){
+                    var data = JSON.parse(response.data)
+
+                    switch (data.msgType) {
+                        case frameMessage:
+                            var frameType = data.framerType
+                            getMedia(frameType)
+
+                            var adjustMsgResponse = {"msgType":frameType,"status":200}
+                            ws.send(JSON.stringify(adjustMsgResponse))
+                        case heartMessage:
+                            console.log("heart")
+                    }
+
+                } else if (type == "object") {
+
+                }
+            };
+
+            ws.onclose = function() {
+                alert("连接已关闭...");
+            };
+        } else {
+            alert("您的浏览器不支持 WebSocket!");
+        }
+    }
+
+    // 获取本地媒体
+    function getMedia(frame) {
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+        var constr = {
+            audio: false,
+            video: {
+                width:110,
+                height:150,
+                frameRate:frame
+            }
+        };
+        navigator.getUserMedia(constr, gotUserMedia, didntGetUserMedia);
+    }
+    function didntGetUserMedia() {
+        console.log('cound not get user media')
+    }
+    function gotUserMedia(stream) {
+        myVideoStream = stream
+        // 向我显示我的本地视频
+        myVideo.srcObject = myVideoStream
+        myVideo.play()
+        console.log( stream.getVideoTracks()[0].getSettings().height )
+        console.log( stream.getVideoTracks()[0].getSettings().width )
+        console.log( stream.getVideoTracks()[0].getSettings().frameRate )
+
+        mediaSend(stream)
+    }
+
+    function mediaSend(strea){
+        var mediaRecorder = new MediaRecorder(strea);
+
+        mediaRecorder.start(10);
+        mediaRecorder.ondataavailable = function(e) {
+            var reader = new FileReader();
+            reader.addEventListener("loadend", function() {
+                var buf = new Uint8Array(reader.result);
+                // sendChunks.push(buf)
+                if (sendHeader >= 2){
+                    ws.send(buf)
+                }else if (sendHeader < 2) {
+                    sendHeader++
+                    ws.send(buf)
+                }
+            });
+            reader.readAsArrayBuffer(e.data);
+        };
+
+        mediaRecorder.onerror = function(e){
+            console.log('Error: ');
+            console.log(e);
+        };
+
+
+        mediaRecorder.onstart = function(){
+            console.log('Started & state = ' + mediaRecorder.state);
+        };
+    }
+
+</script>
+</body>
+</html>
