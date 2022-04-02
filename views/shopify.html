@@ -19,6 +19,7 @@
 </style>
 <body>
 <div class="container">
+
     <style><!--
         /*
         shopify适配 start
@@ -50,9 +51,6 @@
             border-radius: 5px;
             margin-bottom: 10px;
             border: 1px solid #ffb43f !important;
-        }
-        .pcmar0{
-            margin-bottom: 0px !important;
         }
         .dotLine{
             width: 100%;
@@ -194,98 +192,14 @@
             padding-bottom: 43px;
             display: flex;
             justify-content: space-between;
+
         }
         .imageContainer>.imageItem{
             width: 49%;
         }
         .imageItem>img{
             margin-bottom: 24px;
-            width:100%;
-            border: 1px solid #e6e6e6;
-            border-radius: 5px;
-        }
 
-        .imageItem.fourimg{
-
-        }
-
-        .imageItem.fourimg>.fourimgline:nth-child(odd){
-            width: 46%;
-            height: auto;
-            float: left;
-        }
-        .imageItem.fourimg>.fourimgline:nth-child(even){
-            width: 46%;
-            height: auto;
-            float: right;
-        }
-        .imageItem.fourimg>.fourimgline>img{
-            width: 100%;
-            border: 1px solid #e6e6e6;
-            border-radius: 5px;
-        }
-
-        .imageItem.fourimg>.fourimgline>.head{
-            font-size: 16px;
-        }
-        .fourimgline>.head{
-            margin-bottom: 0px;
-        }
-        .twolevelleft{
-            width: 63%;
-        }
-        .twolevelleft img{
-            width:100%;
-            margin-bottom:24px;
-        }
-        .twolevelright{
-            width: 35%;
-        }
-        .twolevelright>.twolevel{
-            height: 50%;
-        }
-        .twolevelright>.twolevel{
-            margin-bottom: 16px;
-        }
-        .twolevelright>.twolevel:first-child{
-            margin-bottom: 16px;
-        }
-        .twolevelright>.twolevel>img{
-            width:100%;
-            margin-bottom:24px;
-        }
-
-        .leftimgline{
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
-
-        .leftimgline>img{
-            width:48%;
-            height: auto;
-            border-radius: 5px;
-            border: 1px solid rgba(230, 230, 230, 100);
-        }
-        .leftimgline>div{
-            width:48%;
-        }
-        .leftimgline>div>.head{
-            text-align: left;
-            margin-bottom: 30px;
-            margin-top: 129px;
-        }
-        .descItem>img{
-            width:100%;
-        }
-        .leftimgcontainer{
-            margin-bottom: 43px;
-        }
-        .imgdesct{
-            margin-bottom: 15px;
-        }
-        .imghead{
-            margin-bottom: 25px !important;
         }
         .imageDescContainer{
             width: 96%;
@@ -296,7 +210,7 @@
         .imageDescContainer>.head{
             text-align: center;
             margin-bottom:8px;
-            font-size: 23px;
+            font-size: 27px;
         }
         .imageDescContainer>.desc{
             font-size: 18px;
@@ -309,9 +223,6 @@
         .pc{
             display:block;
         }
-        .pcflex{
-            display: flex;
-        }
         .wrod_br2{
             display:none;
         }
@@ -319,27 +230,19 @@
             width: 32%;
             height: auto;
         }
-        .imageIt{
-            width: 24%;
-            height: auto;
+        .desch{
+            margin-bottom: 0px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 24px;
+            text-align: center;
         }
-
         .imageContainer>desch{
             width: 24%;
             text-align:center;
         }
         .imageIte>img{
             margin-bottom: 10px;
-            width:100%;
-            border-radius: 5px;
-            border: 1px solid rgba(230, 230, 230, 100);
-        }
-
-        .imageIt>img{
-            margin-bottom: 10px;
-            width:100%;
-            border-radius: 5px;
-            border: 1px solid rgba(230, 230, 230, 100);
         }
         .packageList td{
             border: 1px solid rgba(187, 187, 187, 100);
@@ -390,51 +293,10 @@
 
             line-height: 2;
         }
-        .mof17{
-            font-size: 20px;
+        .pcflex{
+            display:flex;
         }
         @media screen and (max-width: 700px) {
-
-            .imageItem.fourimg>.fourimgline>img{
-                margin-bottom: 10px;
-            }
-            .imageIt{
-                margin-bottom: 30px;
-            }
-            .twolevelright>.twolevel:first-child{
-                margin-bottom: 30px;
-            }
-            .momar10{
-                margin-bottom: 10px !important;
-            }
-            .imghead{
-                margin-bottom: 10px !important;
-            }
-            .imageItem.fourimg>.fourimgline:nth-child(odd){
-                width: 100%;
-                margin-bottom: 30px;
-            }
-            .imageItem.fourimg>.fourimgline:nth-child(even){
-                width: 100%;
-                margin-bottom: 30px;
-            }
-            .twolevelleft{
-                width: 100%;
-                margin-bottom: 30px;
-            }
-            .twolevelright{
-                width: 100%;
-                margin-bottom: 30px;
-            }
-            .twolevelright>.twolevel>img{
-                margin-bottom: 10px;
-            }
-            .twolevelleft img{
-                margin-bottom: 10px;
-            }
-            .dotLine{
-                margin-bottom: 30px;
-            }
             .imageItem>.border{
                 margin-bottom:10px;
             }
@@ -567,7 +429,7 @@
 
             }
             .imageDescContainer>.head{
-                font-size: 17px;
+                font-size: 20px;
                 line-height: 22px;
                 margin-bottom: 8px;
                 text-align: center ;
@@ -582,319 +444,150 @@
             .pc{
                 display:none;
             }
-            .imageIt{
-                width:100%;
-
-            }
-            .imageIt>img{
-                margin-bottom: 10px;
-                border-radius: 5px;
-                border: 1px solid #e6e6e6;
-            }
-            .momargin0{
-                margin-bottom:0px !important;
-            }
-            .imageItem.fourimg{
-                margin-bottom: 0px;
-            }
-            .mof17{
-                font-size: 17px;
-            }
             .pcflex{
-                display: none;
+                display:none;
             }
         }
         --></style>
-    <div class="iframeContainer"><iframe class="iframe" src="https://www.youtube.com/embed/sDDF6Tyi4U0" allowfullscreen=""></iframe></div>
-    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/1_f8317327-6d2e-48fa-90bc-b5eb9406dbcf.jpg?v=1646358055" class="mainImg pc">
-    <img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/1_92919baa-e051-4089-a69c-4c1c38a81299.jpg?v=1646472245" class="mainImg mo">
+    <div class="iframeContainer"><iframe class="iframe" src="https://www.youtube.com/embed/c1PnGoZR1Eo" allowfullscreen=""></iframe></div>
+    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/333.png?v=1628840161" class="mainImg pc">
+    <img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/c8577a1df210126991a8c79837c61c3f_9162e241-7279-4290-8b77-da5a45fd0efc.jpg?v=1648462440" class="mainImg mo">
     <div class="descItem">
         <div class="head">Product Description</div>
-        <div class="desc pc">JetMax is the best AI robotic arm powered by NVIDIA Jetson Nano. It is equipped with HD wide-angle camera and high-quality smart bus servo, adopts ROS robot system and supports Python programming. Through deep learning and AI vision, this robotic arm can perform multiple tasks, such as color tracking, waste sorting, gesture
-            recognition, face tracking, mask identification. Via Android/iOS mobile APP, PC computer, mouse and wireless handle, you can control it at your fingertip.<br>
-            With JetMax, not only can you master the robot vision, image processing, robot kinematics, etc., but also can swiftly complete various AI creativity projects. Ample tutorials and source codes are provided aiming at helping you make the AI ideas into reality.</div>
-        <div class="desc mo"><span style="margin-bottom: 10px;display: block;">
-            JetMax is the best AI robotic arm powered by NVIDIA Jetson Nano. It is equipped with HD wide-angle camera and high-quality smart bus servo, adopts ROS robot system and supports Python programming.<br>
-            </span><span style="margin-bottom: 10px;display: block;">Through deep learning and AI vision, it can perform multiple tasks, such as color tracking, waste sorting, gesture recognition, face tracking, mask identification. Via Android/iOS mobile APP, PC computer, mouse and wireless handle, you can control it at your fingertip.<br>
-           </span><span >With JetMax, not only can you master the robot vision, image processing, robot kinematics, etc., but also can swiftly complete various AI creativity projects.</div>
-        </span>
+        <div class="desc">TonyPi intelligent visual humanoid robot uses Raspberry Pi as the central controller. OpenCV is the image processing library, which uses Python language programming. The robot is equipped with a 2DOF high-definition camera to realise Al many games. It equipped with high-voltage bus servo and voltage display. With built-in action groups, TonyPi can complete many challenging motion like push-ups.</div>
     </div>
-    <img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/2_f6a71ffe-e1bd-49d6-bbca-101c75e9ab18.jpg?v=1646472153" class="mainImg pc">
-    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/2_e270d670-7a20-4088-8e6f-27c4a1831f8b.jpg?v=1646358562" class="mainImg mo">
-
-    <div class="dotLine pc"></div>
-    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
-    <div class="descItem">
-        <div class="head pc">Driven by AI&nbsp;&nbsp;&nbsp;Powered by NVIDIA Jetson Nano</div>
-        <div class="head mo">Driven by AI<br>Powered by NVIDIA Jetson Nano</div>
-        <div class="desc momar10 pc">The open-source JetMax robot arm is powered by Jetson Nano, which supports deep learning, computer vision, graphics and more. Jetson Nano has the performance and capabilities you need to run modern AI workloads, giving you a fast and easy way to add advanced AI to your JetMax robot arm.</div>
-        <div class="desc momar10 mo">Support deep learning, computer vision, graphics and more. Jetson Nano has the performance and capabilities you need to run modern AI workloads, giving you a fast and easy way to add advanced AI to your JetMax robot arm.</div>
-        <img class="momar10 pc" style="width:100%;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/3_301fb70e-d8f4-4d79-a715-e91512ea193b.jpg?v=1646359254">
-        <img class="momar10 mo" style="width:100%;" src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/3_4c814552-600d-40f8-b04d-8fe0d4e3ad27.jpg?v=1646472282">
-        <div class="desc pc">Jetson Nano can connect to a variety of advanced networks, such as TensorFlow, PyTorch, Caffe/Caffe2, Keras, MXNet, etc., which can meet the computing power required by most AI projects. Powered by Jetson Nano, the robotic arm JetMax can perform powerful functions such as image recognition, object detection and positioning,
-            posture recognition, intelligent analysis, etc. </div>
-        <div class="desc mo">Jetson Nano can connect to a variety of advanced networks, such as TensorFlow, PyTorch, Caffe/Caffe2, Keras, MXNet, etc., which can meet the computing power required by most AI projects.
-        </div>
-    </div>
-    <div class="dotLine pc"></div>
-    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
-    <div class="head imghead">First Person Vision</div>
-    <div class="leftimgcontainer pc">
-        <div class="leftimgline">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_08ad7b28-0c5c-40ba-8b68-1094af0ac33b.jpg?v=1646359285">
-            <div>
-                <div class="head">Adjustable Angle</div>
-                <div class="desc">The end camera of the JetMax can be mounted vertically and horizontally, giving JetMax a top view and a flat view for different task needs.</div>
-            </div>
-        </div>
-        <div class="leftimgline">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/6_db1480aa-f2fa-4629-8205-90394d21d2d2.jpg?v=1646360035">
-            <div>
-                <div class="head">HD Image, Real Time Remote Control</div>
-                <div class="desc">Enable to interact with the perceived environment efficiently and empower you to skillfully make your AI creativity into reality.</div>
-            </div>
-        </div>
-        <div class="leftimgline">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/5_ae1f2f10-95b5-4d8f-96d6-d099ba699eb2.jpg?v=1646359982">
-            <div>
-                <div class="head">Various Changeable End-of-arm Tools</div>
-                <div class="desc">The end of JetMax can be fitted with air pump suction nozzles, gripper, electromagnetic suction cup, pen holder, pen, etc., to adapt to more AI scenarios.</div>
-            </div>
-        </div>
-    </div>
-    <div class="imageContainer mo">
+    <div class="feature">Feature</div>
+    <ul class="ulFeature">
+        <li>
+            <span class="dot"></span><b>The robot kit includes the Raspberry Pi 4B 4GB controller board.</b>
+        </li>
+        <li>
+            <span class="dot"></span>Large capacity battery, long working duration</li>
+        <li>
+            <span class="dot"></span>Robot battery voltage display</li>
+        <li>
+            <span class="dot"></span>Installed HD camera catches real-time images</li>
+        <li>
+            <span class="dot"></span>Provide PC software source code and Python source code</li>
+        <li>
+            <span class="dot"></span>Support PC software, phone App and VNC remote desktop control</li>
+    </ul>
+    <div class="imageContainer">
         <div class="imageIte">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_08ad7b28-0c5c-40ba-8b68-1094af0ac33b.jpg?v=1646359285">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/fdac353b299f2676ecea159a865bb939.gif?v=1621907137">
             <div class="imageDescContainer">
-                <div class="head">Adjustable Angle</div>
-                <div class="desc">The end camera of the JetMax can be mounted vertically and horizontally, giving JetMax a top view and a flat view for different task needs.</div>
+                <div class="head">Vision Auto Shooting</div>
+                <div class="desc">Perform image processing through OpenCV to obtain the ball’s position, and then use PID algorithm to track and kick it automatically.</div>
             </div>
         </div>
-        <div class="imageIte ">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/6_db1480aa-f2fa-4629-8205-90394d21d2d2.jpg?v=1646360035">
+        <div class="imageIte pc">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/688eacdfff426cc4b63976d4ac808ad5_145c59e5-bee8-4271-b2ce-75c3521600ac.gif?v=1621906929">
             <div class="imageDescContainer">
-                <div class="head">HD Image, Real Time Remote Control</div>
-                <div calss="desc">Enable to interact with the perceived environment efficiently and empower you to skillfully make your AI creativity into reality.</div>
+                <div class="head">Color Recognition</div>
+                <div class="desc">Use OpenCV to convert the image into LAB color space, then obtain the recognized color. TonyPi nods when recognizes red and shakes for the green and blue.</div>
             </div>
         </div>
-        <div class="imageIte ">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/5_ae1f2f10-95b5-4d8f-96d6-d099ba699eb2.jpg?v=1646359982">
+        <div class="imageIte">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/a5ff5e83ee3757382c27ba2c74c4f2df_af4fa4ce-1398-4226-945e-935e92590937.gif?v=1621906741">
             <div class="imageDescContainer">
-                <div class="head">Various Changeable End-of-arm Tools</div>
-                <div calss="desc">The end of JetMax can be fitted with air pump suction nozzles, gripper, electromagnetic suction cup, pen holder, pen, etc., to adapt to more AI scenarios.</div>
+                <div class="head">Tag Recognition (AprilTag)</div>
+                <div class="desc">TonyPi performs actions according to the recognized tags. In addition to the provided tags, you’re encouraged to program your own tags and actions.</div>
             </div>
         </div>
     </div>
-    <div class="dotLine pc"></div>
-    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
-    <div class="descItem">
-        <div class="head pc">AI Vision Recognition&nbsp;&nbsp;&nbsp;Object Tracking </div>
-        <div class="head mo">AI Vision Recognition<br>Object Tracking </div>
-        <div class="desc imgdesct">Taking OpenCV as image processing library, JetMax can exploit FPV to recognize and locate the blocks of different colors to realize various AI projects.</div>
-        <div style="padding-bottom: 0px;" class="imageContainer">
-            <div class="imageIte">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/7_0cad71e7-36f4-45b2-8edf-c76fcd78ff40.jpg?v=1646360928">
-                <div class="imageDescContainer">
-                    <div class="head" style="margin-bottom: 0px;">Color Sorting</div>
-                </div>
+    <div class="imageContainer">
+        <div class="imageIte">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/e2c5988ccf69350d46f88effb3ca3e48_d0963389-082f-488b-a2c8-0f81c6fd1d27.gif?v=1621906784">
+            <div style="width: 100%;" class="imageDescContainer">
+                <div class="head">Facial Recognition</div>
+                <div class="desc">Use OpenCV to load the trained face detection model. TonyPi will operate the greeting action when recognizes a face.</div>
             </div>
-            <div class="imageIte ">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/9_6a2fe26c-05c4-483a-b738-25cfda1cd38c.jpg?v=1646361362">
-                <div class="imageDescContainer">
-                    <div class="head" style="margin-bottom: 0px;">Intelligent Stacking</div>
-                </div>
+        </div>
+        <div class="imageIte pc">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/29f7f36c3cea05d070f2b5367ffb7023_55b0aa3f-89ea-44e7-a4aa-09e59d44800b.gif?v=1621906977">
+            <div style="width: 100%;" class="imageDescContainer">
+                <div class="head">Color Tracking</div>
+                <div class="desc">Processing images through OpenCV to receive positions of red, green and blue, TonyPi tracks the target color in real time.</div>
             </div>
-            <div class="imageIte momargin0">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/8_9c150045-89ca-4fa7-b736-21d09747b4cf.jpg?v=1646360955">
-                <div class="imageDescContainer">
-                    <div class="head" style="margin-bottom: 0px;">Object Tracking</div>
-                </div>
+        </div>
+        <div class="imageIte">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/1_207210c0-b214-4323-8177-267975e29e2d.gif?v=1621906831">
+            <div style="width: 100%;" class="imageDescContainer">
+                <div class="head">Line Following</div>
+                <div class="desc">TonyPi can recognize black, white and red line through OpenCV. Calculate the line’s position and then adjust the route to follow.</div>
             </div>
         </div>
     </div>
-    <div class="dotLine pc"></div>
-    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
-    <div class="descItem">
-        <div class="head">Deep Learning, Model Training</div>
-        <div class="desc imgdesct">Waste cards, alphabet cards and number cards are provided in the kit. JetMax can swiftly recognize different kinds of cards to implement complex AI projects, like waste sorting, auto sequencing, word spelling, numeric calculation, etc.</div>
-        <img class="imgdesct pc" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/10_7894a770-f155-40ae-afc2-0f8c618642d0.jpg?v=1646361703">
-        <img class="imgdesct mo" src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/4_1470bc70-d40e-4541-97b4-5ab61e542a45.jpg?v=1646472348">
-        <div style="padding-bottom: 0px;" class="imageContainer">
-            <div class="imageIt">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/11_8cb30f50-e4c6-4393-a617-7a84db89d821.jpg?v=1646361793">
-                <div class="imageDescContainer">
-                    <div class="head pcmar0 mof17" >Waste Sorting</div>
-                </div>
-            </div>
-            <div class="imageIt ">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/12_49ba77ee-40f1-445f-ba3e-fa256cc4d568.jpg?v=1646361950">
-                <div class="imageDescContainer">
-                    <div class="head pcmar0 mof17" >Auto Sequencing</div>
-                </div>
-            </div>
-            <div class="imageIt">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/13_096e1d09-cedd-41e3-9e71-87edf4fc5979.jpg?v=1646362034">
-                <div class="imageDescContainer">
-                    <div class="head pcmar0 mof17" >Word Spelling</div>
-                </div>
-            </div>
-            <div class="imageIt momargin0">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/14_bd4700b0-5f97-4f46-a547-5fd48213849f.jpg?v=1646362905">
-                <div class="imageDescContainer">
-                    <div class="head pcmar0 momarin0 mof17" >Numeric Calculation</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="dotLine pc"></div>
-    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
-    <div class="descItem">
-        <div class="head imghead pc">Human Feature Recognition,  AI Interaction</div>
-        <div class="head imghead mo">Human Feature Recognition<br>AI Interaction</div>
-        <div style="padding-bottom: 0px;" class="imageContainer">
-            <div class="imageIte">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/15_01dc3881-a6e5-4a34-a434-aff0b4b9f2cd.jpg?v=1646363344">
-                <div class="imageDescContainer">
-                    <div class="head pcmar0">Gesture Recognition</div>
-                </div>
-            </div>
-            <div class="imageIte ">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/17_60c28b94-3584-42a5-bfda-c825dbc55e7e.jpg?v=1646363483">
-                <div class="imageDescContainer">
-                    <div class="head pcmar0">Facial Emotion Recognition</div>
-                </div>
-            </div>
-            <div class="imageIte momargin0">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/16_5f6a7cab-9155-487d-91d5-fffbd9d987e9.jpg?v=1646363445">
-                <div class="imageDescContainer">
-                    <div class="head pcmar0">Gesture Picking</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="dotLine pc"></div>
-    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
-    <div class="descItem">
-        <div class="head pc">Inverse Kinematics Algorithm&nbsp;&nbsp;&nbsp;Support Path Planning</div>
-        <div class="head mo" style="font-size:18px;">Inverse Kinematics Algorithm<br>Support Path Planning</div>
-        <div class="desc imgdesct pc">With built-in kinematics algorithm, JetMax can calculate the theoretical moving angle of each joint through the input of target coordinates. Then combined with the serial bus servo control protocol, it can precisely control the
-            servos.<br>Attributed to inverse kinematics algorithm, not only can accurately achieve target transferring and tracking, but also carry out path planning for the robotic arm, and complete advanced tasks such as writing numbers, drawing stick figures.</div>
-        <div class="desc imgdesct mo">With built-in kinematics algorithm, JetMax can calculate the theoretical moving angle of each joint through the input of target coordinates. Then combined with the serial bus servo control protocol, it can precisely control the servos.<br>It can accurately achieve target transferring and tracking, carry out path planning, and complete advanced tasks such as writing numbers, drawing stick figures.</div>
-        <div style="padding-bottom: 0px;" class="imageContainer">
-            <div class="imageItem">
-                <img class="momar10" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/18_178fc01c-5951-44c5-91a7-02b885324e0e.jpg?v=1646363496">
-                <div class="imageDescContainer">
-                    <div class="head" style="margin-bottom: 0px;">Drawing Stick Figures</div>
-                </div>
-            </div>
-            <div class="imageItem momargin0">
-                <img class="momar10" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/19_4f735551-3e4f-476c-9d2d-d8efdf7aed51.jpg?v=1646363651">
-                <div class="imageDescContainer">
-                    <div class="head" style="margin-bottom: 0px;">Writing Numbers</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="dotLine pc"></div>
-    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
-    <div class="descItem">
-        <div class="head">Support Various Module Expansions</div>
-        <div class="desc imgdesct">JetMax reserves a lot of sensor ports. With different sensors connected, more AI applications can be realized easily through program coding. Use your imagination, your creativity is irreplaceable!</div>
-        <div style="padding-bottom: 0px;" class="imageContainer">
-            <div class="twolevelleft">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/20_bbd38dc8-3702-4c65-bee6-4a2f1a353f87.jpg?v=1646363672">
-                <div class="imageDescContainer">
-                    <div class="head" style="margin-bottom: 0px;">Mask Identification</div>
-                </div>
-            </div>
-            <div class="twolevelright momargin0">
-                <div class="twolevel">
-                    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/21_35c01ede-a4fd-4a09-91ff-7de295c2484f.jpg?v=1646363811">
-                    <div class="imageDescContainer">
-                        <div class="head" style="margin-bottom: 0px;">Fan Module</div>
-                    </div>
-                </div>
-                <div class="twolevel momargin0">
-                    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/22_1c905157-3de6-4c9c-852a-2d50be40bd37.jpg?v=1646363827">
-                    <div class="imageDescContainer">
-                        <div class="head" style="margin-bottom: 0px;">Face Tracking</div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="dotLine pc"></div>
-    <div class="dotLine mo" style="margin-bottom: 23px;"></div>
-    <div class="head">ROS Robot Operating System</div>
-    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/23_c9a3a867-77b4-4c5e-ad78-584a501d0700.jpg?v=1646363876" class="mainImg pc">
-    <img style="margin-bottom: 17px;" src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/5_c5cdc072-cf7d-4ad5-99af-887a71af2da0.jpg?v=1646472408" class="mainImg mo">
-    <div class="dotLine pc"></div>
-    <div class="dotLine mo" style="margin-bottom: 24px;"></div>
-    <div class="head imghead">Four Control Methods</div>
-
-    <div class="pcflex imageContainer">
-        <div class="imageItem fourimg">
-            <div class="fourimgline">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/25_b6a1055c-36e5-4da6-ab49-24bfad3cd1b9.jpg?v=1646364252">
-                <div class="head">PC software control</div>
-            </div>
-            <div class="fourimgline">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/24_f2acd2d9-a0de-443b-a752-9e0c46a067b4.jpg?v=1646364195">
-                <div class="head">iOS/ Android app control</div>
-            </div>
-            <div class="fourimgline">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/26_75f3d230-5ad4-43ac-84d2-7a3f01e9f130.jpg?v=1646364630">
-                <div class="head">Wireless handle control</div>
-            </div>
-            <div class="fourimgline">
-                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/27_018ce11e-aeb5-473b-ad4e-8045bdf63ebb.jpg?v=1646364834">
-                <div class="head">Mouse cont</div>
-            </div>
-        </div>
-        <div class="imageItem">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/28_ec0d8f97-d632-4d85-94be-52fdbaac696d.jpg?v=1646364961">
-        </div>
-    </div>
-    <div class="mo imageContainer" style="margin-bottom:30px;">
-        <div class="imageItem">
-            <img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/6_dfb2439f-d0d4-45f6-90bf-a740223cb830.jpg?v=1646473866">
-        </div>
-        <div class="imageItem ">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/19_4f735551-3e4f-476c-9d2d-d8efdf7aed51.jpg?v=1646363651">
-        </div>
-    </div>
-    <div class="dotLine"></div>
     <div class="imageContainer">
         <div class="imageItem">
-            <img style="margin-bottom:0px;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/29_1f2f228f-8cc9-44a6-a355-75f0c4c549d9.jpg?v=1646365743">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/d6f2ac92fd2aa12612a7d08e5f562a99_a2b31bab-23b7-44a5-8e91-a1365bc7d445.gif?v=1621907062" class="border">
+            <div class="imageDescContainer">
+                <div class="head" style="margin-bottom: 0px;">Intelligent Transport</div>
+            </div>
         </div>
         <div class="imageItem">
-            <img style="margin-bottom:0px;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/30.jpg?v=1646365844">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/66ccfad14237c285ae5a913c7c7e105c.gif?v=1621906867" class="border">
+            <div class="imageDescContainer">
+                <div class="head" style="margin-bottom: 0px;">Motion Tracking</div>
+            </div>
         </div>
     </div>
-
-    <div class="descItem">
-        <div class="head">Smart Serial Bus Servo</div>
-        <div class="desc imgdesct">Fitted with three precision smart bus servos, JetMax is capable of high accuracy and heavy payload. Using trajectory planning algorithm, JetMax can maneuver accurately according to your programmed path.</div>
-        <img class="pc" style="border-radius: 5px;width:100%;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/31.jpg?v=1646366421">
-        <img class="mo" style="border-radius: 5px;width:100%;" src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/7_12421b57-2dad-4dda-a405-3de053c41162.jpg?v=1646472460">
+    <div class="imageContainer">
+        <div class="imageItem"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/2_586cc1ad-fe71-4be4-8db3-3c0c03b812dc.jpg?v=1621906608" class="border" style="margin-bottom: 0px;"></div>
+        <div class="imageItem"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/3_ce07518b-64c2-42ff-b24e-7d35dd402507.jpg?v=1621906624" class="border" style="margin-bottom: 0px;"></div>
     </div>
-    <div class="dotLine pc"></div>
-    <div class="dotLine mo" style="margin-bottom: 20px;"></div>
-    <div class="head imghead">Product Parameter</div>
-    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/32_7bd37d6c-3dba-457f-b773-c9d1b20a2d4e.jpg?v=1646366442" class="mainImg pc">
-    <img style="margin-bottom: 24px;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/9dddb64871cfc7d36229ae9963e89046.jpg?v=1646368234" class="mainImg mo">
+    <div class="descItem">
+        <div class="head">Control Method</div>
+        <div class="desc">Provide PC software and APP for TonyPi's control. In the “WonderPi” App, you can connect it to the wireless LAN instead of searching IP in router to set the MAC, which is easier!</div>
+    </div>
+    <div class="imageContainer">
+        <div class="imageItem">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_f1e32d34-84a3-4665-911a-0ac4622045ba.jpg?v=1621906640" class="border">
+            <div class="imageDescContainer">
+                <div class="head">High Voltage Bus Servo</div>
+                <div class="desc">11.1V high voltage bus servo reduces current by more than 60%, which improves the robot’s service time.</div>
+            </div>
+        </div>
+        <div class="imageItem">
+            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/5_ae63fced-61e5-44cf-8dce-6d7dd683a099.jpg?v=1621906657" class="border">
+            <div class="imageDescContainer">
+                <div class="head">2DOF Wide-angle Camera</div>
+                <div class="desc">Loaded with 120° wide angle HD camera, TonyPi can look uo and around for wider vision. Support manual focus adjustment.</div>
+            </div>
+        </div>
+    </div>
+    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/3_5f630e27-c81a-49f9-8aa7-6c530295c1ba.jpg?v=1648709328" class="mainImg pc">
+    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/dd9333d90aa852d3ac384c6d6389a93d_59e35c71-ccc4-4edf-9386-b090e36072fa.jpg?v=1648709328" class="mainImg mo">
+    <div class="head">Powerful Control System</div>
+    <ul class="ulDesc">
+        <li>
+            <span class="dot"></span>Independent power switch for stable power supply</li>
+        <li>
+            <span class="dot"></span>channel PWM servo port with avoiding current protection</li>
+        <li>
+            <span class="dot"></span>Loaded 6-axis sensor IC helps data collection</li>
+        <li>
+            <span class="dot"></span>GPIO pins and 4 IIC ports for users’ extension</li>
+        <li>
+            <span class="dot"></span>4PIN ports are compatible with Hiwonder sensors</li>
+    </ul>
 
-    <div class="head pc" style="margin-bottom: 16px;">Starter & Standard & Advanced Kit</div>
-    <div class="head mo" style="margin-bottom: 16px;font-size: 18px;">Starter & Standard & Advanced Kit</div>
-    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/33.jpg?v=1646366503" class="mainImg pc">
-    <img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/8_c58fd5d0-cc90-4a7f-bc49-3bcb1cab4307.jpg?v=1646472507" class="mainImg mo">
+    <div class="imageContainer pcflex">
+        <div class="imageItem" style="margin-bottom:0px;"><img style="margin-bottom:0px;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_01_5762bbb1-96f9-4347-bb4e-2119a4dfae6b.jpg?v=1648709328"></div>
+        <div class="imageItem" style="margin-bottom:0px;"><img style="margin-bottom:0px;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_03_e50cac7a-25bb-47a5-8fda-5f980b933898.jpg?v=1648709328"></div>
+    </div>
+    <div class="mainImg mo">
+        <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_01_5762bbb1-96f9-4347-bb4e-2119a4dfae6b.jpg?v=1648709328">
+        <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_03_e50cac7a-25bb-47a5-8fda-5f980b933898.jpg?v=1648709328">
+    </div>
 
-
-
+    <div class="head">TonyPi Standard Kit</div>
+    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/8_caf2000b-b3f4-4b8c-95dc-7802578050d3.jpg?v=1621906706" class="mainImg pc"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/94d53239037849179c79285840325f32_36b92121-b700-427b-baa2-1408cd249963.jpg?v=1621906721" class="mainImg mo">
+    <div class="head">TonyPi Advanced Kit</div>
+    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/TonyPi_5a27ba54-daee-4d89-9eb5-1cead5c6b38e.jpg?v=1631506054" class="mainImg pc"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/TonyPi_65c111ca-241f-4086-bb1d-27bebb4a86cb.jpg?v=1631506054" class="mainImg mo">
+    <div class="head">Standard &amp; Advanced Kit</div>
+    <img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/1-_2.jpg?v=1642386952" class="mainImg pc"><img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/1-_3.jpg?v=1642386952" class="mainImg mo">
+    <div class="desc"><b>Note: TonyPi includes a Raspberry Pi 4B 4GB controller. The memory card is 16G.</b></div>
     <h5><strong><b>Specifications</b></strong></h5>
     <table>
         <tbody>
@@ -903,90 +596,48 @@
             <td style="width: 521px;"><strong>Specification</strong></td>
         </tr>
         <tr>
-            <td style="width: 337px;"><span>Axis</span></td>
-            <td style="width: 181px;">4+1</td>
+            <td style="width: 337px;"><span>Raspberry Pi 4B</span></td>
+            <td style="width: 181px;"> Processor: Broadcom BCM2711, quad-core Cortex-A72 (ARM v8) 64-bit SoC @ 1.5GHz<br>Memory: 1GB, 2GB or 4GB LPDDR4(depending on model)<br>Connectivity:<br>2.4 GHz and 5.0 GHz IEEE 802.11b/g/n/ac wireless<br>LAN, Bluetooth 5.0, BLE<br>Gigabit Ethernet<br>2 × USB 3.0 ports<br>2 × USB 2.0 ports<br>GPIO: Standard 40-pin GPIO header(fully backwards-compatible with previous boards)<br>Video &amp; Sound:<br>2 × micro HDMI ports (up to 4Kp60 supported)<br>2-lane MIPI DSI display port<br>2-lane MIPI CSI camera port<br>4-pole stereo audio and composite video port<br>Multimedia:<br>H.265 (4Kp60 decode)<br>H.264 (1080p60 decode, 1080p30 encode)<br>OpenGL ES, 3.0 graphics<br>SD card support: Micro SD card slot for loading operating system and data storage<br>Input power:<br>5V DC via USB-C connector (minimum 3A)<br>5V DC via GPIO header (minimum 3A)<br>Power over Ethernet (PoE)–enabled(requires separate PoE HAT)<br>Environment: Operating temperature 0–50ºC
+                <p> </p>
+            </td>
         </tr>
         <tr>
-            <td rowspan="2" style="width: 337px;"><span>Dimension</span></td>
-            <td rowspan="2" style="width: 181px;"><span>450*1 60*260mm</span></td>
+            <td rowspan="2" style="width: 337px;">
+                <span>Raspberry Pi Extension Board</span> </td>
+            <td rowspan="2" style="width: 181px;"><span>The built-in over-current protection of 8 channel PWM port prevents the servo from damage.<br>Built-in single bus serial electric circuit can directly control the serial servo<br>Two-channel programmable LED lights, clearly show the working status of the system<br>Two-channel programmable buttons for more conveniently setting the system <br>Reserved IIC and UART ports, which can be compatible with various sensors<br></span></td>
         </tr>
         <tr></tr>
         <tr>
-            <td rowspan="2" style="width: 337px;"><span>Weight(Only JetMax)</span></td>
-            <td rowspan="2" style="width: 181px;"><span>1.6kg</span></td>
+            <td rowspan="2" style="width: 337px;"><span>Servo </span></td>
+            <td rowspan="2" style="width: 181px;"><span>LX-824 three-port bus servo</span></td>
         </tr>
         <tr></tr>
         <tr>
-            <td rowspan="2" style="width: 337px;"><span>Payload</span></td>
-            <td rowspan="2" style="width: 181px;"><span>Max.450g</span></td>
+            <td rowspan="2" style="width: 337px;"><span>Power Supply</span></td>
+            <td rowspan="2" style="width: 181px;"><span>11.1 V 2000mAh lithium battery</span></td>
         </tr>
         <tr></tr>
         <tr>
-            <td rowspan="2" style="width: 337px;"><span>Ambient Temperature</span></td>
-            <td rowspan="2" style="width: 181px;">0°C~ 45 °C</td>
+            <td rowspan="2" style="width: 337px;"><span>Product Weight</span></td>
+            <td rowspan="2" style="width: 181px;">1.7 kg</td>
         </tr>
         <tr></tr>
         <tr>
-            <td style="width: 337px;">Material</td>
-            <td style="width: 181px;">Aluminum, Fiberglass</td>
+            <td style="width: 337px;">Working Hours</td>
+            <td style="width: 181px;">about 60min</td>
         </tr>
         <tr></tr>
         <tr>
-            <td>Reach</td>
-            <td>R104~ R289 x 240°</td>
+            <td>Standard Kit Package List(Finished Parts)</td>
+            <td>1* robot frame<br> 16* LX-824HV three-port bus servo<br> 1* Raspberry Pi(4B 4GB)<br> 1* Raspberry Pi extension board<br> 2* LFD-01 servo<br> 1* Raspberry Pi Acrylic fixing plate<br> 1* HD camera<br> 1* 11.1 V 2000mAh lithium battery<br> 1* voltage display module<br> 1* camera head frame<br> 1* pack of accessories<br> 1* power charger<br> 1* servo wire<br> 1* screwdriver<br> 3* Tag card<br> 3* Color ball</td>
         </tr>
         <tr>
-            <td>Repeatabillty</td>
-            <td>+1mm</td>
+            <td>Advanced Kit Package List(Finished Parts)</td>
+            <td>1* robot frame<br> 16* LX-824HV three-port bus servo<br> 1* Raspberry Pi(4B 4GB)<br> 1* Raspberry Pi extension board<br> 2* LFD-01 servo<br> 1* Raspberry Pi Acrylic fixing plate<br> 1* HD camera<br> 1* 11.1 V 2000mAh lithium battery<br> 1* voltage display module<br> 1* camera head frame<br> 1* pack of accessories<br> 1* power charger<br> 1* servo wire<br> 1* screwdriver<br> 3* Tag card<br> 3* Color ball<br> 1* Map<br> 3* Color sponge</td>
         </tr>
         <tr></tr>
-        <tr>
-            <td>Joint Speed</td>
-            <td>Max.0.20sec/60°</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>End Effector</td>
-            <td>Suction Cup, Small Gripper, Big Gripper</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>Power Supply</td>
-            <td>12V 5A DC Adapter</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>Connectivity</td>
-            <td>USB/Wi-Fi/Ethernet</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>Controller</td>
-            <td>Jetson Nano B01</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>Storage</td>
-            <td>32G Class 10 TF</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>Programming Tools</td>
-            <td>Python/C/C++/JavaScript</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>Control Methods</td>
-            <td>JetMax Panel/App/Wireless Handle</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>Packing List</td>
-            <td>1* JetMax (installed camera)<br>1* 12V 5A power adapter<br>1* Map<br>6* Blocks<br>1* Waste card pack<br>1* Number and alphabet card pack<br>1* Small gripper with servo (Standard and Developer kit only)<br>1* Big gripper gripper with servo (Standard and Developer kit only)<br>1* Pen and holder (Standard and Developer kit only)<br>1* PS2 handle (Standard and Developer kit only)<br>1* Fan module (Developer kit only)<br>1* Touch sensor (Developer kit only)<br>1* Glowy ultrasonic sensor (Developer kit only)<br>1* MP3 module (Developer kit only)<br>1* Digital tube (Developer kit only)<br>1* Dot matrix display (Developer kit only)<br>1* sensor bracket and wire pack (Developer kit only)</td>
-        </tr>
         </tbody>
     </table>
-    </div>
 </div>
 </body>
 </html>

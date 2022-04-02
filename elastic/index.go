@@ -307,7 +307,7 @@ func InitData() {
 		Content:"中粮创芯",
 		Suggest: ss,
 		Location:lo,
-		ViewNum: 1,
+		ViewNum: 4,
 		CommentNum: 4,
 		Weight: 1,
 		CreateTime:1647048371,

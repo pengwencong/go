@@ -8,6 +8,7 @@ import (
 	"github.com/olivere/elastic/v7"
 	"go/help"
 	"go/server"
+	"log"
 )
 
 /*
@@ -178,6 +179,28 @@ func MoreLikeThis() {
 	search(molik)
 }
 
+func searchAggregation(name string, ag elastic.Aggregation) {
+	clientEs := server.GetEs()
+
+	res, err := clientEs.Search(index).
+		Aggregation(name, ag).
+		Pretty(true).
+		Do(context.TODO())
+	if err != nil {
+		help.Log.Infof("search aggregation error: %s", err.Error())
+		return
+	}
+
+	agg, found := res.Aggregations.Terms(name)
+	if !found {
+		log.Fatalf("we should have a terms aggregation called %q", "timeline")
+	}
+	for _, val := range agg.Aggregations {
+		fmt.Println(string(val))
+	}
+	server.PutEs(clientEs)
+}
+
 /*
 默认10个
 */
@@ -195,21 +218,7 @@ func search(query elastic.Query) {
 		return
 	}
 
-	if res.Hits.TotalHits.Value > 0 {
-
-		for _, hit := range res.Hits.Hits {
-			// hit.Index contains the name of the index
-
-			// Deserialize hit.Source into a Tweet (could also be just a map[string]interface{}).
-			var testIndex TestIndex
-			err := json.Unmarshal(hit.Source, &testIndex)
-			if err != nil {
-			}
-			testIndex.Score = *hit.Score
-			fmt.Printf("%+v\n", testIndex)
-		}
-	}
-	fmt.Println("fasd")
+	getRes(res)
 	server.PutEs(clientEs)
 }
 
@@ -230,6 +239,11 @@ func searchSuggest(query elastic.Query, suggest *elastic.TermSuggester) {
 		return
 	}
 
+	getRes(res)
+	server.PutEs(clientEs)
+}
+
+func getRes(res *elastic.SearchResult){
 	if res.Hits.TotalHits.Value > 0 {
 
 		for _, hit := range res.Hits.Hits {
@@ -245,7 +259,6 @@ func searchSuggest(query elastic.Query, suggest *elastic.TermSuggester) {
 		}
 	}
 	fmt.Println("fasd")
-	server.PutEs(clientEs)
 }
 
 func multiSearch(requests ...*elastic.SearchRequest){

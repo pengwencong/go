@@ -10,9 +10,16 @@ import (
 	"go/elastic"
 	"go/live"
 	"go/monitor"
+	"go/server"
 )
 
 func Init(engine *gin.Engine) {
+
+	kafkaGroup := engine.Group("/kafka")
+	{
+		kafkaGroup.GET("/producter", server.Producer)
+		kafkaGroup.GET("/test", controller.RedisTest)
+	}
 
 	adminGroup := engine.Group("/admin")
 	{
@@ -25,6 +32,7 @@ func Init(engine *gin.Engine) {
 	{
 		elasticGroup.GET("/create", elastic.CreateIndex)
 		elasticGroup.GET("/test", elastic.TestSearch)
+		elasticGroup.GET("/ag",elastic.Aggregation)
 	}
 
 	liveGroup := engine.Group("/live").Use(mw.Access)

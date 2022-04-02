@@ -13,7 +13,7 @@ func main() {
 
 	err := help.InitYaml()
 	if err != nil {
-		fmt.Println(err)
+		help.Log.Error("init yaml err: ", err.Error())
 		return
 	}
 
@@ -21,7 +21,7 @@ func main() {
 
 	err = server.InitMysqlPool(2)
 	if err != nil {
-		fmt.Println(err)
+		help.Log.Error("init mysql err: ", err.Error())
 		return
 	}
 
@@ -29,7 +29,7 @@ func main() {
 
 	err = server.InitRedisPool(2)
 	if err != nil {
-		help.Log.Info("init redis err:", err.Error())
+		help.Log.Error("init redis err: ", err.Error())
 		return
 	}
 
@@ -37,9 +37,19 @@ func main() {
 
 	err = server.InitEsPool(2)
 	if err != nil {
-		help.Log.Info("init Es err:", err.Error())
+		help.Log.Error("init es err: ", err.Error())
 		return
 	}
+
+	server.InitKafkaConfig()
+	err = server.InitKafkaPool(2)
+	if err != nil {
+		help.Log.Error("init kafka err: ", err.Error())
+		return
+	}
+
+	go server.ConsumerGroup()
+	go server.Consumer()
 	//go live.Dispatcher.Start()
 	//go monitor.Dispatcher.Start()
 	//go chat.Dispatcher.Start()
