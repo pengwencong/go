@@ -32,24 +32,24 @@ func main() {
 		help.Log.Error("init redis err: ", err.Error())
 		return
 	}
+	//
+	//server.InitEsConfig()
+	//
+	//err = server.InitEsPool(2)
+	//if err != nil {
+	//	help.Log.Error("init es err: ", err.Error())
+	//	return
+	//}
+	//
+	//server.InitKafkaConfig()
+	//err = server.InitKafkaPool(2)
+	//if err != nil {
+	//	help.Log.Error("init kafka err: ", err.Error())
+	//	return
+	//}
 
-	server.InitEsConfig()
-
-	err = server.InitEsPool(2)
-	if err != nil {
-		help.Log.Error("init es err: ", err.Error())
-		return
-	}
-
-	server.InitKafkaConfig()
-	err = server.InitKafkaPool(2)
-	if err != nil {
-		help.Log.Error("init kafka err: ", err.Error())
-		return
-	}
-
-	go server.ConsumerGroup()
-	go server.Consumer()
+	//go server.ConsumerGroup()
+	//go server.Consumer()
 	//go live.Dispatcher.Start()
 	//go monitor.Dispatcher.Start()
 	//go chat.Dispatcher.Start()

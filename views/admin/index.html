@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <style>
     body{
@@ -55,7 +57,6 @@
         top: 50%;
         transform: translate(-50%, -50%);
         width: fit-content;
-        height: 122px;
     }
 
     .mobilePhione {
@@ -219,6 +220,8 @@
     .workbench-leave-active {
         transition: all 1s ease !important;
     }
+
+    /* creation start */
     .creationContainer{
         width: 100%;
         height: 100%;
@@ -226,107 +229,14 @@
         position: fixed;
         background-color: #f6f6f6;
     }
-    .creationContainer>div{
-        float: left;
-        height: 100%;
-    }
+
     .creationContainer .left {
         width: 25%;
     }
-    .creationContainer .right {
-        width: 25%;
-    }
-    .creationContainer .medium {
-        width: 50%;
-    }
-    .medium .showDetail{
-        width: 100%;
-        height: 250px;
-        border-bottom: 1px solid skyblue;
-        background: url("../../public/static/admin/img/workbk.png") no-repeat;
-        background-size: cover;
-        opacity: 0;
-    }
-    .deveguide{
-        width: 100%;
-        height: 150px;
-        position: relative;
-        display: flex;
-        justify-content: space-around;
-        opacity: 0;
-    }
-    .deveguide .card {
-        width: 228px;
-        height: 100%;
-        border-radius: 10px;
-        background-color: #fff;
-        cursor: pointer;
-        transition: all .6s ease;
-    }
-    .deveguide .card:hover {
-        box-shadow: 8px 15px 21px rgb(0 0 0 / 14%);
-        transform: translate3d(0, -4px, 0);
-    }
+    /* creation end */
 
-    .creative{
-        width: 96.5%;
-        height: 400px;
-        position: relative;
-        padding: 10px;
-        overflow: hidden;
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-        opacity: 0;
-    }
-    .creative .info {
-        margin-right: 10px;
-        flex: 0 0 100% !important;
-        background-color: #fff;
-        border-radius: 10px;
-        text-align: left;
-        cursor: pointer;
-        transition: all 1s ease;
-        opacity: .8;
-        height: 100%;
-        box-shadow: 2px 4px 1px 1px rgba(0, 0, 0, .12);
-    }
 
-    .creative .info .head{
-        font-size: 18px;
-        padding: 10px 10px;
-        margin-bottom: 16px;
-    }
-    .creative .info .desc{
-        font-size: 16px;
-        padding: 10px 10px;
-    }
-    .work {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        margin-top: 6px;
-
-    }
-    .work .area{
-        background: url("../../public/static/admin/img/workbk.png") no-repeat;
-        background-size: cover;
-        font-size: 19px;
-        border: none;
-        outline: 0;
-    }
-    .work>div{
-        float: left;
-    }
-    .textInfo{
-        margin: 11px;
-        width: 96%;
-        height: 100%;
-        background: url("../../public/static/admin/img/workbk.png") no-repeat;
-        background-size: cover;
-        cursor: pointer;
-    }
-    /* platform */
+    /* platform start*/
 
     .platFormContainer{
         position: fixed;
@@ -335,7 +245,7 @@
         background-color: #f0f2f5;
     }
 
-    /* platform */
+    /* platform end*/
     /* addInfo */
     .addInfoContainer{
         position: absolute;
@@ -422,10 +332,221 @@
     }
     /* addBook */
 
+    @media screen and (max-width: 700px) {
+        .loginContainer{
+            width: 100%;
+        }
+        .mobilePhione{
+            width: 77%;
+            left: 48%;
+        }
+        .password{
+            width: 77%;
+            left: 48%;
+        }
+        .workbenchContainer{
+            width: 100%;
+        }
+        .workbenchContainer .line{
+            justify-content: space-around;
+            width: 100%;
+        }
+        .workbenchContainer .line div{
+            width: 40%;
+        }
+        /*creation start*/
+        .creationContainer .bottom{
+            justify-content: space-around;
+            width: 100%;
+            height: 42px;
+            background-color: #fff;
+            padding: 5px 5px;
+            position: fixed;
+            bottom: 0px;
+            display: flex;
+            font-size: 15px;
+        }
+        .creationContainer .bottom .icon{
+            width: 19px;
+            height: 19px;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            margin-bottom: 4px;
+        }
+        .creationContainer .bottom .text {
+            color: #666;
+        }
+        .creationContainer .bottom .text.hover{
+            color: #006eff;
+        }
+        .creationContainer .bottom .icon.hover.show{
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .creationContainer .top {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            box-shadow: 5px 2px 7px rgb(0 0 0 / 10%);
+            transform: translate3d(0, -4px, 0);
+            transition: all 0.8s ease;
+            background-color: #fff;
+            z-index: 20;
+        }
+        .creationContainer .action {
+            display: flex;
+            justify-content: start;
+            transition: al 0.8s ease;
+            overflow: hidden;
+        }
+        .creationContainer .action div {
+            margin-right: 10px;
+            padding: 5px 5px;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .creationContainer .action div:active{
+            box-shadow: 8px 15px 21px rgb(0 0 0 / 14%);
+            transform: translate3d(0, -4px, 0);
+        }
+        .creationContainer .top .colBtn img{
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0px);
+        }
+        .creationContainer .box{
+            height: 100%;
+            overflow: auto;
+        }
+
+
+        .jinengContainer .top .action .createJineng{
+            margin-left: 8px;
+        }
+        .techAction-enter {
+            height: 0px ;
+
+        }
+        .techAction-leave {
+            height: 40px !important;
+        }
+        .techAction-leave-to {
+            height: 0px !important;
+        }
+        .techAction-enter-to {
+            height: 40px !important;
+        }
+        .techAction-enter-active {
+            transition: all 0.3s ease !important;
+        }
+        .techAction-leave-active {
+            transition: all 0.3s ease !important;
+        }
+
+        .creationContainer .box input{
+            width: 93%;
+            height: 40px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            background-color: #fff;
+            padding-left: 10px;
+            transition: all 0.4s ease;
+            margin-top:7px;
+        }
+
+        .creationContainer .box input:focus{
+            background-color: #fff;
+            box-shadow: 1px 7px 7px rgb(0 0 0 / 11%);
+            transform: translate3d(0, -4px, 0);
+        }
+
+        .creationContainer .box .addContainer{
+            width: 78%;
+            margin-top: 30px;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%, 0px);
+            overflow: scroll;
+        }
+
+        .creationContainer .box .descTextarea{
+            width: 93%;
+            height: 300px;
+            border-radius: 8px;
+            padding-left: 10px;
+            padding-top: 10px;
+            transition: all 0.4s ease;
+            margin-top:7px;
+            background-color: #fff;
+            border:none;
+            margin-bottom:40px;
+        }
+        .creationContainer .box .descTextarea:focus{
+            background-color: #fff;
+            box-shadow: 1px 7px 7px rgb(0 0 0 / 11%);
+            transform: translate3d(0, -4px, 0);
+        }
+
+        .creationContainer .button{
+            margin-bottom: 80px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .creationContainer .button div{
+            width: 120px;
+            height: 40px;
+            border-radius: 7px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .creationContainer .sure {
+            background-color: skyblue;
+        }
+
+        .creationContainer .sure:active {
+            background-color: #6272D6;
+        }
+
+        .creationContainer .pre {
+            background-color: #fff;
+            border: 1px solid skyblue;
+        }
+        .creationContainer .pre:active {
+            background-color: skyblue;
+        }
+        /*creation end*/
+        /*creation list start*/
+        .creationContainer .list{
+            width: 100%;
+            margin-bottom: 70px;
+            margin-top:30px;
+        }
+        .creationContainer .list .item{
+            width: 90%;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-around;
+            margin: 0 auto;
+            padding: 4px;
+            margin-bottom: 10px;
+        }
+
+        /*creation list end*/
+    }
+
 </style>
 <body >
 <div id="box">
-
     <router-view>
     </router-view>
 </div>
@@ -440,7 +561,7 @@
                 </transition>
                 <transition name="password-fade">
                     <div class="password" v-show = "loginShow">
-                        <input @keyup.enter="login" type="text" placeholder="请输入密码" v-model="password">
+                        <input @keyup.enter="login" type="password" placeholder="请输入密码" v-model="password">
                     </div>
                 </transition>
             </div>
@@ -471,67 +592,240 @@
     </div>
     </transition>
 </template>
+<template id="techlogy">
+    <div class="jinengContainer">
+        <div class="top">
+            <transition name="techAction">
+                <div class="action" v-show="actionShow">
+                    <div @click="move" id="list">列表</div>
+                    <div @click="move" id="create">增加</div>
+                </div>
+            </transition>
+            <div class="colBtn">
+                <img class="down" v-show="downShow" @click="upDown($event)" src="../../public/static/admin/img/techDown.svg">
+            </div>
+        </div>
+        <div class="box" id="techBox" @click="actionHide($event)">
+            <component :is="viewShow"></component>
+        </div>
+    </div>
+</template>
+<template id="techIndex">
+    <div class="list">
+        <!--<div class="sort"></div>-->
+        <div class="item" v-for="(item,index) in lists" :key="index">
+            <div class="bookName">
+                <div class="text">树名:</div>
+                <div class="name">{{item.name}}</div>
+            </div>
+            <div class="occupationName">
+                <div class="text">职业:</div>
+                <div class="name">{{item.OccupationName}}</div>
+            </div>
+            <div class="techName">
+                <div class="text">名字:</div>
+                <div class="name">{{item.bookName}}</div>
+            </div>
+        </div>
+
+    </div>
+</template>
+<template id="techAdd">
+    <div class="addContainer">
+        <input name="bookId" value="bookId" type="hidden">
+        <div class="occupation">
+            <div class="text">职业：</div>
+            <input name="occupationName" value="通用" type="text" v-model="occupationName">
+            <input name="occupationId" value="occupationId" type="hidden" v-model="occupationId">
+        </div>
+        <div class="name">
+            <div class="text">名字：</div>
+            <input name="name" value="" v-model="techName">
+        </div>
+        <div class="desc">
+            <div class="text">描述：</div>
+            <textarea class="descTextarea" name="desc" value="" v-model="techDesc"></textarea>
+        </div>
+
+        <div class="button">
+            <div class="sure" @click="sure($event)">确定</div>
+            <div class="pre" @click="pre($event)">预保存</div>
+        </div>
+    </div>
+</template>
+
+<template id="outline">
+    <div class="jinengContainer">
+        <div class="top">
+            <transition name="techAction">
+                <div class="action" v-show="actionShow">
+                    <div @click="move" id="list">列表</div>
+                    <div @click="move" id="create">增加</div>
+                </div>
+            </transition>
+            <div class="colBtn">
+                <img class="down" v-show="downShow" @click="upDown($event)" src="../../public/static/admin/img/techDown.svg">
+            </div>
+        </div>
+        <div class="box" id="techBox" @click="actionHide($event)">
+            <component :is="viewShow"></component>
+        </div>
+    </div>
+</template>
+<template id="outlineIndex">
+    <div class="list">
+        <!--<div class="sort"></div>-->
+        <div class="item" v-for="(item,index) in lists" :key="index">
+            <div class="title">
+                <div class="text">标题:</div>
+                <div class="name">{{item.title}}</div>
+            </div>
+        </div>
+    </div>
+</template>
+<template id="outlineAdd">
+    <div class="addContainer">
+        <input name="bookId" value="bookId" type="hidden">
+        <div class="title">
+            <div class="text">标题：</div>
+            <input name="title" value="" type="text" v-model="title">
+        </div>
+        <div class="desc">
+            <div class="text">描述：</div>
+            <textarea class="descTextarea" name="desc" value="" v-model="desc"></textarea>
+        </div>
+        <div class="button">
+            <div class="sure" @click="sure($event)">确定</div>
+            <div class="pre" @click="pre($event)">预保存</div>
+        </div>
+    </div>
+</template>
+
+<template id="plot">
+    <div class="jinengContainer">
+        <div class="top">
+            <transition name="techAction">
+                <div class="action" v-show="actionShow">
+                    <div @click="move" id="list">列表</div>
+                    <div @click="move" id="create">增加</div>
+                </div>
+            </transition>
+            <div class="colBtn">
+                <img class="down" v-show="downShow" @click="upDown($event)" src="../../public/static/admin/img/techDown.svg">
+            </div>
+        </div>
+        <div class="box" id="techBox" @click="actionHide($event)">
+            <component :is="viewShow"></component>
+        </div>
+    </div>
+</template>
+<template id="plotIndex">
+    <div class="list">
+        <!--<div class="sort"></div>-->
+        <div class="item" v-for="(item,index) in lists" :key="index">
+            <div class="title">
+                <div class="text">标题:</div>
+                <div class="name">{{item.title}}</div>
+            </div>
+        </div>
+    </div>
+</template>
+<template id="plotAdd">
+    <div class="addContainer">
+        <input name="bookId" value="bookId" type="hidden">
+        <div class="title">
+            <div class="text">标题：</div>
+            <input name="title" value="" type="text" v-model="title">
+        </div>
+        <div class="desc">
+            <div class="text">描述：</div>
+            <textarea class="descTextarea" name="desc" value="" v-model="desc"></textarea>
+        </div>
+        <div class="button">
+            <div class="sure" @click="sure($event)">确定</div>
+            <div class="pre" @click="pre($event)">预保存</div>
+        </div>
+    </div>
+</template>
+
+<template id="design">
+    <div class="jinengContainer">
+        <div class="top">
+            <transition name="techAction">
+                <div class="action" v-show="actionShow">
+                    <div @click="move" id="list">列表</div>
+                    <div @click="move" id="create">增加</div>
+                </div>
+            </transition>
+            <div class="colBtn">
+                <img class="down" v-show="downShow" @click="upDown($event)" src="../../public/static/admin/img/techDown.svg">
+            </div>
+        </div>
+        <div class="box" id="techBox" @click="actionHide($event)">
+            <component :is="viewShow"></component>
+        </div>
+    </div>
+</template>
+<template id="designIndex">
+    <div class="list">
+        <!--<div class="sort"></div>-->
+        <div class="item" v-for="(item,index) in lists" :key="index">
+            <div class="title">
+                <div class="text">标题:</div>
+                <div class="name">{{item.title}}</div>
+            </div>
+        </div>
+    </div>
+</template>
+<template id="designAdd">
+    <div class="addContainer">
+        <input name="bookId" value="bookId" type="hidden">
+        <div class="title">
+            <div class="text">标题：</div>
+            <input name="title" value="" type="text" v-model="title">
+        </div>
+        <div class="desc">
+            <div class="text">描述：</div>
+            <textarea class="descTextarea" name="desc" value="" v-model="desc"></textarea>
+        </div>
+        <div class="button">
+            <div class="sure" @click="sure($event)">确定</div>
+            <div class="pre" @click="pre($event)">预保存</div>
+        </div>
+    </div>
+</template>
+
 <template id="creation">
     <div class="creationContainer">
-        <div class="left" >
-            <div class="deveguide">
-                <div class="card">
-                    <div class="head">啊ewtgwqg</div>
-                    <div class="desc">啊wrqghehqg</div>
-                </div>
-                <div class="card">
-                    <div class="head">啊ewtgwqg</div>
-                    <div class="desc">啊wrqghehqg</div>
-                </div>
+        <div>
+            <component :is="viewShow"></component>
+        </div>
+        <div class="bottom" v-show="bottomShow">
+            <div @click="cateShow($event)" id="0">
+                <img class="icon" v-show="bottomIcon[0].icon" src="../../public/static/admin/img/jineng.svg">
+                <img class="icon hover " v-show="bottomIcon[0].iconHover" src="../../public/static/admin/img/jineng-hover.svg">
+                <div v-if="bottomIcon[0].text" class="text ">技能</div>
+                <div e-else class="text hover">技能</div>
             </div>
-            <div class="creative">
-                <div class="info">
-                    <div class="head">啊fasdf</div>
-                    <div class="desc">de的</div>
-                </div>
-                <div class="info">
-                    <div class="head">啊fasdf</div>
-                    <div class="desc">de的</div>
-                </div>
+            <div @click="cateShow($event)" id="1">
+                <img class="icon " v-show="bottomIcon[1].icon" src="../../public/static/admin/img/dagang.svg">
+                <img class="icon hover" v-show="bottomIcon[1].iconHover" src="../../public/static/admin/img/dagang-hover.svg">
+                <div v-if="bottomIcon[1].text" class="text">大刚</div>
+                <div v-else class="text hover">大刚</div>
             </div>
-            <div class="textInfo"  v-show="textInfoShow">
-                <div class="volume">
-                    <input>
-                </div>
-                <div class="chapter">
-                    <input>
-                </div>
+            <div @click="cateShow($event)" id="2">
+                <img class="icon " v-show="bottomIcon[2].icon" src="../../public/static/admin/img/juqing.svg">
+                <img class="icon hover" v-show="bottomIcon[2].iconHover" src="../../public/static/admin/img/juqing-hover.svg">
+                <div v-if="bottomIcon[2].text" class="text">剧前</div>
+                <div v-else class="text hover">剧前</div>
+            </div>
+            <div @click="cateShow($event)" id="3">
+                <img class="icon " v-show="bottomIcon[3].icon" src="../../public/static/admin/img/sheding.svg">
+                <img class="icon hover" v-show="bottomIcon[3].iconHover" src="../../public/static/admin/img/sheding-hover.svg">
+                <div v-if="bottomIcon[3].text"  class="text">设顶</div>
+                <div v-else class="text hover">设顶</div>
             </div>
         </div>
-        <div class="medium">
-            <div class="showDetail">
-            </div>
-            <div class="work" >
-                <div class="target">
-                    <div>target:</div>
-                    <textarea @keyup.enter="storeTarget" class="area" v-model="targetContent"></textarea>
-                </div>
-                <div class="scene">
-                    <div>scene:</div>
-                    <textarea @keyup.enter="storeScene" class="area" v-model="sceneContent"></textarea>
-                </div>
-                <div @click="up">up</div>
-            </div>
-        </div>
-        <div class="right">
-            <div class="deveguide">
-                <div class="card">
-                    <div class="head">啊ewtgwqg</div>
-                    <div class="desc">啊wrqghehqg</div>
-                </div>
-                <div class="card">
-                    <div class="head">啊ewtgwqg</div>
-                    <div class="desc">啊wrqghehqg</div>
-                </div>
-            </div>
-        </div>
-
-
     </div>
 </template>
 <template id="writeCreationPlatform">
@@ -539,40 +833,7 @@
         <add-info></add-info>
     </div>
 </template>
-<template id="addInfo">
-    <div class="addInfoContainer">
-        <div class="tagList">
-            <label class="addBook"><input type="radio" value="add-book" id="add-book" v-model="view">A</label>
-            <label class="addVolume"><input type="radio" value="add-volume" id="add-volume" v-model="view">B</label>
-            <label class="addChapter"><input type="radio" value="add-volume" id="add-volume" v-model="view">C</label>
-            <label class="addAfflatus"><input type="radio" value="add-volume" id="add-volume" v-model="view">D</label>
-            <label class="addCreation"><input type="radio" value="add-volume" id="add-volume" v-model="view">E</label>
-        </div>
-        <div class="operation">
-            <component v-bind:is="view"></component>
-        </div>
-    </div>
-</template>
-<template id="addBook">
-    <div class="bookContainer">
-        <div class="book">
-            <input v-model="bookName" type="text" class="bookName" placeholder="请输入">
-        </div>
-        <div class="bookDesc">
-            <textarea @keyup.enter="addBook" v-model="bookDesc" type="text"></textarea>
-        </div>
-    </div>
-</template>
-<template id="addVolume">
-    <div class="volumeContainer">
-        <div class="book">
-            <input v-model="bookName" type="text" class="bookName" placeholder="请输入">
-        </div>
-        <div class="volume">
-            <input @keyup.enter="addVolume" v-model="volume" type="text" placeholder="请输入">
-        </div>
-    </div>
-</template>
+
 <script src="../../public/static/common/js/vue.js"></script>
 <script src="../../public/static/common/js/router.js"></script>
 <script src="../../public/static/common/js/axios.min.js"></script>
@@ -584,55 +845,31 @@
     }
 
     var token = localStorage.getItem("token")
-    var creation = {
+
+    var techIndex = {
         data: function () {
             return {
-                textInfoShow : false,
-                targetContent: '',
-                sceneContent: ''
+                bookId: 1,
+                lists: [],
             }
+        },
+        created() {
+            this.techList();
         },
         mounted() {
 
         },
-        methods: {
-            hide : function () {
-                this.textInfoShow = !this.textInfoShow
-            },
-            storeScene: function(){
-                let scene = localStorage.getItem("scene")
-                console.log(scene)
-                console.log(this.sceneContent)
-
-                let data = this.targetContent
-                if (scene != null) {
-                    data = scene + data
+        methods:{
+            techList:function () {
+                var that = this
+                var data = {
+                    "token": token
                 }
-                localStorage.setItem("scene", data)
-                this.sceneContent = ''
-            },
-            storeTarget:function(){
-                let target = localStorage.getItem("target")
-                console.log(target)
-                console.log(this.targetContent)
-
-                let data = this.targetContent
-                if (target != null) {
-                    data = target + data
-                }
-                localStorage.setItem("target", data)
-                this.targetContent = ''
-            },
-            up: function () {
-                let data = {
-                    target: this.targetContent,
-                    scene: this.sceneContent
-                }
-                axios.post("/admin/create", Qs.stringify(data))
+                axios.post("/admin/creation/techList", Qs.stringify(data))
                     .then(function (res) {
                         let data = res.data
-                        console.log(data)
                         if (data.status == 200){
+                            that.lists = data.data
                         } else {
                             alert(data.message)
                         }
@@ -640,68 +877,531 @@
                     .catch(function (res) {
                         console.log(res)
                     })
+            },
+            outlineList:function () {
+                if (this.outlineLists.length == 0) {
+                    var that = this
+                    var data = {
+                        "token": token
+                    }
+                    axios.post("/admin/creation/outlineList", Qs.stringify(data))
+                        .then(function (res) {
+                            let data = res.data
+                            if (data.status == 200) {
+                                that.outlineLists = data.data
+                                that.changeShow()
+                            } else {
+                                alert(data.message)
+                            }
+                        })
+                        .catch(function (res) {
+                            console.log(res)
+                        })
+                }else{
+                    this.changeShow()
+                }
+            }
+        },
+        template:'#techIndex'
+    };
+    var techAdd = {
+        data: function () {
+            return {
+                bookId: 1,
+                occupationId: 1,
+                techName: '',
+                techDesc: '',
+                occupationName: '通用'
+            }
+        },
+        methods:{
+            sure : function () {
+                var that = this
+                var data = {
+                    "occupationId" : this.occupationId,
+                    "bookId" : this.bookId,
+                    "techName": this.techName,
+                    "techDesc": this.techDesc,
+                    "token": token
+                }
+
+                axios.post("/admin/creation/addTech", Qs.stringify(data))
+                    .then(function (res) {
+                        let data = res.data
+                        if (data.status == 200){
+                            that.techName = ''
+                            that.techDesc = ''
+                        } else {
+                            alert(data.message)
+                        }
+                    })
+                    .catch(function (res) {
+                        console.log(res)
+                    })
+            },
+            pre : function () {
+
+            }
+        },
+        template:'#techAdd'
+    };
+    var techlogy = {
+        data: function () {
+            return {
+                viewShow: 'index',
+                downShow: true,
+                actionShow: false
+            }
+        },
+        components: {
+            "index": techIndex,
+            "add": techAdd
+        },
+        methods:{
+            actionHide: function(){
+                this.actionShow = false
+                var that = this
+                setTimeout(function () {
+                    that.downShow = true
+                },300)
+            },
+            move :function (data) {
+                let id = data.currentTarget.id
+                switch (id) {
+                    case 'list':
+                        this.viewShow = 'index'
+                        this.actionHide()
+                        break;
+                    case 'create':
+                        this.viewShow = 'add'
+                        this.actionHide()
+                        break;
+                }
+            },
+            upDown :function () {
+                this.actionShow = true
+                this.downShow = false
+            }
+        },
+        template:'#techlogy'
+    };
+
+    var outlineIndex = {
+        data: function () {
+            return {
+                lists: []
+            }
+        },
+        created() {
+            this.outlineList()
+        },
+        mounted() {
+
+        },
+        methods:{
+            outlineList:function () {
+                var that = this
+                var data = {
+                    "token": token
+                }
+                axios.post("/admin/creation/outlineList", Qs.stringify(data))
+                    .then(function (res) {
+                        let data = res.data
+                        if (data.status == 200){
+                            that.lists = data.data
+                        } else {
+                            alert(data.message)
+                        }
+                    })
+                    .catch(function (res) {
+                        console.log(res)
+                    })
+            },
+            delTech:function () {
+
+            }
+        },
+        template:'#outlineIndex'
+    };
+    var outlineAdd = {
+        data: function () {
+            return {
+                bookId: 1,
+                title: '',
+                desc: '',
+            }
+        },
+        methods:{
+            sure : function () {
+                var that = this
+                var data = {
+                    "bookId" : this.bookId,
+                    "title": this.title,
+                    "desc": this.desc,
+                    "token": token
+                }
+
+                axios.post("/admin/creation/addOutline", Qs.stringify(data))
+                    .then(function (res) {
+                        let data = res.data
+                        if (data.status == 200){
+                            that.title = ''
+                            that.desc = ''
+                        } else {
+                            alert(data.message)
+                        }
+                    })
+                    .catch(function (res) {
+                        console.log(res)
+                    })
+            },
+            pre : function () {
+
+            }
+        },
+        template:'#outlineAdd'
+    };
+    var outline = {
+        data: function () {
+            return {
+                viewShow: 'index',
+                downShow: true,
+                actionShow: false
+            }
+        },
+        components: {
+            'index':outlineIndex,
+            'add': outlineAdd
+        },
+        methods:{
+            actionHide: function(){
+                this.actionShow = false
+                var that = this
+                setTimeout(function () {
+                    that.downShow = true
+                },300)
+            },
+            move :function (data) {
+                let id = data.currentTarget.id
+                switch (id) {
+                    case 'list':
+                        this.viewShow = 'index'
+                        this.actionHide()
+                        break;
+                    case 'create':
+                        this.viewShow = 'add'
+                        this.actionHide()
+                        break;
+                }
+            },
+            upDown :function () {
+                this.actionShow = true
+                this.downShow = false
+            }
+        },
+        template:'#outline'
+    };
+
+    var plotIndex = {
+        data: function () {
+            return {
+                lists: []
+            }
+        },
+        created() {
+            this.plotList()
+        },
+        methods:{
+            plotList:function () {
+                var that = this
+                let data = {
+                    "token": token
+                }
+                axios.post("/admin/creation/plotList", Qs.stringify(data))
+                    .then(function (res) {
+                        let data = res.data
+                        if (data.status == 200){
+                            that.lists = data.data
+                        } else {
+                            alert(data.message)
+                        }
+                    })
+                    .catch(function (res) {
+                        console.log(res)
+                    })
+            },
+            delTech:function () {
+
+            }
+        },
+        template:'#plotIndex'
+    };
+    var plotAdd = {
+        data: function () {
+            return {
+                bookId: 1,
+                title: '',
+                desc: '',
+            }
+        },
+        methods:{
+            sure : function () {
+                var that = this
+                let data = {
+                    "bookId" : this.bookId,
+                    "title": this.title,
+                    "desc": this.desc,
+                    "token": token
+                }
+
+                axios.post("/admin/creation/addPlot", Qs.stringify(data))
+                    .then(function (res) {
+                        let data = res.data
+                        if (data.status == 200){
+                            that.title = ''
+                            that.desc = ''
+                        } else {
+                            alert(data.message)
+                        }
+                    })
+                    .catch(function (res) {
+                        console.log(res)
+                    })
+            },
+            pre : function () {
+
+            }
+        },
+        template:'#plotAdd'
+    };
+    var plot = {
+        data: function () {
+            return {
+                viewShow: 'index',
+                downShow: true,
+                actionShow: false
+            }
+        },
+        components: {
+            'index':plotIndex,
+            'add': plotAdd
+        },
+        methods:{
+            actionHide: function(){
+                this.actionShow = false
+                var that = this
+                setTimeout(function () {
+                    that.downShow = true
+                },300)
+            },
+            move :function (data) {
+                let id = data.currentTarget.id
+                switch (id) {
+                    case 'list':
+                        this.viewShow = 'index'
+                        this.actionHide()
+                        break;
+                    case 'create':
+                        this.viewShow = 'add'
+                        this.actionHide()
+                        break;
+                }
+            },
+            upDown :function () {
+                this.actionShow = true
+                this.downShow = false
+            }
+        },
+        template:'#outline'
+    };
+
+    var designIndex = {
+        data: function () {
+            return {
+                lists: []
+            }
+        },
+        created() {
+            this.designList()
+        },
+        methods:{
+            designList:function () {
+                var that = this
+                let data = {
+                    "token": token
+                }
+                axios.post("/admin/creation/designList", Qs.stringify(data))
+                    .then(function (res) {
+                        let data = res.data
+                        if (data.status == 200){
+                            that.lists = data.data
+                        } else {
+                            alert(data.message)
+                        }
+                    })
+                    .catch(function (res) {
+                        console.log(res)
+                    })
+            },
+            delTech:function () {
+
+            }
+        },
+        template:'#designIndex'
+    };
+    var designAdd = {
+        data: function () {
+            return {
+                bookId: 1,
+                title: '',
+                desc: '',
+            }
+        },
+        methods:{
+            sure : function () {
+                var that = this
+                let data = {
+                    "bookId" : this.bookId,
+                    "title": this.title,
+                    "desc": this.desc,
+                    "token": token
+                }
+
+                axios.post("/admin/creation/addDesign", Qs.stringify(data))
+                    .then(function (res) {
+                        let data = res.data
+                        if (data.status == 200){
+                            that.title = ''
+                            that.desc = ''
+                        } else {
+                            alert(data.message)
+                        }
+                    })
+                    .catch(function (res) {
+                        console.log(res)
+                    })
+            },
+            pre : function () {
+
+            }
+        },
+        template:'#designAdd'
+    };
+    var design = {
+        data: function () {
+            return {
+                viewShow: 'index',
+                downShow: true,
+                actionShow: false
+            }
+        },
+        components: {
+            'index':designIndex,
+            'add': designAdd
+        },
+        methods:{
+            actionHide: function(){
+                this.actionShow = false
+                var that = this
+                setTimeout(function () {
+                    that.downShow = true
+                },300)
+            },
+            move :function (data) {
+                let id = data.currentTarget.id
+                switch (id) {
+                    case 'list':
+                        this.viewShow = 'index'
+                        this.actionHide()
+                        break;
+                    case 'create':
+                        this.viewShow = 'add'
+                        this.actionHide()
+                        break;
+                }
+            },
+            upDown :function () {
+                this.actionShow = true
+                this.downShow = false
+            }
+        },
+        template:'#design'
+    };
+
+    var creation = {
+        data: function () {
+            return {
+                viewShow: "techlogy",
+                bottomShow: true,
+                docmHeight: 0,
+                showHeight: 0,
+                showIndex: '0',
+                bottomIcon:[
+                    {"icon":false,"iconHover":true,"text":false},
+                    {"icon":true,"iconHover":false,"text":true},
+                    {"icon":true,"iconHover":false,"text":true},
+                    {"icon":true,"iconHover":false,"text":true}
+                    ],
+                showTag:["techlogy","outline","plot","design"]
+            }
+        },
+        components: {
+            "techlogy": techlogy,
+            "outline": outline,
+            "plot": plot,
+            "design": design
+        },
+        watch:{  // 监听 窗口数值的变化，发生变化就执行 inputType
+            showHeight: 'inputType'
+        },
+        mounted() {
+            this.docmHeight = window.innerHeight;
+            document.getElementById('techBox').setAttribute('style', 'height:'+this.docmHeight+'px;');
+            // window.onresize监听页面高度的变化
+            window.onresize = () => {
+                return (() => {
+                    this.showHeight = window.innerHeight;
+                })()
+            }
+        },
+        directives:{
+          trigger:{
+              inserted(el, binging){
+              }
+          }
+        },
+        methods: {
+            cateShow : function (data) {
+                let id = data.currentTarget.id
+                if (id != this.showIndex){
+                    for(index in this.bottomIcon){
+                        if(this.showIndex == index){
+                            this.bottomIcon[index].icon = true
+                            this.bottomIcon[index].iconHover = false
+                            this.bottomIcon[index].text = true
+                        }
+                        if(index == id){
+                            this.bottomIcon[index].icon = false
+                            this.bottomIcon[index].iconHover = true
+                            this.bottomIcon[index].text = false
+                            this.viewShow = this.showTag[index]
+                        }
+                    }
+                    this.showIndex = id
+                }
+            },
+            inputType: function() {
+                let height = this.docmHeight * 0.2;
+                document.getElementById('techBox').setAttribute('style', 'height:'+this.showHeight+'px;');
+                if(this.docmHeight - this.showHeight < height){
+                    this.bottomShow = true
+                }else{
+                    this.bottomShow = false
+                }
             }
         },
         template:'#creation'
     };
-
-    var addBook = {
-        data: function () {
-            return {
-                bookName: '',
-                bookDesc: ''
-            }
-        },
-        mounted() {
-        },
-        methods: {
-            addBook: function () {
-
-            }
-        },
-        template:'#addBook'
-    };
-    var addVolume = {
-        data: function () {
-            return {
-                bookName: '',
-                volume: ''
-            }
-        },
-        mounted() {
-        },
-        methods: {
-            addVolume: function () {
-
-            }
-        },
-        template:'#addVolume'
-    };
-
-    var addInfo = {
-        data: function () {
-            return {
-                containerShow: false,
-                bookShow: true,
-                volumeShow: false,
-                view: "add-book"
-            }
-        },
-        components: {
-            "add-book": addBook,
-            "add-volume": addVolume
-        },
-        mounted() {
-            this.containerShow = !this.containerShow
-        },
-        methods: {
-            action : function (data) {
-
-            }
-        },
-        template:'#addInfo'
-    };
-
 
     var platform = {
         data: function () {
@@ -711,7 +1411,7 @@
         mounted() {
         },
         components: {
-            "add-info": addInfo
+
         },
         methods: {
             action : function (data) {
@@ -857,6 +1557,7 @@
     const router=new VueRouter({
         routes
     });
+
     new Vue({
         el:'#box',
         data: obj,
@@ -886,7 +1587,7 @@
                         let data = res.data
                         if (data.status == 200){
                             // router.push({path:"workbench"})
-                            router.push({path:"platform"})
+                            router.push({path:"creation"})
                         } else {
                             localStorage.removeItem('token')
                             router.push({path:"login"})

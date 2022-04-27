@@ -82,8 +82,6 @@ func Suggester(){
 
 	searchSuggest(match, suggester)
 
-
-
 }
 
 /*

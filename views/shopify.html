@@ -19,623 +19,685 @@
 </style>
 <body>
 <div class="container">
-
     <style><!--
-        /*
-        shopify适配 start
-        */
-        .templateProduct .tab-content table td{
+    /*
+    shopify适配 start
+    */
+    .templateProduct .tab-content table td{
 
-            padding: 7px 5px;
-        }
-        .templateProduct .tab-content{
-            padding-top: 2%;
-        }
-        .page-product.layout-extended .product-simple-tab .nav:before{
-            top:39px;
-        }
-        .tab-content .tab-pane ul{
-            padding: 0 0 43px 0px;
-        }
-        /*
-        shopify适配 end
-        */
-        body{
-            font-family: "Open Sans", sans-serif !important;
-        }
-        /*防止详情下面多了空白*/
-        #tabs-1{
-            display:none;
-        }
-        .imageItem>.border{
-            border-radius: 5px;
-            margin-bottom: 10px;
-            border: 1px solid #ffb43f !important;
-        }
-        .dotLine{
-            width: 100%;
-            height: 5px;
-            background-image: linear-gradient(to right, #ccc 0%, #ccc 50%, #0000 50%);
-            background-size: 11px 5px;
-            margin-bottom: 43px;
-            background-repeat: repeat-x;
-        }
-        .dot{
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background-color: rgba(255, 180, 63, 100);
-            border-radius: 50%;
-            margin-right: 13px;
-        }
-        .border{
-            border-radius: 5px;
-            display: block;
-            margin: 0 auto;
-            border: 1px solid #ffb43f !important;
-        }
-        .dot{
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background-color: rgba(255, 180, 63, 100);
-            border-radius: 50%;
-            margin-right: 13px;
-        }
-        .mainImg{
-            width:100%;
-            height: auto;
-            margin-bottom: 43px;
-        }
-        .head{
-            line-height: 30px;
-            font-family: "Open Sans", sans-serif;
-            font-weight: bold;
-            font-size: 30px;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-        .desc{
-            font-weight: 400;
-            font-family: "Open Sans", sans-serif;
-            font-size: 18px;
-            color: #101010;
-            line-height: 2;
-        }
+        padding: 7px 5px;
+    }
+    .templateProduct .tab-content{
+        padding-top: 2%;
+    }
+    .page-product.layout-extended .product-simple-tab .nav:before{
+        top:39px;
+    }
+    .tab-content .tab-pane ul{
+        padding: 0 0 43px 0px;
+    }
+    /*
+    shopify适配 end
+    */
+    body{
+        font-family: "Open Sans", sans-serif !important;
+    }
+    /*防止详情下面多了空白*/
+    #tabs-1{
+        display:none;
+    }
+    .imageItem>.border{
+        border-radius: 5px;
+        margin-bottom: 0px;
+        border: 1px solid #ffb43f !important;
+    }
+    .border{
+        border-radius: 5px;
+        display: block;
+        margin: 0 auto;
+        border: 1px solid #ffb43f !important;
+    }
+    .dot{
+        display:inline-block;
+        width:10px;
+        height:10px;
+        background-color:#ffb43f;
+        border-radius:50%;
+        margin-right:13px;
+    }
+    .mainImg{
+        width:100%;
+        height: auto;
+        margin-bottom: 43px;
+    }
+    .head{
+        line-height: 30px;
+        font-family: "Open Sans", sans-serif;
+        font-weight: bold;
+        font-size: 30px;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+    .desc{
+        font-weight: 400;
+        font-family: "Open Sans", sans-serif;
+        font-size: 18px;
+        color: #101010;
+        line-height: 2;
+    }
+    .descItem{
+        padding-bottom: 43px;
+    }
+    .feature{
+        font-size: 30px;
+        font-weight: bold;
+        font-family: "Open Sans", sans-serif;
+        margin-bottom: 24px;
+    }
+    .ulFeature{
+        font-size: 18px;
+        font-family: "Open Sans", sans-serif;
+        color: #101010;
+        list-style:none !important;
+        line-height: 21px;
+    }
+    .descItem>.head{
+        line-height: 30px;
+        font-family: "Open Sans", sans-serif;
+        font-weight: bold;
+        font-size: 30px;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+    .descItem>.desc{
+        font-weight: 400;
+        font-family: "Open Sans", sans-serif;
+        font-size: 18px;
+        color:rgba(16, 16, 16, 100);
+        line-height: 2;
+    }
+    .item>img{
+        margin-right:48px;
+    }
+    .iframeContainer{
+        line-height: 20px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 100);
+        margin-bottom:30px;
+    }
+    .iframeContainer>.iframe{
+        width: 670px;
+        height: 394px;
+        margin-top:17px;
+        border: none;
+    }
+    .iframeContainer>.video_href{
+        color: #fff;
+        display: block;
+        width: 15%;
+        background: #f99000;
+        font-size: 18px;
+        line-height: 44px;
+        text-align: center;
+        border-radius: 22px;
+        font-family: sans-serif;
+        font-weight: 900;
+        margin: 30px auto;
+        box-shadow: 0 0 6px #f08000;
+    }
+    .imageContainer{
+        padding-bottom: 43px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .imageContainer>.imageItem{
+        width: 49%;
+    }
+    .imageContainer>.imageIt{
+        width: 24%;
+    }
+    .imageItem>img{
+        margin-bottom: 0px;
+    }
 
-        .descItem{
-            padding-bottom: 43px;
-        }
-        .feature{
-            font-size: 30px;
-            font-weight: bold;
+    .mo{
+        display:none;
+    }
+    .pc{
+        display:block;
+    }
+    .imageIte{
+        width: 32%;
+        height: auto;
+    }
+    .imageIte>img{
+        margin-bottom: 0px;
+    }
+    .packageList td{
+        border: 1px solid rgba(187, 187, 187, 100);
+        line-height: 20px;
+        text-align: center !important;
+        width: 302px;
+        height: 48px;
+        padding-top: 7px !important;
+        color:rgba(16, 16, 16, 100);
+        font-size: 18px;
+        font-weight: 400;
+    }
+    .packageList{
+        position: relative;
+        display: block;
+        width: fit-content;
+        border-spacing: 7px !important;
+        border-collapse:separate !important;
+        margin:0 auto;
+        margin-bottom: 9px !important;
+    }
+    .packageList .small{
+        width: 71px;
+        text-align: center !important;
+    }
+    .packageList .long{
+        width: 300px;
+        text-align: left !important;
+    }
+    .packageList .ll{
+        width: 361px;
+        text-align: left !important;
+    }
+    .packageList tr:first-child td{
+        border-top:1px solid rgba(187, 187, 187, 100) !important;
+    }
+    .packageList tr:last-child td {
+        border-bottom: 1px solid rgba(187, 187, 187, 100) !important;
+    }
+    .ulDesc{
+        list-style: none !important;
+        width: fit-content;
+        margin: 0 auto;
+        font-size: 18px;
+        font-family: "Open Sans", sans-serif;
+        color: #101010;
+        line-height: 2;
+    }
+    .imageDescContaine>.head{
+        margin-bottom: 0px;
+        margin-top: 8px;
+        font-size: 25px;
+    }
+    .mar7{
+        margin-bottom:17px;
+    }
 
-            font-family: "Open Sans", sans-serif;
-            margin-bottom: 24px;
-        }
-
-        .ulFeature{
-            font-size: 18px;
-            font-family: "Open Sans", sans-serif;
-            color: #101010;
-            list-style:none !important;
-            line-height: 21px;
-
-        }
-
-
-        .descItem>.head{
-            line-height: 30px;
-            font-family: "Open Sans", sans-serif;
-            font-weight: bold;
-            font-size: 30px;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-
-        .descItem>.desc{
-            font-weight: 400;
-            font-family: "Open Sans", sans-serif;
-            font-size: 18px;
-            color:rgba(16, 16, 16, 100);
-            line-height: 2;
-
-        }
-        .item>img{
-            margin-right:48px;
-        }
-        .descContainer>.head{
-            line-height: 30px;
-            font-family: "Open Sans", sans-serif;
-            font-weight: bold;
-            font-size: 30px;
-            margin-bottom: 8px;
-            text-align: left;
-        }
-        .descContainer>.desc{
-            line-height: 2;
-            color:rgba(16, 16, 16, 100);
-            font-size: 18px;
-            font-weight: 400;
-        }
-
-
-        .iframeContainer{
-
-            line-height: 20px;
-
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 100);
+    .dotLine {
+        width: 100%;
+        height: 1px;
+        border-bottom: 2px dashed #ccc;
+        margin-bottom: 43px;
+    }
+    .pad10{
+        padding-bottom:10px;
+    }
+    @media screen and (max-width: 700px) {
+        .dotLine {
             margin-bottom:30px;
         }
-        .iframeContainer>.iframe{
-            width: 670px;
-            height: 394px;
-            margin-top:17px;
-            border: none;
-        }
-        .iframeContainer>.video_href{
-            color: #fff;
-            display: block;
-            width: 15%;
-            background: #f99000;
-            font-size: 18px;
-            line-height: 44px;
-            text-align: center;
-            border-radius: 22px;
-            font-family: sans-serif;
-            font-weight: 900;
-            margin: 30px auto;
-            box-shadow: 0 0 6px #f08000;
-        }
-        .imageContainer{
-            padding-bottom: 43px;
-            display: flex;
-            justify-content: space-between;
-
-        }
-        .imageContainer>.imageItem{
-            width: 49%;
-        }
-        .imageItem>img{
-            margin-bottom: 24px;
-
-        }
-        .imageDescContainer{
-            width: 96%;
-            display: block;
-            margin: 0 auto;
-
-        }
-        .imageDescContainer>.head{
-            text-align: center;
-            margin-bottom:8px;
-            font-size: 27px;
-        }
-        .imageDescContainer>.desc{
-            font-size: 18px;
-            line-height:2;
-            text-align: left ;
-        }
-        .mo{
-            display:none;
-        }
-        .pc{
-            display:block;
-        }
-        .wrod_br2{
-            display:none;
-        }
-        .imageIte{
-            width: 32%;
-            height: auto;
-        }
-        .desch{
+        .imageDescContaine>.head{
             margin-bottom: 0px;
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 24px;
-            text-align: center;
+            margin-top: 8px;
+            font-size: 20px;
         }
-        .imageContainer>desch{
-            width: 24%;
-            text-align:center;
+        .imageDescContaine{
+            margin-bottom:0px;
+        }
+        .imageItem>.border{
+            margin-bottom:0px;
         }
         .imageIte>img{
-            margin-bottom: 10px;
-        }
-        .packageList td{
-            border: 1px solid rgba(187, 187, 187, 100);
-            line-height: 20px;
-            text-align: center !important;
-            width: 302px;
-            height: 48px;
-            padding-top: 7px !important;
-            color:rgba(16, 16, 16, 100);
-            font-size: 18px;
-            font-weight: 400;
+            margin-bottom: 0px;
         }
         .packageList{
-            position: relative;
+            width:100%;
+        }
+        .packageList td{
+            font-size:16px;
+        }
+        .descContainer>.head{
+            text-align:center;
+        }
+        .imageIte{
+            width:100%;
+            margin-bottom: 30px;
+        }
+        .item>img{
+            margin: 0 auto;
             display: block;
-            width: fit-content;
-            border-spacing: 7px !important;
-            border-collapse:separate !important;
-            margin:0 auto;
-            margin-bottom: 43px !important;
+            margin-bottom: 17px;
         }
-        .packageList .small{
-            width: 71px;
-            text-align: center !important;
+        .iframeContainer{
+            margin-bottom: 30px;
         }
-        .packageList .long{
-            width: 300px;
-            text-align: left !important;
+        .iframeContainer>.iframe{
+            height:auto;
+            margin-bottom: 1px;
+            margin-top: 8px;
         }
-        .packageList .ll{
-            width: 361px;
-            text-align: left !important;
+        .descItem>.head{
+            font-size:20px;
+            line-height: 22px;
+            margin-bottom: 8px;
         }
-        .packageList tr:first-child td{
-            border-top:1px solid rgba(187, 187, 187, 100) !important;
+        .descItem>.desc{
+            font-size:16px;
+            line-height: inherit;
         }
-        .packageList tr:last-child td {
-            border-bottom: 1px solid rgba(187, 187, 187, 100) !important;
+        .item{
+            display: block;
+            padding-bottom:30px;
+        }
+        .descContainer>.head{
+            font-size:20px;
+            line-height: 22px;
+            margin-bottom: 8px;
+        }
+        .descContainer>.desc{
+            font-size:16px;
+            line-height: inherit;
+        }
+        .descItem{
+            padding-bottom: 30px;
+        }
+        .product-simple-tab .nav li a{
+            line-height: 24px;
+        }
+        .page-product.layout-extended .product-simple-tab .nav li{
+            padding: 3px;
+            margin-right: 4px;
+        }
+        .product-simple-tab .nav li a{
+            font-size: 15px;
+        }
+        .page-product.layout-extended .product-simple-tab .nav li:before{
+            display:none !important;
+        }
+        .mainImg{
+            margin-bottom:30px;
+        }
+        .tab-content .tab-pane ul{
+            padding: 0 0 30px 0px;
+        }
+        .head{
+            font-size:20px;
+            margin-bottom:8px;
         }
         .ulDesc{
-            list-style: none !important;
-            width: fit-content;
-            margin: 0 auto;
-            font-size: 18px;
-            font-family: "Open Sans", sans-serif;
-            color: #101010;
-
-
-            line-height: 2;
+            width:100%;
+            font-size: 16px;
+            line-height: inherit;
         }
-        .pcflex{
-            display:flex;
+        .feature{
+            margin-bottom:10px;
+            font-size: 20px;
         }
-        @media screen and (max-width: 700px) {
-            .imageItem>.border{
-                margin-bottom:10px;
-            }
-            .imageIte>img{
-                margin-bottom: 10px;
-            }
-            .headMo{
-                font-size:20px;
-                line-height: 22px;
-                margin-bottom: 8px;
-                font-weight:bold;
-            }
-            .packageList{
-                width:100%;
-            }
-            .packageList td{
-                font-size:16px;
-            }
-            .descContainer>.head{
-                text-align:center;
-            }
-            .desch{
-                margin-bottom:30px;
-                margin-top: 17px;
-            }
-            .imageIte{
-                width:100%;
-                margin-bottom: 30px;
-            }
-            .item>img{
-                margin: 0 auto;
-                display: block;
-                margin-bottom: 17px;
-            }
-            .iframeContainer{
-                margin-bottom: 30px;
-            }
-            .iframeContainer>.iframe{
-                height:auto;
-                margin-bottom: 1px;
-                margin-top: 8px;
-            }
-            .descItem>.head{
-                font-size:20px;
-                line-height: 22px;
-                margin-bottom: 8px;
-            }
-            .descItem>.desc{
-                font-size:16px;
-                line-height: inherit;
-            }
-            .item{
-                display: block;
-                padding-bottom:30px;
-            }
-
-            .descContainer>.head{
-                font-size:20px;
-                line-height: 22px;
-                margin-bottom: 8px;
-            }
-            .descContainer>.desc{
-                font-size:16px;
-                line-height: inherit;
-            }
-
-
-            .descItem{
-                padding-bottom: 30px;
-            }
-
-            .product-simple-tab .nav li a{
-                line-height: 24px;
-            }
-            .page-product.layout-extended .product-simple-tab .nav li{
-                padding: 3px;
-                margin-right: 4px;
-            }
-            .product-simple-tab .nav li a{
-                font-size: 15px;
-            }
-            .page-product.layout-extended .product-simple-tab .nav li:before{
-                display:none !important;
-            }
-            .mainImg{
-                margin-bottom:30px;
-            }
-
-            .tab-content .tab-pane ul{
-                padding: 0 0 30px 0px;
-            }
-            .head{
-                font-size:20px;
-                margin-bottom:8px;
-            }
-            .ulDesc{
-                width:100%;
-                font-size: 16px;
-                line-height: inherit;
-            }
-            .feature{
-                margin-bottom:17px;
-                font-size: 20px;
-            }
-            .ulFeature{
-                font-size: 16px;
-                line-height: inherit;
-            }
-            .imageContainer{
-                display:block;
-                padding-bottom: 0px;
-            }
-            .imageContainer>.imageItem{
-                width:100%;
-            }
-            .imageItem{
-                margin-bottom:30px;
-            }
-            .desc{
-                font-size:16px;
-                line-height: inherit;
-            }
-            .imageItem>img{
-                margin-bottom:0px;
-            }
-            .imageDescContainer{
-                width: 100%;
-                display: block;
-                margin: 0 auto;
-
-            }
-            .imageDescContainer>.head{
-                font-size: 20px;
-                line-height: 22px;
-                margin-bottom: 8px;
-                text-align: center ;
-            }
-            .imageDescContainer>.desc {
-                font-size: 16px;
-                line-height: inherit;
-            }
-            .mo{
-                display:block;
-            }
-            .pc{
-                display:none;
-            }
-            .pcflex{
-                display:none;
-            }
+        .ulFeature{
+            font-size: 16px;
+            line-height: inherit;
         }
-        --></style>
-    <div class="iframeContainer"><iframe class="iframe" src="https://www.youtube.com/embed/c1PnGoZR1Eo" allowfullscreen=""></iframe></div>
-    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/333.png?v=1628840161" class="mainImg pc">
-    <img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/c8577a1df210126991a8c79837c61c3f_9162e241-7279-4290-8b77-da5a45fd0efc.jpg?v=1648462440" class="mainImg mo">
+        .imageContainer{
+            display:block;
+            padding-bottom: 0px;
+        }
+        .imageContainer>.imageItem{
+            width:100%;
+            margin-bottom:30px;
+        }
+        .imageItem{
+            margin-bottom:0px;
+        }
+        .desc{
+            font-size:16px;
+            line-height: inherit;
+        }
+        .imageItem>img{
+            margin-bottom:0px;
+        }
+
+        .mo{
+            display:block;
+        }
+        .pc{
+            display:none;
+        }
+        .imageContainer>.imageIt{
+            width:49%;
+        }
+        .imageContainer>.mar10{
+            margin-bottom:10px;
+        }
+
+        .pad10{
+            padding-bottom:0px;
+        }
+    }
+    --></style>
+
+
+
+    <div class="mainImg pc"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/1_a5eeff80-2fd7-458e-8280-e6c83c9d58b0.jpg?v=1650868938"></div>
+    <div class="mainImg mo"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/1_4f1fe7e3-98e4-4b7e-bf98-62e3c75e19b7.jpg?v=1650868938"></div>
     <div class="descItem">
         <div class="head">Product Description</div>
-        <div class="desc">TonyPi intelligent visual humanoid robot uses Raspberry Pi as the central controller. OpenCV is the image processing library, which uses Python language programming. The robot is equipped with a 2DOF high-definition camera to realise Al many games. It equipped with high-voltage bus servo and voltage display. With built-in action groups, TonyPi can complete many challenging motion like push-ups.</div>
+        <div style="text-align: left;" class="desc pc">This three connectors serial bus smart servo possess 35KG torque and adopts all-metal gears inside, strong and durable. It can be controlled by serial port commands, connected to multiple servos at the same time, which can help us create robotic arms and bionic robots. Compared with ordinary servos on the market, it can read back the angle and faceback voltage, temperature position parameter.</div>
+        <div style="text-align: left;" class="desc mo">
+            <span style="margin-bottom:10px;display: block;">This three connectors serial bus smart servo possess 35KG torque and adopts all-metal gears inside, strong and durable. </span>It can be controlled by serial port commands, connected to multiple servos at the same time, which can help us create robotic arms and bionic robots. Compared with ordinary servos on the market, it can read back the angle and faceback voltage, temperature position parameter.</div>
     </div>
     <div class="feature">Feature</div>
-    <ul class="ulFeature">
+    <ul class="ulFeature pc">
         <li>
-            <span class="dot"></span><b>The robot kit includes the Raspberry Pi 4B 4GB controller board.</b>
-        </li>
+            <span class="dot"></span>Suppot position/temperature/voltage feedback for protecting the servo from burning</li>
         <li>
-            <span class="dot"></span>Large capacity battery, long working duration</li>
+            <span class="dot"></span>With the TTL/USB debugging board, you can set the servo through the provided PC software</li>
         <li>
-            <span class="dot"></span>Robot battery voltage display</li>
+            <span class="dot"></span>High-precision potentiometer for more stable operation</li>
         <li>
-            <span class="dot"></span>Installed HD camera catches real-time images</li>
-        <li>
-            <span class="dot"></span>Provide PC software source code and Python source code</li>
-        <li>
-            <span class="dot"></span>Support PC software, phone App and VNC remote desktop control</li>
+            <span class="dot"></span>Provide 51, Arduino, STM32, and Raspberry Pi control source code</li>
     </ul>
-    <div class="imageContainer">
-        <div class="imageIte">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/fdac353b299f2676ecea159a865bb939.gif?v=1621907137">
-            <div class="imageDescContainer">
-                <div class="head">Vision Auto Shooting</div>
-                <div class="desc">Perform image processing through OpenCV to obtain the ball’s position, and then use PID algorithm to track and kick it automatically.</div>
-            </div>
-        </div>
-        <div class="imageIte pc">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/688eacdfff426cc4b63976d4ac808ad5_145c59e5-bee8-4271-b2ce-75c3521600ac.gif?v=1621906929">
-            <div class="imageDescContainer">
-                <div class="head">Color Recognition</div>
-                <div class="desc">Use OpenCV to convert the image into LAB color space, then obtain the recognized color. TonyPi nods when recognizes red and shakes for the green and blue.</div>
-            </div>
-        </div>
-        <div class="imageIte">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/a5ff5e83ee3757382c27ba2c74c4f2df_af4fa4ce-1398-4226-945e-935e92590937.gif?v=1621906741">
-            <div class="imageDescContainer">
-                <div class="head">Tag Recognition (AprilTag)</div>
-                <div class="desc">TonyPi performs actions according to the recognized tags. In addition to the provided tags, you’re encouraged to program your own tags and actions.</div>
-            </div>
-        </div>
-    </div>
-    <div class="imageContainer">
-        <div class="imageIte">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/e2c5988ccf69350d46f88effb3ca3e48_d0963389-082f-488b-a2c8-0f81c6fd1d27.gif?v=1621906784">
-            <div style="width: 100%;" class="imageDescContainer">
-                <div class="head">Facial Recognition</div>
-                <div class="desc">Use OpenCV to load the trained face detection model. TonyPi will operate the greeting action when recognizes a face.</div>
-            </div>
-        </div>
-        <div class="imageIte pc">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/29f7f36c3cea05d070f2b5367ffb7023_55b0aa3f-89ea-44e7-a4aa-09e59d44800b.gif?v=1621906977">
-            <div style="width: 100%;" class="imageDescContainer">
-                <div class="head">Color Tracking</div>
-                <div class="desc">Processing images through OpenCV to receive positions of red, green and blue, TonyPi tracks the target color in real time.</div>
-            </div>
-        </div>
-        <div class="imageIte">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/1_207210c0-b214-4323-8177-267975e29e2d.gif?v=1621906831">
-            <div style="width: 100%;" class="imageDescContainer">
-                <div class="head">Line Following</div>
-                <div class="desc">TonyPi can recognize black, white and red line through OpenCV. Calculate the line’s position and then adjust the route to follow.</div>
-            </div>
-        </div>
-    </div>
-    <div class="imageContainer">
-        <div class="imageItem">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/d6f2ac92fd2aa12612a7d08e5f562a99_a2b31bab-23b7-44a5-8e91-a1365bc7d445.gif?v=1621907062" class="border">
-            <div class="imageDescContainer">
-                <div class="head" style="margin-bottom: 0px;">Intelligent Transport</div>
-            </div>
-        </div>
-        <div class="imageItem">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/66ccfad14237c285ae5a913c7c7e105c.gif?v=1621906867" class="border">
-            <div class="imageDescContainer">
-                <div class="head" style="margin-bottom: 0px;">Motion Tracking</div>
-            </div>
-        </div>
-    </div>
-    <div class="imageContainer">
-        <div class="imageItem"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/2_586cc1ad-fe71-4be4-8db3-3c0c03b812dc.jpg?v=1621906608" class="border" style="margin-bottom: 0px;"></div>
-        <div class="imageItem"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/3_ce07518b-64c2-42ff-b24e-7d35dd402507.jpg?v=1621906624" class="border" style="margin-bottom: 0px;"></div>
-    </div>
-    <div class="descItem">
-        <div class="head">Control Method</div>
-        <div class="desc">Provide PC software and APP for TonyPi's control. In the “WonderPi” App, you can connect it to the wireless LAN instead of searching IP in router to set the MAC, which is easier!</div>
-    </div>
-    <div class="imageContainer">
-        <div class="imageItem">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_f1e32d34-84a3-4665-911a-0ac4622045ba.jpg?v=1621906640" class="border">
-            <div class="imageDescContainer">
-                <div class="head">High Voltage Bus Servo</div>
-                <div class="desc">11.1V high voltage bus servo reduces current by more than 60%, which improves the robot’s service time.</div>
-            </div>
-        </div>
-        <div class="imageItem">
-            <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/5_ae63fced-61e5-44cf-8dce-6d7dd683a099.jpg?v=1621906657" class="border">
-            <div class="imageDescContainer">
-                <div class="head">2DOF Wide-angle Camera</div>
-                <div class="desc">Loaded with 120° wide angle HD camera, TonyPi can look uo and around for wider vision. Support manual focus adjustment.</div>
-            </div>
-        </div>
-    </div>
-    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/3_5f630e27-c81a-49f9-8aa7-6c530295c1ba.jpg?v=1648709328" class="mainImg pc">
-    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/dd9333d90aa852d3ac384c6d6389a93d_59e35c71-ccc4-4edf-9386-b090e36072fa.jpg?v=1648709328" class="mainImg mo">
-    <div class="head">Powerful Control System</div>
-    <ul class="ulDesc">
+    <ul class="ulFeature mo">
         <li>
-            <span class="dot"></span>Independent power switch for stable power supply</li>
+            <span class="dot"></span>Suppot position/temperature/voltage feedback for protecting the servo from burning</li>
         <li>
-            <span class="dot"></span>channel PWM servo port with avoiding current protection</li>
+            <span class="dot"></span>With the TTL/USB debugging board, you can set the servo through the provided PC software</li>
         <li>
-            <span class="dot"></span>Loaded 6-axis sensor IC helps data collection</li>
+            <span class="dot"></span>High-precision potentiometer for more stable operation</li>
         <li>
-            <span class="dot"></span>GPIO pins and 4 IIC ports for users’ extension</li>
-        <li>
-            <span class="dot"></span>4PIN ports are compatible with Hiwonder sensors</li>
+            <span class="dot"></span>Provide bus servo communication protocol, 51, Arduino and STM32 source code</li>
     </ul>
-
-    <div class="imageContainer pcflex">
-        <div class="imageItem" style="margin-bottom:0px;"><img style="margin-bottom:0px;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_01_5762bbb1-96f9-4347-bb4e-2119a4dfae6b.jpg?v=1648709328"></div>
-        <div class="imageItem" style="margin-bottom:0px;"><img style="margin-bottom:0px;" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_03_e50cac7a-25bb-47a5-8fda-5f980b933898.jpg?v=1648709328"></div>
+    <div class="dotLine mo" style="margin-bottom: 10px"></div>
+    <div class="head pc" style="margin-top: 12px">Clean Wiring</div>
+    <div class="head mo">Clean Wiring</div>
+    <div style="text-align: left;padding-bottom: 20px;" class="desc">There are 3 ports for you to connect which makes the project have clean wiring and beautiful outlook.</div>
+    <div class="mainImg pc"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/2_cbed50bf-320e-45e7-ac18-00f751815987.jpg?v=1650868939"></div>
+    <div class="mainImg mo"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/2_be2ac45c-a071-4164-87f8-43bca8e05ca5.jpg?v=1650868938"></div>
+    <div class="mainImg pc" style="margin-top: 55px">
+        <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/752d0a1af97809ba8bcd6984e5d68889_83901ed5-1acf-43f0-9622-b7447c6f6ecd.jpg?v=1650868938">
     </div>
     <div class="mainImg mo">
-        <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_01_5762bbb1-96f9-4347-bb4e-2119a4dfae6b.jpg?v=1648709328">
-        <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_03_e50cac7a-25bb-47a5-8fda-5f980b933898.jpg?v=1648709328">
+        <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/3ca55d4d91c569c1a7489791b5dadf00_45aae3d4-334d-42c4-8bb3-98d1102886f2.jpg?v=1650868938">
     </div>
-
-    <div class="head">TonyPi Standard Kit</div>
-    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/8_caf2000b-b3f4-4b8c-95dc-7802578050d3.jpg?v=1621906706" class="mainImg pc"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/94d53239037849179c79285840325f32_36b92121-b700-427b-baa2-1408cd249963.jpg?v=1621906721" class="mainImg mo">
-    <div class="head">TonyPi Advanced Kit</div>
-    <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/TonyPi_5a27ba54-daee-4d89-9eb5-1cead5c6b38e.jpg?v=1631506054" class="mainImg pc"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/TonyPi_65c111ca-241f-4086-bb1d-27bebb4a86cb.jpg?v=1631506054" class="mainImg mo">
-    <div class="head">Standard &amp; Advanced Kit</div>
-    <img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/1-_2.jpg?v=1642386952" class="mainImg pc"><img src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/1-_3.jpg?v=1642386952" class="mainImg mo">
-    <div class="desc"><b>Note: TonyPi includes a Raspberry Pi 4B 4GB controller. The memory card is 16G.</b></div>
+    <div class="pc" style="margin-top: 55px">
+        <div class="imageContainer">
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/3_6d2b9d8e-1098-48f6-bae7-aa57c7dc9f38.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">Powerful Torque</div>
+                </div>
+            </div>
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_0ee862b6-9925-470f-8523-d332fc573085.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">All Metal Gear</div>
+                </div>
+            </div>
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/5_a7583f1c-6c23-4070-a3ed-5ff039415fac.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">Metal Shell</div>
+                </div>
+            </div>
+        </div>
+        <div class="imageContainer">
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/6_80952059-8d49-4810-80e7-685c90e9daf9.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">High Voltage</div>
+                </div>
+            </div>
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/7_93a06430-c480-4605-b089-17e5d40f0945.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">Serial Bus Port</div>
+                </div>
+            </div>
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/8_a1ec28fc-7371-44b1-89a9-ffa62a3cd0b8.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">Data Feedback</div>
+                </div>
+            </div>
+        </div>
+        <div class="imageContainer">
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/9_d0628843-bca9-4fe3-bcf0-781d9fa622bc.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">Two Operation Modes</div>
+                </div>
+            </div>
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/10_24799ed4-876c-42c8-8b89-71d75f5b0281.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">Double Shaft</div>
+                </div>
+            </div>
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/11_db9400f8-ea49-4cca-860a-b8b28c6f4d0b.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">ID Identification, Serial Communication</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mo" style="margin-top: 36px">
+        <div class="imageContainer">
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/3_6d2b9d8e-1098-48f6-bae7-aa57c7dc9f38.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">Powerful Torque</div>
+                </div>
+            </div>
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/4_0ee862b6-9925-470f-8523-d332fc573085.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">All Metal Gear</div>
+                </div>
+            </div>
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/5_a7583f1c-6c23-4070-a3ed-5ff039415fac.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">Metal Shell</div>
+                </div>
+            </div>
+        </div>
+        <div class="imageContainer">
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/6_80952059-8d49-4810-80e7-685c90e9daf9.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">High Voltage</div>
+                </div>
+            </div>
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/7_93a06430-c480-4605-b089-17e5d40f0945.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">Serial Bus Port</div>
+                </div>
+            </div>
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/8_a1ec28fc-7371-44b1-89a9-ffa62a3cd0b8.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">Data Feedback</div>
+                </div>
+            </div>
+        </div>
+        <div class="imageContainer">
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/9_d0628843-bca9-4fe3-bcf0-781d9fa622bc.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">Two Operation Modes</div>
+                </div>
+            </div>
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/10_24799ed4-876c-42c8-8b89-71d75f5b0281.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">Double Shaft</div>
+                </div>
+            </div>
+            <div class="imageIte">
+                <img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/11_db9400f8-ea49-4cca-860a-b8b28c6f4d0b.jpg?v=1650868938" class="border">
+                <div style="width: 100%;" class="imageDescContaine">
+                    <div class="head">ID Identification, Serial Communication</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dotLine pc" style="margin-bottom: 30px;"></div>
+    <div class="dotLine mo" style="margin-bottom: 15px;"></div>
+    <div style="padding-bottom: 20px;" class="descItem">
+        <div class="head">Servo Debugging System</div>
+        <div style="text-align: left;" class="desc">In Debugging system, you can set ID number, working mode, rotation speed, position deviation, LED light, temperature alarm, stalling alarm and voltage alarm for servos.</div>
+    </div>
+    <div style="margin-bottom: 36px" class="imageContainer pad10">
+        <div class="imageItem"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/14_5a30a59d-5e52-468f-aa6a-fa85b713dc3a.jpg?v=1650607759" class="border"></div>
+        <div class="imageItem mar10"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/15_1eaf9d21-ca5f-45ce-b5e8-519a314a452a.jpg?v=1650607759" class="border"></div>
+    </div>
+    <div class="dotLine mo" style="margin-bottom: 36px"></div>
+    <div class="pc">
+        <div class="imageContainer" style="margin-top: 55px">
+            <div class="imageItem"><a target="_blank" href="https://www.hiwonder.hk/products/hiwonder-ttl-usb-debugging-board?_pos=1&amp;_sid=f17b37147&amp;_ss=r"><img class="border" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/16_1e95b9c4-0479-458e-9e0c-03cb12d86a29.jpg?v=1650607759"></a></div>
+            <div class="imageItem"><a target="_blank" href="https://www.hiwonder.hk/products/serial-bus-servo-controller?_pos=1&amp;_sid=6ceec4237&amp;_ss=r"><img class="border" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/17_372e5ce1-3c96-4e53-a49b-612d851dc629.jpg?v=1650607759"></a></div>
+        </div>
+    </div>
+    <div class="imageContainer mo">
+        <div class="imageItem"><a target="_blank" href="https://www.hiwonder.hk/products/hiwonder-ttl-usb-debugging-board?_pos=1&amp;_sid=f17b37147&amp;_ss=r"><img class="border" src="https://cdn.shopify.com/s/files/1/0084/2799/5187/files/1111_1.jpg?v=1650878069"></a></div>
+        <div class="imageItem"><a target="_blank" href="https://www.hiwonder.hk/products/serial-bus-servo-controller?_pos=1&amp;_sid=6ceec4237&amp;_ss=r"><img class="border" src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/17_372e5ce1-3c96-4e53-a49b-612d851dc629.jpg?v=1650607759"></a></div>
+    </div>
+    <div style="margin-bottom: 10px;margin-top: 13px" class="head pc">Packing List</div>
+    <div style="margin-bottom: 10px;" class="head mo">Packing List</div>
+    <div class="mainImg pc"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/qingdan_2f03c02f-f7d3-4916-a47d-8afd4d445f8d.jpg?v=1650874088"></div>
+<div class="mainImg mo"><img src="https://cdn.shopifycdn.net/s/files/1/0084/2799/5187/files/5f7045ecd6b82d4902502c54a7369b96_9d93384f-4dfa-4f53-bd7b-426656d8802a.jpg?v=1650868938"></div>
     <h5><strong><b>Specifications</b></strong></h5>
     <table>
         <tbody>
         <tr>
-            <td style="width: 209px;"><strong>Item</strong></td>
-            <td style="width: 521px;"><strong>Specification</strong></td>
+            <td><strong>Item</strong></td>
+            <td><strong>Specification</strong></td>
         </tr>
         <tr>
-            <td style="width: 337px;"><span>Raspberry Pi 4B</span></td>
-            <td style="width: 181px;"> Processor: Broadcom BCM2711, quad-core Cortex-A72 (ARM v8) 64-bit SoC @ 1.5GHz<br>Memory: 1GB, 2GB or 4GB LPDDR4(depending on model)<br>Connectivity:<br>2.4 GHz and 5.0 GHz IEEE 802.11b/g/n/ac wireless<br>LAN, Bluetooth 5.0, BLE<br>Gigabit Ethernet<br>2 × USB 3.0 ports<br>2 × USB 2.0 ports<br>GPIO: Standard 40-pin GPIO header(fully backwards-compatible with previous boards)<br>Video &amp; Sound:<br>2 × micro HDMI ports (up to 4Kp60 supported)<br>2-lane MIPI DSI display port<br>2-lane MIPI CSI camera port<br>4-pole stereo audio and composite video port<br>Multimedia:<br>H.265 (4Kp60 decode)<br>H.264 (1080p60 decode, 1080p30 encode)<br>OpenGL ES, 3.0 graphics<br>SD card support: Micro SD card slot for loading operating system and data storage<br>Input power:<br>5V DC via USB-C connector (minimum 3A)<br>5V DC via GPIO header (minimum 3A)<br>Power over Ethernet (PoE)–enabled(requires separate PoE HAT)<br>Environment: Operating temperature 0–50ºC
-                <p> </p>
+            <td>Name</td>
+            <td>HTD-35H serial bus high voltage servo</td>
+        </tr>
+        <tr>
+            <td>Brand</td>
+            <td>Hiwonder</td>
+        </tr>
+        <tr>
+            <td>Weight</td>
+            <td>64g</td>
+        </tr>
+        <tr>
+            <td>Dimension</td>
+            <td>51.1 X 20.14 X 40mm</td>
+        </tr>
+        <tr>
+            <td>Working voltage</td>
+            <td>9-12.6V</td>
+        </tr>
+        <tr>
+            <td>Rotation speed</td>
+            <td>0.18sec/ 60°11.1V</td>
+        </tr>
+        <tr>
+            <td>Rotation torque</td>
+            <td>35kg.cm 11.1V</td>
+        </tr>
+
+        <tr>
+            <td>Static maximum torque</td>
+            <td>35kg.cm 11.1V</td>
+        </tr>
+        <tr>
+            <td>Rotation range</td>
+            <td>0-240°</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>No-load current</td>
+            <td>100mA</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Stall current</td>
+            <td>3A</td>
+        </tr>
+        <tr>
+            <td>Servo accuracy</td>
+            <td>0.3°</td>
+        </tr>
+        <tr>
+            <td>Controllable angle range</td>
+            <td>0-1000,corresponding to 0-240°</td>
+        </tr>
+        <tr>
+            <td>Control method</td>
+            <td>UART serial command</td>
+        </tr>
+        <tr>
+            <td>Communication baud rate</td>
+            <td>115200</td>
+        </tr>
+        <tr>
+            <td>Storage</td>
+            <td>save data when power off</td>
+        </tr>
+        <tr>
+            <td>Servo ID</td>
+            <td>can be set to 0-253.1 by default</td>
+        </tr>
+        <tr>
+            <td>Angle read back function</td>
+            <td>support</td>
+        </tr>
+        <tr>
+            <td>Protection</td>
+            <td>avoid stalling and overheat</td>
+        </tr>
+        <tr>
+            <td>Data feedback</td>
+            <td>temperature, voltage, position</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Working mode</td>
+            <td>servo mode and gear motor mode</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Gear tape</td>
+            <td>metal gear</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Servo wire length</td>
+            <td>20cm</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Connector</td>
+            <td>PH2.0-3P</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Applicable to</td>
+            <td>joints of bionic robots</td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+            <td style="width: 352px;"><span>Package List</span></td>
+            <td style="width: 352px;">
+                <span>1* HTD-35H servo<br>1* Plastic main servo horn<br>1* Plastic assistant servo horn<br>1* Servo wire(20cm)<br>1* Screw bag<br></span>
             </td>
         </tr>
         <tr>
-            <td rowspan="2" style="width: 337px;">
-                <span>Raspberry Pi Extension Board</span> </td>
-            <td rowspan="2" style="width: 181px;"><span>The built-in over-current protection of 8 channel PWM port prevents the servo from damage.<br>Built-in single bus serial electric circuit can directly control the serial servo<br>Two-channel programmable LED lights, clearly show the working status of the system<br>Two-channel programmable buttons for more conveniently setting the system <br>Reserved IIC and UART ports, which can be compatible with various sensors<br></span></td>
         </tr>
-        <tr></tr>
-        <tr>
-            <td rowspan="2" style="width: 337px;"><span>Servo </span></td>
-            <td rowspan="2" style="width: 181px;"><span>LX-824 three-port bus servo</span></td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td rowspan="2" style="width: 337px;"><span>Power Supply</span></td>
-            <td rowspan="2" style="width: 181px;"><span>11.1 V 2000mAh lithium battery</span></td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td rowspan="2" style="width: 337px;"><span>Product Weight</span></td>
-            <td rowspan="2" style="width: 181px;">1.7 kg</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td style="width: 337px;">Working Hours</td>
-            <td style="width: 181px;">about 60min</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>Standard Kit Package List(Finished Parts)</td>
-            <td>1* robot frame<br> 16* LX-824HV three-port bus servo<br> 1* Raspberry Pi(4B 4GB)<br> 1* Raspberry Pi extension board<br> 2* LFD-01 servo<br> 1* Raspberry Pi Acrylic fixing plate<br> 1* HD camera<br> 1* 11.1 V 2000mAh lithium battery<br> 1* voltage display module<br> 1* camera head frame<br> 1* pack of accessories<br> 1* power charger<br> 1* servo wire<br> 1* screwdriver<br> 3* Tag card<br> 3* Color ball</td>
-        </tr>
-        <tr>
-            <td>Advanced Kit Package List(Finished Parts)</td>
-            <td>1* robot frame<br> 16* LX-824HV three-port bus servo<br> 1* Raspberry Pi(4B 4GB)<br> 1* Raspberry Pi extension board<br> 2* LFD-01 servo<br> 1* Raspberry Pi Acrylic fixing plate<br> 1* HD camera<br> 1* 11.1 V 2000mAh lithium battery<br> 1* voltage display module<br> 1* camera head frame<br> 1* pack of accessories<br> 1* power charger<br> 1* servo wire<br> 1* screwdriver<br> 3* Tag card<br> 3* Color ball<br> 1* Map<br> 3* Color sponge</td>
-        </tr>
-        <tr></tr>
         </tbody>
     </table>
 </div>

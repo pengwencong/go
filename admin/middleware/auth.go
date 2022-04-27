@@ -19,6 +19,7 @@ func Login(c *gin.Context)  {
 			"status":300,
 			"message":"no login",
 		})
+		c.Abort()
 	}
 
 	c.Next()

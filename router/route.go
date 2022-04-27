@@ -4,28 +4,37 @@ import (
 	"github.com/gin-gonic/gin"
 	adcontroller "go/admin/controller"
 	"go/admin/middleware"
-	mw "go/middleware"
 	"go/chat"
 	"go/controller"
 	"go/elastic"
 	"go/live"
+	mw "go/middleware"
 	"go/monitor"
 	"go/server"
 )
 
 func Init(engine *gin.Engine) {
-
-	kafkaGroup := engine.Group("/kafka")
-	{
-		kafkaGroup.GET("/producter", server.Producer)
-		kafkaGroup.GET("/test", controller.RedisTest)
-	}
-
 	adminGroup := engine.Group("/admin")
 	{
 		adminGroup.POST("/login", adcontroller.Login)
 		adminGroup.POST("/isLogin", adcontroller.IsLogin)
-		adminGroup.POST("/creation", middleware.Login, adcontroller.Creation)
+		creationGroup := adminGroup.Group("/creation").Use(middleware.Login)
+		{
+			creationGroup.POST("/addTech", adcontroller.AddTech)
+			creationGroup.POST("/techList", adcontroller.TechList)
+			creationGroup.POST("/outlineList", adcontroller.OutlineList)
+			creationGroup.POST("/addOutline", adcontroller.AddOutline)
+			creationGroup.POST("/plotList", adcontroller.PlotList)
+			creationGroup.POST("/addPlot", adcontroller.AddPlot)
+			creationGroup.POST("/designList", adcontroller.DesignList)
+			creationGroup.POST("/addDesign", adcontroller.AddDesign)
+		}
+	}
+
+	kafkaGroup := engine.Group("/kafka")
+	{
+		kafkaGroup.GET("/producter", server.Producer)
+		kafkaGroup.GET("/test/*name", controller.RedisTest)
 	}
 
 	elasticGroup := engine.Group("/elastic").Use(mw.Access)
@@ -60,8 +69,8 @@ func Init(engine *gin.Engine) {
 	engine.Static("/resource/video","./resource/video")
 	engine.Static("/public/static","./public/static")
 	engine.StaticFile("/admin","./views/admin/index.html")
-	engine.StaticFile("/shopify","./views/shopify.html")
 	engine.Static("/resource/js","./resource/js")
 	engine.GET("/monitorGc", controller.MonitorGC)
 	engine.GET("/test", controller.TestSlice)
+
 }

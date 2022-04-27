@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-var tokenExpire time.Duration = time.Hour * 24
+var tokenExpire time.Duration = time.Hour * 24 * 7
 
 func IsLogin(c *gin.Context) {
 	token := c.PostForm("token")
@@ -28,6 +28,7 @@ func IsLogin(c *gin.Context) {
 			"status":300,
 			"message":"no login",
 		})
+		return
 	}
 
 	common.Json(c, 200, H)

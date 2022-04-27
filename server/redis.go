@@ -8,7 +8,7 @@ import (
 	"sync"
 )
 
-var redisOption *redis.ClusterOptions
+var redisOption *redis.Options
 
 var redisPool = sync.Pool{
 	New :func() interface{} {
@@ -16,11 +16,11 @@ var redisPool = sync.Pool{
 	},
 }
 
-func GetRedis() *redis.ClusterClient {
-	return redisPool.Get().(*redis.ClusterClient)
+func GetRedis() *redis.Client {
+	return redisPool.Get().(*redis.Client)
 }
 
-func PutRedis(instance *redis.ClusterClient) {
+func PutRedis(instance *redis.Client) {
 	redisPool.Put(instance)
 }
 
@@ -32,11 +32,8 @@ func InitRedisConfig() {
 	port := redisConfig.Port
 
 	addr := fmt.Sprintf("%s:%s", host, port)
-	addr1 := fmt.Sprintf("%s:%s", "106.55.178.129", "6380")
-	addr2 := fmt.Sprintf("%s:%s", "120.77.17.51", "6379")
-	redisOption = &redis.ClusterOptions {
-		Addrs:    []string{addr, addr1, addr2},
-		PoolSize:3,
+	redisOption = &redis.Options {
+		Addr:    addr,
 		Password: password,
 	}
 }
@@ -53,8 +50,8 @@ func InitRedisPool(num int) error {
 	return nil
 }
 
-func newRedis() *redis.ClusterClient {
-	redisinstance := redis.NewClusterClient(redisOption)
+func newRedis() *redis.Client {
+	redisinstance := redis.NewClient(redisOption)
 
 	_, err := redisinstance.Ping().Result()
 

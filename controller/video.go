@@ -5,6 +5,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"go/help"
 	"go/live"
+	"io/ioutil"
+	"net/http"
 	"runtime/debug"
 	"strconv"
 	"time"
@@ -73,6 +75,30 @@ func MonitorGC(c *gin.Context) {
 }
 
 func TestSlice(c *gin.Context) {
+	url := "https://www.dddbiquge.cc/chapter/45082839_7130174.html"
 
+	client := &http.Client{}
+
+	request, _ := http.NewRequest("GET", url, nil)
+	request.Header.Set("Acceept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+	request.Header.Set("Accept-Charset", "GBK,utf-8;q=0.7,*;q=0.3")
+	request.Header.Set("Accept-Encoding", "gzip,deflate,sdch")
+	request.Header.Set("Accept-Language", "zh-CN,zh;q=0.8")
+	request.Header.Set("Cache-Control", "max-age=0")
+	request.Header.Set("Connection", "keep-alive")
+
+	res, err := client.Do(request)
+	if err != nil {
+
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != 200 {
+
+	}
+
+	body, err := ioutil.ReadAll(res.Body)
+
+	fmt.Println(string(body))
 }
 
