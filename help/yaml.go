@@ -52,7 +52,7 @@ var Conf *Yaml = &Yaml{}
 
 func InitYaml() error {
 
-	yamlFile, err := ioutil.ReadFile("config.yaml")
+	yamlFile, err := ioutil.ReadFile("./config.yaml")
 
 	if err != nil {
 		log.Printf("yamlFile.Get err #%v ", err)
