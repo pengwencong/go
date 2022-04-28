@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>index</title>
+    <title>登录</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
@@ -13,7 +13,6 @@
         height: 100%;
         pdding: 0;
         margin: 0;
-        overflow: hidden;
     }
 
     textarea {
@@ -25,6 +24,7 @@
         outline:none;
         border:none;
     }
+
     input::-webkit-input-placeholder{
         text-align: center;
     }
@@ -37,38 +37,6 @@
     input:-ms-input-placeholder{
         text-align: center;
     }
-
-    /* addtechlogy animal start*/
-    #wrapper {
-        height:100%;
-        width:100%;
-        text-align: center;
-        display: table;
-        position:absolute;
-    }
-
-    #wrapper canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        width:100%;
-    }
-
-    #canvas {
-        z-index: 1;
-    }
-    #canvasbg {
-        z-index: -10;
-        -webkit-filter: blur(3px);
-        -moz-filter: blur(3px);
-        -o-filter: blur(3px);
-        filter: blur(3px);
-        opacity: 0.6;
-    }
-    /* addtechlogy animal end*/
-
-
     .login{
         width:100%;
         height: 100%;
@@ -83,23 +51,6 @@
     .login-leave-active {
         transition: all 1s ease;
     }
-    .loginContainer{
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: fit-content;
-    }
-
-    .mobilePhione {
-        width: 370px;
-        height: 50px;
-        position: relative;
-        left: 50%;
-        margin-bottom:30px;
-        transform: translate(-50%, 0px);
-        box-shadow: 16px 11px 14px #919d91;
-    }
 
     .mobilePhione > input {
         width:100%;
@@ -113,14 +64,6 @@
         padding-left:15px;
     }
 
-    .password  {
-        width: 370px;
-        height: 50px;
-        position: relative;
-        left: 50%;
-        transform: translate(-50%, 0px);
-        box-shadow: 16px 11px 14px #919d91;
-    }
 
     .password > input {
         width:100%;
@@ -180,30 +123,7 @@
     .workbenchC-enter-active {
         transition: all 2s ease;
     }
-    .workbenchContainer{
-        cursor: pointer;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-    .workbenchContainer .line {
-        display: flex;
-        width: 500px;
-        height: 150px;
-        justify-content: space-between;
-    }
-    .workbenchContainer .line div {
-        width: 230px;
-        height: 26px;
-        border-radius: 20px;
-        text-align: center;
-        padding-top: 45px;
-        padding-bottom: 45px;
-        transition: all .6s ease;
-        font-size: 20px;
-        font-weight: 600;
-    }
+
     .workbenchContainer .line div:hover {
         box-shadow: 8px 15px 21px rgb(0 0 0 / 14%);
         transform: translate3d(0, -4px, 0);
@@ -246,14 +166,57 @@
         width: 130px !important;
         height: 0px !important;
     }
-     .workbench-enter-active {
+    .workbench-enter-active {
         transition: all 2s ease !important;
     }
     .workbench-leave-active {
         transition: all 1s ease !important;
     }
 
-    /* creation start */
+    .techAction-enter {
+        height: 0px ;
+
+    }
+    .techAction-leave {
+        height: 40px !important;
+    }
+    .techAction-leave-to {
+        height: 0px !important;
+    }
+    .techAction-enter-to {
+        height: 40px !important;
+    }
+    .techAction-enter-active {
+        transition: all 0.3s ease !important;
+    }
+    .techAction-leave-active {
+        transition: all 0.3s ease !important;
+    }
+    /*creation end*/
+
+    .loginContainer{
+        width: 100%;
+    }
+    .mobilePhione{
+        width: 77%;
+        left: 48%;
+    }
+    .password{
+        width: 77%;
+        left: 48%;
+    }
+    .workbenchContainer{
+        width: 100%;
+    }
+    .workbenchContainer .line{
+        justify-content: space-around;
+        width: 100%;
+    }
+    .workbenchContainer .line div{
+        width: 40%;
+    }
+
+    /*creation start*/
     .creationContainer{
         width: 100%;
         height: 100%;
@@ -261,26 +224,16 @@
         position: fixed;
         background-color: #f6f6f6;
     }
-
-    .creationContainer .left {
-        width: 25%;
-    }
-
     .creationContainer .bottom{
         justify-content: space-around;
         width: 100%;
+        height: 42px;
         background-color: #fff;
-        /*padding: 5px 5px;*/
+        padding: 5px 5px;
         position: fixed;
         bottom: 0px;
         display: flex;
         font-size: 15px;
-        cursor: pointer;
-        transition: all 0.5s ease;
-        height: 0px;
-    }
-    .creationContainer .bottom>div{
-        margin-top:8px;
     }
     .creationContainer .bottom .icon{
         width: 19px;
@@ -304,33 +257,19 @@
     .creationContainer .top {
         position: absolute;
         top: 0;
-        width: 50%;
-        left:50%;
-        transform:translate(-50%,0);
-
+        width: 100%;
+        box-shadow: 5px 2px 7px rgb(0 0 0 / 10%);
+        transform: translate3d(0, -4px, 0);
         transition: all 0.8s ease;
         background-color: #fff;
         z-index: 20;
-        cursor: pointer;
     }
     .creationContainer .action {
         display: flex;
         justify-content: start;
         transition: al 0.8s ease;
         overflow: hidden;
-        position: absolute;
-        top: 10px;
-        background-color: #fff;
-        box-shadow: 5px 2px 7px rgb(0 0 0 / 10%);
-        left: 50%;
-        transform: translate(-50%, 0px);
-        z-index: 30;
-        width: 400px;
-        border-bottom-left-radius: 7px;
-        border-bottom-right-radius: 7px;
-
     }
-
     .creationContainer .action div {
         margin-right: 10px;
         padding: 5px 5px;
@@ -343,60 +282,70 @@
         box-shadow: 8px 15px 21px rgb(0 0 0 / 14%);
         transform: translate3d(0, -4px, 0);
     }
-    .creationContainer .top .colBtn {
-        width: 400px;
-        height: 4px;
+    .creationContainer .top .colBtn img{
+        width: 16px;
+        height: 16px;
         position: absolute;
-        top: 10px;
         left: 50%;
         transform: translate(-50%, 0px);
-        background-color: #87ceeb;
-        border-radius: 23px;
-        z-index: 31;
     }
-    .techAction-enter {
-        height: 0px ;
-
-    }
-    .techAction-leave {
-        height: 42px !important;
-    }
-    .techAction-leave-to {
-        height: 0px !important;
-    }
-    .techAction-enter-to {
-        height: 42px !important;
-    }
-    .techAction-enter-active {
-        transition: all 0.5s ease !important;
-    }
-    .techAction-leave-active {
-        transition: all 0.5s ease !important;
+    .creationContainer .box{
+        height: 100%;
+        overflow: auto;
     }
 
-    .creationContainer .bottomContainer{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: fit-content;
-    }
-    .creationContainer .colBtn{
-        position: relative;
-        left: 50%;
-        transform: translate(-50%, 0px);
-        cursor: pointer;
-        width: fit-content;
-        top: 10px;
-        transition: all 0.5s ease;
-    }
-    .creationContainer .bottomContainer .colBtn .upIcon{
-        width: 23px;
-        height: 23px;
-    }
+
     .jinengContainer .top .action .createJineng{
         margin-left: 8px;
     }
+
+
+    .creationContainer .box input{
+        width: 93%;
+        height: 40px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        background-color: #fff;
+        padding-left: 10px;
+        transition: all 0.4s ease;
+        margin-top:7px;
+    }
+
+    .creationContainer .box input:focus{
+        background-color: #fff;
+        box-shadow: 1px 7px 7px rgb(0 0 0 / 11%);
+        transform: translate3d(0, -4px, 0);
+    }
+
+    .creationContainer .box .addContainer{
+        width: 78%;
+        margin-top: 30px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0px);
+        overflow: scroll;
+    }
+
+    .creationContainer .box .descTextarea{
+        width: 93%;
+        height: 300px;
+        border-radius: 8px;
+        padding-left: 10px;
+        padding-top: 10px;
+        transition: all 0.4s ease;
+        margin-top:7px;
+        background-color: #fff;
+        border:none;
+        margin-bottom:40px;
+    }
+    .creationContainer .box .descTextarea:focus{
+        background-color: #fff;
+        box-shadow: 1px 7px 7px rgb(0 0 0 / 11%);
+        transform: translate3d(0, -4px, 0);
+    }
+
     .creationContainer .button{
+        margin-bottom: 80px;
         display: flex;
         justify-content: space-between;
     }
@@ -410,184 +359,41 @@
     }
     .creationContainer .sure {
         background-color: skyblue;
-        cursor: pointer;
     }
 
-    .creationContainer .sure:hover {
+    .creationContainer .sure:active {
         background-color: #6272D6;
     }
 
     .creationContainer .pre {
         background-color: #fff;
         border: 1px solid skyblue;
-        cursor: pointer;
     }
-    .creationContainer .pre:hover {
+    .creationContainer .pre:active {
         background-color: skyblue;
     }
     /*creation end*/
     /*creation list start*/
     .creationContainer .list{
-        width: 60%;
+        width: 100%;
         margin-bottom: 70px;
         margin-top:30px;
-        position: relative;
-        left: 50%;
-        transform: translate(-50%, 10px);
     }
     .creationContainer .list .item{
-        position: relative;
-        width: 240px;
-        height: 105px;
+        width: 90%;
+        height: 50px;
         background-color: #fff;
         border-radius: 4px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-around;
         margin: 0 auto;
         padding: 4px;
         margin-bottom: 10px;
-        cursor: pointer;
-        float: left;
-        margin-right: 20px;
-        padding-left: 10px;
-    }
-    .creationContainer .list .item:hover{
-        box-shadow: 8px 6px 16px rgb(0 0 0 / 14%);
     }
 
-    .creationContainer .list .search{
-        display: flex;
-        justify-content: start;
-        height: 33px;
-        margin-bottom: 20px;
-    }
-    .creationContainer .list .search input{
-        margin-right: 15px;
-        border-radius: 4px;
-    }
-    .creationContainer .list .searchName{
-        border: 1px solid #D2691E;
-    }
-    .creationContainer .list .searchOccupation{
-        border: 1px solid #6495ED;
-    }
-    .creationContainer .list .item .name{
-        color: #333;
-        margin-top: 30px;
-        margin-bottom: 20px;
-    }
-    .creationContainer .list .actions{
-        position: absolute;
-        bottom: 12px;
-        right: 12px;
-        display: flex;
-        justify-content: end;
-    }
-    .creationContainer .list .actions .update{
-        padding: 3px 12px;
-        border: 1px solid #87ceeb;
-        border-radius: 5px;
-        margin-right: 12px;
-    }
-    .creationContainer .list .actions .update:hover{
-        background-color: #87ceeb;
-    }
-    .creationContainer .list .actions .scene{
-        border: 1px solid #D2691E;
-        border-radius: 5px;
-        padding: 3px 12px;
-    }
-    .creationContainer .list .actions .scene:hover{
-        background-color: #D2691E;
-    }
-    .creationContainer .list .item .occupation{
-        color: #999;
-    }
     /*creation list end*/
 
-    /*add techlogy start*/
-    .addTechlogy .createBox{
-        position: absolute;
-        top: 18%;
-        left: 50%;
-        transform: translate(-50%, 0px);
-        width: 70%;
-        z-index: 10;
-    }
-    .addTechlogy .createBox .techInfo{
-        display: flex;
-        justify-content: start;
-    }
-    .addTechlogy .createBox .techInfo>div{
-        border-radius: 10px;
-        height: 30px;
-        margin-right: 30px;
-        font-size:20px;
-    }
-    .techInfo .book .text{
-        margin-top:2px;
-    }
-    .techInfo input{
-        margin-left: 10px;
-        transition: all 0.5s ease-in-out;
-        height: 30px;
-        font-size:20px;
-        width:150px;
-    }
-    .techInfo .name .techName:hover{
-        background-color: skyblue;
-        border-radius: 4px;
-        cursor: pointer;
-        opacity: 0.7;
-    }
-    .techInfo .occupationInput:hover{
-        background-color: #D2B48C;
-        border-radius: 4px;
-        cursor: pointer;
-        opacity: 0.7;
-    }
-    .createBox .descScene{
-        display: flex;
-        justify-content: start;
-    }
-    .descScene .desc{
-        width: 28%;
-        margin-top: 30px;
-        margin-right: 38px;
-    }
-    .descScene .desc .button{
-        float: right;
-    }
-    .descScene .desc .descTextarea{
-        margin-top:11px;
-        height: 500px;
-        border-radius: 10px;
-        resize: none;
-        width: 98%;
-        padding: 10px;
-        font-size: 18px;
-    }
-
-    .createBox .example{
-        margin-top: 30px;
-        width: 70%;
-    }
-    .createBox .example .button{
-        display: flex;
-        justify-content: end;
-    }
-    .createBox .example .button .sure {
-        margin-right:20px;
-    }
-    .createBox .exampleArea{
-        background-color: #fff;
-        resize: none;
-        height: 500px;
-        width: 100%;
-        border-radius: 10px;
-        margin-top:10px;
-        padding: 10px;
-        font-size: 18px;
-    }
-    /*add techlogy end*/
 
 </style>
 <body >
@@ -616,37 +422,40 @@
 <template id="workbench">
     <transition name="workbenchC">
         <div class="workbench" v-show="workbenchShow">
-        <div class="workbenchContainer" >
-            <div class="line">
-                <transition name="workbench">
-                    <div class="write" v-show = "writeShow" @click="action($event)" id="1">写</div>
-                </transition>
-                <transition name="workbench">
-                    <div class="creation" v-show = "creationShow" @click="action($event)" id="2">思</div>
-                </transition>
-            </div>
-            <div class="line">
-                <transition name="workbench">
-                    <div class="bbs" v-show = "bbsShow" @click="action($event)" id="4">论</div>
-                </transition>
-                <transition name="workbench">
-                    <div class="live" v-show = "liveShow" @click="action($event)" id="3">直</div>
-                </transition>
+            <div class="workbenchContainer" >
+                <div class="line">
+                    <transition name="workbench">
+                        <div class="write" v-show = "writeShow" @click="action($event)" id="1">写</div>
+                    </transition>
+                    <transition name="workbench">
+                        <div class="creation" v-show = "creationShow" @click="action($event)" id="2">思</div>
+                    </transition>
+                </div>
+                <div class="line">
+                    <transition name="workbench">
+                        <div class="bbs" v-show = "bbsShow" @click="action($event)" id="4">论</div>
+                    </transition>
+                    <transition name="workbench">
+                        <div class="live" v-show = "liveShow" @click="action($event)" id="3">直</div>
+                    </transition>
+                </div>
             </div>
         </div>
-    </div>
     </transition>
 </template>
 <template id="techlogy">
     <div class="jinengContainer">
         <div class="top">
             <transition name="techAction">
-                <div class="action" v-show="actionShow" @mouseleave="ml">
+                <div class="action" v-show="actionShow">
                     <div @click="move" id="list">列表</div>
                     <div @click="move" id="create">增加</div>
                 </div>
             </transition>
-            <div class="colBtn" @mouseenter="me" ></div>
+            <div class="colBtn">
+                <img class="down" v-show="downShow" @click="upDown($event)" @mouseenter="me" @mouseleave="ml"
+                     src="../../public/static/admin/img/techDown.svg">
+            </div>
         </div>
         <div class="box" id="techBox" @click="actionHide($event)">
             <component :is="viewShow"></component>
@@ -655,106 +464,60 @@
 </template>
 <template id="techIndex">
     <div class="list">
-        <div class="search">
-            <input value="" v-model="searchName" class="searchName" @keyup.enter="search">
-            <input value="searchOccupation" v-model="searchOccupation" class="searchOccupation">
-            <input value="searchOccupationId" v-model="searchOccupationId" type="hidden">
-            <!--<input value="sesarchLevelName" v-model="sesarchLevelName" class="searchLevelName">-->
-            <!--<input value="" v-model="sesarchLevel" type="hidden">-->
-        </div>
-        <div class="item" v-for="list in lists" :key="list.id">
-            <div class="name">{{list.name}}</div>
-            <div class="occupation">{{list.OccupationName}}</div>
-            <div class="actions">
-                <div class="update" :id="list.id">更新</div>
-                <div class="scene" :id="list.id">场景</div>
+        <!--<div class="sort"></div>-->
+        <div class="item" v-for="(item,index) in lists" :key="index">
+            <div class="bookName">
+                <div class="text">树名:</div>
+                <div class="name">{{item.name}}</div>
+            </div>
+            <div class="occupationName">
+                <div class="text">职业:</div>
+                <div class="name">{{item.OccupationName}}</div>
+            </div>
+            <div class="techName">
+                <div class="text">名字:</div>
+                <div class="name">{{item.bookName}}</div>
             </div>
         </div>
 
     </div>
 </template>
 <template id="techAdd">
-    <div class="addTechlogy">
-        <div id="wrapper">
-            <canvas id="canvas" width="1950px" height="800px"></canvas>
-            <canvas id="canvasbg" width="1950px" height="800px"></canvas>
+    <div class="addContainer">
+        <input name="bookId" value="bookId" type="hidden">
+        <div class="occupation">
+            <div class="text">职业：</div>
+            <input name="occupationName" value="通用" type="text" v-model="occupationName">
+            <input name="occupationId" value="occupationId" type="hidden" v-model="occupationId">
         </div>
-        <div class="createBox">
-            <div class="techInfo">
-                <div class="book">
-                    <div class="text">树名：发送我去过</div>
-                    <input value="bookId" type="hidden">
-                </div>
-                <div class="name">
-                    <div class="text">
-                        名字：<input class="techName" value="" v-model="techName">
-                    </div>
+        <div class="name">
+            <div class="text">名字：</div>
+            <input name="name" value="" v-model="techName">
+        </div>
+        <div class="desc">
+            <div class="text">描述：</div>
+            <textarea class="descTextarea" name="desc" value="" v-model="techDesc"></textarea>
+        </div>
 
-                </div>
-                <div class="occupation">
-                    <div class="text">
-                        职业：<input class="occupationInput" value="通用" type="text"
-                               v-model="occupationName">
-                    </div>
-                    <input value="occupationId" type="hidden" v-model="occupationId">
-                </div>
-            </div>
-
-            <div class="descScene">
-                <div class="desc">
-                    <div class="button">
-                        <div class="sure" @click="sure($event)">确定</div>
-                    </div>
-                    <textarea  class="descTextarea" value="" v-model="techDesc"></textarea>
-                </div>
-                <div class="example">
-                    <div class="button">
-                        <div class="sure" @click="sureScene($event)">确定</div>
-                        <div class="pre" @click="pre($event)">预保存</div>
-                    </div>
-                    <textarea class="exampleArea" value="" v-model="techScene"></textarea>
-                </div>
-            </div>
-
+        <div class="button">
+            <div class="sure" @click="sure($event)">确定</div>
+            <div class="pre" @click="pre($event)">预保存</div>
         </div>
     </div>
 </template>
-<template id="techUpdate">
-    <div class="updateTechlogy">
-        <div class="createBox">
-            <div class="techInfo">
-                <input type="hidden" value="1" type="hidden">
-                <div class="name">
-                    名字：<input class="techName" value="" v-model="techName">
-                </div>
-                <div class="occupation">
-                    职业：<input class="occupationInput" value="通用" type="text" v-model="occupationName">
-                    <input value="occupationId" type="hidden" v-model="occupationId">
-                </div>
-            </div>
-            <div class="desc">
-                <textarea  class="descTextarea" value="" v-model="techDesc"></textarea>
-            </div>
-
-            <div class="button">
-                <div class="sure" @click="sureScene($event)">确定</div>
-                <div class="pre" @click="pre($event)">预保存</div>
-            </div>
-        </div>
-    </div>
-</template>
-
 
 <template id="outline">
     <div class="jinengContainer">
         <div class="top">
             <transition name="techAction">
-                <div class="action" v-show="actionShow" @mouseleave="ml">
+                <div class="action" v-show="actionShow">
                     <div @click="move" id="list">列表</div>
                     <div @click="move" id="create">增加</div>
                 </div>
             </transition>
-            <div class="colBtn" @mouseenter="me" ></div>
+            <div class="colBtn">
+                <img class="down" v-show="downShow" @click="upDown($event)" src="../../public/static/admin/img/techDown.svg">
+            </div>
         </div>
         <div class="box" id="techBox" @click="actionHide($event)">
             <component :is="viewShow"></component>
@@ -794,12 +557,14 @@
     <div class="jinengContainer">
         <div class="top">
             <transition name="techAction">
-                <div class="action" v-show="actionShow" @mouseleave="ml">
+                <div class="action" v-show="actionShow">
                     <div @click="move" id="list">列表</div>
                     <div @click="move" id="create">增加</div>
                 </div>
             </transition>
-            <div class="colBtn" @mouseenter="me" ></div>
+            <div class="colBtn">
+                <img class="down" v-show="downShow" @click="upDown($event)" src="../../public/static/admin/img/techDown.svg">
+            </div>
         </div>
         <div class="box" id="techBox" @click="actionHide($event)">
             <component :is="viewShow"></component>
@@ -839,12 +604,15 @@
     <div class="jinengContainer">
         <div class="top">
             <transition name="techAction">
-                <div class="action" v-show="actionShow" @mouseleave="ml">
+                <div class="action" v-show="actionShow">
                     <div @click="move" id="list">列表</div>
                     <div @click="move" id="create">增加</div>
                 </div>
             </transition>
-            <div class="colBtn" @mouseenter="me"></div>
+            <div class="colBtn">
+                <img class="down" v-show="downShow" @click="upDown($event)" @mouseenter="me" @mouseleave="ml"
+                     src="../../public/static/admin/img/techDown.svg">
+            </div>
         </div>
         <div class="box" id="techBox" @click="actionHide($event)">
             <component :is="viewShow"></component>
@@ -885,37 +653,37 @@
         <div>
             <component :is="viewShow"></component>
         </div>
-        <div class="bottomContainer">
-            <div class="colBtn" @mouseenter="me" id="botCol">
-                <img class="upIcon" src="../../public/static/admin/img/techUp.svg" >
+        <div class="bottom" v-show="bottomShow">
+            <div @click="cateShow($event)" id="0">
+                <img class="icon" v-show="bottomIcon[0].icon" src="../../public/static/admin/img/jineng.svg">
+                <img class="icon hover " v-show="bottomIcon[0].iconHover" src="../../public/static/admin/img/jineng-hover.svg">
+                <div v-if="bottomIcon[0].text" class="text ">技能</div>
+                <div e-else class="text hover">技能</div>
             </div>
-            <div class="bottom" @mouseleave="ml" id="creBottom">
-                <div @click="cateShow($event)" id="0">
-                    <img class="icon" v-show="bottomIcon[0].icon" src="../../public/static/admin/img/jineng.svg">
-                    <img class="icon hover " v-show="bottomIcon[0].iconHover" src="../../public/static/admin/img/jineng-hover.svg">
-                    <div v-if="bottomIcon[0].text" class="text ">技能</div>
-                    <div e-else class="text hover">技能</div>
-                </div>
-                <div @click="cateShow($event)" id="1">
-                    <img class="icon " v-show="bottomIcon[1].icon" src="../../public/static/admin/img/dagang.svg">
-                    <img class="icon hover" v-show="bottomIcon[1].iconHover" src="../../public/static/admin/img/dagang-hover.svg">
-                    <div v-if="bottomIcon[1].text" class="text">大刚</div>
-                    <div v-else class="text hover">大刚</div>
-                </div>
-                <div @click="cateShow($event)" id="2">
-                    <img class="icon " v-show="bottomIcon[2].icon" src="../../public/static/admin/img/juqing.svg">
-                    <img class="icon hover" v-show="bottomIcon[2].iconHover" src="../../public/static/admin/img/juqing-hover.svg">
-                    <div v-if="bottomIcon[2].text" class="text">剧前</div>
-                    <div v-else class="text hover">剧前</div>
-                </div>
-                <div @click="cateShow($event)" id="3">
-                    <img class="icon " v-show="bottomIcon[3].icon" src="../../public/static/admin/img/sheding.svg">
-                    <img class="icon hover" v-show="bottomIcon[3].iconHover" src="../../public/static/admin/img/sheding-hover.svg">
-                    <div v-if="bottomIcon[3].text"  class="text">设顶</div>
-                    <div v-else class="text hover">设顶</div>
-                </div>
+            <div @click="cateShow($event)" id="1">
+                <img class="icon " v-show="bottomIcon[1].icon" src="../../public/static/admin/img/dagang.svg">
+                <img class="icon hover" v-show="bottomIcon[1].iconHover" src="../../public/static/admin/img/dagang-hover.svg">
+                <div v-if="bottomIcon[1].text" class="text">大刚</div>
+                <div v-else class="text hover">大刚</div>
+            </div>
+            <div @click="cateShow($event)" id="2">
+                <img class="icon " v-show="bottomIcon[2].icon" src="../../public/static/admin/img/juqing.svg">
+                <img class="icon hover" v-show="bottomIcon[2].iconHover" src="../../public/static/admin/img/juqing-hover.svg">
+                <div v-if="bottomIcon[2].text" class="text">剧前</div>
+                <div v-else class="text hover">剧前</div>
+            </div>
+            <div @click="cateShow($event)" id="3">
+                <img class="icon " v-show="bottomIcon[3].icon" src="../../public/static/admin/img/sheding.svg">
+                <img class="icon hover" v-show="bottomIcon[3].iconHover" src="../../public/static/admin/img/sheding-hover.svg">
+                <div v-if="bottomIcon[3].text"  class="text">设顶</div>
+                <div v-else class="text hover">设顶</div>
             </div>
         </div>
+    </div>
+</template>
+<template id="writeCreationPlatform">
+    <div class="platFormContainer">
+        <add-info></add-info>
     </div>
 </template>
 
@@ -936,12 +704,6 @@
             return {
                 bookId: 1,
                 lists: [],
-                searchName: '',
-                searchOccupation: '通用',
-                searchOccupationId: 1,
-                searchLevel:0,
-                sesarchLevelName:'',
-                ids: []
             }
         },
         created() {
@@ -969,25 +731,28 @@
                         console.log(res)
                     })
             },
-            search:function () {
-                var that = this
-                var data = {
-                    searchName: this.searchName,
-                    searchOccupationId: this.searchOccupationId,
-                    "token": token
+            outlineList:function () {
+                if (this.outlineLists.length == 0) {
+                    var that = this
+                    var data = {
+                        "token": token
+                    }
+                    axios.post("/admin/creation/outlineList", Qs.stringify(data))
+                        .then(function (res) {
+                            let data = res.data
+                            if (data.status == 200) {
+                                that.outlineLists = data.data
+                                that.changeShow()
+                            } else {
+                                alert(data.message)
+                            }
+                        })
+                        .catch(function (res) {
+                            console.log(res)
+                        })
+                }else{
+                    this.changeShow()
                 }
-                axios.post("/admin/creation/searchTech", Qs.stringify(data))
-                    .then(function (res) {
-                        let data = res.data
-                        if (data.status == 200){
-                            that.lists = data.data
-                        } else {
-                            alert(data.message)
-                        }
-                    })
-                    .catch(function (res) {
-                        console.log(res)
-                    })
             }
         },
         template:'#techIndex'
@@ -999,8 +764,7 @@
                 occupationId: 1,
                 techName: '',
                 techDesc: '',
-                occupationName: '通用',
-                techScene: ''
+                occupationName: '通用'
             }
         },
         methods:{
@@ -1018,29 +782,8 @@
                     .then(function (res) {
                         let data = res.data
                         if (data.status == 200){
-
-                        } else {
-                            alert(data.message)
-                        }
-                    })
-                    .catch(function (res) {
-                        console.log(res)
-                    })
-            },
-            sureScene:function(){
-                var that = this
-                var data = {
-                    "bookId" : this.bookId,
-                    "techName": this.techName,
-                    "techScene": this.techScene,
-                    "token": token
-                }
-
-                axios.post("/admin/creation/addTechScene", Qs.stringify(data))
-                    .then(function (res) {
-                        let data = res.data
-                        if (data.status == 200){
-
+                            that.techName = ''
+                            that.techDesc = ''
                         } else {
                             alert(data.message)
                         }
@@ -1214,13 +957,6 @@
             upDown :function () {
                 this.actionShow = true
                 this.downShow = false
-            },
-            me:function(data){
-                this.actionShow = true
-                this.downShow = false
-            },
-            ml:function(data){
-                this.actionHide()
             }
         },
         template:'#outline'
@@ -1334,13 +1070,6 @@
             upDown :function () {
                 this.actionShow = true
                 this.downShow = false
-            },
-            me:function(data){
-                this.actionShow = true
-                this.downShow = false
-            },
-            ml:function(data){
-                this.actionHide()
             }
         },
         template:'#outline'
@@ -1454,13 +1183,6 @@
             upDown :function () {
                 this.actionShow = true
                 this.downShow = false
-            },
-            me:function(data){
-                this.actionShow = true
-                this.downShow = false
-            },
-            ml:function(data){
-                this.actionHide()
             }
         },
         template:'#design'
@@ -1470,14 +1192,16 @@
         data: function () {
             return {
                 viewShow: "techlogy",
-                bottomShow: false,
+                bottomShow: true,
+                docmHeight: 0,
+                showHeight: 0,
                 showIndex: '0',
                 bottomIcon:[
                     {"icon":false,"iconHover":true,"text":false},
                     {"icon":true,"iconHover":false,"text":true},
                     {"icon":true,"iconHover":false,"text":true},
                     {"icon":true,"iconHover":false,"text":true}
-                    ],
+                ],
                 showTag:["techlogy","outline","plot","design"]
             }
         },
@@ -1486,6 +1210,25 @@
             "outline": outline,
             "plot": plot,
             "design": design
+        },
+        watch:{  // 监听 窗口数值的变化，发生变化就执行 inputType
+            showHeight: 'inputType'
+        },
+        mounted() {
+            this.docmHeight = window.innerHeight;
+            document.getElementById('techBox').setAttribute('style', 'height:'+this.docmHeight+'px;');
+            // window.onresize监听页面高度的变化
+            window.onresize = () => {
+                return (() => {
+                    this.showHeight = window.innerHeight;
+                })()
+            }
+        },
+        directives:{
+            trigger:{
+                inserted(el, binging){
+                }
+            }
         },
         methods: {
             cateShow : function (data) {
@@ -1507,13 +1250,14 @@
                     this.showIndex = id
                 }
             },
-            me:function(data){
-                data.currentTarget.setAttribute('style', 'top:-49px');
-                document.getElementById('creBottom').setAttribute('style', 'height:60px');
-            },
-            ml:function(){
-                document.getElementById('creBottom').setAttribute('style', 'height:0px');
-                document.getElementById('botCol').setAttribute('style', 'top:10px');
+            inputType: function() {
+                let height = this.docmHeight * 0.2;
+                document.getElementById('techBox').setAttribute('style', 'height:'+this.showHeight+'px;');
+                if(this.docmHeight - this.showHeight < height){
+                    this.bottomShow = true
+                }else{
+                    this.bottomShow = false
+                }
             }
         },
         template:'#creation'
@@ -1536,6 +1280,7 @@
         },
         template:'#writeCreationPlatform'
     }
+
 
     var workbench ={
         data: function () {
@@ -1715,195 +1460,5 @@
         }
     });
 </script>
-
-<script>
-    // min and max radius, radius threshold and percentage of filled circles
-    var radMin = 5,
-        radMax = 125,
-        filledCircle = 60, //percentage of filled circles
-        concentricCircle = 30, //percentage of concentric circles
-        radThreshold = 25; //IFF special, over this radius concentric, otherwise filled
-
-    //min and max speed to move
-    var speedMin = 0.3,
-        speedMax = 2.5;
-
-    //max reachable opacity for every circle and blur effect
-    var maxOpacity = 0.6;
-
-    //default palette choice
-    var colors = ['52,168,83', '117,95,147', '199,108,23', '194,62,55', '0,172,212', '120,120,120'],
-        bgColors = ['52,168,83', '117,95,147', '199,108,23', '194,62,55', '0,172,212', '120,120,120'],
-        circleBorder = 10,
-        backgroundLine = bgColors[0];
-    var backgroundMlt = 0.85;
-
-    //min distance for links
-    var linkDist = Math.min(canvas.width, canvas.height) / 2.4,
-        lineBorder = 2.5;
-
-    //most importantly: number of overall circles and arrays containing them
-    var maxCircles = 12,
-        points = [],
-        pointsBack = [];
-
-    //populating the screen
-    for (var i = 0; i < maxCircles * 2; i++) points.push(new Circle());
-    for (var i = 0; i < maxCircles; i++) pointsBack.push(new Circle(true));
-
-    //experimental vars
-    var circleExp = 1,
-        circleExpMax = 1.003,
-        circleExpMin = 0.997,
-        circleExpSp = 0.00004,
-        circlePulse = false;
-
-    //circle class
-    function Circle(background) {
-        //if background, it has different rules
-        this.background = (background || false);
-        this.x = randRange(-canvas.width / 2, canvas.width / 2);
-        this.y = randRange(-canvas.height / 2, canvas.height / 2);
-        this.radius = background ? hyperRange(radMin, radMax) * backgroundMlt : hyperRange(radMin, radMax);
-        this.filled = this.radius < radThreshold ? (randint(0, 100) > filledCircle ? false : 'full') : (randint(0, 100) > concentricCircle ? false : 'concentric');
-        this.color = background ? bgColors[randint(0, bgColors.length - 1)] : colors[randint(0, colors.length - 1)];
-        this.borderColor = background ? bgColors[randint(0, bgColors.length - 1)] : colors[randint(0, colors.length - 1)];
-        this.opacity = 0.05;
-        this.speed = (background ? randRange(speedMin, speedMax) / backgroundMlt : randRange(speedMin, speedMax)); // * (radMin / this.radius);
-        this.speedAngle = Math.random() * 2 * Math.PI;
-        this.speedx = Math.cos(this.speedAngle) * this.speed;
-        this.speedy = Math.sin(this.speedAngle) * this.speed;
-        var spacex = Math.abs((this.x - (this.speedx < 0 ? -1 : 1) * (canvas.width / 2 + this.radius)) / this.speedx),
-            spacey = Math.abs((this.y - (this.speedy < 0 ? -1 : 1) * (canvas.height / 2 + this.radius)) / this.speedy);
-        this.ttl = Math.min(spacex, spacey);
-    };
-
-    Circle.prototype.init = function() {
-        Circle.call(this, this.background);
-    }
-
-    //support functions
-    //generate random int a<=x<=b
-    function randint(a, b) {
-        return Math.floor(Math.random() * (b - a + 1) + a);
-    }
-    //generate random float
-    function randRange(a, b) {
-        return Math.random() * (b - a) + a;
-    }
-    //generate random float more likely to be close to a
-    function hyperRange(a, b) {
-        return Math.random() * Math.random() * Math.random() * (b - a) + a;
-    }
-
-    //rendering function
-    function drawCircle(ctx, circle) {
-        //circle.radius *= circleExp;
-        var radius = circle.background ? circle.radius *= circleExp : circle.radius /= circleExp;
-        ctx.beginPath();
-        ctx.arc(circle.x, circle.y, radius * circleExp, 0, 2 * Math.PI, false);
-        ctx.lineWidth = Math.max(1, circleBorder * (radMin - circle.radius) / (radMin - radMax));
-        ctx.strokeStyle = ['rgba(', circle.borderColor, ',', circle.opacity, ')'].join('');
-        if (circle.filled == 'full') {
-            ctx.fillStyle = ['rgba(', circle.borderColor, ',', circle.background ? circle.opacity * 0.8 : circle.opacity, ')'].join('');
-            ctx.fill();
-            ctx.lineWidth=0;
-            ctx.strokeStyle = ['rgba(', circle.borderColor, ',', 0, ')'].join('');
-        }
-        ctx.stroke();
-        if (circle.filled == 'concentric') {
-            ctx.beginPath();
-            ctx.arc(circle.x, circle.y, radius / 2, 0, 2 * Math.PI, false);
-            ctx.lineWidth = Math.max(1, circleBorder * (radMin - circle.radius) / (radMin - radMax));
-            ctx.strokeStyle = ['rgba(', circle.color, ',', circle.opacity, ')'].join('');
-            ctx.stroke();
-        }
-        circle.x += circle.speedx;
-        circle.y += circle.speedy;
-        if (circle.opacity < (circle.background ? maxOpacity : 1)) circle.opacity += 0.01;
-        circle.ttl--;
-    }
-
-    //initializing function
-    function init() {
-        window.requestAnimationFrame(draw);
-    }
-
-    //rendering function
-    function draw() {
-
-        if (circlePulse) {
-            if (circleExp < circleExpMin || circleExp > circleExpMax) circleExpSp *= -1;
-            circleExp += circleExpSp;
-        }
-        var ctxfr = document.getElementById('canvas').getContext('2d');
-        var ctxbg = document.getElementById('canvasbg').getContext('2d');
-
-        ctxfr.globalCompositeOperation = 'destination-over';
-        ctxfr.clearRect(0, 0, canvas.width, canvas.height); // clear canvas
-        ctxbg.globalCompositeOperation = 'destination-over';
-        ctxbg.clearRect(0, 0, canvas.width, canvas.height); // clear canvas
-
-        ctxfr.save();
-        ctxfr.translate(canvas.width / 2, canvas.height / 2);
-        ctxbg.save();
-        ctxbg.translate(canvas.width / 2, canvas.height / 2);
-
-        //function to render each single circle, its connections and to manage its out of boundaries replacement
-        function renderPoints(ctx, arr) {
-            for (var i = 0; i < arr.length; i++) {
-                var circle = arr[i];
-                //checking if out of boundaries
-                if (circle.ttl<0) {}
-                var xEscape = canvas.width / 2 + circle.radius,
-                    yEscape = canvas.height / 2 + circle.radius;
-                if (circle.ttl < -20) arr[i].init(arr[i].background);
-                //if (Math.abs(circle.y) > yEscape || Math.abs(circle.x) > xEscape) arr[i].init(arr[i].background);
-                drawCircle(ctx, circle);
-            }
-            for (var i = 0; i < arr.length - 1; i++) {
-                for (var j = i + 1; j < arr.length; j++) {
-                    var deltax = arr[i].x - arr[j].x;
-                    var deltay = arr[i].y - arr[j].y;
-                    var dist = Math.pow(Math.pow(deltax, 2) + Math.pow(deltay, 2), 0.5);
-                    //if the circles are overlapping, no laser connecting them
-                    if (dist <= arr[i].radius + arr[j].radius) continue;
-                    //otherwise we connect them only if the dist is < linkDist
-                    if (dist < linkDist) {
-                        var xi = (arr[i].x < arr[j].x ? 1 : -1) * Math.abs(arr[i].radius * deltax / dist);
-                        var yi = (arr[i].y < arr[j].y ? 1 : -1) * Math.abs(arr[i].radius * deltay / dist);
-                        var xj = (arr[i].x < arr[j].x ? -1 : 1) * Math.abs(arr[j].radius * deltax / dist);
-                        var yj = (arr[i].y < arr[j].y ? -1 : 1) * Math.abs(arr[j].radius * deltay / dist);
-                        ctx.beginPath();
-                        ctx.moveTo(arr[i].x + xi, arr[i].y + yi);
-                        ctx.lineTo(arr[j].x + xj, arr[j].y + yj);
-                        var samecolor = arr[i].color == arr[j].color;
-                        ctx.strokeStyle = ["rgba(", arr[i].borderColor, ",", Math.min(arr[i].opacity, arr[j].opacity) * ((linkDist - dist) / linkDist), ")"].join("");
-                        ctx.lineWidth = (arr[i].background ? lineBorder * backgroundMlt : lineBorder) * ((linkDist - dist) / linkDist); //*((linkDist-dist)/linkDist);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        var startTime = Date.now();
-        renderPoints(ctxfr, points);
-        renderPoints(ctxbg, pointsBack);
-        deltaT = Date.now() - startTime;
-
-        ctxfr.restore();
-        ctxbg.restore();
-
-        window.requestAnimationFrame(draw);
-    }
-
-    init();
-
-    /*Credits and aknowledgements:
-    Original Idea and Design by Luca Luzzatti
-
-    Optimizing tips from Benjamin K?stner
-    General tips from Salvatore Previti*/</script>
-
 </body>
 </html>

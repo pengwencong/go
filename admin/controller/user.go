@@ -94,3 +94,14 @@ func Login(c *gin.Context){
 	H["token"] = token
 	common.Json(c, 200, H)
 }
+
+func Index(c *gin.Context){
+	isMobile := common.IsMobile(c.GetHeader("User-Agent"))
+
+	if isMobile {
+		c.HTML(200,"indexMobile.html",gin.H{})
+	}else{
+		c.HTML(200,"index.html",gin.H{})
+	}
+
+}

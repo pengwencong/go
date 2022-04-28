@@ -219,6 +219,52 @@ func AddTech(c *gin.Context) {
 		return
 	}
 
+
+
+	common.Json(c, 200, H)
+
+}
+
+func AddTechScene(c *gin.Context) {
+	occupationId, _ := strconv.Atoi(c.PostForm("occupationId"))
+	bookId, _ := strconv.Atoi(c.PostForm("bookId"))
+	techName := c.PostForm("techName")
+	techDesc := c.PostForm("techDesc")
+	techScene := c.PostForm("techScene")
+
+
+	if techScene == "" {
+
+	}
+	H := gin.H{
+		"status":200,
+		"message":"ok",
+	}
+
+	now := time.Now().Unix()
+	tech := model.Technology{
+		Name: techName,
+		BookId: bookId,
+		OccupationId: occupationId,
+		Desc: techDesc,
+		CreateTime: now,
+		UpdateTime: now,
+	}
+
+	err := tech.AddTech()
+	if err != nil {
+		help.Log.Infof("bookId:%s, occupationId:%s, name:%s, desc:%s create tech fail: %s",
+			bookId, occupationId, techName, techDesc, err.Error())
+
+		H["status"] = 500
+		H["message"] = err.Error()
+		common.Json(c, 200, H)
+
+		return
+	}
+
+
+
 	common.Json(c, 200, H)
 
 }
@@ -236,6 +282,32 @@ func TechList(c *gin.Context) {
 
 	if err != nil {
 		help.Log.Infof("get techList fail: %s", err.Error())
+
+		H["status"] = 500
+		H["message"] = err.Error()
+		common.Json(c, 200, H)
+
+		return
+	}
+
+	H["data"] = techList
+	common.Json(c, 200, H)
+}
+
+func SearchTech(c *gin.Context) {
+	searchName := c.PostForm("searchName")
+	searchOccupationId, _ := strconv.Atoi(c.PostForm("searchOccupationId"))
+
+	H := gin.H{
+		"status":200,
+		"message":"ok",
+	}
+
+	techList, err := model.SearchTech(searchName, searchOccupationId)
+
+	if err != nil {
+		help.Log.Infof("name: %s, occupationId: %s search techList fail: %s",
+			searchName, searchOccupationId, err.Error())
 
 		H["status"] = 500
 		H["message"] = err.Error()

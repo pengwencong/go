@@ -3,6 +3,7 @@ package common
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/valyala/fastrand"
+	"strings"
 )
 
 func GenRandStr(len int) string {
@@ -16,4 +17,22 @@ func GenRandStr(len int) string {
 
 func Json(c *gin.Context, status int, h gin.H) {
 	c.JSON(status,h)
+}
+
+func IsMobile(userAgent string) bool {
+	if len(userAgent) == 0 {
+		return false
+	}
+
+	isMobile := false
+	mobileKeywords := []string{"Mobile", "Android", "Silk/", "Kindle", "BlackBerry", "Opera Mini", "Opera Mobi"}
+
+	for _, word := range mobileKeywords {
+		if strings.Contains(userAgent, word) {
+			isMobile = true
+			break
+		}
+	}
+
+	return isMobile
 }

@@ -59,6 +59,9 @@ func main() {
 	//server.GCTicker()
 
 	engine := gin.Default()
+	engine.Delims("{[{","}]}")
+	engine.LoadHTMLGlob("views/admin/*")
+
 	//pprof.Register(engine)
 
 	router.Init(engine)

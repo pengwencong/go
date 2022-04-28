@@ -16,12 +16,15 @@ import (
 func Init(engine *gin.Engine) {
 	adminGroup := engine.Group("/admin")
 	{
+		adminGroup.GET("/index", adcontroller.Index)
 		adminGroup.POST("/login", adcontroller.Login)
 		adminGroup.POST("/isLogin", adcontroller.IsLogin)
 		creationGroup := adminGroup.Group("/creation").Use(middleware.Login)
 		{
 			creationGroup.POST("/addTech", adcontroller.AddTech)
+			creationGroup.POST("/addTechScene", adcontroller.AddTechScene)
 			creationGroup.POST("/techList", adcontroller.TechList)
+			creationGroup.POST("/searchTech", adcontroller.SearchTech)
 			creationGroup.POST("/outlineList", adcontroller.OutlineList)
 			creationGroup.POST("/addOutline", adcontroller.AddOutline)
 			creationGroup.POST("/plotList", adcontroller.PlotList)
@@ -68,7 +71,7 @@ func Init(engine *gin.Engine) {
 
 	engine.Static("/resource/video","./resource/video")
 	engine.Static("/public/static","./public/static")
-	engine.StaticFile("/admin","./views/admin/index.html")
+	//engine.StaticFile("/admin","./views/admin/index.html")
 	engine.Static("/resource/js","./resource/js")
 	engine.GET("/monitorGc", controller.MonitorGC)
 	engine.GET("/test", controller.TestSlice)

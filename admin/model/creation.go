@@ -12,6 +12,7 @@ type Technology struct {
 }
 
 type TechnologyList struct {
+	Id int `json:"id"`
 	Name string `json:"name"`
 	BookName string `gorm:"-" json:"bookName"`
 	OccupationName string `gorm:"-" json:"occupationName`
@@ -135,10 +136,24 @@ func GetTechList(offset int, limit int) (techList []TechnologyList, err error) {
 	mysql := server.GetMysql()
 
 	err = mysql.GormDB.Table("technology t").
-		Select("t.name, b.name AS book_name, o.name AS occupation_name").
+		Select("t.id, t.name, b.name AS book_name, o.name AS occupation_name").
 		Joins("left join book b on b.id = t.book_id").
 		Joins("left join occupation o on o.id = t.occupation_id").
 		Where("t.id > ? ", offset).Limit(limit).Find(&techList).Error
+
+	server.PutMysql(mysql)
+
+	return techList, err
+}
+
+func SearchTech(name string, occupationId int) (techList []TechnologyList, err error) {
+	mysql := server.GetMysql()
+
+	err = mysql.GormDB.Table("technology").
+		Select("name").
+		Where("name like ?", name + "%").
+		Where("occupation_id = ?", occupationId).
+		Find(&techList).Error
 
 	server.PutMysql(mysql)
 
